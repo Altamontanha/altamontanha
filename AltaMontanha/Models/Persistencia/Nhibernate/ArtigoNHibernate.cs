@@ -6,7 +6,7 @@ using NH = NHibernate;
 
 namespace AltaMontanha.Models.Persistencia.Nhibernate
 {
-	public class ArtigoMySQL : Abstracao.IArtigoDAO
+	public class ArtigoNHibernate : Abstracao.IArtigoDAO
 	{
 		public void Alterar(Dominio.Artigo objeto)
 		{

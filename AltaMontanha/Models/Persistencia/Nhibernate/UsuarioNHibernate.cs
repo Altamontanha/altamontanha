@@ -21,7 +21,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 		public IList<Dominio.Usuario> Pesquisar(Dominio.Usuario objeto)
 		{
 			if (objeto == null)
-				NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Usuario>().List<Dominio.Usuario>();
+				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Usuario>().List<Dominio.Usuario>();
 
 			Dictionary<string,object> filtros = new Dictionary<string,object>();
 

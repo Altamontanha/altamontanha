@@ -7,80 +7,67 @@ namespace AltaMontanha.Models.Persistencia.Fabrica
 	{
 		public Abstracao.IArtigoDAO GetArtigoDAO()
 		{
-			// TODO : Implementar.
-			throw new NotImplementedException();
+			return new Nhibernate.ArtigoNHibernate();
 		}
 
 		public Abstracao.IAventuraDAO GetAventuraDAO()
 		{
-			// TODO : Implementar.
-			throw new NotImplementedException();
+			return new Nhibernate.AventuraNHibernate();
 		}
 
 		public Abstracao.IBannerDAO GetBannerDAO()
 		{
-			// TODO : Implementar.
-			throw new NotImplementedException();
+			return new Nhibernate.BannerNHibernate();
 		}
 
 		public Abstracao.ICategoriaDAO GetCategoriaDAO()
 		{
-			// TODO : Implementar.
-			throw new NotImplementedException();
+			return new Nhibernate.CategoriaNHibernate();
 		}
 
 		public Abstracao.IColunaDAO GetColunaDAO()
 		{
-			// TODO : Implementar.
-			throw new NotImplementedException();
+			return new Nhibernate.ColunaNHibernate();
 		}
 
 		public Abstracao.IComentarioDAO GetComentarioDAO()
 		{
-			// TODO : Implementar.
-			throw new NotImplementedException();
+			return new Nhibernate.ComentarioNHibernate();
 		}
 
 		public Abstracao.IFotoDAO GetFotoDAO()
 		{
-			// TODO : Implementar.
-			throw new NotImplementedException();
+			return new Nhibernate.FotoNHibernate();
 		}
 
 		public Abstracao.ILinkDAO GetLinkDAO()
 		{
-			// TODO : Implementar.
-			throw new NotImplementedException();
+			return new Nhibernate.LinkNHibernate();
 		}
 
 		public Abstracao.ILocalDAO GetLocalDAO()
 		{
-			// TODO : Implementar.
-			throw new NotImplementedException();
+			return new Nhibernate.LocalNHibernate();
 		}
 
 		public Abstracao.INoticiaDAO GetNoticiaDAO()
 		{
-			// TODO : Implementar.
-			throw new NotImplementedException();
+			return new Nhibernate.NoticiaNHibernate();
 		}
 
 		public Abstracao.IPalavraChaveDAO GetPalavraChaveDAO()
 		{
-			// TODO : Implementar.
-			throw new NotImplementedException();
+			return new Nhibernate.PalavraChaveNHibernate();
 		}
 
 		public Abstracao.IPerfilDAO GetPerfilDAO()
 		{
-			// TODO : Implementar.
-			throw new NotImplementedException();
+			return new Nhibernate.PerfilNHibernate();
 		}
 
 		public Abstracao.IRotaDAO GetRotaDAO()
 		{
-			// TODO : Implementar.
-			throw new NotImplementedException();
+			return new Nhibernate.RotaNHibernate();
 		}
 		/// <summary>
 		/// Retorna um objeto DAO para MySQL
@@ -93,8 +80,7 @@ namespace AltaMontanha.Models.Persistencia.Fabrica
 
 		public Abstracao.IPermissaoDAO GetPermissaoDAO()
 		{
-			// TODO : Implementar.
-			throw new NotImplementedException();
+			return new Nhibernate.PermissaoNHibernate();
 		}
 	}
 }

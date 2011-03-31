@@ -23,7 +23,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			try
 			{
 				if (objeto == null)
-					NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Perfil>().List<Dominio.Perfil>();
+					return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Perfil>().List<Dominio.Perfil>();
 
 				Dictionary<string, object> filtros = new Dictionary<string, object>();
 

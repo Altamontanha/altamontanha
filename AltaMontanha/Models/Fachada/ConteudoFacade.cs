@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using AltaMontanha.Models.Persistencia.Fabrica;
+using AltaMontanha.Models.Persistencia.Abstracao;
 
 namespace AltaMontanha.Models.Fachada
 {
@@ -9,66 +11,165 @@ namespace AltaMontanha.Models.Fachada
 	{
 		#region Noticia
 
-		public List<Dominio.Noticia> PesquisarNoticia(Dominio.Noticia noticia)
+		public IList<Dominio.Noticia> PesquisarNoticia(Dominio.Noticia noticia)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				INoticiaDAO noticiaDAO = fabrica.GetNoticiaDAO();
+
+				return noticiaDAO.Pesquisar(noticia);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		public Dominio.Noticia SalvarNoticia(Dominio.Noticia noticia)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				if(noticia == null)
+					throw new ArgumentNullException("noticia");
+
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				INoticiaDAO noticiaDAO = fabrica.GetNoticiaDAO();
+
+				return noticiaDAO.Cadastrar(noticia);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		public bool ExcluirNoticia(int codigo)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				INoticiaDAO noticiaDAO = fabrica.GetNoticiaDAO();
+							
+				return noticiaDAO.Excluir(codigo);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		#endregion
 		
 		#region Coluna
 
-		public List<Dominio.Coluna> PesquisarColuna(Dominio.Coluna coluna)
+		public IList<Dominio.Coluna> PesquisarColuna(Dominio.Coluna coluna)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IColunaDAO colunaDAO = fabrica.GetColunaDAO();
+
+				return colunaDAO.Pesquisar(coluna);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		public Dominio.Coluna SalvarColuna(Dominio.Coluna coluna)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				if(coluna == null)
+					throw new ArgumentNullException("coluna");
+
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IColunaDAO colunaDAO = fabrica.GetColunaDAO();
+
+				return colunaDAO.Cadastrar(coluna);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		public bool ExcluirColuna(int codigo)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IColunaDAO colunaDAO = fabrica.GetColunaDAO();
+							
+				return colunaDAO.Excluir(codigo);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		#endregion
 
 		#region Aventura
 
-		public List<Dominio.Aventura> PesquisarAventura(Dominio.Aventura aventura)
+		public IList<Dominio.Aventura> PesquisarAventura(Dominio.Aventura aventura)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IAventuraDAO aventuraDAO = fabrica.GetAventuraDAO();
+
+				return aventuraDAO.Pesquisar(aventura);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		public Dominio.Aventura SalvarAventura(Dominio.Aventura aventura)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				if(aventura == null)
+					throw new ArgumentNullException("aventura");
+
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IAventuraDAO aventuraDAO = fabrica.GetAventuraDAO();
+
+				return aventuraDAO.Cadastrar(aventura);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		public bool ExcluirAventura(int codigo)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IAventuraDAO aventuraDAO = fabrica.GetAventuraDAO();
+							
+				return aventuraDAO.Excluir(codigo);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		public void ConvertToKml()
@@ -89,42 +190,108 @@ namespace AltaMontanha.Models.Fachada
 
 		#region Categoria
 
-		public List<Dominio.Categoria> PesquisarCategoria(Dominio.Categoria categoria)
+		public IList<Dominio.Categoria> PesquisarCategoria(Dominio.Categoria categoria)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				ICategoriaDAO categoriaDAO = fabrica.GetCategoriaDAO();
+
+				return categoriaDAO.Pesquisar(categoria);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		public Dominio.Categoria SalvarCategoria(Dominio.Categoria categoria)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				if (categoria == null)
+					throw new ArgumentNullException("categoria");
+
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				ICategoriaDAO categoriaDAO = fabrica.GetCategoriaDAO();
+
+				return categoriaDAO.Cadastrar(categoria);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		public bool ExcluirCategoria(int codigo)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				ICategoriaDAO categoriaDAO = fabrica.GetCategoriaDAO();
+							
+				return categoriaDAO.Excluir(codigo);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		#endregion
 
-		public List<Dominio.Artigo> PesquisarArtigo(Dominio.Artigo artigo)
+		public IList<Dominio.Artigo> PesquisarArtigo(Dominio.Artigo artigo)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IArtigoDAO artigoDAO = fabrica.GetArtigoDAO();
+
+				return artigoDAO.Pesquisar(artigo);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		public Dominio.Artigo SalvarArtigo(Dominio.Artigo artigo)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				if(artigo == null)
+					throw new NotImplementedException("artigo");
+
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IArtigoDAO artigoDAO = fabrica.GetArtigoDAO();
+
+				return artigoDAO.Cadastrar(artigo);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		public bool ExcluirArtigo(int codigo)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IArtigoDAO artigoDAO = fabrica.GetArtigoDAO();
+							
+				return artigoDAO.Excluir(codigo);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		#endregion

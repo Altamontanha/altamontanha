@@ -12,24 +12,56 @@ namespace AltaMontanha.Models.Fachada
 	{
 		#region Perfil
 
-		public List<Dominio.Perfil> PesquisarPerfil(Dominio.Perfil perfil)
+		public IList<Dominio.Perfil> PesquisarPerfil(Dominio.Perfil perfil)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IPerfilDAO perfilDAO = fabrica.GetPerfilDAO();
+
+				return perfilDAO.Pesquisar(perfil);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		public Dominio.Perfil SalvarPerfil(Dominio.Perfil perfil)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				if (perfil == null)
+					throw new ArgumentNullException("usuario");
+
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IPerfilDAO perfilDAO = fabrica.GetPerfilDAO();
+
+				return perfilDAO.Cadastrar(perfil);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
 		}
 
 		public bool ExcluirPerfil(int codigo)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
-		}
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IPerfilDAO perfilDAO = fabrica.GetPerfilDAO();
 
+				return perfilDAO.Excluir(codigo);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
+		}
 
 		#endregion
 
@@ -71,6 +103,9 @@ namespace AltaMontanha.Models.Fachada
 		{
 			try
 			{
+				if(usuario == null)
+					throw new ArgumentNullException("usuario");
+
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IUsuarioDAO usuarioDAO = fabrica.GetUsuarioDAO();
 
@@ -99,7 +134,6 @@ namespace AltaMontanha.Models.Fachada
 				// TODO: Tratar erro.
 				throw;
 			}
-			
 		}
 
 		public bool AutenticarUsuario(Dominio.Usuario usuario)

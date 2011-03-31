@@ -20,7 +20,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 		public IList<Dominio.Banner> Pesquisar(Dominio.Banner objeto)
 		{
 			if (objeto == null)
-				NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Aventura>().List<Dominio.Aventura>();
+				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Banner>().List<Dominio.Banner>();
 
 			Dictionary<string, object> filtros = new Dictionary<string, object>();
 
