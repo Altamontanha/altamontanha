@@ -27,12 +27,11 @@ namespace AltaMontanha.Utilitario
 			if (ab == null)
 			{
 				travaEscritaLeitura.AcquireReaderLock(500);
-				ambiente = ConfigurationManager.AppSettings.Get("Ambiente");
 				travaEscritaLeitura.ReleaseLock();
 				ab = ambiente;
 			}
 
-			ab = string.Format("{0}_{1}", ab, chave);
+			ab = string.Format("{0}", ab, chave);
 			return ConfigurationManager.AppSettings.Get(ab);
 		}
 		
