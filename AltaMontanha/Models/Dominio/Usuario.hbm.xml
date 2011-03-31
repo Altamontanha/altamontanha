@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="AltaMontanha" namespace="AltaMontanha.Models.Dominio">
+	<class name="Usuario" table="TB_Usuario" lazy="false">
+		<id name="Codigo" access="property" column="CodUsuario" type="Int32">
+			<generator class="identity" />
+		</id>
+		<property name="Nome" not-null="true" access="property" type="String">
+			<column name="Nome" length="100" />
+		</property>
+		<property name="Email" not-null="true" access="property" type="String">
+			<column name="Email" length="150" />
+		</property>
+		<property name="Senha" not-null="true" access="property" type="String">
+			<column name="Senha" length="32" />
+		</property>
+		<many-to-one name="Perfil" column="CodPerfil" class="Perfil" not-null="true" />
+	</class>
+</hibernate-mapping>

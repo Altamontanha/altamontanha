@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="AltaMontanha" namespace="AltaMontanha.Models.Dominio">
+	<class name="Rota" table="TB_Rota" lazy="false">
+		<id name="Codigo" access="property" column="CodRota" type="Int32">
+			<generator class="identity" />
+		</id>
+		<property name="Caminho" not-null="true" access="property" type="String">
+			<column name="Caminho" length="255" />
+		</property>
+	</class>
+</hibernate-mapping>

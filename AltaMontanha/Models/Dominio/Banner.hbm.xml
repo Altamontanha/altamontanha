@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="AltaMontanha" namespace="AltaMontanha.Models.Dominio">
+	<class name="Banner" table="TB_Banner" lazy="false">
+		<id name="Codigo" access="property" column="CodBanner" type="Int32">
+			<generator class="identity" />
+		</id>
+		<property name="Titulo" not-null="true" access="property" type="String">
+			<column name="Titulo" length="100" />
+		</property>
+		<property name="Caminho" not-null="true" access="property" type="String">
+			<column name="Caminho" sql-type="Text" />
+		</property>
+		<property name="DataInicial" not-null="true" access="property" type="DateTime">
+			<column name="DataInicial" sql-type="DATETIME" />
+		</property>
+		<property name="DataFinal" not-null="true" access="property" type="DateTime">
+			<column name="DataFinal" sql-type="DATETIME" />
+		</property>
+		<property name="Multimidia" not-null="true" access="property" type="bool">
+			<column name="Multimidia" sql-type="BOOL" />
+		</property>
+		<property name="Randomico" not-null="true" access="property" type="bool">
+			<column name="Randomico" sql-type="BOOL" />
+		</property>
+		<property name="Ativo" not-null="true" access="property" type="bool">
+			<column name="Ativo" sql-type="BOOL" />
+		</property>
+	</class>
+</hibernate-mapping>

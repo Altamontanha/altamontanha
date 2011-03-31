@@ -1,0 +1,3 @@
+﻿<asp:GridView runat="server" CssClass="grid" ShowHeader="false" BorderWidth="0" BorderColor="white" CellPadding="0" CellSpacing="0">
+	<AlternatingRowStyle CssClass="odd" />
+</asp:GridView>

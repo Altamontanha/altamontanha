@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="AltaMontanha" namespace="AltaMontanha.Models.Dominio" >
+	<class name="Conteudo" table="TB_Conteudo" lazy="false">
+		<id name="Codigo" access="property" column="CodConteudo" type="Int32">
+			<generator class="identity" />
+		</id>
+		<discriminator column="Tipo" type="String" />
+		<property name="Titulo" not-null="true" access="property" type="String">
+			<column name="Titulo" length="150" />
+		</property>
+		<property name="AnteTitulo" not-null="true" access="property" type="String">
+			<column name="AnteTitulo" length="250" />
+		</property>
+		<property name="Resumo" not-null="true" access="property" type="String">
+			<column name="Resumo" sql-type="TEXT"/>
+		</property>
+		<property name="Texto" not-null="true" access="property" type="String">
+			<column name="Texto" sql-type="TEXT"/>
+		</property>
+		<property name="Data" not-null="true" access="property" type="DateTime">
+			<column name="Data" sql-type="DATETIME"/>
+		</property>
+		<bag name="ListaFotos" table="TB_ConteudoFoto" cascade="save-update">
+			<key column="CodConteudo"/>
+			<many-to-many class="Foto" column="CodFoto"></many-to-many>
+		</bag>
+		<bag name="ListaPalavrasChave" table="TB_ConteudoPalavrasChave" cascade="save-update">
+			<key column="CodConteudo"/>
+			<many-to-many class="PalavraChave" column="CodPalavraChave"></many-to-many>
+		</bag>
+		<many-to-one name="UsuarioCadastro" column="CodUsuario" class="Usuario" not-null="true" />
+		<bag name="ListaComentarios" table="TB_Comentario" cascade="save-update">
+			<key column="CodConteudo"/>
+			<one-to-many class="Comentario"></one-to-many>
+		</bag>
+		
+	</class>
+	<!--Artigo-->
+	<subclass name="Artigo" extends="Conteudo" discriminator-value="Artigo" lazy="false">
+		<join table="TB_Artigo">
+			<key column="CodArtigo" />
+			<many-to-one name="Categoria" column="CodCategoria" class="Categoria" not-null="true" />
+		</join>
+	</subclass>
+	<!--Aventura-->
+	<subclass name="Aventura" extends="Conteudo" discriminator-value="Aventura" lazy="false">
+		<join table="TB_Aventura">
+			<key column="CodAventura" />
+			<many-to-one name="AventuraAnterior" column="CodAventura" class="Aventura" not-null="true" />
+			<many-to-one name="Rota" column="CodRota" class="Rota" not-null="true" />
+			<many-to-one name="Autor" column="CodUsuario" class="Usuario" not-null="true" />
+		</join>
+	</subclass>
+	<!--Coluna-->
+	<subclass name="Coluna" extends="Conteudo" discriminator-value="Coluna" lazy="false">
+		<join table="TB_Coluna">
+			<key column="CodColuna" />
+			<many-to-one name="Autor" column="CodUsuario" class="Usuario" not-null="true" />
+		</join>
+	</subclass>
+	<!--Noticia-->
+	<subclass name="Noticia" extends="Conteudo" discriminator-value="Coluna" lazy="false">
+		<join table="TB_Noticia">
+			<key column="CodNoticia" />
+			<property name="Fonte" not-null="true" access="property" type="String">
+				<column name="Fonte" length="75"/>
+			</property>
+			<property name="Destaque" not-null="true" access="property" type="bool">
+				<column name="Destaque" sql-type="bool"/>
+			</property>
+		</join>
+	</subclass>
+</hibernate-mapping>

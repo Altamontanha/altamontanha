@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="AltaMontanha" namespace="AltaMontanha.Models.Dominio" >
+	<class name="Perfil" table="TB_Perfil" lazy="false">
+		<id name="Codigo" access="property" column="CodPerfil" type="Int32">
+			<generator class="identity" />
+		</id>
+		<property name="Nome" not-null="true" access="property" type="String">
+			<column name="Nome" length="100" />
+		</property>
+		<property name="Descricao" not-null="true" access="property" type="String">
+			<column name="Descricao" length="200" />
+		</property>
+		<bag name="ListaUsuarios" cascade="save-update" lazy="true" >
+			<key column="CodPerfil" />
+			<one-to-many class="Usuario" />
+		</bag>
+		<bag name="listaPermissoes" cascade="save-update" lazy="true" >
+			<key column="CodPermissao" />
+			<one-to-many class="Permissao" />
+		</bag>
+	</class>
+</hibernate-mapping>

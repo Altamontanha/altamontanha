@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="AltaMontanha" namespace="AltaMontanha.Models.Dominio">
+	<class name="Comentario" table="TB_Comentario" lazy="false">
+		<id name="Codigo" access="property" column="CodComentario" type="Int32">
+			<generator class="identity" />
+		</id>
+		<property name="Nome" not-null="true" access="property" type="String">
+			<column name="Nome" length="100" />
+		</property>
+		<property name="Texto" not-null="true" access="property" type="String">
+			<column name="Texto" sql-type="Text" />
+		</property>
+		<property name="Email" not-null="true" access="property" type="String">
+			<column name="Email" length="150" />
+		</property>
+		<property name="Habilitado" not-null="true" access="property" type="bool">
+			<column name="Habilitado" sql-type="bool" />
+		</property>
+	</class>
+</hibernate-mapping>
