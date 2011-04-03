@@ -24,9 +24,9 @@ namespace AltaMontanha
 			routes.MapRoute
 			(
 				"Default",
-				"{controller}/{action}",
-				"{controller}/{action}/{id}"
-			).Defaults.Add("id", 0);
+				"{controller}/{action}/{id}",
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+            ).Defaults.Add("id", 0);
 
 		}
 

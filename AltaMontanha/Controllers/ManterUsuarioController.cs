@@ -16,6 +16,12 @@ namespace AltaMontanha.Controllers
         {
             return View();
         }
+
+        public ActionResult Criar()
+        {
+            return View();
+        }
+
         //
         // GET: /ManterUsuario/Details/5
         public ActionResult PesquisarUsuario(int id)

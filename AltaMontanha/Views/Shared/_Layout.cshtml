@@ -15,10 +15,7 @@
 			<div id="containerHolder">
 				<div id="container">
 					<div id="sidebar">
-						<ul class="sideNav">
-							<li><a href="#" class="active">Cadastro</a></li>
-							<li><a href="#">Consulta</a></li>
-						</ul>
+                        @Html.Partial("../" + @ViewContext.RouteData.Values["Controller"] + "/_Sidebar")
 					</div>  
 					<h2>TODO: SiteMapPath</h2>
 					<div id="main">
