@@ -26,7 +26,7 @@ namespace AltaMontanha
 				"Default",
 				"{controller}/{action}/{id}",
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-            ).Defaults.Add("id", 0);
+            );
 
 		}
 
