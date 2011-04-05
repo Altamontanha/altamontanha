@@ -91,9 +91,9 @@ namespace AltaMontanha.Controllers
         //
         // GET: /ManterLink/ExcluirLink/5
  
-        public ActionResult ExcluirLink(int id)
+        public ActionResult ExcluirLink(int Codigo)
         {
-			facade.ExcluirLink(id);
+			facade.ExcluirLink(Codigo);
 			return RedirectToAction("Index");
 		}
     }
