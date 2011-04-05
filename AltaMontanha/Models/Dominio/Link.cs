@@ -8,7 +8,6 @@ namespace AltaMontanha.Models.Dominio
 {
 	public class Link
 	{
-		[Key]
 		public int Codigo { get; set; }
 
 		[Required(ErrorMessage="Título é um campo obrigatório")]

@@ -32,8 +32,8 @@
             @item.Url
         </td>
         <td>
-            @Html.ActionLink("Editar", "EditarLink", new { id = item.Codigo }) |
-            @Html.ActionLink("Deletar", "DeletarLink", new { id = item.Codigo })
+            @Html.ActionLink("Editar", "EditarLink", new { Codigo = item.Codigo }) |
+            @Html.ActionLink("Excluir", "ExcluirLink", new { Codigo = item.Codigo })
         </td>
     </tr>
 }

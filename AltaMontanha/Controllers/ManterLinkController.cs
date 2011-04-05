@@ -10,8 +10,8 @@ namespace AltaMontanha.Controllers
 {
     public class ManterLinkController : Controller
     {
-
 		private InformativoFacade facade = new InformativoFacade();
+
         //
         // GET: /ManterLink/
 
@@ -57,9 +57,10 @@ namespace AltaMontanha.Controllers
         //
         // GET: /ManterLink/EditarLink/5
  
-        public ActionResult EditarLink(int id)
+        public ActionResult EditarLink(int Codigo)
         {
-            return View(facade.PesquisarLink(new Link() { Codigo = id }));
+			IList<Link> links = facade.PesquisarLink(new Link() { Codigo = Codigo });
+            return View(links[0]);
         }
 
         //
@@ -88,29 +89,12 @@ namespace AltaMontanha.Controllers
         }
 
         //
-        // GET: /ManterLink/DeletarLink/5
+        // GET: /ManterLink/ExcluirLink/5
  
-        public ActionResult DeletarLink(int id)
+        public ActionResult ExcluirLink(int id)
         {
-            return View();
-        }
-
-        //
-        // POST: /ManterLink/DeletarLink/5
-
-        [HttpPost]
-        public ActionResult DeletarLink(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+			facade.ExcluirLink(id);
+			return RedirectToAction("Index");
+		}
     }
 }

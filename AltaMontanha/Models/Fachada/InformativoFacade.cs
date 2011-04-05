@@ -35,7 +35,15 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				ILinkDAO linkDAO = fabrica.GetLinkDAO();
 
-				return linkDAO.Cadastrar(link);
+				if (link.Codigo <= 0)
+				{
+					return linkDAO.Cadastrar(link);
+				}
+				else
+				{
+					linkDAO.Alterar(link);
+					return link;
+				}
 			}
 			catch (Exception)
 			{

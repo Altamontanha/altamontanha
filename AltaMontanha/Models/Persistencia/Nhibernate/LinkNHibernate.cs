@@ -22,15 +22,9 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			if (objeto == null)
 				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Link>().List<Dominio.Link>();
 
-			//IList<Dominio.Link> links = new IList<Dominio.Link>();
-			//links.Where(link => link.Codigo == objeto.Codigo);
-			Dictionary<string, object> filtros = new Dictionary<string, object>();
+			IList<Dominio.Link> links = NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Link>().List<Dominio.Link>().Where(link => link.Codigo == objeto.Codigo).ToList();
 
-			filtros.Add("Codigo", objeto.Codigo);
-			filtros.Add("Titulo", objeto.Titulo);
-			
-			// TODO: Verificar se o codigo de consulta com filtros é feita dessa forma.
-			return NHibernate.HttpModule.RecuperarSessao.CreateFilter(filtros, "").List<Dominio.Link>();
+			return links;
 		}
 
 		public Dominio.Link Pesquisar(int codigo)
@@ -45,7 +39,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 				Dominio.Link link = this.Pesquisar(codigo);
 
 				NHibernate.HttpModule.RecuperarSessao.Delete(link);
-				NHibernate.HttpModule.RecuperarSessao.Close();
+				//NHibernate.HttpModule.RecuperarSessao.Close();
 
 				return true;
 			}
