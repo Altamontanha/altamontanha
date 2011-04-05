@@ -259,10 +259,25 @@
     <Content Include="Views\ManterLink\_Sidebar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\ManterLink\CriarLink.cshtml" />
+    <Content Include="Views\ManterLink\CadastrarLink.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\ManterLink\EditarLink.cshtml" />
+    <Content Include="Views\ManterLink\AlterarLink.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterPerfil\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterPerfil\_Sidebar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterPerfil\VisualizarPerfil.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterPerfil\AdicionarPerfil.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterPerfil\AlterarPerfil.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

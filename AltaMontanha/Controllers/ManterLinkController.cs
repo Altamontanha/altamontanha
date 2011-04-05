@@ -22,18 +22,18 @@ namespace AltaMontanha.Controllers
         }
 
         //
-        // GET: /ManterLink/CriarLink
+		// GET: /ManterLink/CadastrarLink
 
-        public ActionResult CriarLink()
+		public ActionResult CadastrarLink()
         {
             return View();
         } 
 
         //
-        // POST: /ManterLink/CriarLink
+		// POST: /ManterLink/CadastrarLink
 
         [HttpPost]
-        public ActionResult CriarLink(Link link)
+		public ActionResult CadastrarLink(Link link)
         {
             try
             {
@@ -55,19 +55,19 @@ namespace AltaMontanha.Controllers
         }
         
         //
-        // GET: /ManterLink/EditarLink/5
+        // GET: /ManterLink/AlterarLink/5
  
-        public ActionResult EditarLink(int Codigo)
+        public ActionResult AlterarLink(int Codigo)
         {
 			IList<Link> links = facade.PesquisarLink(new Link() { Codigo = Codigo });
             return View(links[0]);
         }
 
         //
-        // POST: /ManterLink/EditarLink/5
+        // POST: /ManterLink/AlterarLink/5
 
         [HttpPost]
-        public ActionResult EditarLink(Link link)
+		public ActionResult AlterarLink(Link link)
         {
             try
             {
