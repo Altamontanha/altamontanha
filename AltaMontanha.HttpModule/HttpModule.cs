@@ -64,7 +64,7 @@ namespace AltaMontanha.NHibernate
 
 			if (session != null)
 			{
-				//session.Flush();
+				session.Flush();
 				session.Close();
 			}
 
