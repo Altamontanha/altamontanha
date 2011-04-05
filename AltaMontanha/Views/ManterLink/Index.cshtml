@@ -1,42 +1,39 @@
 ﻿@model IEnumerable<AltaMontanha.Models.Dominio.Link>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Links";
 }
 
-<h2>Index</h2>
+<div id="divGrid">
+	<h3>Links</h3>
 
-<table>
-    <tr>
-        <th>
-            Código
-        </th>
-        <th>
-            Título
-        </th>
-        <th>
-            Url
-        </th>
-        <th></th>
-    </tr>
+	<div class="grid">
+		<table>
+			<tr>
+				<th>Título</th>
+				<th>Url</th>
+				<th></th>
+				<th></th>
+			</tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @item.Codigo
-        </td>
-        <td>
-            @item.Titulo
-        </td>
-        <td>
-            @item.Url
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "EditarLink", new { Codigo = item.Codigo }) |
-            @Html.ActionLink("Excluir", "ExcluirLink", new { Codigo = item.Codigo })
-        </td>
-    </tr>
-}
+		@foreach (var item in Model) {
+			<tr>
+				<td>
+					@item.Titulo
+				</td>
+				<td>
+					@item.Url
+				</td>
+				<td class="action">
+					@Html.ActionLink("Editar", "EditarLink", new { Codigo = item.Codigo }, new { @class = "edit" })
+				</td>
+				<td class="action">
+					@Html.ActionLink("Excluir", "ExcluirLink", new { Codigo = item.Codigo }, new { @class = "delete" })
+				</td>
+			</tr>
+		}
 
-</table>
+		</table>
+	</div>
 
+</div>
