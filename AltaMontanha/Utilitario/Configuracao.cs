@@ -10,7 +10,6 @@ namespace AltaMontanha.Utilitario
 		
 		//Necessário para sincronizar a leitura do registro
 		private static ReaderWriterLock travaEscritaLeitura = new ReaderWriterLock();
-		private static string ambiente;
 		
 		#endregion
 
