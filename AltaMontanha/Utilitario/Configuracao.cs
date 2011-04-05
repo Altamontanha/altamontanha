@@ -23,16 +23,7 @@ namespace AltaMontanha.Utilitario
 		/// <returns></returns>
 		public static string Get(string chave)
 		{
-			string ab = ambiente;
-			if (ab == null)
-			{
-				travaEscritaLeitura.AcquireReaderLock(500);
-				travaEscritaLeitura.ReleaseLock();
-				ab = ambiente;
-			}
-
-			ab = string.Format("{0}", ab, chave);
-			return ConfigurationManager.AppSettings.Get(ab);
+			return ConfigurationManager.AppSettings.Get(chave);
 		}
 		
 		#endregion
