@@ -21,7 +21,7 @@ namespace AltaMontanha.Models.Fachada
 			catch (Exception)
 			{
 				// TODO: Tratar erro.
-				throw;
+				 throw;
 			}
 		}
 

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<AltaMontanha.Models.Dominio.Link>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table>
+    <tr>
+        <th>
+            Código
+        </th>
+        <th>
+            Título
+        </th>
+        <th>
+            Url
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Codigo
+        </td>
+        <td>
+            @item.Titulo
+        </td>
+        <td>
+            @item.Url
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "EditarLink", new { id = item.Codigo }) |
+            @Html.ActionLink("Deletar", "DeletarLink", new { id = item.Codigo })
+        </td>
+    </tr>
+}
+
+</table>
+

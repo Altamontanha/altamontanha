@@ -22,6 +22,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			if (objeto == null)
 				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Link>().List<Dominio.Link>();
 
+			//IList<Dominio.Link> links = new IList<Dominio.Link>();
+			//links.Where(link => link.Codigo == objeto.Codigo);
 			Dictionary<string, object> filtros = new Dictionary<string, object>();
 
 			filtros.Add("Codigo", objeto.Codigo);
