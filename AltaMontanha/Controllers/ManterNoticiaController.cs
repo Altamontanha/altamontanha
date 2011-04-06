@@ -15,19 +15,19 @@ namespace AltaMontanha.Controllers
             return View();
         }
         //
-        // GET: /ManterNoticia/Details/5
+        // GET: /ManterNoticia/VisualizarUsuario/5
         public ActionResult PesquisarNoticia(int id)
         {
             return View();
         }
         //
-        // GET: /ManterNoticia/Create
+        // GET: /ManterNoticia/CadastrarUsuario
         public ActionResult CarregarNoticia()
         {
             return View();
         } 
         //
-        // POST: /ManterNoticia/Create
+        // POST: /ManterNoticia/CadastrarUsuario
         [HttpPost]
 		public ActionResult CarregarNoticia(FormCollection collection)
         {
@@ -43,13 +43,13 @@ namespace AltaMontanha.Controllers
             }
         }
         //
-        // GET: /ManterNoticia/Edit/5
+        // GET: /ManterNoticia/AlterarUsuario/5
         public ActionResult SalvarNoticia(int id)
         {
             return View();
         }
         //
-        // POST: /ManterNoticia/Edit/5
+        // POST: /ManterNoticia/AlterarUsuario/5
         [HttpPost]
 		public ActionResult SalvarNoticia(int id, FormCollection collection)
         {
@@ -65,13 +65,13 @@ namespace AltaMontanha.Controllers
             }
         }
         //
-        // GET: /ManterNoticia/Delete/5
+        // GET: /ManterNoticia/ExcluirUsuario/5
         public ActionResult ExcluirNoticia(int id)
         {
             return View();
         }
         //
-        // POST: /ManterNoticia/Delete/5
+        // POST: /ManterNoticia/ExcluirUsuario/5
         [HttpPost]
 		public ActionResult ExcluirNoticia(int id, FormCollection collection)
         {

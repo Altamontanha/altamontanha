@@ -15,19 +15,19 @@ namespace AltaMontanha.Controllers
             return View();
         }
 		//
-        // GET: /ManterFoto/Details/5
+        // GET: /ManterFoto/VisualizarUsuario/5
 		public ActionResult PesquisarFoto(int id)
         {
             return View();
         }
 		//
-        // GET: /ManterFoto/Create
+        // GET: /ManterFoto/CadastrarUsuario
         public ActionResult CarregarFoto()
         {
             return View();
         } 
         //
-        // POST: /ManterFoto/Create
+        // POST: /ManterFoto/CadastrarUsuario
         [HttpPost]
 		public ActionResult CarregarFoto(FormCollection collection)
         {
@@ -43,13 +43,13 @@ namespace AltaMontanha.Controllers
             }
         }
         //
-        // GET: /ManterFoto/Edit/5
+        // GET: /ManterFoto/AlterarUsuario/5
         public ActionResult SalvarFoto(int id)
         {
             return View();
         }
         //
-        // POST: /ManterFoto/Edit/5
+        // POST: /ManterFoto/AlterarUsuario/5
         [HttpPost]
 		public ActionResult SalvarFoto(int id, FormCollection collection)
         {

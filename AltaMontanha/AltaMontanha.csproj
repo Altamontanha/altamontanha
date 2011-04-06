@@ -217,9 +217,6 @@
     <Folder Include="Models\Persistencia\SQLServer\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\ManterUsuario\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\ManterAutenticacao\Autenticar.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -233,15 +230,6 @@
       <Project>{F1146BDF-A5C7-492C-B08B-C18FF1295DD4}</Project>
       <Name>AltaMontanha.HttpModule</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ManterUsuario\SalvarUsuario.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ManterUsuario\PesquisarUsuario.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ManterUsuario\ExcluirUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ManterUsuario\_Sidebar.cshtml" />
@@ -274,10 +262,19 @@
     <Content Include="Views\ManterPerfil\VisualizarPerfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\ManterPerfil\AdicionarPerfil.cshtml" />
+    <Content Include="Views\ManterPerfil\CadastrarPerfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ManterPerfil\AlterarPerfil.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterUsuario\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterUsuario\VisualizarUsuario.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterUsuario\CadastrarUsuario.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

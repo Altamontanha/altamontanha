@@ -15,19 +15,19 @@ namespace AltaMontanha.Controllers
             return View();
         }
         //
-        // GET: /ManterComentario/Details/5
+        // GET: /ManterComentario/VisualizarUsuario/5
         public ActionResult PesquisarComentario(int id)
         {
             return View();
         }
         //
-        // GET: /ManterComentario/Create
+        // GET: /ManterComentario/CadastrarUsuario
 		public ActionResult CarregarComentario()
         {
             return View();
         } 
         //
-        // POST: /ManterComentario/Create
+        // POST: /ManterComentario/CadastrarUsuario
         [HttpPost]
 		public ActionResult CarregarComentario(FormCollection collection)
         {

@@ -15,19 +15,19 @@ namespace AltaMontanha.Controllers
             return View();
         }
         //
-        // GET: /ManterAventura/Details/5
+        // GET: /ManterAventura/VisualizarUsuario/5
         public ActionResult PesquisarAventura(int id)
         {
             return View();
         }
         //
-        // GET: /ManterAventura/Create
+        // GET: /ManterAventura/CadastrarUsuario
         public ActionResult CarregarAventura()
         {
             return View();
         } 
         //
-        // POST: /ManterAventura/Create
+        // POST: /ManterAventura/CadastrarUsuario
         [HttpPost]
 		public ActionResult CarregarAventura(FormCollection collection)
         {
@@ -43,13 +43,13 @@ namespace AltaMontanha.Controllers
             }
         }
         //
-        // GET: /ManterAventura/Edit/5
+        // GET: /ManterAventura/AlterarUsuario/5
         public ActionResult SalvarAventura(int id)
         {
             return View();
         }
         //
-        // POST: /ManterAventura/Edit/5
+        // POST: /ManterAventura/AlterarUsuario/5
         [HttpPost]
 		public ActionResult SalvarAventura(int id, FormCollection collection)
         {
@@ -65,13 +65,13 @@ namespace AltaMontanha.Controllers
             }
         }
         //
-        // GET: /ManterAventura/Delete/5
+        // GET: /ManterAventura/ExcluirUsuario/5
 		public ActionResult ExcluirAventura(int id)
         {
             return View();
         }
         //
-        // POST: /ManterAventura/Delete/5
+        // POST: /ManterAventura/ExcluirUsuario/5
         [HttpPost]
 		public ActionResult ExcluirAventura(int id, FormCollection collection)
         {

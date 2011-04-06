@@ -3,152 +3,103 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using AltaMontanha.Models.Fachada;
 using AltaMontanha.Models.Dominio;
+using AltaMontanha.Models.Fachada;
 
 namespace AltaMontanha.Controllers
 {
     public class ManterUsuarioController : Controller
     {
+		UsuarioFacade facade = new UsuarioFacade();
+
         //
         // GET: /ManterUsuario/
+
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult Criar()
-        {
-            return View();
+			IList<Usuario> usuarios = facade.PesquisarUsuario(null);
+            return View(usuarios);
         }
 
         //
-        // GET: /ManterUsuario/Details/5
-        public ActionResult PesquisarUsuario(int id)
-        {
-			UsuarioFacade usuarioFacade = new UsuarioFacade();
-			
-			if(id > 0)
-				usuarioFacade.PesquisarUsuario(id);
-			else
-			{
-				usuarioFacade.PesquisarUsuario(null);
-				usuarioFacade.PesquisarUsuario(new Usuario(){Codigo=5});
-			}
+        // GET: /ManterUsuario/VisualizarUsuario/5
 
-            return View();
+        public ActionResult VisualizarUsuario(int Codigo)
+        {
+			return View(facade.PesquisarUsuario(Codigo));
         }
+
         //
-        // GET: /ManterUsuario/Create
-        public ActionResult CarregarUsuario()
+        // GET: /ManterUsuario/CadastrarUsuario
+
+        public ActionResult CadastrarUsuario()
         {
             return View();
         } 
+
         //
-        // POST: /ManterUsuario/Create
+        // POST: /ManterUsuario/CadastrarUsuario
+
         [HttpPost]
-		public ActionResult CarregarUsuario(FormCollection collection)
+		public ActionResult CadastrarUsuario(Usuario usuario)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+				if (ModelState.IsValid)
+				{
+					facade.SalvarUsuario(usuario);
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					return View(usuario);
+				}
             }
             catch
             {
                 return View();
             }
         }
+        
         //
-        // GET: /ManterUsuario/Edit/5
-        public ActionResult SalvarUsuario()
+        // GET: /ManterUsuario/AlterarUsuario/5
+ 
+        public ActionResult AlterarUsuario(int Codigo)
         {
-			try
-			{
-				UsuarioFacade fachada = new UsuarioFacade();
+            return View(facade.PesquisarUsuario(Codigo));
+        }
 
-				Usuario usuario = new Usuario()
-				{
-					//Codigo = 1,
-					Nome  = "root",
-					Login = "root",
-					Senha = "#C0nd0R1r1#",
-					Email = "root@altamontanha.com",
-					//Foto  = new Foto(),
-					Perfil = new Perfil() { Codigo = 1 }
-				};
-
-				fachada.SalvarUsuario(usuario);
-
-				return RedirectToAction("Index");
-			}
-			catch
-			{
-				return View();
-			}
-		}
         //
-        // POST: /ManterUsuario/Edit/5
+        // POST: /ManterUsuario/AlterarUsuario/5
+
         [HttpPost]
-		public ActionResult SalvarUsuario(int id, FormCollection collection)
+		public ActionResult AlterarUsuario(Usuario usuario)
         {
             try
             {
-				UsuarioFacade fachada = new UsuarioFacade();
-				
-				Usuario usuario = new Usuario()
+				if (ModelState.IsValid)
 				{
-					Login = "root",
-					Senha = "#C0nd0R1r1#",
-					Perfil = new Perfil() { Codigo = 1 }
-				};
-
-				fachada.SalvarUsuario(usuario);
-
-                return RedirectToAction("Index");
-            }
+					facade.SalvarUsuario(usuario);
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					return View(usuario);
+				}
+			}
             catch
             {
                 return View();
             }
         }
+
         //
-        // GET: /ManterUsuario/Delete/5
-        public ActionResult ExcluirUsuario(int id)
+        // GET: /ManterUsuario/ExcluirUsuario/5
+ 
+        public ActionResult ExcluirUsuario(int Codigo)
         {
-
-			try
-			{
-				UsuarioFacade fachada = new UsuarioFacade();
-
-				fachada.ExcluirUsuario(5);
-
-				return RedirectToAction("Index");
-			}
-			catch
-			{
-				return View();
-			}
-        }
-        //
-        // POST: /ManterUsuario/Delete/5
-        [HttpPost]
-		public ActionResult ExcluirUsuario(int id, FormCollection collection)
-        {
-
-			try
-			{
-				UsuarioFacade fachada = new UsuarioFacade();
-
-				fachada.ExcluirUsuario(id);
-
-				return RedirectToAction("Index");
-			}
-			catch
-			{
-				return View();
-			}
+			facade.ExcluirUsuario(Codigo);
+            return RedirectToAction("Index");
         }
     }
 }

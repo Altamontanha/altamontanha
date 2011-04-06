@@ -15,13 +15,13 @@ namespace AltaMontanha.Controllers
             return View();
         }
         //
-        // GET: /ManterAutenticacao/Create
+        // GET: /ManterAutenticacao/CadastrarUsuario
         public ActionResult CarregarAutenticacao()
         {
             return View();
         } 
         //
-        // POST: /ManterAutenticacao/Create
+        // POST: /ManterAutenticacao/CadastrarUsuario
         [HttpPost]
 		public ActionResult CarregarAutenticacao(FormCollection collection)
         {

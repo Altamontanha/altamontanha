@@ -15,19 +15,19 @@ namespace AltaMontanha.Controllers
             return View();
         }
         //
-        // GET: /ManterBanner/Details/5
+        // GET: /ManterBanner/VisualizarUsuario/5
         public ActionResult PesquisarBanner(int id)
         {
             return View();
         }
         //
-        // GET: /ManterBanner/Create
+        // GET: /ManterBanner/CadastrarUsuario
         public ActionResult CarregarBanner()
         {
             return View();
         } 
         //
-        // POST: /ManterBanner/Create
+        // POST: /ManterBanner/CadastrarUsuario
         [HttpPost]
 		public ActionResult CarregarBanner(FormCollection collection)
         {
@@ -43,13 +43,13 @@ namespace AltaMontanha.Controllers
             }
         }
         //
-        // GET: /ManterBanner/Edit/5
+        // GET: /ManterBanner/AlterarUsuario/5
 		public ActionResult SalvarBanner(int id)
         {
             return View();
         }
         //
-        // POST: /ManterBanner/Edit/5
+        // POST: /ManterBanner/AlterarUsuario/5
         [HttpPost]
 		public ActionResult SalvarBanner(int id, FormCollection collection)
         {
@@ -65,13 +65,13 @@ namespace AltaMontanha.Controllers
             }
         }
         //
-        // GET: /ManterBanner/Delete/5
+        // GET: /ManterBanner/ExcluirUsuario/5
 		public ActionResult ExcluirBanner(int id)
         {
             return View();
         }
         //
-        // POST: /ManterBanner/Delete/5
+        // POST: /ManterBanner/ExcluirUsuario/5
         [HttpPost]
 		public ActionResult ExcluirBanner(int id, FormCollection collection)
         {

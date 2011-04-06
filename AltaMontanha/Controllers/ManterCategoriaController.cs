@@ -15,19 +15,19 @@ namespace AltaMontanha.Controllers
             return View();
         }
         //
-        // GET: /ManterCategoria/Details/5
+        // GET: /ManterCategoria/VisualizarUsuario/5
         public ActionResult PesquisarCategoria(int id)
         {
             return View();
         }
         //
-        // GET: /ManterCategoria/Create
+        // GET: /ManterCategoria/CadastrarUsuario
         public ActionResult CarregarCategoria()
         {
             return View();
         } 
         //
-        // POST: /ManterCategoria/Create
+        // POST: /ManterCategoria/CadastrarUsuario
         [HttpPost]
 		public ActionResult CarregarCategoria(FormCollection collection)
         {
@@ -43,13 +43,13 @@ namespace AltaMontanha.Controllers
             }
         }
         //
-        // GET: /ManterCategoria/Edit/5
+        // GET: /ManterCategoria/AlterarUsuario/5
 		public ActionResult SalvarCategoria(int id)
         {
             return View();
         }
         //
-        // POST: /ManterCategoria/Edit/5
+        // POST: /ManterCategoria/AlterarUsuario/5
         [HttpPost]
 		public ActionResult SalvarCategoria(int id, FormCollection collection)
         {
@@ -65,13 +65,13 @@ namespace AltaMontanha.Controllers
             }
         }
         //
-        // GET: /ManterCategoria/Delete/5
+        // GET: /ManterCategoria/ExcluirUsuario/5
         public ActionResult ExcluirCategoria(int id)
         {
             return View();
         }
         //
-        // POST: /ManterCategoria/Delete/5
+        // POST: /ManterCategoria/ExcluirUsuario/5
         [HttpPost]
 		public ActionResult ExcluirCategoria(int id, FormCollection collection)
         {

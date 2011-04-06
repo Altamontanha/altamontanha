@@ -1,0 +1,23 @@
+﻿@model AltaMontanha.Models.Dominio.Usuario
+
+@{
+    ViewBag.Title = "Usuário: Visualizar";
+}
+
+<h2>ViewBag.Title</h2>
+
+<fieldset>
+    <legend>Usuário</legend>
+
+    <div class="display-label">Nome</div>
+    <div class="display-field">@Model.Nome</div>
+
+    <div class="display-label">Login</div>
+    <div class="display-field">@Model.Login</div>
+
+    <div class="display-label">Email</div>
+    <div class="display-field">@Model.Email</div>
+
+    <div class="display-label">Perfil</div>
+    <div class="display-field">@Model.Perfil.Nome</div>
+</fieldset>
