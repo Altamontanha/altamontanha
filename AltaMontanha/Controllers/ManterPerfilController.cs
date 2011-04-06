@@ -31,18 +31,18 @@ namespace AltaMontanha.Controllers
         }
 
         //
-        // GET: /ManterPerfil/AdicionarPerfil
+		// GET: /ManterPerfil/CadastrarPerfil
 
-		public ActionResult AdicionarPerfil()
+		public ActionResult CadastrarPerfil()
         {
             return View();
         } 
 
         //
-		// POST: /ManterPerfil/AdicionarPerfil
+		// POST: /ManterPerfil/CadastrarPerfil
 
         [HttpPost]
-		public ActionResult AdicionarPerfil(Perfil perfil)
+		public ActionResult CadastrarPerfil(Perfil perfil)
         {
             try
             {
