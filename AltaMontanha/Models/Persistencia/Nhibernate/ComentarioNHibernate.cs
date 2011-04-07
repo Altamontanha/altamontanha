@@ -22,13 +22,9 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			if (objeto == null)
 				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Comentario>().List<Dominio.Comentario>();
 
-			Dictionary<string, object> filtros = new Dictionary<string, object>();
+			IList<Dominio.Comentario> comentarios = NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Comentario>().List<Dominio.Comentario>().Where(comentario => comentario.Codigo == objeto.Codigo).ToList();
 
-			filtros.Add("Codigo", objeto.Codigo);
-			filtros.Add("Nome", objeto.Nome);
-			
-			// TODO: Verificar se o codigo de consulta com filtros é feita dessa forma.
-			return NHibernate.HttpModule.RecuperarSessao.CreateFilter(filtros, "").List<Dominio.Comentario>();
+			return comentarios;
 		}
 
 		public Dominio.Comentario Pesquisar(int codigo)
