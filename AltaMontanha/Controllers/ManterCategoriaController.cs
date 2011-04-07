@@ -3,88 +3,91 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AltaMontanha.Models.Fachada;
+using AltaMontanha.Models.Dominio;
 
 namespace AltaMontanha.Controllers
 {
     public class ManterCategoriaController : Controller
     {
+		ConteudoFacade facade = new ConteudoFacade();
+
         //
         // GET: /ManterCategoria/
         public ActionResult Index()
         {
-            return View();
+            return View(facade.PesquisarCategoria(null));
         }
         //
-        // GET: /ManterCategoria/VisualizarUsuario/5
-        public ActionResult PesquisarCategoria(int id)
-        {
-            return View();
-        }
-        //
-        // GET: /ManterCategoria/CadastrarUsuario
-        public ActionResult CarregarCategoria()
+        // GET: /ManterCategoria/CadastrarCategoria
+		public ActionResult CadastrarCategoria()
         {
             return View();
         } 
         //
-        // POST: /ManterCategoria/CadastrarUsuario
+		// POST: /ManterCategoria/CadastrarCategoria
         [HttpPost]
-		public ActionResult CarregarCategoria(FormCollection collection)
+		public ActionResult CadastrarCategoria(Categoria categoria)
         {
             try
             {
-                // TODO: Add insert logic here
+				if (ModelState.IsValid)
+				{
+					facade.SalvarCategoria(categoria);
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					return View(categoria);
+				}
+			}
+            catch
+            {
+                return View(categoria);
+            }
+        }
+        
+        //
+        // GET: /ManterCategoria/AlterarCategoria/5
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        //
-        // GET: /ManterCategoria/AlterarUsuario/5
-		public ActionResult SalvarCategoria(int id)
+		public ActionResult AlterarCategoria(int Codigo)
         {
-            return View();
+			// TODO: implementar pesquisa por Codigo
+			IList<Categoria> categorias = facade.PesquisarCategoria(new Categoria() { Codigo = Codigo });
+            return View(categorias[0]);
         }
+
         //
-        // POST: /ManterCategoria/AlterarUsuario/5
+		// POST: /ManterCategoria/AlterarCategoria/5
+
         [HttpPost]
-		public ActionResult SalvarCategoria(int id, FormCollection collection)
+		public ActionResult AlterarCategoria(Categoria categoria)
         {
             try
             {
-                // TODO: Add update logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+				if (ModelState.IsValid)
+				{
+					facade.SalvarCategoria(categoria);
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					return View(categoria);
+				}
+			}
+			catch
+			{
+				return View(categoria);
+			}
         }
+
         //
-        // GET: /ManterCategoria/ExcluirUsuario/5
-        public ActionResult ExcluirCategoria(int id)
+        // GET: /ManterCategoria/ExcluirCategoria/5
+
+		public ActionResult ExcluirCategoria(int Codigo)
         {
-            return View();
-        }
-        //
-        // POST: /ManterCategoria/ExcluirUsuario/5
-        [HttpPost]
-		public ActionResult ExcluirCategoria(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+			facade.ExcluirCategoria(Codigo);
+            return RedirectToAction("Index");
         }
     }
 }

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<AltaMontanha.Models.Dominio.Categoria>
+
+@{
+    ViewBag.Title = "Categoria";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table>
+    <tr>
+        <th>
+            Titulo
+        </th>
+        <th>
+            Descrição
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Titulo
+        </td>
+        <td>
+            @item.Descricao
+        </td>
+        <td>
+            @Html.ActionLink("Alterar", "AlterarCategoria", new { Codigo = item.Codigo }, new { @class = "edit" })
+        </td>
+        <td>
+            @Html.ActionLink("Excluir", "ExcluirCategoria", new { Codigo = item.Codigo }, new { @class = "delete" })
+        </td>
+    </tr>
+}
+
+</table>
+
