@@ -37,7 +37,11 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				INoticiaDAO noticiaDAO = fabrica.GetNoticiaDAO();
 
-				return noticiaDAO.Cadastrar(noticia);
+				if (noticia.Codigo <= 0)
+					return noticiaDAO.Cadastrar(noticia);
+
+				noticiaDAO.Alterar(noticia);
+				return noticia;
 			}
 			catch (Exception)
 			{
@@ -92,7 +96,11 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IColunaDAO colunaDAO = fabrica.GetColunaDAO();
 
-				return colunaDAO.Cadastrar(coluna);
+				if (coluna.Codigo <= 0)
+					return colunaDAO.Cadastrar(coluna);
+
+				colunaDAO.Alterar(coluna);
+				return coluna;
 			}
 			catch (Exception)
 			{
@@ -147,7 +155,11 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IAventuraDAO aventuraDAO = fabrica.GetAventuraDAO();
 
-				return aventuraDAO.Cadastrar(aventura);
+				if (aventura.Codigo <= 0)
+					return aventuraDAO.Cadastrar(aventura);
+
+				aventuraDAO.Alterar(aventura);
+				return aventura;
 			}
 			catch (Exception)
 			{
@@ -216,7 +228,11 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				ICategoriaDAO categoriaDAO = fabrica.GetCategoriaDAO();
 
-				return categoriaDAO.Cadastrar(categoria);
+				if (categoria.Codigo <= 0)
+					return categoriaDAO.Cadastrar(categoria);
+
+				categoriaDAO.Alterar(categoria);
+				return categoria;
 			}
 			catch (Exception)
 			{
@@ -269,7 +285,11 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IArtigoDAO artigoDAO = fabrica.GetArtigoDAO();
 
-				return artigoDAO.Cadastrar(artigo);
+				if (artigo.Codigo <= 0)
+					return artigoDAO.Cadastrar(artigo);
+
+				artigoDAO.Alterar(artigo);
+				return artigo;
 			}
 			catch (Exception)
 			{
