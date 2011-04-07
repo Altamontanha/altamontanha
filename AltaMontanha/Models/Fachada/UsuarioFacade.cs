@@ -38,7 +38,11 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IPerfilDAO perfilDAO = fabrica.GetPerfilDAO();
 
-				return perfilDAO.Cadastrar(perfil);
+				if (perfil.Codigo <= 0)
+					return perfilDAO.Cadastrar(perfil);
+
+				perfilDAO.Alterar(perfil);
+				return perfil;
 			}
 			catch (Exception)
 			{
@@ -111,7 +115,11 @@ namespace AltaMontanha.Models.Fachada
 
 				usuario.Senha = Utilitario.Seguranca.Criptografar(usuario.Senha);
 
-				return usuarioDAO.Cadastrar(usuario);
+				if (usuario.Codigo <= 0)
+					return usuarioDAO.Cadastrar(usuario);
+
+				usuarioDAO.Alterar(usuario);
+				return usuario;
 			}
 			catch (Exception)
 			{

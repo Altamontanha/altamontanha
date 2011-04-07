@@ -19,6 +19,15 @@
 	<body>
 		<div id="wrapper">
 			<h1 class="logo"><a href="#"><span>Página Principal</span></a></h1>
+			<div id="mainNav">
+				<ul class="level1">
+					<li>@Html.ActionLink("Usuário", "Index", "ManterUsuario")</li>
+					<li>@Html.ActionLink("Perfil", "Index", "ManterPerfil")</li>
+					<li>@Html.ActionLink("Link", "Index", "ManterLink")</li>
+				</ul>
+			</div>
+
+
 			<div id="containerHolder">
 				<div id="container">
 					<div id="sidebar">

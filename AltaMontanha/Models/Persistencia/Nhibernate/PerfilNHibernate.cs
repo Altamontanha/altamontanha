@@ -25,7 +25,6 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 				if (objeto == null)
 					return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Perfil>().List<Dominio.Perfil>();
 
-
 				IList<Dominio.Perfil> perfis = NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Perfil>().List<Dominio.Perfil>().Where(perfil => perfil.Codigo == objeto.Codigo).ToList();
 
 				return perfis;

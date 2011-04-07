@@ -11,7 +11,6 @@
         <th>Nome</th>
         <th>Login</th>
         <th>Email</th>
-        <th>Perfil</th>
         <th></th>
         <th></th>
         <th></th>
@@ -27,9 +26,6 @@
         </td>
         <td>
             @item.Email
-        </td>
-        <td>
-            @item.Perfil.Nome
         </td>
         <td>
             @Html.ActionLink("Alterar", "AlterarUsuario", new { Codigo = item.Codigo }, new { @class = "edit" })
