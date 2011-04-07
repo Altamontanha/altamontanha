@@ -39,7 +39,6 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 				Dominio.Categoria categoria = this.Pesquisar(codigo);
 
 				NHibernate.HttpModule.RecuperarSessao.Delete(categoria);
-				NHibernate.HttpModule.RecuperarSessao.Close();
 
 				return true;
 			}

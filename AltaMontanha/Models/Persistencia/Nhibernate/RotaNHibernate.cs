@@ -42,7 +42,6 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 				Dominio.Rota rota = this.Pesquisar(codigo);
 
 				NHibernate.HttpModule.RecuperarSessao.Delete(rota);
-				NHibernate.HttpModule.RecuperarSessao.Close();
 
 				return true;
 			}

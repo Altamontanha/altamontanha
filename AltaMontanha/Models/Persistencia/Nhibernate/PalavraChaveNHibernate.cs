@@ -43,7 +43,6 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 				Dominio.PalavraChave palavraChave = this.Pesquisar(codigo);
 
 				NHibernate.HttpModule.RecuperarSessao.Delete(palavraChave);
-				NHibernate.HttpModule.RecuperarSessao.Close();
 
 				return true;
 			}

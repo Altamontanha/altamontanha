@@ -39,7 +39,6 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 				Dominio.Aventura artigo = Pesquisar(codigo);
 
 				NHibernate.HttpModule.RecuperarSessao.Delete(artigo);
-				NHibernate.HttpModule.RecuperarSessao.Close();
 
 				return true;
 			}

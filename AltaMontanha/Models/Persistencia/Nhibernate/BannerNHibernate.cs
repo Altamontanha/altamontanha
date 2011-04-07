@@ -46,7 +46,6 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 				Dominio.Banner banner = Pesquisar(codigo);
 
 				NHibernate.HttpModule.RecuperarSessao.Delete(banner);
-				NHibernate.HttpModule.RecuperarSessao.Close();
 
 				return true;
 			}

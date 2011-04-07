@@ -43,7 +43,6 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 				Dominio.Foto foto = this.Pesquisar(codigo);
 
 				NHibernate.HttpModule.RecuperarSessao.Delete(foto);
-				NHibernate.HttpModule.RecuperarSessao.Close();
 
 				return true;
 			}

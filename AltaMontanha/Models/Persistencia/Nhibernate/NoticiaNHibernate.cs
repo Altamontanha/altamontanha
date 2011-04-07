@@ -39,7 +39,6 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 				Dominio.Noticia noticia = this.Pesquisar(codigo);
 
 				NHibernate.HttpModule.RecuperarSessao.Delete(noticia);
-				NHibernate.HttpModule.RecuperarSessao.Close();
 
 				return true;
 			}

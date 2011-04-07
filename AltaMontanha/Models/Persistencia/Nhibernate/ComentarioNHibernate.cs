@@ -39,7 +39,6 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 				Dominio.Comentario comentario = this.Pesquisar(codigo);
 
 				NHibernate.HttpModule.RecuperarSessao.Delete(comentario);
-				NHibernate.HttpModule.RecuperarSessao.Close();
 
 				return true;
 			}

@@ -43,7 +43,6 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 				Dominio.Permissao permissao = this.Pesquisar(codigo);
 
 				NHibernate.HttpModule.RecuperarSessao.Delete(permissao);
-				NHibernate.HttpModule.RecuperarSessao.Close();
 
 				return true;
 			}
