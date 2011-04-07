@@ -1,4 +1,4 @@
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+﻿SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
@@ -203,7 +203,7 @@ CREATE  TABLE IF NOT EXISTS `altamontanha`.`TB_Comentario` (
   `Email` VARCHAR(150) NOT NULL COMMENT 'E-mail do autor do comentário' ,
   `Texto` TEXT NOT NULL COMMENT 'Texto do comentário' ,
   `Habilitado` TINYINT(1)  NOT NULL DEFAULT false COMMENT 'Indica se o comentário está habilitado para aparecer' ,
-  `Data` DATETIME NOT NULL DEFAULT now() COMMENT 'Data de cadastro do comentário' ,
+  `Data` DATETIME NOT NULL COMMENT 'Data de cadastro do comentário' ,
   PRIMARY KEY (`CodComentario`) ,
   INDEX `fk_TB_Comentario_TB_Conteudo1` (`CodConteudo` ASC) ,
   CONSTRAINT `fk_TB_Comentario_TB_Conteudo1`
@@ -331,7 +331,3 @@ CREATE  TABLE IF NOT EXISTS `altamontanha`.`TB_ConteudoFoto` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-
-
-SET SQL_MODE=@OLD_SQL_MOD
