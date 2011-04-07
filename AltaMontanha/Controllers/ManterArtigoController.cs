@@ -3,88 +3,91 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AltaMontanha.Models.Dominio;
+using AltaMontanha.Models.Fachada;
 
 namespace AltaMontanha.Controllers
 {
     public class ManterArtigoController : Controller
     {
+		ConteudoFacade facade = new ConteudoFacade();
+
         //
         // GET: /ManterArtigo/
-        public ActionResult Index()
+		public ActionResult Index()
         {
-            return View();
+			IList<Artigo> artigos = facade.PesquisarArtigo(null);
+            return View(artigos);
         }
         //
-        // GET: /ManterArtigo/VisualizarUsuario/5
-        public ActionResult PesquisarArtigo(int id)
+        // GET: /ManterArtigo/CadastrarArtigo
+		public ActionResult CadastrarArtigo()
         {
-            return View();
-        }
-        //
-        // GET: /ManterArtigo/CadastrarUsuario
-        public ActionResult CarregarArtigo()
-        {
+			ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null), "Codigo", "Titulo");
             return View();
         } 
         //
-        // POST: /ManterArtigo/CadastrarUsuario
+		// POST: /ManterArtigo/CadastrarArtigo
         [HttpPost]
-		public ActionResult CarregarArtigo(FormCollection collection)
+		public ActionResult CadastrarArtigo(Artigo artigo)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
+				if (ModelState.IsValid)
+				{
+					facade.SalvarArtigo(artigo);
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null).ToList(), "Codigo", "Titulo");
+					return View(artigo);
+				}
+			}
             catch
             {
-                return View();
+				ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null), "Codigo", "Titulo");
+				return View(artigo);
             }
         }
         //
-        // GET: /ManterArtigo/AlterarUsuario/5
-        public ActionResult SalvarArtigo(int id)
+        // GET: /ManterArtigo/AlterarArtigo/5
+		public ActionResult AlterarArtigo(int Codigo)
         {
-            return View();
+			ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null), "Codigo", "Titulo");
+			// TODO: implementar sobrecarga
+			return View(facade.PesquisarArtigo(new Artigo() { Codigo = Codigo }));
         }
         //
-        // POST: /ManterArtigo/AlterarUsuario/5
+		// POST: /ManterArtigo/AlterarArtigo/5
         [HttpPost]
-		public ActionResult SalvarArtigo(int id, FormCollection collection)
+		public ActionResult AlterarArtigo(Artigo artigo)
         {
             try
             {
-                // TODO: Add update logic here
- 
-                return RedirectToAction("Index");
-            }
+				if (ModelState.IsValid)
+				{
+					facade.SalvarArtigo(artigo);
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null).ToList(), "Codigo", "Titulo");
+					return View(artigo);
+				}
+			}
             catch
             {
-                return View();
+				ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null), "Codigo", "Titulo");
+				return View(artigo);
             }
         }
         //
-        // GET: /ManterArtigo/ExcluirUsuario/5
-        public ActionResult ExcluirArtigo(int id)
+        // GET: /ManterArtigo/ExcluirArtigo/5
+        public ActionResult ExcluirArtigo(int Codigo)
         {
-            return View();
-        }
-        //
-        // POST: /ManterArtigo/ExcluirUsuario/5
-        [HttpPost]
-		public ActionResult ExcluirArtigo(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+			facade.ExcluirArtigo(Codigo);
+            return RedirectToAction("Index");
         }
     }
 }

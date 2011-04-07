@@ -1,0 +1,1 @@
+alter table tb_conteudo add column `Tipo` varchar(15) not null;

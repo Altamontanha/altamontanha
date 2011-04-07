@@ -279,6 +279,18 @@
   <ItemGroup>
     <Content Include="Views\ManterUsuario\AlterarUsuario.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterArtigo\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterArtigo\CadastrarArtigo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterArtigo\_Sidebar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterArtigo\AlterarArtigo.cshtml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
