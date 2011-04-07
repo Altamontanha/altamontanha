@@ -38,14 +38,14 @@
 	<!--Artigo-->
 	<subclass name="Artigo" extends="Conteudo" discriminator-value="Artigo" lazy="false">
 		<join table="TB_Artigo">
-			<key column="CodArtigo" />
+			<key column="CodConteudo" />
 			<many-to-one name="Categoria" column="CodCategoria" class="Categoria" not-null="true" />
 		</join>
 	</subclass>
 	<!--Aventura-->
 	<subclass name="Aventura" extends="Conteudo" discriminator-value="Aventura" lazy="false">
 		<join table="TB_Aventura">
-			<key column="CodAventura" />
+			<key column="CodConteudo" />
 			<many-to-one name="AventuraAnterior" column="CodAventura" class="Aventura" not-null="true" />
 			<many-to-one name="Rota" column="CodRota" class="Rota" not-null="true" />
 			<many-to-one name="Autor" column="CodUsuario" class="Usuario" not-null="true" />
@@ -54,14 +54,14 @@
 	<!--Coluna-->
 	<subclass name="Coluna" extends="Conteudo" discriminator-value="Coluna" lazy="false">
 		<join table="TB_Coluna">
-			<key column="CodColuna" />
+			<key column="CodConteudo" />
 			<many-to-one name="Autor" column="CodUsuario" class="Usuario" not-null="true" />
 		</join>
 	</subclass>
 	<!--Noticia-->
 	<subclass name="Noticia" extends="Conteudo" discriminator-value="Coluna" lazy="false">
 		<join table="TB_Noticia">
-			<key column="CodNoticia" />
+			<key column="CodConteudo" />
 			<property name="Fonte" not-null="true" access="property" type="String">
 				<column name="Fonte" length="75"/>
 			</property>
