@@ -61,17 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ManterArtigoController.cs" />
-    <Compile Include="Controllers\ManterAutenticacaoController.cs" />
-    <Compile Include="Controllers\ManterAventuraController.cs" />
-    <Compile Include="Controllers\ManterBannerController.cs" />
     <Compile Include="Controllers\ManterCategoriaController.cs" />
     <Compile Include="Controllers\ManterColunaController.cs" />
-    <Compile Include="Controllers\ManterComentarioController.cs" />
-    <Compile Include="Controllers\ManterFotoController.cs" />
     <Compile Include="Controllers\ManterLinkController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\ManterNoticiaController.cs" />
     <Compile Include="Controllers\ManterPerfilController.cs" />
     <Compile Include="Controllers\ManterUsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -217,13 +211,7 @@
     <Folder Include="Models\Persistencia\SQLServer\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\ManterAutenticacao\Autenticar.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Content\themes\Cinza\Geral.skin" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ManterColuna\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AltaMontanha.HttpModule\AltaMontanha.HttpModule.csproj">
@@ -233,12 +221,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ManterUsuario\_Sidebar.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ManterColuna\_Sidebar.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ManterAutenticacao\_Sidebar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ManterLink\Index.cshtml" />
@@ -290,6 +272,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ManterArtigo\AlterarArtigo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterColuna\_Sidebar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterColuna\AlterarColuna.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterColuna\CadastrarColuna.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterColuna\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -1,7 +1,33 @@
-﻿@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model IEnumerable<AltaMontanha.Models.Dominio.Coluna>
+
+@{
+	ViewBag.Title = "Coluna";
 }
 
-<h2>Coluna: Index</h2>
+<h2>@ViewBag.Title</h2>
 
+<table>
+    <tr>
+        <th>Título</th>
+        <th>Data</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Titulo
+        </td>
+        <td>
+            @String.Format("{0:g}", item.Data)
+        </td>
+        <td>
+            @Html.ActionLink("Alterar", "AlterarColuna", new { Codigo = item.Codigo }) |
+        </td>
+        <td>
+            @Html.ActionLink("Excluir", "ExcluirColuna", new { Codigo = item.Codigo })
+        </td>
+    </tr>
+}
+</table>
