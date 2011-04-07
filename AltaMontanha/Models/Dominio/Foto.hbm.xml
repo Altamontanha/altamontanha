@@ -19,9 +19,9 @@
 		<property name="Fonte" not-null="false" access="property" type="String">
 			<column name="Fonte" length="75" />
 		</property>
-		<bag name="FotoReduzida" cascade="save-update" lazy="false" >
+		<!--<bag name="FotoReduzida" cascade="save-update" lazy="false" >
 			<key column="CodFotoPai" />
 			<one-to-many class="Foto" />
-		</bag>
-	</class>
+		</bag>-->
+</class>
 </hibernate-mapping>

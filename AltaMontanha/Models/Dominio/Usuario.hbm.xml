@@ -7,6 +7,9 @@
 		<property name="Nome" not-null="true" access="property" type="String">
 			<column name="Nome" length="100" />
 		</property>
+		<property name="Login" not-null="true" access="property" type="String">
+			<column name="Login" length="30" />
+		</property>
 		<property name="Email" not-null="true" access="property" type="String">
 			<column name="Email" length="150" />
 		</property>
@@ -14,5 +17,6 @@
 			<column name="Senha" length="32" />
 		</property>
 		<many-to-one name="Perfil" column="CodPerfil" class="Perfil" not-null="true" />
+		<many-to-one name="Foto" column="CodFoto" class="Foto" not-null="true" />
 	</class>
 </hibernate-mapping>

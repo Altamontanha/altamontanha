@@ -11,6 +11,6 @@ namespace AltaMontanha.Models.Dominio
 		public string Nome { get; set; }
 		public string Descricao { get; set; }
 		public IList<Usuario> ListaUsuarios { get; set; }
-		public IList<Permissao> listaPermissoes { get; set; }
+		public IList<Permissao> ListaPermissoes { get; set; }
 	}
 }
