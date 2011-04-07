@@ -7,6 +7,6 @@ namespace AltaMontanha.Models.Dominio
 {
 	public partial class Artigo : Conteudo
 	{
-		public Categoria Categoria { get; set; }
+		public virtual Categoria Categoria { get; set; }
 	}
 }

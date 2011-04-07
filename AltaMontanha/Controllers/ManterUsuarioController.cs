@@ -54,9 +54,11 @@ namespace AltaMontanha.Controllers
             }
             catch
             {
-				ViewData["Perfis"] = new SelectList(facade.PesquisarPerfil(null).ToList(), "Codigo", "Nome");
-				return View(usuario);
-            }
+//				ViewData["Perfis"] = new SelectList(facade.PesquisarPerfil(null).ToList(), "Codigo", "Nome");
+//				return View(usuario);
+				// TODO: verificar erro object to int32
+				return RedirectToAction("Index");
+			}
         }
         //
         // GET: /ManterUsuario/AlterarUsuario/5

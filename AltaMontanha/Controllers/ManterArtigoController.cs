@@ -35,6 +35,8 @@ namespace AltaMontanha.Controllers
             {
 				if (ModelState.IsValid)
 				{
+					// TODO: pegar usuário logado
+					artigo.UsuarioCadastro = new Usuario() { Codigo = 1 };
 					facade.SalvarArtigo(artigo);
 					return RedirectToAction("Index");
 				}
@@ -46,8 +48,10 @@ namespace AltaMontanha.Controllers
 			}
             catch
             {
-				ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null), "Codigo", "Titulo");
-				return View(artigo);
+				//ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null), "Codigo", "Titulo");
+				//return View(artigo);
+				// TODO: verificar erro object to int32
+				return RedirectToAction("Index");
             }
         }
         //
@@ -56,7 +60,8 @@ namespace AltaMontanha.Controllers
         {
 			ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null), "Codigo", "Titulo");
 			// TODO: implementar sobrecarga
-			return View(facade.PesquisarArtigo(new Artigo() { Codigo = Codigo }));
+			IList<Artigo> artigos = facade.PesquisarArtigo(new Artigo() { Codigo = Codigo });
+			return View(artigos[0]);
         }
         //
 		// POST: /ManterArtigo/AlterarArtigo/5
@@ -67,6 +72,8 @@ namespace AltaMontanha.Controllers
             {
 				if (ModelState.IsValid)
 				{
+					// TODO: verificar como não validar usuário no alterar
+					artigo.UsuarioCadastro = new Usuario() { Codigo = 1 };
 					facade.SalvarArtigo(artigo);
 					return RedirectToAction("Index");
 				}

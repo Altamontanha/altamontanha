@@ -20,20 +20,19 @@
 		<property name="Data" not-null="true" access="property" type="DateTime">
 			<column name="Data" sql-type="DATETIME"/>
 		</property>
-		<bag name="ListaFotos" table="TB_ConteudoFoto" cascade="save-update">
+		<!--bag name="ListaFotos" table="TB_ConteudoFoto" cascade="save-update">
 			<key column="CodConteudo"/>
 			<many-to-many class="Foto" column="CodFoto"></many-to-many>
 		</bag>
-		<bag name="ListaPalavrasChave" table="TB_ConteudoPalavrasChave" cascade="save-update">
-			<key column="CodConteudo"/>
-			<many-to-many class="PalavraChave" column="CodPalavraChave"></many-to-many>
-		</bag>
-		<many-to-one name="UsuarioCadastro" column="CodUsuario" class="Usuario" not-null="true" />
 		<bag name="ListaComentarios" table="TB_Comentario" cascade="save-update">
 			<key column="CodConteudo"/>
 			<one-to-many class="Comentario"></one-to-many>
 		</bag>
-		
+		<bag name="ListaPalavrasChave" table="TB_ConteudoPalavraChave" cascade="save-update">
+			<key column="CodConteudo"/>
+			<many-to-many class="PalavraChave" column="CodPalavraChave"></many-to-many>
+		</bag-->
+		<many-to-one name="UsuarioCadastro" column="CodUsuario" class="Usuario" not-null="true" />
 	</class>
 	<!--Artigo-->
 	<subclass name="Artigo" extends="Conteudo" discriminator-value="Artigo" lazy="false">

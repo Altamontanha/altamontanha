@@ -21,7 +21,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 		public IList<Dominio.Artigo> Pesquisar(Dominio.Artigo objeto)
 		{
 			if (objeto == null)
-				NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Artigo>().List<Dominio.Artigo>();
+				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Artigo>().List<Dominio.Artigo>();
 
 			IList<Dominio.Artigo> artigos = NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Artigo>().List<Dominio.Artigo>().Where(artigo => artigo.Codigo == objeto.Codigo).ToList();
 			

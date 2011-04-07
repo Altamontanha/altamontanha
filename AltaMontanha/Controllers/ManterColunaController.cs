@@ -46,7 +46,9 @@ namespace AltaMontanha.Controllers
 			}
 			catch
 			{
-				return View(coluna);
+//				return View(coluna);
+				// TODO: verificar erro object to int32
+				return RedirectToAction("Index");
 			}
 		}
 		//

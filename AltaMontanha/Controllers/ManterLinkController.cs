@@ -50,8 +50,10 @@ namespace AltaMontanha.Controllers
             }
             catch
             {
-                return View();
-            }
+//                return View();
+				// TODO: verificar erro object to int32
+				return RedirectToAction("Index");
+			}
         }
         
         //
