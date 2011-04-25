@@ -8,18 +8,21 @@ using AltaMontanha.Models.Dominio;
 
 namespace AltaMontanha.Controllers
 {
-    public class ManterCategoriaController : Controller
+	[HandleError]
+    public class ManterCategoriaController : Utilitario.BaseController
     {
 		ConteudoFacade facade = new ConteudoFacade();
 
         //
         // GET: /ManterCategoria/
+		[Authorize]
         public ActionResult Index()
         {
             return View(facade.PesquisarCategoria(null));
         }
         //
         // GET: /ManterCategoria/CadastrarCategoria
+		[Authorize]
 		public ActionResult CadastrarCategoria()
         {
             return View();
@@ -51,18 +54,16 @@ namespace AltaMontanha.Controllers
         
         //
         // GET: /ManterCategoria/AlterarCategoria/5
-
+		[Authorize]
 		public ActionResult AlterarCategoria(int Codigo)
         {
-			// TODO: implementar pesquisa por Codigo
-			IList<Categoria> categorias = facade.PesquisarCategoria(new Categoria() { Codigo = Codigo });
-            return View(categorias[0]);
+			return View(facade.PesquisarCategoria(Codigo));
         }
 
         //
 		// POST: /ManterCategoria/AlterarCategoria/5
-
         [HttpPost]
+		[Authorize]
 		public ActionResult AlterarCategoria(Categoria categoria)
         {
             try
@@ -85,7 +86,7 @@ namespace AltaMontanha.Controllers
 
         //
         // GET: /ManterCategoria/ExcluirCategoria/5
-
+		[Authorize]
 		public ActionResult ExcluirCategoria(int Codigo)
         {
 			facade.ExcluirCategoria(Codigo);

@@ -8,12 +8,14 @@ using AltaMontanha.Models.Fachada;
 
 namespace AltaMontanha.Controllers
 {
-	public class ManterColunaController : Controller
+	[HandleError]
+	public class ManterColunaController : Utilitario.BaseController
 	{
 		ConteudoFacade facade = new ConteudoFacade();
 
 		//
 		// GET: /ManterColuna/
+		[Authorize]
 		public ActionResult Index()
 		{
 			IList<Coluna> colunas = facade.PesquisarColuna(null);
@@ -21,6 +23,7 @@ namespace AltaMontanha.Controllers
 		}
 		//
 		// GET: /ManterColuna/CadastrarColuna
+		[Authorize]
 		public ActionResult CadastrarColuna()
 		{
 			// TODO: incluir autor
@@ -29,6 +32,7 @@ namespace AltaMontanha.Controllers
 		//
 		// POST: /ManterColuna/CadastrarColuna
 		[HttpPost]
+		[Authorize]
 		public ActionResult CadastrarColuna(Coluna coluna)
 		{
 			try
@@ -53,6 +57,7 @@ namespace AltaMontanha.Controllers
 		}
 		//
 		// GET: /ManterColuna/AlterarColuna/5
+		[Authorize]
 		public ActionResult AlterarColuna(int Codigo)
 		{
 			// TODO: incluir autor
@@ -62,6 +67,7 @@ namespace AltaMontanha.Controllers
 		//
 		// POST: /ManterColuna/AlterarColuna/5
 		[HttpPost]
+		[Authorize]
 		public ActionResult AlterarColuna(Coluna coluna)
 		{
 			try
@@ -84,6 +90,7 @@ namespace AltaMontanha.Controllers
 		}
 		//
 		// GET: /ManterColuna/ExcluirColuna/5
+		[Authorize]
 		public ActionResult ExcluirColuna(int Codigo)
 		{
 			facade.ExcluirColuna(Codigo);

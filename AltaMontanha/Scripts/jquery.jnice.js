@@ -45,7 +45,7 @@
 				$input.addClass("jNiceInput").wrap('<div class="jNiceInputWrapper"><div class="jNiceInputInner"><div></div></div></div>');
 
 				var $wrapper = $input.parents('div.jNiceInputWrapper');
-				$wrapper.css("width", $(this).width() + 10);
+				$wrapper.css("width", $(this).width() + 80);
 
 				$input.focus(function ()
 				{
@@ -209,7 +209,7 @@
 	}; /* End the Plugin */
 
 	/* Automatically apply to any forms with class jNice */
-	$(function () { $('form.jNice').jNice(); });
+	$(function () { $('div.jNice').jNice(); });
 
 })(jQuery);
 				   

@@ -1,15 +1,53 @@
 ﻿@{
-    Layout = null;
+ 
+	Layout = null;
 }
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Error</title>
-</head>
-<body>
-    <h2>
-        Sorry, an error occurred while processing your request.
-    </h2>
-</body>
+	<head>
+		<title>Erro na Aplicação</title>
+		<!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="/Content/Cinza/css/ie6.css" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" type="text/css" media="screen" href="/Content/Cinza/css/ie7.css" /><![endif]-->
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/ie6.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/ie7.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/jNice.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/jquery.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/layout.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/reset.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/transdmin.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/Site.css" />
+		<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")"></script>
+		<script type="text/javascript">	var j = jQuery.noConflict();</script>
+		<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.jnice.js")"></script>
+	</head>
+	<body>
+		<div id="wrapper">
+			<h1 class="logo"><a href="#"><span>Página Principal</span></a></h1>
+			<div id="mainNav">
+				<ul class="level1">
+					<li>@Html.ActionLink("Usuário", "Index", "ManterUsuario")</li>
+					<li>@Html.ActionLink("Perfil", "Index", "ManterPerfil")</li>
+					<li>@Html.ActionLink("Link", "Index", "ManterLink")</li>
+					<li>@Html.ActionLink("Categoria", "Index", "ManterCategoria")</li>
+					<li>@Html.ActionLink("Artigo", "Index", "ManterArtigo")</li>
+					<li>@Html.ActionLink("Coluna", "Index", "ManterColuna")</li>
+				</ul>
+			</div>
+			<div id="containerHolder">
+				<div id="container">
+					<div id="main">
+						<h2>Desculpe, ocorreu um erro ao processar o pedido!</h2>
+						<div class="clear"></div>
+						<div class="erro">
+							<p><b>Tela:</b> @this.ViewData.Model.ControllerName</p>
+							<p><b>Ação:</b> @this.ViewData.Model.ActionName</p>
+							<p><b>Mensagem da exceção:</b> @this.ViewData.Model.Exception.Message</p>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using NH = NHibernate;
+using NHibernate;
+using NHibernate.Criterion;
 
 namespace AltaMontanha.Models.Persistencia.Nhibernate
 {
@@ -20,19 +22,19 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public IList<Dominio.Perfil> Pesquisar(Dominio.Perfil objeto)
 		{
-			try
-			{
-				if (objeto == null)
-					return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Perfil>().List<Dominio.Perfil>();
+			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Perfil));
 
-				IList<Dominio.Perfil> perfis = NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Perfil>().List<Dominio.Perfil>().Where(perfil => perfil.Codigo == objeto.Codigo).ToList();
+			if (objeto == null)
+				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Perfil>().List<Dominio.Perfil>();
 
-				return perfis;
-			}
-			catch (Exception)
-			{
-				throw;
-			}
+			if (objeto.Codigo > 0)
+				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
+			if (!string.IsNullOrEmpty(objeto.Nome))
+				criteria = criteria.Add(Expression.Eq("Nome", objeto.Nome));
+
+			IList<Dominio.Perfil> perfis = criteria.List<Dominio.Perfil>();
+
+			return perfis;
 		}
 
 		public Dominio.Perfil Pesquisar(int codigo)

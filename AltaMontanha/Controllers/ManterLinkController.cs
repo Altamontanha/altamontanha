@@ -8,30 +8,29 @@ using AltaMontanha.Models.Dominio;
 
 namespace AltaMontanha.Controllers
 {
-    public class ManterLinkController : Controller
+	[HandleError]
+	public class ManterLinkController : Utilitario.BaseController
     {
 		private InformativoFacade facade = new InformativoFacade();
 
         //
         // GET: /ManterLink/
-
+		[Authorize]
         public ActionResult Index()
         {
 			IList<Link> links = facade.PesquisarLink(null);
             return View(links.ToList());
         }
-
         //
 		// GET: /ManterLink/CadastrarLink
-
+		[Authorize]
 		public ActionResult CadastrarLink()
         {
             return View();
         } 
-
-        //
+		//
 		// POST: /ManterLink/CadastrarLink
-
+		[Authorize]
         [HttpPost]
 		public ActionResult CadastrarLink(Link link)
         {
@@ -55,20 +54,17 @@ namespace AltaMontanha.Controllers
 				return RedirectToAction("Index");
 			}
         }
-        
         //
         // GET: /ManterLink/AlterarLink/5
- 
+		[Authorize]
         public ActionResult AlterarLink(int Codigo)
         {
-			IList<Link> links = facade.PesquisarLink(new Link() { Codigo = Codigo });
-            return View(links[0]);
+			return View(facade.PesquisarLink(Codigo));
         }
-
-        //
+		//
         // POST: /ManterLink/AlterarLink/5
-
-        [HttpPost]
+		[HttpPost]
+		[Authorize]
 		public ActionResult AlterarLink(Link link)
         {
             try
@@ -89,10 +85,9 @@ namespace AltaMontanha.Controllers
                 return View();
             }
         }
-
-        //
+		//
         // GET: /ManterLink/ExcluirLink/5
- 
+		[Authorize]
         public ActionResult ExcluirLink(int Codigo)
         {
 			facade.ExcluirLink(Codigo);

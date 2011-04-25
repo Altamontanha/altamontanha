@@ -4,58 +4,43 @@
     ViewBag.Title = "Usuário: Alterar";
 }
 
-<h2>@ViewBag.Title</h2>
-
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+<h2>@ViewBag.Title</h2>
+<div class="clear"></div>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Usuário</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Nome)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nome)
-            @Html.ValidationMessageFor(model => model.Nome)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Login)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Login)
+        <p>
+			@Html.LabelFor(model => model.Login)
+            @Html.TextBoxFor(model => model.Login, new { @class = "text-medium" })
             @Html.ValidationMessageFor(model => model.Login)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Senha)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Senha)
+        </p>
+        <p>
+		    @Html.LabelFor(model => model.Senha)
+            @Html.PasswordFor(model => model.Senha, new { @class = "text-medium" })
             @Html.ValidationMessageFor(model => model.Senha)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Perfil.Nome)
-        </div>
-		<div class="editor-field">
-			@Html.DropDownListFor(model => model.Perfil.Codigo, (SelectList) ViewData["Perfis"])
-			@Html.ValidationMessageFor(model => model.Perfil.Codigo)
-		</div>
+        </p>
+		<p>
+			@Html.LabelFor(model => model.Nome)
+            @Html.TextBoxFor(model => model.Nome, new { @class="text-long"})
+            @Html.ValidationMessageFor(model => model.Nome)
+        </p>
 
         <p>
-            <input type="submit" value="Alterar" />
+		    @Html.LabelFor(model => model.Email)
+            @Html.TextBoxFor(model => model.Email, new { @class = "text-long" })
+            @Html.ValidationMessageFor(model => model.Email)
         </p>
+        <p>
+		    @Html.LabelFor(model => model.Perfil)
+        	@Html.DropDownListFor(model => model.Perfil.Codigo, (SelectList) ViewData["Perfis"])
+			@Html.ValidationMessageFor(model => model.Perfil.Codigo)
+		</p>
+		<br />
+        <p><input type="submit" value="Alterar" /></p>
     </fieldset>
 }

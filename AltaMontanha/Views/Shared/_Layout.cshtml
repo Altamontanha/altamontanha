@@ -17,30 +17,32 @@
 		<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.jnice.js")"></script>
 	</head>
 	<body>
-		<div id="wrapper">
-			<h1 class="logo"><a href="#"><span>Página Principal</span></a></h1>
-			<div id="mainNav">
-				<ul class="level1">
-					<li>@Html.ActionLink("Usuário", "Index", "ManterUsuario")</li>
-					<li>@Html.ActionLink("Perfil", "Index", "ManterPerfil")</li>
-					<li>@Html.ActionLink("Link", "Index", "ManterLink")</li>
-					<li>@Html.ActionLink("Categoria", "Index", "ManterCategoria")</li>
-					<li>@Html.ActionLink("Artigo", "Index", "ManterArtigo")</li>
-					<li>@Html.ActionLink("Coluna", "Index", "ManterColuna")</li>
-				</ul>
-			</div>
+		<div class="jNice">
+			<div id="wrapper">
+				<h1 class="logo"><a href="#"><span>Página Principal</span></a></h1>
+				<div id="mainNav">
+					<ul class="level1">
+						<li>@Html.ActionLink("Usuário", "Index", "ManterUsuario")</li>
+						<li>@Html.ActionLink("Perfil", "Index", "ManterPerfil")</li>
+						<li>@Html.ActionLink("Link", "Index", "ManterLink")</li>
+						<li>@Html.ActionLink("Categoria", "Index", "ManterCategoria")</li>
+						<li>@Html.ActionLink("Artigo", "Index", "ManterArtigo")</li>
+						<li>@Html.ActionLink("Coluna", "Index", "ManterColuna")</li>
+						<li>@Html.ActionLink("Sair", "Sair", "ManterAutenticacao")</li>
+					</ul>
+				</div>
 
 
-			<div id="containerHolder">
-				<div id="container">
-					<div id="sidebar">
-                        @Html.Partial("../" + @ViewContext.RouteData.Values["Controller"] + "/_Sidebar")
-					</div>  
-					<h2>TODO: SiteMapPath</h2>
-					<div id="main">
-						@RenderBody()
+				<div id="containerHolder">
+					<div id="container">
+						<div id="sidebar">
+							@Html.Partial("../" + @ViewContext.RouteData.Values["Controller"] + "/_Sidebar")
+						</div>  
+						<div id="main">
+							@RenderBody()
+						</div>
+						<div class="clear"></div>
 					</div>
-					<div class="clear"></div>
 				</div>
 			</div>
 		</div>

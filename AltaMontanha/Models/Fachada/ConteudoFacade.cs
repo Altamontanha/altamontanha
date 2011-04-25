@@ -218,6 +218,22 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		public Dominio.Categoria PesquisarCategoria(int codigo)
+		{
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				ICategoriaDAO categoriaDAO = fabrica.GetCategoriaDAO();
+
+				return categoriaDAO.Pesquisar(codigo);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
+		}
+
 		public Dominio.Categoria SalvarCategoria(Dominio.Categoria categoria)
 		{
 			try

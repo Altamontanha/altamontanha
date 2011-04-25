@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using NHibernate;
+using NHibernate.Criterion;
 
 namespace AltaMontanha.Models.Persistencia.Nhibernate
 {
@@ -19,16 +21,19 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public IList<Dominio.Local> Pesquisar(Dominio.Local objeto)
 		{
+			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Local));
+
 			if (objeto == null)
 				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Local>().List<Dominio.Local>();
 
-			Dictionary<string, object> filtros = new Dictionary<string, object>();
+			if (objeto.Codigo > 0)
+				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
+			if (!string.IsNullOrEmpty(objeto.Nome))
+				criteria = criteria.Add(Expression.Eq("Nome", objeto.Nome));
+			
+			IList<Dominio.Local> locais = criteria.List<Dominio.Local>();
 
-			filtros.Add("Codigo", objeto.Codigo);
-			filtros.Add("Nome", objeto.Descricao);
-
-			// TODO: Verificar se o codigo de consulta com filtros é feita dessa forma.
-			return NHibernate.HttpModule.RecuperarSessao.CreateFilter(filtros, "").List<Dominio.Local>();
+			return locais;
 		}
 
 		public Dominio.Local Pesquisar(int codigo)

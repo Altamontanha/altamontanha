@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using NHibernate;
+using NHibernate.Criterion;
 
 namespace AltaMontanha.Models.Persistencia.Nhibernate
 {
@@ -19,15 +21,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public IList<Dominio.Rota> Pesquisar(Dominio.Rota objeto)
 		{
-			if (objeto == null)
-				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Rota>().List<Dominio.Rota>();
-
-			Dictionary<string, object> filtros = new Dictionary<string, object>();
-
-			filtros.Add("Codigo", objeto.Codigo);
-			
-			// TODO: Verificar se o codigo de consulta com filtros é feita dessa forma.
-			return NHibernate.HttpModule.RecuperarSessao.CreateFilter(filtros, "").List<Dominio.Rota>();
+			return new List<Dominio.Rota>(){this.Pesquisar(objeto.Codigo)};
 		}
 
 		public Dominio.Rota Pesquisar(int codigo)

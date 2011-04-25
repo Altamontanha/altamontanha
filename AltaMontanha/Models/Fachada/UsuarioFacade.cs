@@ -146,31 +146,36 @@ namespace AltaMontanha.Models.Fachada
 
 		public bool AutenticarUsuario(Dominio.Usuario usuario)
 		{
-			try
-			{
-				if (usuario == null)
-					return false;
+			if (usuario == null)
+				return false;
 
-				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
-				IUsuarioDAO usuarioDAO = fabrica.GetUsuarioDAO();
-				IList<Usuario> listaUsuarios = usuarioDAO.Pesquisar(usuario);
+			usuario.Senha = Utilitario.Seguranca.Criptografar(usuario.Senha);
 
-				if (listaUsuarios.Count != 1)
-					return false;
+			IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+			IUsuarioDAO usuarioDAO = fabrica.GetUsuarioDAO();
+			IList<Usuario> listaUsuarios = usuarioDAO.Pesquisar(usuario);
 
-				return true;
-			}
-			catch (Exception)
-			{
-				// TODO: TratarErro.
-				throw;
-			}
+			if (listaUsuarios.Count != 1)
+				return false;
+
+			return true;
 		}
 
 		public bool VerificarAcesso(Dominio.Usuario usuario, string nomeFormulario)
 		{
-			// TODO: Implementar
-			throw new NotImplementedException();
+			IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+			IUsuarioDAO usuarioDAO = fabrica.GetUsuarioDAO();
+			IList<Usuario> listaUsuarios = usuarioDAO.Pesquisar(usuario);
+
+			//TODO : Criar Mapeamento do objeto permissão.
+
+			//if (listaUsuarios.Count != 1)
+			//	return false;
+			//Permissao permissao = listaUsuarios[0].Perfil.ListaPermissoes.FirstOrDefault(obj=> obj.Nome == nomeFormulario);
+			//if (permissao == null)
+			//    return false;
+			
+			return true;
 		}
 
 		#endregion

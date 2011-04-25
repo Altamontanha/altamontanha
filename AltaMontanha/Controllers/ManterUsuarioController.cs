@@ -8,12 +8,14 @@ using AltaMontanha.Models.Fachada;
 
 namespace AltaMontanha.Controllers
 {
-    public class ManterUsuarioController : Controller
+	[HandleError]
+    public class ManterUsuarioController : Utilitario.BaseController
     {
 		UsuarioFacade facade = new UsuarioFacade();
 
         //
         // GET: /ManterUsuario/
+		[Authorize]
 		public ActionResult Index()
         {
 			IList<Usuario> usuarios = facade.PesquisarUsuario(null);
@@ -21,12 +23,14 @@ namespace AltaMontanha.Controllers
         }
         //
         // GET: /ManterUsuario/VisualizarUsuario/5
-        public ActionResult VisualizarUsuario(int Codigo)
+		[Authorize]
+		public ActionResult VisualizarUsuario(int Codigo)
         {
 			return View(facade.PesquisarUsuario(Codigo));
         }
 		//
         // GET: /ManterUsuario/CadastrarUsuario
+		[Authorize]
 		public ActionResult CadastrarUsuario()
         {
 			ViewData["Perfis"] = new SelectList(facade.PesquisarPerfil(null).ToList(), "Codigo", "Nome");
@@ -36,32 +40,26 @@ namespace AltaMontanha.Controllers
 		//
         // POST: /ManterUsuario/CadastrarUsuario
         [HttpPost]
+		[Authorize]
 		public ActionResult CadastrarUsuario(Usuario usuario)
         {
-            try
-            {
-				if (ModelState.IsValid)
-				{
-					usuario.Foto = new Foto() { Codigo = 1 };
-					facade.SalvarUsuario(usuario);
-					return RedirectToAction("Index");
-				}
-				else
-				{
-					ViewData["Perfis"] = new SelectList(facade.PesquisarPerfil(null).ToList(), "Codigo", "Nome");
-					return View(usuario);
-				}
-            }
-            catch
-            {
-//				ViewData["Perfis"] = new SelectList(facade.PesquisarPerfil(null).ToList(), "Codigo", "Nome");
-//				return View(usuario);
-				// TODO: verificar erro object to int32
+			if (ModelState.IsValid)
+			{
+				usuario.Foto = new Foto() { Codigo = 1 };
+				facade.SalvarUsuario(usuario);
 				return RedirectToAction("Index");
 			}
+			else
+			{
+				ViewData["Perfis"] = new SelectList(facade.PesquisarPerfil(null).ToList(), "Codigo", "Nome");
+				return View(usuario);
+			}
+
+			// TODO: verificar erro object to int32
         }
         //
         // GET: /ManterUsuario/AlterarUsuario/5
+		[Authorize]
         public ActionResult AlterarUsuario(int Codigo)
         {
 			ViewData["Perfis"] = new SelectList(facade.PesquisarPerfil(null).ToList(), "Codigo", "Nome");
@@ -70,6 +68,7 @@ namespace AltaMontanha.Controllers
 		//
         // POST: /ManterUsuario/AlterarUsuario/5
         [HttpPost]
+		[Authorize]
 		public ActionResult AlterarUsuario(Usuario usuario)
         {
             try
@@ -94,6 +93,7 @@ namespace AltaMontanha.Controllers
         }
         //
         // GET: /ManterUsuario/ExcluirUsuario/5
+		[Authorize]
         public ActionResult ExcluirUsuario(int Codigo)
         {
 			facade.ExcluirUsuario(Codigo);

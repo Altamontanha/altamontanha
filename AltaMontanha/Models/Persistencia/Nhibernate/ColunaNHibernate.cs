@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using NHibernate;
+using NHibernate.Criterion;
 
 namespace AltaMontanha.Models.Persistencia.Nhibernate
 {
@@ -19,10 +21,23 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto)
 		{
+			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Coluna));
+
 			if (objeto == null)
 				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Coluna>().List<Dominio.Coluna>();
 
-			IList<Dominio.Coluna> colunas = NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Coluna>().List<Dominio.Coluna>().Where(coluna => coluna.Codigo == objeto.Codigo).ToList();
+			if (objeto.Codigo > 0)
+				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
+			if (objeto.Autor != null)
+				criteria = criteria.Add(Expression.Eq("CodUsuario", objeto.Autor.Codigo));
+			if (objeto.UsuarioCadastro != null)
+				criteria = criteria.Add(Expression.Eq("CodUsuarioCadastro", objeto.UsuarioCadastro.Codigo));
+			if (objeto.Data > DateTime.MinValue)
+				criteria = criteria.Add(Expression.Eq("Data", objeto.Data));
+			if (!string.IsNullOrEmpty(objeto.Titulo))
+				criteria = criteria.Add(Expression.Eq("Titulo", objeto.Titulo));
+
+			IList<Dominio.Coluna> colunas = criteria.List<Dominio.Coluna>();
 
 			return colunas;
 		}

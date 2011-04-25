@@ -25,6 +25,21 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		public Dominio.Link PesquisarLink(int codigo)
+		{
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				ILinkDAO linkDAO = fabrica.GetLinkDAO();
+
+				return linkDAO.Pesquisar(codigo);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
+		}
 		public Dominio.Link SalvarLink(Dominio.Link link)
 		{
 			try

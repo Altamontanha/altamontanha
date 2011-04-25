@@ -37,6 +37,10 @@ textarea
     margin:0.5em 0 0 0;
 }
 
+.editor-field p input 
+{
+	float:left;
+}
 
 /* Styles for validation helpers
 -----------------------------------------------------------*/
@@ -65,4 +69,16 @@ textarea
 .validation-summary-valid
 {
     display: none;
+}
+
+.erro
+{
+	margin: 15px 0 15px 0;
+	border: 1px solid red;
+	color: #F00;	
+}
+
+.erro p
+{
+	padding:5px;
 }

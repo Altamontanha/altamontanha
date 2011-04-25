@@ -1,0 +1,50 @@
+﻿@model AltaMontanha.Models.Dominio.Usuario
+@{
+	Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Autenticar</title>
+	@*
+	<!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="/Content/Cinza/css/ie6.css" /><![endif]-->
+	<!--[if IE 7]><link rel="stylesheet" type="text/css" media="screen" href="/Content/Cinza/css/ie7.css" /><![endif]-->
+	<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/ie6.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/ie7.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/jNice.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/jquery.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/layout.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/reset.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/transdmin.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/Content/Site.css" />
+	<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")"></script>
+	<script type="text/javascript">	var j = jQuery.noConflict();</script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.jnice.js")"></script>*@
+</head>
+<body>
+	<div id="main">
+		<h2>Autenticar</h2>
+		<div class="clear"></div>
+		@using (Html.BeginForm())
+		{
+			@Html.ValidationSummary(true)
+			
+			<div class="editor-label">
+				@Html.LabelFor(model => model.Login)
+			</div>
+			<div class="editor-field">
+				@Html.EditorFor(model => model.Login)
+				@Html.ValidationMessageFor(model => model.Login)
+			</div>
+			<div class="editor-label">
+				@Html.LabelFor(model => model.Senha)
+			</div>
+			<div class="editor-field">
+				@Html.PasswordFor(model => model.Senha) 
+				@Html.ValidationMessageFor(model => model.Senha)
+			</div>
+			<p><input type="submit" value="Autenticar" /></p>
+		}
+	</div>
+</body>
+</html>

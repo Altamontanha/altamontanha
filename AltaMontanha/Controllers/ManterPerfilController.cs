@@ -8,21 +8,21 @@ using AltaMontanha.Models.Fachada;
 
 namespace AltaMontanha.Controllers
 {
-    public class ManterPerfilController : Controller
+	[HandleError]
+	public class ManterPerfilController : Utilitario.BaseController
     {
 		UsuarioFacade facade = new UsuarioFacade();
 
         //
         // GET: /ManterPerfil/
-
+		[Authorize]
         public ActionResult Index()
         {
             return View(facade.PesquisarPerfil(null));
         }
-
         //
         // GET: /ManterPerfil/VisualizarPerfil/5
-
+		[Authorize]
 		public ActionResult VisualizarPerfil(int Codigo)
         {
 			// TODO: adicionar overload
@@ -30,18 +30,16 @@ namespace AltaMontanha.Controllers
 
             return View(perfis[0]);
         }
-
         //
 		// GET: /ManterPerfil/CadastrarPerfil
-
+		[Authorize]
 		public ActionResult CadastrarPerfil()
         {
             return View();
         } 
-
         //
 		// POST: /ManterPerfil/CadastrarPerfil
-
+		[Authorize]
         [HttpPost]
 		public ActionResult CadastrarPerfil(Perfil perfil)
         {
@@ -64,10 +62,9 @@ namespace AltaMontanha.Controllers
 				return RedirectToAction("Index");
 			}
         }
-        
         //
         // GET: /ManterPerfil/AlterarPerfil/5
-
+		[Authorize]
 		public ActionResult AlterarPerfil(int Codigo)
         {
 			// TODO: adicionar overload
@@ -75,11 +72,10 @@ namespace AltaMontanha.Controllers
 
 			return View(perfis[0]);
 		}
-
         //
 		// POST: /ManterPerfil/AlterarPerfil/5
-
         [HttpPost]
+		[Authorize]
 		public ActionResult AlterarPerfil(Perfil perfil)
         {
 			try
@@ -99,10 +95,9 @@ namespace AltaMontanha.Controllers
 				return View();
 			}
 		}
-
-        //
+		//
         // GET: /ManterPerfil/ExcluirPerfil/5
-
+		[Authorize]
 		public ActionResult ExcluirPerfil(int Codigo)
         {
 			facade.ExcluirPerfil(Codigo);

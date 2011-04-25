@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using NHibernate;
+using NHibernate.Criterion;
 
 namespace AltaMontanha.Models.Persistencia.Nhibernate
 {
@@ -19,10 +21,17 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public IList<Dominio.Comentario> Pesquisar(Dominio.Comentario objeto)
 		{
+			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Comentario));
+
 			if (objeto == null)
 				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Comentario>().List<Dominio.Comentario>();
 
-			IList<Dominio.Comentario> comentarios = NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Comentario>().List<Dominio.Comentario>().Where(comentario => comentario.Codigo == objeto.Codigo).ToList();
+			if (objeto.Codigo > 0)
+				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
+			if (!string.IsNullOrEmpty(objeto.Nome))
+				criteria = criteria.Add(Expression.Eq("Nome", objeto.Nome));
+
+			IList<Dominio.Comentario> comentarios = criteria.List<Dominio.Comentario>();
 
 			return comentarios;
 		}

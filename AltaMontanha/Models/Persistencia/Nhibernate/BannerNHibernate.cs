@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using NHibernate;
+using NHibernate.Criterion;
 
 namespace AltaMontanha.Models.Persistencia.Nhibernate
 {
@@ -19,19 +21,23 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public IList<Dominio.Banner> Pesquisar(Dominio.Banner objeto)
 		{
+			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Banner));
+
 			if (objeto == null)
 				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Banner>().List<Dominio.Banner>();
 
-			Dictionary<string, object> filtros = new Dictionary<string, object>();
+			if (objeto.Codigo > 0)
+				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
+			if (objeto.DataInicial > DateTime.MinValue)
+				criteria = criteria.Add(Expression.Eq("DataInicial", objeto.DataInicial));
+			if (objeto.DataFinal > DateTime.MinValue)
+				criteria = criteria.Add(Expression.Eq("DataFinal", objeto.DataFinal));
+			if (!string.IsNullOrEmpty(objeto.Titulo))
+				criteria = criteria.Add(Expression.Eq("Titulo", objeto.Titulo));
 
-			filtros.Add("Codigo", objeto.Codigo);
-			filtros.Add("Titulo", objeto.Titulo);
-			filtros.Add("DataInicial", objeto.DataInicial);
-			filtros.Add("DataFinal", objeto.DataFinal);
-			filtros.Add("Ativo", objeto.Ativo);
+			IList<Dominio.Banner> banners = criteria.List<Dominio.Banner>();
 
-			// TODO: Verificar se o codigo de consulta com filtros é feita dessa forma.
-			return NHibernate.HttpModule.RecuperarSessao.CreateFilter(filtros, "").List<Dominio.Banner>();
+			return banners;
 		}
 
 		public Dominio.Banner Pesquisar(int codigo)

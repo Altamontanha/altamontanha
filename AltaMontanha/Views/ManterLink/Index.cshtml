@@ -3,10 +3,9 @@
 @{
     ViewBag.Title = "Links";
 }
-
+<h2>Pesquisa de Link</h2>
 <div id="divGrid">
 	<h3>Links</h3>
-
 	<div class="grid">
 		<table>
 			<tr>
@@ -15,8 +14,8 @@
 				<th></th>
 				<th></th>
 			</tr>
-
-		@foreach (var item in Model) {
+			@foreach (var item in Model) 
+			{
 			<tr>
 				<td>
 					@item.Titulo
@@ -32,8 +31,7 @@
 				</td>
 			</tr>
 		}
-
 		</table>
+		<br />
 	</div>
-
 </div>
