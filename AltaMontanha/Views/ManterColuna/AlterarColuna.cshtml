@@ -8,11 +8,14 @@
 <script src="@Url.Content("~/Scripts/jquery.maskedinput.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.ui.datepicker.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/AM/Util.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")" type="text/javascript"></script>  
 <script type="text/javascript">
-	j(document).ready(function () 
-	{
+	j(document).ready(function () {
 		ConfigurarHoverCalendario();
 		ConfigurarCalendario("#Data");
+		CKEDITOR.replace("AnteTitulo");
+		CKEDITOR.replace("Resumo");
+		CKEDITOR.replace("Texto");
 	});
 </script>
 
@@ -24,6 +27,14 @@
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Coluna</legend>
+		@Html.HiddenFor(model => model.UsuarioCadastro.Codigo)
+		
+		<p>
+			@Html.LabelFor(model => model.Autor)
+			@Html.DropDownListFor(model => model.Autor.Codigo, (IEnumerable<SelectListItem>)ViewData["Autores"])
+			@Html.ValidationMessageFor(model => model.Autor.Codigo)
+		</p>
+
 		<p>
             @Html.LabelFor(model => model.Titulo)
             @Html.TextBoxFor(model => model.Titulo, new { @class="text-long"})

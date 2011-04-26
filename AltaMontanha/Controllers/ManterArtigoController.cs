@@ -33,6 +33,7 @@ namespace AltaMontanha.Controllers
 		// POST: /ManterArtigo/CadastrarArtigo
         [HttpPost]
 		[Authorize]
+		[ValidateInput(false)]
 		public ActionResult CadastrarArtigo(Artigo artigo)
         {
             try
@@ -72,6 +73,7 @@ namespace AltaMontanha.Controllers
 		// POST: /ManterArtigo/AlterarArtigo/5
         [HttpPost]
 		[Authorize]
+		[ValidateInput(false)]
 		public ActionResult AlterarArtigo(Artigo artigo)
         {
             try

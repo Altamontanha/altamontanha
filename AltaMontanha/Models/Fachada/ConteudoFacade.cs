@@ -102,7 +102,7 @@ namespace AltaMontanha.Models.Fachada
 				colunaDAO.Alterar(coluna);
 				return coluna;
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
 				// TODO: Tratar erro.
 				throw;

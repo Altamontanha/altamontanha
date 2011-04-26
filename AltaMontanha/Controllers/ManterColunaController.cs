@@ -12,6 +12,7 @@ namespace AltaMontanha.Controllers
 	public class ManterColunaController : Utilitario.BaseController
 	{
 		ConteudoFacade facade = new ConteudoFacade();
+		UsuarioFacade usuarioFacade = new UsuarioFacade();
 
 		//
 		// GET: /ManterColuna/
@@ -26,20 +27,22 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult CadastrarColuna()
 		{
-			// TODO: incluir autor
+			ViewData["Autores"] = new SelectList(usuarioFacade.PesquisarUsuario(null), "Codigo", "Nome");
 			return View();
 		}
 		//
 		// POST: /ManterColuna/CadastrarColuna
 		[HttpPost]
 		[Authorize]
+		[ValidateInput(false)]
 		public ActionResult CadastrarColuna(Coluna coluna)
 		{
 			try
 			{
 				if (ModelState.IsValid)
 				{
-					// TODO: incluir autor
+					// TODO: alterar para usuário logado
+					coluna.UsuarioCadastro = new Usuario() { Codigo = 1 };
 					facade.SalvarColuna(coluna);
 					return RedirectToAction("Index");
 				}
@@ -50,9 +53,7 @@ namespace AltaMontanha.Controllers
 			}
 			catch
 			{
-//				return View(coluna);
-				// TODO: verificar erro object to int32
-				return RedirectToAction("Index");
+				return View(coluna);
 			}
 		}
 		//
@@ -60,21 +61,24 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult AlterarColuna(int Codigo)
 		{
-			// TODO: incluir autor
+			ViewData["Autores"] = new SelectList(usuarioFacade.PesquisarUsuario(null), "Codigo", "Nome");
+
+			IList<Coluna> coluna = facade.PesquisarColuna(new Coluna() { Codigo = Codigo });
+
 			// TODO: implementar sobrecarga
-			return View(facade.PesquisarColuna(new Coluna() { Codigo = Codigo }));
+			return View(coluna[0]);
 		}
 		//
 		// POST: /ManterColuna/AlterarColuna/5
 		[HttpPost]
 		[Authorize]
+		[ValidateInput(false)]
 		public ActionResult AlterarColuna(Coluna coluna)
 		{
 			try
 			{
 				if (ModelState.IsValid)
 				{
-					// TODO: incluir autor
 					facade.SalvarColuna(coluna);
 					return RedirectToAction("Index");
 				}

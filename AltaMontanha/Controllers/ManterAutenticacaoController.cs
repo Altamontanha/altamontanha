@@ -33,7 +33,7 @@ namespace AltaMontanha.Controllers
 							&& !returnUrl.StartsWith("/\\"))
 						return Redirect(returnUrl);
 					else
-						return Redirect("/manterusuario");
+						return Redirect("/ManterUsuario");
 				}
 				else
 				{
