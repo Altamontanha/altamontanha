@@ -148,6 +148,10 @@ namespace AltaMontanha.Models.Fachada
 		{
 			if (usuario == null)
 				return false;
+			else if (usuario.Login == null)
+				return false;
+			else if (usuario.Senha == null)
+				return false;
 
 			usuario.Senha = Utilitario.Seguranca.Criptografar(usuario.Senha);
 
