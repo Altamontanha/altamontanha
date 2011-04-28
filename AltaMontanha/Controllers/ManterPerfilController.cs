@@ -100,6 +100,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult ExcluirPerfil(int Codigo)
         {
+			// TODO: validar a existência de usuários
 			facade.ExcluirPerfil(Codigo);
 			return RedirectToAction("Index");
         }

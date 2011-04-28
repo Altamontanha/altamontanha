@@ -79,6 +79,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult AlterarUsuario(Usuario usuario)
         {
+			//TODO: na alteração a senha não é obrigatória (?)
             try
             {
 				if (ModelState.IsValid)

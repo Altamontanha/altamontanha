@@ -89,6 +89,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult ExcluirCategoria(int Codigo)
         {
+			// TODO: validar a existência de conteúdo ligado
 			facade.ExcluirCategoria(Codigo);
             return RedirectToAction("Index");
         }
