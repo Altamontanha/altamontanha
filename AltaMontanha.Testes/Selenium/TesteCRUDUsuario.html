@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:17597/ManterUsuario/" />
+<title>Teste CRUD Usuario</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Teste CRUD Usuario</td></tr>
+</thead><tbody>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Usuário</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Cadastro</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Login</td>
+	<td>teste</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Senha</td>
+	<td>teste</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Nome</td>
+	<td>Usuário</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Nome</td>
+	<td>Usuário teste</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Email</td>
+	<td>teste@altamontanha.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@id='']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='divGrid']/div/table/tbody/tr[last()]/td[1]</td>
+	<td>Usuário teste</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='divGrid']/div/table/tbody/tr[last()]/td[2]</td>
+	<td>teste</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='divGrid']/div/table/tbody/tr[last()]/td[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Senha</td>
+	<td>teste</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Nome</td>
+	<td>Usuário teste (alterado)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='main']/form/fieldset/p[5]/div/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Editores</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@id='']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='divGrid']/div/table/tbody/tr[last()]/td[1]</td>
+	<td>Usuário teste (alterado)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='divGrid']/div/table/tbody/tr[last()]/td[2]</td>
+	<td>teste</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='divGrid']/div/table/tbody/tr[last()]/td[5]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>//div[@id='divGrid']/div/table/tbody/tr[last()]/td[2]</td>
+	<td>teste</td>
+</tr>
+</tbody></table>
+</body>
+</html>
