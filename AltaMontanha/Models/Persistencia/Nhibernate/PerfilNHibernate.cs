@@ -46,7 +46,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 		{
 			try
 			{
-				NHibernate.HttpModule.RecuperarSessao.Delete(codigo);
+				Dominio.Perfil perfil = Pesquisar(codigo);
+				NHibernate.HttpModule.RecuperarSessao.Delete(perfil);
 
 				return true;
 			}
