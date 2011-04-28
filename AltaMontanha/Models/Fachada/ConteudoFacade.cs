@@ -161,6 +161,22 @@ namespace AltaMontanha.Models.Fachada
 
 		#region Aventura
 
+		public Dominio.Aventura PesquisarAventura(int codigo)
+		{
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IAventuraDAO aventuraDAO = fabrica.GetAventuraDAO();
+
+				return aventuraDAO.Pesquisar(codigo);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
+		}
+
 		public IList<Dominio.Aventura> PesquisarAventura(Dominio.Aventura aventura)
 		{
 			try

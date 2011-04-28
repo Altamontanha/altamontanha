@@ -28,7 +28,7 @@
         <legend>Coluna</legend>
 		<p>
 			@Html.LabelFor(model => model.Autor)
-			@Html.DropDownListFor(model => model.Autor.Codigo, (SelectList)ViewData["Autores"])
+			@Html.DropDownListFor(model => model.Autor.Codigo, (IEnumerable<SelectListItem>)ViewData["Autores"])
 			@Html.ValidationMessageFor(model => model.Autor.Codigo)
 		</p>
 

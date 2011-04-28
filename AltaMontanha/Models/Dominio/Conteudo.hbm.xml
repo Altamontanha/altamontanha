@@ -20,6 +20,7 @@
 		<property name="Data" not-null="true" access="property" type="DateTime">
 			<column name="Data" sql-type="DATETIME"/>
 		</property>
+		<!-- TODO: adicionar elementos -->
 		<!--bag name="ListaFotos" table="TB_ConteudoFoto" cascade="save-update">
 			<key column="CodConteudo"/>
 			<many-to-many class="Foto" column="CodFoto"></many-to-many>
@@ -45,8 +46,9 @@
 	<subclass name="Aventura" extends="Conteudo" discriminator-value="Aventura" lazy="false">
 		<join table="TB_Aventura">
 			<key column="CodConteudo" />
-			<many-to-one name="AventuraAnterior" column="CodAventura" class="Aventura" not-null="true" />
-			<many-to-one name="Rota" column="CodRota" class="Rota" not-null="true" />
+			<many-to-one name="AventuraAnterior" column="CodConteudoPai" class="Aventura" not-null="false" />
+			<!-- TODO: adicionar atributo -->
+			<!--many-to-one name="Rota" column="CodRota" class="Rota" not-null="true" /-->
 			<many-to-one name="Autor" column="CodUsuario" class="Usuario" not-null="true" />
 		</join>
 	</subclass>

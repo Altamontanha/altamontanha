@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ManterArtigoController.cs" />
     <Compile Include="Controllers\ManterAutenticacaoController.cs" />
+    <Compile Include="Controllers\ManterAventuraController.cs" />
     <Compile Include="Controllers\ManterCategoriaController.cs" />
     <Compile Include="Controllers\ManterColunaController.cs" />
     <Compile Include="Controllers\ManterLinkController.cs">
@@ -328,6 +329,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ManterNoticia\_Sidebar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterAventura\_Sidebar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterAventura\AlterarAventura.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterAventura\CadastrarAventura.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterAventura\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

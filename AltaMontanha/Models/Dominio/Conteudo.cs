@@ -24,7 +24,7 @@ namespace AltaMontanha.Models.Dominio
 		public virtual string Texto { get; set; }
 
 		[Required(ErrorMessage = "Data é um campo obrigatório")]
-		[DataType(DataType.Date)]
+		[DataType(DataType.Date, ErrorMessage="Formato da data é inválido")]
 		public virtual DateTime Data { get; set; }
 		
 		//public virtual List<Foto> ListaFotos { get; set; }

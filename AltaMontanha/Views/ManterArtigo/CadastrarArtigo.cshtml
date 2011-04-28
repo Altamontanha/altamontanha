@@ -28,7 +28,7 @@
 		<legend>Artigo</legend>
 		<p>
 			@Html.LabelFor(model => model.Categoria)
-			@Html.DropDownListFor(model => model.Categoria.Codigo, (SelectList)ViewData["Categorias"])
+			@Html.DropDownListFor(model => model.Categoria.Codigo, (IEnumerable<SelectListItem>)ViewData["Categorias"])
 			@Html.ValidationMessageFor(model => model.Categoria.Codigo)
 		</p>
 		<p>
