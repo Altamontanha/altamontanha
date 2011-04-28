@@ -14,8 +14,6 @@
 	j(document).ready(function () {
 		ConfigurarHoverCalendario();
 		ConfigurarCalendario("#Data");
-		CKEDITOR.replace("AnteTitulo");
-		CKEDITOR.replace("Resumo");
 		CKEDITOR.replace("Texto");
 	});
 </script>
@@ -28,7 +26,6 @@
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Artigo</legend>
-
         <p>
             @Html.LabelFor(model => model.Categoria.Titulo)
         	@Html.DropDownListFor(model => model.Categoria.Codigo, (SelectList) ViewData["Categorias"])
@@ -42,18 +39,18 @@
 
         <p>
             @Html.LabelFor(model => model.AnteTitulo)
-            @Html.EditorFor(model => model.AnteTitulo)
+            @Html.TextAreaFor(model => model.AnteTitulo)
             @Html.ValidationMessageFor(model => model.AnteTitulo)
         </p>
 		<p>
             @Html.LabelFor(model => model.Resumo)
-            @Html.EditorFor(model => model.Resumo)
+            @Html.TextAreaFor(model => model.Resumo)
             @Html.ValidationMessageFor(model => model.Resumo)
         </p>
 
         <p>
             @Html.LabelFor(model => model.Texto)
-            @Html.EditorFor(model => model.Texto)
+            @Html.TextAreaFor(model => model.Texto)
             @Html.ValidationMessageFor(model => model.Texto)
         </p>
 		<p>

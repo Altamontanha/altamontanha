@@ -14,15 +14,13 @@
 	j(document).ready(function () {
 		ConfigurarHoverCalendario();
 		ConfigurarCalendario("#Data");
-		CKEDITOR.replace("AnteTitulo");
-		CKEDITOR.replace("Resumo");
 		CKEDITOR.replace("Texto");
 	});
 </script>
 
 <h2>@ViewBag.Title</h2>
-<div class="clear">
-</div>
+<div class="clear"></div>
+
 @using (Html.BeginForm())
 {
 	@Html.ValidationSummary(true)
