@@ -43,17 +43,25 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult CadastrarUsuario(Usuario usuario)
         {
-			if (ModelState.IsValid)
+			try
 			{
-				usuario.Foto = new Foto() { Codigo = 1 };
-				facade.SalvarUsuario(usuario);
-				return RedirectToAction("Index");
+				if (ModelState.IsValid)
+				{
+					facade.SalvarUsuario(usuario);
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					ViewData["Perfis"] = new SelectList(facade.PesquisarPerfil(null).ToList(), "Codigo", "Nome");
+					return View(usuario);
+				}
 			}
-			else
+			catch
 			{
 				ViewData["Perfis"] = new SelectList(facade.PesquisarPerfil(null).ToList(), "Codigo", "Nome");
 				return View(usuario);
 			}
+				
 
 			// TODO: verificar erro object to int32
         }
@@ -75,7 +83,6 @@ namespace AltaMontanha.Controllers
             {
 				if (ModelState.IsValid)
 				{
-					usuario.Foto = new Foto() { Codigo = 1 };
 					facade.SalvarUsuario(usuario);
 					return RedirectToAction("Index");
 				}
