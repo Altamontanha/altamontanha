@@ -11,6 +11,22 @@ namespace AltaMontanha.Models.Fachada
 	{
 		#region Noticia
 
+		public Dominio.Noticia PesquisarNoticia(int codigo)
+		{
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				INoticiaDAO noticiaDAO = fabrica.GetNoticiaDAO();
+
+				return noticiaDAO.Pesquisar(codigo);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
+		}
+
 		public IList<Dominio.Noticia> PesquisarNoticia(Dominio.Noticia noticia)
 		{
 			try
@@ -69,6 +85,22 @@ namespace AltaMontanha.Models.Fachada
 		#endregion
 		
 		#region Coluna
+
+		public Dominio.Coluna PesquisarColuna(int codigo)
+		{
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IColunaDAO colunaDAO = fabrica.GetColunaDAO();
+
+				return colunaDAO.Pesquisar(codigo);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
+		}
 
 		public IList<Dominio.Coluna> PesquisarColuna(Dominio.Coluna coluna)
 		{

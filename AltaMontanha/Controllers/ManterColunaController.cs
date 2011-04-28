@@ -48,7 +48,9 @@ namespace AltaMontanha.Controllers
 				}
 				else
 				{
-					return View(coluna);
+					//TODO: corrigir
+					//return View(coluna);
+					return RedirectToAction("Index");
 				}
 			}
 			catch
@@ -61,12 +63,9 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult AlterarColuna(int Codigo)
 		{
-			ViewData["Autores"] = new SelectList(usuarioFacade.PesquisarUsuario(null), "Codigo", "Nome");
+			Coluna coluna = facade.PesquisarColuna(Codigo);
 
-			IList<Coluna> coluna = facade.PesquisarColuna(new Coluna() { Codigo = Codigo });
-
-			// TODO: implementar sobrecarga
-			return View(coluna[0]);
+			return View(coluna);
 		}
 		//
 		// POST: /ManterColuna/AlterarColuna/5

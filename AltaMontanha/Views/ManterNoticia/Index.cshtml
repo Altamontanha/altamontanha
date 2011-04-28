@@ -1,0 +1,39 @@
+﻿@model IEnumerable<AltaMontanha.Models.Dominio.Noticia>
+
+@{
+	ViewBag.Title = "Pesquisa de Notícia";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="clear"></div>
+<div id="divGrid">
+	<h3>Notícias:</h3>
+	<div class="grid">
+		<table>
+			<tr>
+				<th>Título</th>
+				<th>Data</th>
+				<th></th>
+				<th></th>
+			</tr>
+
+		@foreach (var item in Model) {
+			<tr>
+				<td>
+					@item.Titulo
+				</td>
+				<td>
+					@String.Format("{0:g}", item.Data)
+				</td>
+				<td class="action">
+					@Html.ActionLink("Alterar", "AlterarNoticia", new { Codigo = item.Codigo }, new { @class = "edit" })
+				</td>
+				<td class="action">
+					@Html.ActionLink("Excluir", "ExcluirNoticia", new { Codigo = item.Codigo }, new { @class = "delete" })
+				</td>
+			</tr>
+		}
+		</table>
+		<br />
+	</div>
+</div>
