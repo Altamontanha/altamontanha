@@ -16,7 +16,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public Dominio.Noticia Cadastrar(Dominio.Noticia objeto)
 		{
-			return (Dominio.Noticia)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+			objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+			return objeto;
 		}
 
 		public IList<Dominio.Noticia> Pesquisar(Dominio.Noticia objeto)

@@ -16,7 +16,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public Dominio.Foto Cadastrar(Dominio.Foto objeto)
 		{
-			return (Dominio.Foto)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+			objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+			return objeto;
 		}
 
 		public IList<Dominio.Foto> Pesquisar(Dominio.Foto objeto)

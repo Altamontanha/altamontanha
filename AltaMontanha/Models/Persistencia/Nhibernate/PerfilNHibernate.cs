@@ -17,7 +17,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public Dominio.Perfil Cadastrar(Dominio.Perfil objeto)
 		{
-			return (Dominio.Perfil) NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+			objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+			return objeto;
 		}
 
 		public IList<Dominio.Perfil> Pesquisar(Dominio.Perfil objeto)
