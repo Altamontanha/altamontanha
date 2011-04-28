@@ -1,26 +1,40 @@
-INSERT INTO TB_Permissao(CodPerfil, CodTela)
-VALUES
-(1,1),
-(1,2),
-(1,3),
-(1,4),
-(1,5),
-(1,6),
-(1,7),
-(1,8),
-(1,9),
-(1,10),
-(1,11),
-(1,12),
-(1,13),
-(1,14),
-(1,15),
-(1,16),
-(1,17),
-(1,18),
-(1,19),
-(1,20),
-(1,21),
-(1,22),
-(1,23),
-(1,24)
+--
+-- Estrutura da tabela `TB_Permissao`
+--
+
+CREATE TABLE IF NOT EXISTS `TB_Permissao` (
+  `CodPerfil` int(11) NOT NULL,
+  `CodTela` int(11) NOT NULL,
+  PRIMARY KEY (`CodPerfil`,`CodTela`),
+  KEY `CodTela` (`CodTela`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `TB_Permissao`
+--
+
+INSERT INTO `TB_Permissao` (`CodPerfil`, `CodTela`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(1, 7),
+(1, 8),
+(1, 9),
+(1, 10),
+(1, 11),
+(1, 12),
+(1, 13),
+(1, 14),
+(1, 15),
+(1, 16),
+(1, 17),
+(1, 18),
+(1, 19),
+(1, 20),
+(1, 21),
+(1, 22),
+(1, 23),
+(1, 24);
