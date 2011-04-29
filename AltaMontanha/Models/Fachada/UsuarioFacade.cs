@@ -12,6 +12,21 @@ namespace AltaMontanha.Models.Fachada
 	{
 		#region Perfil
 
+		public Dominio.Perfil PesquisarPerfil(int codigo)
+		{
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IPerfilDAO perfilDAO = fabrica.GetPerfilDAO();
+
+				return perfilDAO.Pesquisar(codigo);
+			}
+			catch (Exception e)
+			{
+				throw new Exception(e.Message);
+			}
+		}
+
 		public IList<Dominio.Perfil> PesquisarPerfil(Dominio.Perfil perfil)
 		{
 			try

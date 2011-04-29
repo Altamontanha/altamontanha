@@ -25,10 +25,9 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult VisualizarPerfil(int Codigo)
         {
-			// TODO: adicionar overload
-			IList<Perfil> perfis = facade.PesquisarPerfil(new Perfil() { Codigo = Codigo });
+			Perfil perfil = facade.PesquisarPerfil(Codigo);
 
-            return View(perfis[0]);
+            return View(perfil);
         }
         //
 		// GET: /ManterPerfil/CadastrarPerfil
@@ -58,10 +57,9 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult AlterarPerfil(int Codigo)
         {
-			// TODO: adicionar overload
-			IList<Perfil> perfis = facade.PesquisarPerfil(new Perfil() { Codigo = Codigo });
+			Perfil perfil = facade.PesquisarPerfil(Codigo);
 
-			return View(perfis[0]);
+			return View(perfil);
 		}
         //
 		// POST: /ManterPerfil/AlterarPerfil/5
