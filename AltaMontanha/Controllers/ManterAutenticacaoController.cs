@@ -22,23 +22,17 @@ namespace AltaMontanha.Controllers
 		[HttpPost]
 		public ActionResult Autenticar(Models.Dominio.Usuario usuario, string returnUrl)
 		{
-			if (ModelState.IsValid)
+			// TODO: como mandar a mensagem de usuário e senha inválidos?
+			if (fachada.AutenticarUsuario(usuario))
 			{
-				if (fachada.AutenticarUsuario(usuario))
-				{
-					FormsAuthentication.SetAuthCookie(usuario.Login, false);
+				FormsAuthentication.SetAuthCookie(usuario.Login, false);
 
-					if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1
-							&& returnUrl.StartsWith("/") && !returnUrl.StartsWith("//")
-							&& !returnUrl.StartsWith("/\\"))
-						return Redirect(returnUrl);
-					else
-						return Redirect("/ManterUsuario");
-				}
+				if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1
+						&& returnUrl.StartsWith("/") && !returnUrl.StartsWith("//")
+						&& !returnUrl.StartsWith("/\\"))
+					return Redirect(returnUrl);
 				else
-				{
-					ModelState.AddModelError("", "Usuário ou senha inválidos!");
-				}
+					return Redirect("/ManterUsuario");
 			}
 						
 			return View(usuario);
