@@ -17,6 +17,6 @@
 			<column name="Senha" length="32" />
 		</property>
 		<many-to-one name="Perfil" column="CodPerfil" class="Perfil" not-null="true" />
-		<many-to-one name="Foto" column="CodFoto" class="Foto" not-null="true" />
+		<many-to-one name="Foto" column="CodFoto" class="Foto" not-null="false" /><!-- TODO: por obrigatório novamente -->
 	</class>
 </hibernate-mapping>
