@@ -55,9 +55,8 @@ namespace AltaMontanha.Controllers
 		public ActionResult AlterarArtigo(int Codigo)
         {
 			ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null), "Codigo", "Titulo");
-			// TODO: implementar sobrecarga
-			IList<Artigo> artigos = facade.PesquisarArtigo(new Artigo() { Codigo = Codigo });
-			return View(artigos[0]);
+			Artigo artigo = facade.PesquisarArtigo(Codigo);
+			return View(artigo);
         }
         //
 		// POST: /ManterArtigo/AlterarArtigo/5

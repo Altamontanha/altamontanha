@@ -323,6 +323,22 @@ namespace AltaMontanha.Models.Fachada
 
 		#endregion
 
+		public Dominio.Artigo PesquisarArtigo(int codigo)
+		{
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IArtigoDAO artigoDAO = fabrica.GetArtigoDAO();
+
+				return artigoDAO.Pesquisar(codigo);
+			}
+			catch (Exception)
+			{
+				// TODO: Tratar erro.
+				throw;
+			}
+		}
+
 		public IList<Dominio.Artigo> PesquisarArtigo(Dominio.Artigo artigo)
 		{
 			try
