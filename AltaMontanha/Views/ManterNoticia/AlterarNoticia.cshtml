@@ -54,7 +54,7 @@
 
         <p>
             @Html.LabelFor(model => model.Fonte)
-            @Html.TextBoxFor(model => model.Fonte)
+            @Html.TextBoxFor(model => model.Fonte, new { @class = "text-medium" })
             @Html.ValidationMessageFor(model => model.Fonte)
         </p>
 
