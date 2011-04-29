@@ -38,25 +38,15 @@ namespace AltaMontanha.Controllers
         {
             try
             {
-				if (ModelState.IsValid)
-				{
-					// TODO: pegar usuário logado
-					artigo.UsuarioCadastro = new Usuario() { Codigo = 1 };
-					facade.SalvarArtigo(artigo);
-					return RedirectToAction("Index");
-				}
-				else
-				{
-					ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null).ToList(), "Codigo", "Titulo");
-					return View(artigo);
-				}
+				// TODO: pegar usuário logado
+				artigo.UsuarioCadastro = new Usuario() { Codigo = 1 };
+				facade.SalvarArtigo(artigo);
+				return RedirectToAction("Index");
 			}
             catch
             {
-				//ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null), "Codigo", "Titulo");
-				//return View(artigo);
-				// TODO: verificar erro object to int32
-				return RedirectToAction("Index");
+				ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null), "Codigo", "Titulo");
+				return View(artigo);
             }
         }
         //
@@ -78,18 +68,10 @@ namespace AltaMontanha.Controllers
         {
             try
             {
-				if (ModelState.IsValid)
-				{
-					// TODO: verificar como não validar usuário no alterar
-					artigo.UsuarioCadastro = new Usuario() { Codigo = 1 };
-					facade.SalvarArtigo(artigo);
-					return RedirectToAction("Index");
-				}
-				else
-				{
-					ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null).ToList(), "Codigo", "Titulo");
-					return View(artigo);
-				}
+				// TODO: verificar como não validar usuário no alterar
+				artigo.UsuarioCadastro = new Usuario() { Codigo = 1 };
+				facade.SalvarArtigo(artigo);
+				return RedirectToAction("Index");
 			}
             catch
             {

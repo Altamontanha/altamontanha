@@ -39,17 +39,10 @@ namespace AltaMontanha.Controllers
         {
 			try
 			{
-				if (ModelState.IsValid)
-				{
-					// TODO: alterar para usuário logado
-					noticia.UsuarioCadastro = new Usuario() { Codigo = 1 };
-					facade.SalvarNoticia(noticia);
-					return RedirectToAction("Index");
-				}
-				else
-				{
-					return View(noticia);
-				}
+				// TODO: alterar para usuário logado
+				noticia.UsuarioCadastro = new Usuario() { Codigo = 1 };
+				facade.SalvarNoticia(noticia);
+				return RedirectToAction("Index");
 			}
 			catch
 			{
@@ -76,15 +69,8 @@ namespace AltaMontanha.Controllers
         {
             try
             {
-				if (ModelState.IsValid)
-				{
-					facade.SalvarNoticia(noticia);
-					return RedirectToAction("Index");
-				}
-				else
-				{
-					return View(noticia);
-				}
+				facade.SalvarNoticia(noticia);
+				return RedirectToAction("Index");
 			}
             catch
             {

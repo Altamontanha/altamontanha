@@ -45,21 +45,12 @@ namespace AltaMontanha.Controllers
         {
             try
             {
-				if (ModelState.IsValid)
-				{
-					facade.SalvarPerfil(perfil);
-					return RedirectToAction("Index");
-				}
-				else
-				{
-					return View(perfil);
-				}
+				facade.SalvarPerfil(perfil);
+				return RedirectToAction("Index");
             }
             catch
             {
-//                return View(perfil);
-				// TODO: verificar erro object to int32
-				return RedirectToAction("Index");
+                return View(perfil);
 			}
         }
         //
@@ -80,19 +71,12 @@ namespace AltaMontanha.Controllers
         {
 			try
 			{
-				if (ModelState.IsValid)
-				{
-					facade.SalvarPerfil(perfil);
-					return RedirectToAction("Index");
-				}
-				else
-				{
-					return View(perfil);
-				}
+				facade.SalvarPerfil(perfil);
+				return RedirectToAction("Index");
 			}
 			catch
 			{
-				return View();
+				return View(perfil);
 			}
 		}
 		//

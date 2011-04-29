@@ -45,25 +45,14 @@ namespace AltaMontanha.Controllers
         {
 			try
 			{
-				if (ModelState.IsValid)
-				{
-					facade.SalvarUsuario(usuario);
-					return RedirectToAction("Index");
-				}
-				else
-				{
-					ViewData["Perfis"] = new SelectList(facade.PesquisarPerfil(null).ToList(), "Codigo", "Nome");
-					return View(usuario);
-				}
+				facade.SalvarUsuario(usuario);
+				return RedirectToAction("Index");
 			}
 			catch
 			{
 				ViewData["Perfis"] = new SelectList(facade.PesquisarPerfil(null).ToList(), "Codigo", "Nome");
 				return View(usuario);
 			}
-				
-
-			// TODO: verificar erro object to int32
         }
         //
         // GET: /ManterUsuario/AlterarUsuario/5
@@ -82,16 +71,8 @@ namespace AltaMontanha.Controllers
 			//TODO: na alteração a senha não é obrigatória (?)
             try
             {
-				if (ModelState.IsValid)
-				{
-					facade.SalvarUsuario(usuario);
-					return RedirectToAction("Index");
-				}
-				else
-				{
-					ViewData["Perfis"] = new SelectList(facade.PesquisarPerfil(null).ToList(), "Codigo", "Nome");
-					return View(usuario);
-				}
+				facade.SalvarUsuario(usuario);
+				return RedirectToAction("Index");
 			}
             catch
             {

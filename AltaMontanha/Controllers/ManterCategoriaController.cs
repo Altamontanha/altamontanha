@@ -34,21 +34,12 @@ namespace AltaMontanha.Controllers
         {
             try
             {
-				if (ModelState.IsValid)
-				{
-					facade.SalvarCategoria(categoria);
-					return RedirectToAction("Index");
-				}
-				else
-				{
-					return View(categoria);
-				}
+				facade.SalvarCategoria(categoria);
+				return RedirectToAction("Index");
 			}
             catch
             {
-//                return View(categoria);
-				// TODO: verificar erro object to int32
-				return RedirectToAction("Index");
+                return View(categoria);
 			}
         }
         
@@ -68,15 +59,8 @@ namespace AltaMontanha.Controllers
         {
             try
             {
-				if (ModelState.IsValid)
-				{
-					facade.SalvarCategoria(categoria);
-					return RedirectToAction("Index");
-				}
-				else
-				{
-					return View(categoria);
-				}
+				facade.SalvarCategoria(categoria);
+				return RedirectToAction("Index");
 			}
 			catch
 			{
