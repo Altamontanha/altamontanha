@@ -18,10 +18,9 @@ namespace AltaMontanha.Models.Fachada
 
 				return linkDAO.Pesquisar(link);
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				 throw;
+				throw new Exception(e.Message);
 			}
 		}
 
@@ -34,10 +33,9 @@ namespace AltaMontanha.Models.Fachada
 
 				return linkDAO.Pesquisar(codigo);
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 		public Dominio.Link SalvarLink(Dominio.Link link)
@@ -51,19 +49,14 @@ namespace AltaMontanha.Models.Fachada
 				ILinkDAO linkDAO = fabrica.GetLinkDAO();
 
 				if (link.Codigo <= 0)
-				{
 					return linkDAO.Cadastrar(link);
-				}
-				else
-				{
-					linkDAO.Alterar(link);
-					return link;
-				}
+
+				linkDAO.Alterar(link);
+				return link;
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 
@@ -76,10 +69,9 @@ namespace AltaMontanha.Models.Fachada
 							
 				return linkDAO.Excluir(codigo);
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 	}

@@ -21,10 +21,9 @@ namespace AltaMontanha.Models.Fachada
 
 				return perfilDAO.Pesquisar(perfil);
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 
@@ -44,10 +43,9 @@ namespace AltaMontanha.Models.Fachada
 				perfilDAO.Alterar(perfil);
 				return perfil;
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 
@@ -60,10 +58,9 @@ namespace AltaMontanha.Models.Fachada
 
 				return perfilDAO.Excluir(codigo);
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 
@@ -80,10 +77,9 @@ namespace AltaMontanha.Models.Fachada
 
 				return usuarioDAO.Pesquisar(codigo);
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 
@@ -96,10 +92,9 @@ namespace AltaMontanha.Models.Fachada
 
 				return usuarioDAO.Pesquisar(usuario);
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 
@@ -121,10 +116,9 @@ namespace AltaMontanha.Models.Fachada
 				usuarioDAO.Alterar(usuario);
 				return usuario;
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 
@@ -137,10 +131,9 @@ namespace AltaMontanha.Models.Fachada
 							
 				return usuarioDAO.Excluir(codigo);
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 

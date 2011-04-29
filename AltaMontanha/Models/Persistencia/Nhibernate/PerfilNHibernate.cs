@@ -52,10 +52,9 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 				return true;
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				// TODO : Tratar Exceções
-				throw ex;
+				throw new Exception(e.Message);
 			}
 		}
 	}

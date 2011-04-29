@@ -20,10 +20,9 @@ namespace AltaMontanha.Models.Fachada
 
 				return fotoDAO.Pesquisar(foto);
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 
@@ -39,10 +38,9 @@ namespace AltaMontanha.Models.Fachada
 
 				return fotoDAO.Cadastrar(foto);
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 
@@ -55,10 +53,9 @@ namespace AltaMontanha.Models.Fachada
 
 				return fotoDAO.Excluir(codigo);
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 
@@ -75,10 +72,9 @@ namespace AltaMontanha.Models.Fachada
 
 				return bannerDAO.Pesquisar(banner);
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 
@@ -94,10 +90,9 @@ namespace AltaMontanha.Models.Fachada
 
 				return bannerDAO.Cadastrar(banner);
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 
@@ -110,10 +105,9 @@ namespace AltaMontanha.Models.Fachada
 							
 				return bannerDAO.Excluir(codigo);
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO: Tratar erro.
-				throw;
+				throw new Exception(e.Message);
 			}
 		}
 
