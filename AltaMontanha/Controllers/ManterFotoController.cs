@@ -44,5 +44,27 @@ namespace AltaMontanha.Controllers
 			
 			return RedirectToAction("Index");
 		}
+
+
+		[HttpPost]
+		[ValidateInput(false)]
+		public ActionResult Upload(HttpPostedFileBase file)
+		{
+			string caminho = string.Empty;
+			string nome = string.Empty;
+
+			if (file.ContentLength > 0)
+			{
+				nome = Path.GetFileName(file.FileName);
+				caminho = Path.Combine(Server.MapPath("~/Temp"));
+				file.SaveAs(caminho); //TODO: verificar erro/permissão no caminho???
+			}
+
+			foto.Caminho = string.Format(@"{0}\{1}", caminho, nome);
+
+			facade.SalvarFoto(foto);
+
+			return RedirectToAction("Index");
+		}
     }
 }
