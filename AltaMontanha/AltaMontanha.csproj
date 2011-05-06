@@ -69,6 +69,7 @@
     <Compile Include="Controllers\ManterAventuraController.cs" />
     <Compile Include="Controllers\ManterCategoriaController.cs" />
     <Compile Include="Controllers\ManterColunaController.cs" />
+    <Compile Include="Controllers\ManterFotoController.cs" />
     <Compile Include="Controllers\ManterLinkController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -226,7 +227,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Models\Persistencia\SQLServer\" />
+    <Folder Include="Temp\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AltaMontanha.HttpModule\AltaMontanha.HttpModule.csproj">
@@ -342,6 +345,15 @@
   <ItemGroup>
     <Content Include="Views\ManterAventura\Index.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterFoto\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterFoto\_Sidebar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ManterFoto\CadastrarFoto.cshtml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -358,7 +370,7 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
+          <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>17597</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>

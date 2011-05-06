@@ -1,0 +1,43 @@
+﻿@model AltaMontanha.Models.Dominio.Foto
+
+@{
+	ViewBag.Title = "Cadastro de Foto";
+}
+<h2>@ViewBag.Title</h2>
+<div class="clear"></div>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.maskedinput.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.ui.datepicker.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/AM/Util.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")" type="text/javascript"></script>  
+
+@using (Html.BeginForm("CadastrarFoto", "ManterFoto", FormMethod.Post, new { @encType = "multipart/form-data" }))
+{
+	@Html.ValidationSummary(true)
+	<fieldset>
+		<legend>Foto</legend>
+		<p>
+			@Html.LabelFor(model => model.Autor)
+			@Html.TextBoxFor(model => model.Autor, new { @class = "text-long" })
+			@Html.ValidationMessageFor(model => model.Autor)
+		</p>
+		<p>
+			@Html.LabelFor(model => model.Fonte)
+			@Html.TextBoxFor(model => model.Fonte, new { @class = "text-long" })
+			@Html.ValidationMessageFor(model => model.Fonte)
+		</p>
+		<p>
+			@Html.LabelFor(model => model.Legenda)
+			@Html.TextAreaFor(model => model.Legenda)
+			@Html.ValidationMessageFor(model => model.Legenda)
+		</p>
+		<p>
+			@Html.DisplayFor(x => x.Caminho)
+			<input type="file" name="file" value="Foto" />
+			@Html.ValidationMessageFor(model => model.Caminho)
+		</p>
+		<br />
+		<p><input type="submit" value="Cadastrar" /></p>
+	</fieldset>
+}
