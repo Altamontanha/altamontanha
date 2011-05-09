@@ -1,8 +1,14 @@
 ﻿<ul class="sideNav">
 	<li>
-		@Html.ActionLink("Cadastro", "CadastrarArtigo")
+		@Html.ActionLink("Cadastro", "CadastrarArtigo", "ManterArtigo")
 	</li>
 	<li>
-		@Html.ActionLink("Consulta", "Index")
+		@Html.ActionLink("Consulta", "Index", "ManterArtigo")
+	</li>
+	<li>
+		@Html.ActionLink("Cadastrar Categoria", "CadastrarCategoria", "ManterCategoria")
+	</li>
+	<li>
+		@Html.ActionLink("Consultar Categoria", "Index", "ManterCategoria")
 	</li>
 </ul>
