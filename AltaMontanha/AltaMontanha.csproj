@@ -40,6 +40,7 @@
     <Reference Include="NHibernate">
       <HintPath>..\AltaMontanha.HttpModule\Componentes\NHibernate\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages" />
     <Reference Include="System.Web.Helpers" />
@@ -230,7 +231,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Foto\" />
     <Folder Include="Models\Persistencia\SQLServer\" />
     <Folder Include="Temp\" />
   </ItemGroup>

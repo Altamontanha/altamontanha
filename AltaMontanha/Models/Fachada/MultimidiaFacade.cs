@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using AltaMontanha.Models.Persistencia.Fabrica;
 using AltaMontanha.Models.Persistencia.Abstracao;
+using System.IO;
+using System.Transactions;
 
 namespace AltaMontanha.Models.Fachada
 {
@@ -22,25 +24,33 @@ namespace AltaMontanha.Models.Fachada
 			}
 			catch (Exception e)
 			{
-				throw new Exception(e.Message);
+				throw e;
 			}
 		}
 
-		public Dominio.Foto SalvarFoto(Dominio.Foto foto)
+		public Dominio.Foto SalvarFoto(Dominio.Foto foto, HttpPostedFileBase file)
 		{
 			try
 			{
-				if (foto == null)
-					throw new ArgumentNullException("foto");
+				//using (TransactionScope transacao = new TransactionScope())
+				//{
+					if (foto == null)
+						throw new ArgumentNullException("foto");
 
-				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
-				IFotoDAO fotoDAO = fabrica.GetFotoDAO();
+					IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+					IFotoDAO fotoDAO = fabrica.GetFotoDAO();
 
-				return fotoDAO.Cadastrar(foto);
+					foto.Caminho = this.SalvarArquivo(file);
+					fotoDAO.Cadastrar(foto);
+					
+					//transacao.Complete();
+
+					return foto;
+				//}
 			}
 			catch (Exception e)
 			{
-				throw new Exception(e.Message);
+				throw e;
 			}
 		}
 
@@ -63,7 +73,7 @@ namespace AltaMontanha.Models.Fachada
 
 		#region Banner
 
-		public IList<Dominio.Banner> PesquisarPerfil(Dominio.Banner banner)
+		public IList<Dominio.Banner> PesquisarBanner(Dominio.Banner banner)
 		{
 			try
 			{
@@ -78,7 +88,7 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
-		public Dominio.Banner SalvarPerfil(Dominio.Banner banner)
+		public Dominio.Banner SalvarBanner(Dominio.Banner banner)
 		{
 			try
 			{
@@ -116,10 +126,36 @@ namespace AltaMontanha.Models.Fachada
 		/// <summary>
 		/// Salva um arquivo de Multimidia em disco.
 		/// </summary>
-		public void SalvarArquivo()
+		/// <param name="file">Arquivo de upload</param>
+		/// <returns>Caminho</returns>
+		public string SalvarArquivo(HttpPostedFileBase file)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				string caminho = string.Empty;
+				string nome = string.Empty;
+
+				if (file.ContentLength > 0)
+				{
+					nome = Path.GetFileName(file.FileName);
+					caminho = HttpContext.Current.Server.MapPath("~/Temp");
+
+					caminho = string.Format(@"{0}\{1}", caminho, nome);
+
+					file.SaveAs(caminho);
+				}
+
+				return caminho;
+			}
+			catch (IOException e)
+			{
+				throw new ApplicationException("Erro ao salvar arquivo!", e);
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+
 		}
 	}
 }
