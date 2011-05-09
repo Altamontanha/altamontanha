@@ -60,11 +60,7 @@ namespace AltaMontanha.Controllers
 				file.SaveAs(caminho); //TODO: verificar erro/permissão no caminho???
 			}
 
-			foto.Caminho = string.Format(@"{0}\{1}", caminho, nome);
-
-			facade.SalvarFoto(foto);
-
-			return RedirectToAction("Index");
+			return View();
 		}
     }
 }
