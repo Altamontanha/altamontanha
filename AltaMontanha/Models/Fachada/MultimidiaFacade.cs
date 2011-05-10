@@ -6,6 +6,8 @@ using AltaMontanha.Models.Persistencia.Fabrica;
 using AltaMontanha.Models.Persistencia.Abstracao;
 using System.IO;
 using System.Transactions;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace AltaMontanha.Models.Fachada
 {
@@ -34,18 +36,50 @@ namespace AltaMontanha.Models.Fachada
 			{
 				//using (TransactionScope transacao = new TransactionScope())
 				//{
-					if (foto == null)
-						throw new ArgumentNullException("foto");
+				if (foto == null)
+					throw new ArgumentNullException("foto");
 
-					IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
-					IFotoDAO fotoDAO = fabrica.GetFotoDAO();
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IFotoDAO fotoDAO = fabrica.GetFotoDAO();
 
-					foto.Caminho = this.SalvarArquivo(file);
-					fotoDAO.Cadastrar(foto);
-					
-					//transacao.Complete();
 
-					return foto;
+				// Pequena
+				foto.Caminho = this.GerarCaminhoImagem(file, "Pequena");
+
+				this.SalvarImagem
+				(
+					this.RedimencionarImagem(file.InputStream, 160, 120),
+					foto.Caminho
+				);
+				
+				fotoDAO.Cadastrar(foto);
+
+				// Media
+				foto.FotoReduzida = foto;
+				foto.Caminho = this.GerarCaminhoImagem(file, "Media");
+				
+				this.SalvarImagem
+				(
+					this.RedimencionarImagem(file.InputStream, 320, 240),
+					foto.Caminho
+				);
+
+				// Grande
+				foto.FotoReduzida = foto;
+				foto.Caminho = this.GerarCaminhoImagem(file, "Grande");
+
+				this.SalvarImagem
+				(
+					this.RedimencionarImagem(file.InputStream, 640, 480),
+					foto.Caminho
+				);
+			
+
+				fotoDAO.Cadastrar(foto);
+				
+				//transacao.Complete();
+
+				return foto;
 				//}
 			}
 			catch (Exception e)
@@ -92,7 +126,7 @@ namespace AltaMontanha.Models.Fachada
 		{
 			try
 			{
-				if(banner == null)
+				if (banner == null)
 					throw new ArgumentNullException("usuario");
 
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
@@ -112,7 +146,7 @@ namespace AltaMontanha.Models.Fachada
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IBannerDAO bannerDAO = fabrica.GetBannerDAO();
-							
+
 				return bannerDAO.Excluir(codigo);
 			}
 			catch (Exception e)
@@ -156,6 +190,60 @@ namespace AltaMontanha.Models.Fachada
 				throw;
 			}
 
+		}
+
+		private Bitmap RedimencionarImagem(Stream stream, int altura, int largura)
+		{
+			// Carrega imagem original
+			Bitmap original = (Bitmap)Image.FromStream(stream);
+			// Bitmap para nova imagem com o novo tamanho
+			Bitmap modificada = new Bitmap(altura, largura);
+			// Redimensiona imagem
+			Graphics g = Graphics.FromImage(modificada);
+			g.DrawImage(original, new Rectangle(0, 0, modificada.Width, modificada.Height), 0, 0, original.Width, original.Height, GraphicsUnit.Pixel);
+			g.Dispose();
+
+			return modificada;
+		}
+
+		private string GerarCaminhoImagem(HttpPostedFileBase file, string tamanho)
+		{
+			string caminho = string.Empty;
+			string nome = string.Empty;
+			string pasta = string.Empty;
+			DirectoryInfo dir = null;
+
+			if (file.ContentLength > 0)
+			{
+				nome = DateTime.Now.ToString().Replace("/","").Replace(":", "").Replace(" ", "") + Path.GetFileName(file.FileName);
+				caminho = HttpContext.Current.Server.MapPath("~/App_Data/Foto");
+				pasta = string.Format("{0}_{1}", DateTime.Now.Month, DateTime.Now.Year);
+
+				caminho = string.Format(@"{0}\{1}\{2}", caminho, tamanho, pasta);
+
+				if (!Directory.Exists(caminho))
+					dir = Directory.CreateDirectory(caminho);
+				
+				caminho = string.Format(@"{0}\{1}", caminho, nome);
+
+			}
+
+			return caminho;
+		}
+
+		/// <summary>
+		/// Salva uma imagem com jpeg.
+		/// </summary>
+		/// <param name="imagem"></param>
+		/// <param name="caminho"></param>
+		public void SalvarImagem(Bitmap imagem, string caminho)
+		{
+			if (imagem == null)
+				throw new ArgumentNullException("imagem");
+			if (string.IsNullOrEmpty(caminho))
+				throw new ArgumentNullException("caminho");
+
+			imagem.Save(caminho, ImageFormat.Jpeg);
 		}
 	}
 }

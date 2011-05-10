@@ -1,4 +1,4 @@
-﻿///<reference path="/Scripts/jquery-1.4.4-vsdoc.js">1
+﻿///<reference path="/Scripts/jquery-1.4.4-vsdoc.js">
 
 var j = jQuery.noConflict();
 
