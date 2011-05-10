@@ -20,5 +20,6 @@
 			<key column="CodFotoPai" />
 			<one-to-many class="Foto" />
 		</bag>-->
-</class>
+		<many-to-one name="FotoPai" class="Foto" column="CodFotoPai" />
+	</class>
 </hibernate-mapping>

@@ -34,6 +34,10 @@ namespace AltaMontanha.Models.Fachada
 		{
 			try
 			{
+				Dominio.Foto fotoPequena = null;
+				Dominio.Foto fotoMedia = null;
+				Dominio.Foto fotoGrande = null;
+
 				//using (TransactionScope transacao = new TransactionScope())
 				//{
 				if (foto == null)
@@ -42,44 +46,43 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IFotoDAO fotoDAO = fabrica.GetFotoDAO();
 
-
-				// Pequena
-				foto.Caminho = this.GerarCaminhoImagem(file, "Pequena");
-
+				// Grande
+				fotoGrande = foto.Clone();
+				fotoGrande.Caminho = this.GerarCaminhoImagem(file, "Grande");
+				
 				this.SalvarImagem
 				(
-					this.RedimencionarImagem(file.InputStream, 160, 120),
-					foto.Caminho
+					this.RedimensionarImagem(file.InputStream, 640, 480),
+					fotoGrande.Caminho
 				);
-				
-				fotoDAO.Cadastrar(foto);
 
 				// Media
-				foto.FotoReduzida = foto;
-				foto.Caminho = this.GerarCaminhoImagem(file, "Media");
+				fotoMedia = foto.Clone();
+				fotoMedia.FotoPai = fotoGrande;
+				fotoMedia.Caminho = this.GerarCaminhoImagem(file, "Media");
 				
 				this.SalvarImagem
 				(
-					this.RedimencionarImagem(file.InputStream, 320, 240),
-					foto.Caminho
+					this.RedimensionarImagem(file.InputStream, 320, 240),
+					fotoMedia.Caminho
 				);
 
-				// Grande
-				foto.FotoReduzida = foto;
-				foto.Caminho = this.GerarCaminhoImagem(file, "Grande");
+				// Pequena
+				fotoPequena = foto.Clone();
+				fotoPequena.FotoPai = fotoMedia;
+				fotoPequena.Caminho = this.GerarCaminhoImagem(file, "Pequena");
 
 				this.SalvarImagem
 				(
-					this.RedimencionarImagem(file.InputStream, 640, 480),
-					foto.Caminho
+					this.RedimensionarImagem(file.InputStream, 160, 120),
+					fotoPequena.Caminho
 				);
-			
-
-				fotoDAO.Cadastrar(foto);
+				
+				fotoDAO.Cadastrar(fotoPequena);
 				
 				//transacao.Complete();
 
-				return foto;
+				return fotoPequena;
 				//}
 			}
 			catch (Exception e)
@@ -191,8 +194,14 @@ namespace AltaMontanha.Models.Fachada
 			}
 
 		}
-
-		private Bitmap RedimencionarImagem(Stream stream, int altura, int largura)
+		/// <summary>
+		/// Redimensiona o tamanho da imagem.
+		/// </summary>
+		/// <param name="stream"></param>
+		/// <param name="altura"></param>
+		/// <param name="largura"></param>
+		/// <returns></returns>
+		private Bitmap RedimensionarImagem(Stream stream, int altura, int largura)
 		{
 			// Carrega imagem original
 			Bitmap original = (Bitmap)Image.FromStream(stream);
@@ -205,7 +214,13 @@ namespace AltaMontanha.Models.Fachada
 
 			return modificada;
 		}
-
+		// TODO : Corrigir nome das pastas
+		/// <summary>
+		/// Cria o caminho que a imagem será salva.
+		/// </summary>
+		/// <param name="file"></param>
+		/// <param name="tamanho"></param>
+		/// <returns></returns>
 		private string GerarCaminhoImagem(HttpPostedFileBase file, string tamanho)
 		{
 			string caminho = string.Empty;
@@ -230,7 +245,6 @@ namespace AltaMontanha.Models.Fachada
 
 			return caminho;
 		}
-
 		/// <summary>
 		/// Salva uma imagem com jpeg.
 		/// </summary>
