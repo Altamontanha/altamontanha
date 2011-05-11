@@ -8,6 +8,7 @@ namespace AltaMontanha.Models.Dominio
 	public class Banner
 	{
 		public int Codigo { get; set; }
+		public Local Local { get; set; }
 		public string Titulo { get; set; }
 		public string Caminho { get; set; }
 		public DateTime DataInicial { get; set; }

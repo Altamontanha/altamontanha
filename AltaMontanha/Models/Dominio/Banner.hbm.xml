@@ -4,6 +4,7 @@
 		<id name="Codigo" access="property" column="CodBanner" type="Int32">
 			<generator class="identity" />
 		</id>
+		<many-to-one name="Local" column="CodLocal" class="Local" not-null="true" />
 		<property name="Titulo" not-null="true" access="property" type="String">
 			<column name="Titulo" length="100" />
 		</property>

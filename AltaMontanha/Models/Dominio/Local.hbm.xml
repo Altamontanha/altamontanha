@@ -4,11 +4,8 @@
 		<id name="Codigo" access="property" column="CodLocal" type="Int32">
 			<generator class="identity" />
 		</id>
-		<property name="Nome" not-null="true" access="property" type="String">
-			<column name="Nome" length="150" />
-		</property>
 		<property name="Descricao" not-null="true" access="property" type="String">
-			<column name="Descricao" length="150" />
+			<column name="Descricao" length="50" />
 		</property>
 		<property name="Altura" not-null="true" access="property" type="Int32">
 			<column name="Altura" sql-type="INT"/>
@@ -16,6 +13,11 @@
 		<property name="Largura" not-null="true" access="property" type="Int32">
 			<column name="Largura" sql-type="INT"/>
 		</property>
+		<!-- TODO: como fazer?
+		<property name="Local" not-null="true" access="property" type="String">
+			<column name="Local" length="50" />
+		</property>
+		-->
 		<many-to-one name="Banner" column="CodBanner" class="Banner" not-null="true" />
 	</class>
 </hibernate-mapping>

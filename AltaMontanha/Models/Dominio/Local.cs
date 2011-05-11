@@ -8,10 +8,10 @@ namespace AltaMontanha.Models.Dominio
 	public class Local
 	{
 		public int Codigo { get; set; }
-		public string Nome { get; set; }
 		public string Descricao { get; set; }
 		public int Altura { get; set; }
 		public int Largura { get; set; }
+		//public string Local { get; set; } // TODO: como fazer?
 		public Banner Banner { get; set; }
 	}
 }

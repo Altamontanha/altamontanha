@@ -24,7 +24,8 @@ namespace AltaMontanha.Controllers
         // GET: /ManterBanner/CadastrarBanner
 		public ActionResult CadastrarBanner()
         {
-            return View();
+			ViewData["Locais"] = new SelectList(facade.PesquisarLocal(null), "Codigo", "Descricao");
+			return View();
         } 
 
         //
@@ -39,7 +40,8 @@ namespace AltaMontanha.Controllers
             }
             catch
             {
-                return View(banner);
+				ViewData["Locais"] = new SelectList(facade.PesquisarLocal(null), "Codigo", "Descricao");
+				return View(banner);
             }
         }
         
@@ -48,7 +50,8 @@ namespace AltaMontanha.Controllers
 		public ActionResult AlterarBanner(int Codigo)
         {
 			Banner banner = facade.PesquisarBanner(Codigo);
-            return View(banner);
+			ViewData["Locais"] = new SelectList(facade.PesquisarLocal(null), "Codigo", "Descricao");
+			return View(banner);
         }
 
         //
@@ -63,7 +66,8 @@ namespace AltaMontanha.Controllers
             }
             catch
             {
-                return View(banner);
+				ViewData["Locais"] = new SelectList(facade.PesquisarLocal(null), "Codigo", "Descricao");
+				return View(banner);
             }
         }
 

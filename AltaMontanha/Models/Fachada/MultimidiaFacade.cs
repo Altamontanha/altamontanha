@@ -122,7 +122,7 @@ namespace AltaMontanha.Models.Fachada
 			}
 			catch (Exception e)
 			{
-				throw new Exception(e.Message);
+				throw e;
 			}
 		}
 
@@ -141,7 +141,7 @@ namespace AltaMontanha.Models.Fachada
 			}
 			catch (Exception e)
 			{
-				throw new Exception(e.Message);
+				throw e;
 			}
 		}
 
@@ -156,7 +156,22 @@ namespace AltaMontanha.Models.Fachada
 			}
 			catch (Exception e)
 			{
-				throw new Exception(e.Message);
+				throw e;
+			}
+		}
+
+		public IList<Dominio.Local> PesquisarLocal(Dominio.Local local)
+		{
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				ILocalDAO localDAO = fabrica.GetLocalDAO();
+
+				return localDAO.Pesquisar(local);
+			}
+			catch (Exception e)
+			{
+				throw e;
 			}
 		}
 
@@ -174,7 +189,7 @@ namespace AltaMontanha.Models.Fachada
 			}
 			catch (Exception e)
 			{
-				throw new Exception(e.Message);
+				throw e;
 			}
 		}
 
@@ -189,7 +204,7 @@ namespace AltaMontanha.Models.Fachada
 			}
 			catch (Exception e)
 			{
-				throw new Exception(e.Message);
+				throw e;
 			}
 		}
 

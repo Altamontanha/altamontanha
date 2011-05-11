@@ -29,8 +29,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			if (objeto.Codigo > 0)
 				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
-			if (!string.IsNullOrEmpty(objeto.Nome))
-				criteria = criteria.Add(Expression.Eq("Nome", objeto.Nome));
+			if (!string.IsNullOrEmpty(objeto.Descricao))
+				criteria = criteria.Add(Expression.Eq("Descricao", objeto.Descricao));
 			
 			IList<Dominio.Local> locais = criteria.List<Dominio.Local>();
 
