@@ -29,6 +29,7 @@ namespace AltaMontanha.Models.Dominio
 		[Required(ErrorMessage = "Perfil é um campo obrigatório")]
 		public virtual Perfil Perfil { get; set; }
 
+		[Required(ErrorMessage = "Foto é um campo obrigatório")]
 		public virtual Foto Foto { get; set; }
 	}
 }

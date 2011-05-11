@@ -64,12 +64,51 @@ namespace AltaMontanha.Models.Fachada
 		{
 			try
 			{
+				if (foto == null)
+					throw new ArgumentNullException("foto");
+
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IFotoDAO fotoDAO = fabrica.GetFotoDAO();
+				string path = "~/App_Data/Foto/";
+
+				foto.Caminho = string.Format("Usuario/{0}.jpg", foto.Legenda);
+
+				this.SalvarImagem
+				(
+					this.RedimensionarImagem(file.InputStream, 160, 120),
+					HttpContext.Current.Server.MapPath(path + foto.Caminho)
+				);
+				
+				if (foto.Codigo == 0)
+					return fotoDAO.Cadastrar(foto);
+
+				fotoDAO.Alterar(foto);
+
+				return foto;
+				//}
+			}
+			catch (Exception e)
+			{
+				throw e;
+			}
+		}
+		/// <summary>
+		/// Cadastra uma nova foto em banco,
+		/// Salvando todos os tamanhos necessários para galeria.
+		/// </summary>
+		/// <param name="foto">objetos com os dados da foto</param>
+		/// <param name="file">arquivo da foto</param>
+		/// <returns>Foto cadastrada com o código gerado</returns>
+		public Dominio.Foto SalvarFotoGaleria(Dominio.Foto foto, HttpPostedFileBase file)
+		{
+			try
+			{
 				// TODO: utilizar Enum?
 				List<string> tamanhos = new List<string>(3);
 				tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Grande");
 				tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Media");
 				tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Pequena");
-				
+
 				// TODO: verificar transação
 				// using (TransactionScope transacao = new TransactionScope())
 				//{
@@ -124,6 +163,7 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
+
 		/// <summary>
 		/// Exclui uma foto do sistema.
 		/// </summary>
@@ -225,10 +265,10 @@ namespace AltaMontanha.Models.Fachada
 			imagem.Save(caminho, ImageFormat.Jpeg);
 		}
 		/// <summary>
-		/// Exclui as imagens referentes a uma foto do disco.
+		/// Exclui as imagens referentes a uma foto de galeria do disco.
 		/// </summary>
 		/// <param name="caminho">Caminho relativo da Imagem</param>
-		public void ExcluirImagem(string caminho)
+		public void ExcluirImagemGaleria(string caminho)
 		{
 			// TODO: utilizar Enum?
 			List<string> tamanhos = new List<string>(3);
@@ -237,14 +277,22 @@ namespace AltaMontanha.Models.Fachada
 			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Pequena");
 			
 			foreach (string tamanho in tamanhos)
-			{
 				if (File.Exists(string.Format(@"{0}\{1}", tamanho, caminho.Replace("/", @"\"))))
 					File.Delete(string.Format(@"{0}\{1}", tamanho, caminho.Replace("/", @"\")));	
-			}
-
-			
 		}
-		
+
+		/// <summary>
+		/// Exclui a imagem referentes a uma foto do disco.
+		/// </summary>
+		/// <param name="caminho">Caminho relativo da Imagem</param>
+		public void ExcluirImagem(string caminho)
+		{
+			string path = HttpContext.Current.Server.MapPath("~/App_Data/Foto");
+
+			if (File.Exists(string.Format(@"{0}\{1}",path, caminho.Replace("/", @"\"))))
+				File.Delete(string.Format(@"{0}\{1}", path, caminho.Replace("/", @"\")));
+		}
+
 		#endregion
 
 		#region Banner

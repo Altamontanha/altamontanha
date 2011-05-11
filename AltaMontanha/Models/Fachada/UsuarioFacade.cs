@@ -10,6 +10,8 @@ namespace AltaMontanha.Models.Fachada
 {
 	public class UsuarioFacade
 	{
+		MultimidiaFacade MultimidiaFacade = new Fachada.MultimidiaFacade();
+
 		#region Perfil
 
 		public Dominio.Perfil PesquisarPerfil(int codigo)
@@ -83,6 +85,11 @@ namespace AltaMontanha.Models.Fachada
 
 		#region Usuario
 
+		/// <summary>
+		/// consulta de um usuário especifico
+		/// </summary>
+		/// <param name="codigo">código do usuário</param>
+		/// <returns>usuário referente ao código passado</returns>
 		public Dominio.Usuario PesquisarUsuario(int codigo)
 		{
 			try
@@ -97,7 +104,11 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
+		/// <summary>
+		/// Consulta de usuarios cadastrados
+		/// </summary>
+		/// <param name="usuario">objeto com parametros de pesquisa</param>
+		/// <returns>lista de usuarios</returns>
 		public IList<Dominio.Usuario> PesquisarUsuario(Dominio.Usuario usuario)
 		{
 			try
@@ -112,8 +123,13 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
-		public Dominio.Usuario SalvarUsuario(Dominio.Usuario usuario)
+		/// <summary>
+		/// Cadastra ou altera um usuário.
+		/// </summary>
+		/// <param name="usuario">objeto com as informações de um usuário</param>
+		/// <param name="file">arquivo da foto do usuário.</param>
+		/// <returns>usuário com o código gerado</returns>
+		public Dominio.Usuario SalvarUsuario(Dominio.Usuario usuario, HttpPostedFileBase file)
 		{
 			try
 			{
@@ -125,10 +141,19 @@ namespace AltaMontanha.Models.Fachada
 
 				usuario.Senha = Utilitario.Seguranca.Criptografar(usuario.Senha);
 
+				if (usuario.Foto == null)
+					usuario.Foto = new Foto() { Autor = usuario.Nome, Fonte = usuario.Email, Legenda = usuario.Login };
+				else
+					usuario.Foto = MultimidiaFacade.PesquisarFoto(usuario.Foto.Codigo);
+
+				if (file != null)
+					usuario.Foto = MultimidiaFacade.SalvarFoto(usuario.Foto, file);
+
 				if (usuario.Codigo <= 0)
 					return usuarioDAO.Cadastrar(usuario);
 
 				usuarioDAO.Alterar(usuario);
+				
 				return usuario;
 			}
 			catch (Exception e)
@@ -136,22 +161,34 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
+		/// <summary>
+		/// Exclui um usuário do banco
+		/// </summary>
+		/// <param name="codigo">código do usuário</param>
+		/// <returns></returns>
 		public bool ExcluirUsuario(int codigo)
 		{
 			try
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IUsuarioDAO usuarioDAO = fabrica.GetUsuarioDAO();
-							
-				return usuarioDAO.Excluir(codigo);
+				Foto foto	= usuarioDAO.Pesquisar(codigo).Foto;
+				bool retorno = usuarioDAO.Excluir(codigo);
+
+				MultimidiaFacade.ExcluirFoto(foto.Codigo);
+
+				return retorno;
 			}
 			catch (Exception e)
 			{
 				throw e;
 			}
 		}
-
+		/// <summary>
+		/// autentica um usuário no sistema.
+		/// </summary>
+		/// <param name="usuario">objeto com login e senha do usuário</param>
+		/// <returns>autenticação</returns>
 		public bool AutenticarUsuario(Dominio.Usuario usuario)
 		{
 			if (usuario == null)
@@ -172,7 +209,12 @@ namespace AltaMontanha.Models.Fachada
 
 			return true;
 		}
-
+		/// <summary>
+		/// Verifica o nivel de acesso de um usuário.
+		/// </summary>
+		/// <param name="usuario"></param>
+		/// <param name="nomeFormulario"></param>
+		/// <returns></returns>
 		public bool VerificarAcesso(Dominio.Usuario usuario, string nomeFormulario)
 		{
 			IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();

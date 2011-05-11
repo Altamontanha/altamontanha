@@ -235,8 +235,8 @@
     <Folder Include="App_Data\Foto\Grande\" />
     <Folder Include="App_Data\Foto\Media\" />
     <Folder Include="App_Data\Foto\Pequena\" />
+    <Folder Include="App_Data\Foto\Usuario\" />
     <Folder Include="Models\Persistencia\SQLServer\" />
-    <Folder Include="Temp\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AltaMontanha.HttpModule\AltaMontanha.HttpModule.csproj">

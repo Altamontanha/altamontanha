@@ -10,10 +10,12 @@
 <h2>@ViewBag.Title</h2>
 <div class="clear"></div>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("AlterarUsuario", "ManterUsuario", FormMethod.Post, new { @encType = "multipart/form-data" }))
+{
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Usuário</legend>
+		@Html.HiddenFor(model => model.Foto.Codigo)
         <p>
 			@Html.LabelFor(model => model.Login)
             @Html.TextBoxFor(model => model.Login, new { @class = "text-medium" })
@@ -39,6 +41,10 @@
 		    @Html.LabelFor(model => model.Perfil)
         	@Html.DropDownListFor(model => model.Perfil.Codigo, (SelectList) ViewData["Perfis"])
 			@Html.ValidationMessageFor(model => model.Perfil.Codigo)
+		</p>
+		<p>
+			@Html.LabelFor(model => model.Foto)
+			<input type="file" name="file" value="Foto" />
 		</p>
 		<br />
         <p><input type="submit" value="Alterar" /></p>

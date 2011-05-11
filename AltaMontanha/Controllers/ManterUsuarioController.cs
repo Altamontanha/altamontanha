@@ -41,11 +41,11 @@ namespace AltaMontanha.Controllers
         // POST: /ManterUsuario/CadastrarUsuario
         [HttpPost]
 		[Authorize]
-		public ActionResult CadastrarUsuario(Usuario usuario)
+		public ActionResult CadastrarUsuario(Usuario usuario, HttpPostedFileBase file)
         {
 			try
 			{
-				facade.SalvarUsuario(usuario);
+				facade.SalvarUsuario(usuario, file);
 				return RedirectToAction("Index");
 			}
 			catch
@@ -66,12 +66,12 @@ namespace AltaMontanha.Controllers
         // POST: /ManterUsuario/AlterarUsuario/5
         [HttpPost]
 		[Authorize]
-		public ActionResult AlterarUsuario(Usuario usuario)
+		public ActionResult AlterarUsuario(Usuario usuario, HttpPostedFileBase file)
         {
 			//TODO: na alteração a senha não é obrigatória (?)
             try
             {
-				facade.SalvarUsuario(usuario);
+				facade.SalvarUsuario(usuario, file);
 				return RedirectToAction("Index");
 			}
             catch

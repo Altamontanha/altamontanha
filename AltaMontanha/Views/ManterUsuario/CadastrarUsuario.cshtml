@@ -9,7 +9,8 @@
 <h2>@ViewBag.Title</h2>
 <div class="clear"></div>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("CadastrarUsuario", "ManterUsuario", FormMethod.Post, new { @encType = "multipart/form-data" }))
+{
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Usuário</legend>
@@ -20,7 +21,7 @@
         </p>
         <p>
             @Html.LabelFor(model => model.Senha)
-            @Html.PasswordFor(model => model.Senha, new { @class = "text-medium"})
+            @Html.PasswordFor(model => model.Senha, new { @class = "text-medium" })
             @Html.ValidationMessageFor(model => model.Senha)
         </p>
 		<p>
@@ -35,7 +36,7 @@
         </p>
         <p>
             @Html.LabelFor(model => model.Perfil)
-        	@Html.DropDownListFor(model => model.Perfil.Codigo, (SelectList) ViewData["Perfis"])
+        	@Html.DropDownListFor(model => model.Perfil.Codigo, (SelectList)ViewData["Perfis"])
 			@Html.ValidationMessageFor(model => model.Perfil.Codigo)
 		</p>
 		<p>

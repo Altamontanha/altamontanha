@@ -40,7 +40,7 @@ namespace AltaMontanha.Controllers
 		{
 			try
 			{
-				facade.SalvarFoto(foto, file);
+				facade.SalvarFotoGaleria(foto, file);
 
 				return RedirectToAction("Index");
 			}
@@ -63,7 +63,7 @@ namespace AltaMontanha.Controllers
 		{
 			try
 			{
-				facade.SalvarFoto(foto, file);
+				facade.SalvarFotoGaleria(foto, file);
 				return RedirectToAction("Index");
 			}
 			catch
