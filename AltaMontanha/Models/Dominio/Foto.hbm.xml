@@ -16,8 +16,5 @@
 		<property name="Fonte" not-null="false" access="property" type="String">
 			<column name="Fonte" length="75" />
 		</property>
-		<property name="Data" not-null="true" access="property" type="DateTime">
-			<column name="Data" sql-type="DATETIME"/>
-		</property>
 	</class>
 </hibernate-mapping>
