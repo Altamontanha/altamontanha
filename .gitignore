@@ -1,4 +1,5 @@
 bin
 *.csproj.user
 obj
-AltaMontanha.suo
+*.suo
+App_Data
