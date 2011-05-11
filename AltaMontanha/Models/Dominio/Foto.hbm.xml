@@ -16,10 +16,8 @@
 		<property name="Fonte" not-null="false" access="property" type="String">
 			<column name="Fonte" length="75" />
 		</property>
-		<!--<bag name="FotoReduzida" cascade="save-update" lazy="false" >
-			<key column="CodFotoPai" />
-			<one-to-many class="Foto" />
-		</bag>-->
-		<many-to-one name="FotoPai" class="Foto" column="CodFotoPai" />
+		<property name="Data" not-null="true" access="property" type="DateTime">
+			<column name="Data" sql-type="DATETIME"/>
+		</property>
 	</class>
 </hibernate-mapping>

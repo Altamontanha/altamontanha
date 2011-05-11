@@ -13,7 +13,7 @@ namespace AltaMontanha.Models.Dominio
 		public virtual string Legenda { get; set; }
 		public virtual string Caminho { get; set; }
 		public virtual string Fonte { get; set; }
-		public virtual Foto FotoPai { get; set; }
+		public virtual DateTime Data { get; set; }
 
 		public Foto Clone()
 		{

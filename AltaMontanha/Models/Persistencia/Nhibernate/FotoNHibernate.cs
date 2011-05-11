@@ -16,8 +16,6 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public Dominio.Foto Cadastrar(Dominio.Foto objeto)
 		{
-			objeto.FotoPai.FotoPai.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto.FotoPai.FotoPai);
-			objeto.FotoPai.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto.FotoPai);
 			objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
 
 			return objeto;

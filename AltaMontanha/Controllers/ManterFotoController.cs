@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Helpers;
 using System.IO;
+using AltaMontanha.Models.Dominio;
 
 namespace AltaMontanha.Controllers
 {
@@ -16,7 +17,8 @@ namespace AltaMontanha.Controllers
         // GET: /ManterFoto/
 		public ActionResult Index()
         {
-            return View();
+			IList<Foto> fotos = facade.PesquisarFoto(null);
+            return View(fotos);
         }
 
 		public ActionResult CadastrarFoto()
@@ -28,30 +30,48 @@ namespace AltaMontanha.Controllers
 		[ValidateInput(false)]
 		public ActionResult CadastrarFoto(Models.Dominio.Foto foto, HttpPostedFileBase file)
 		{
+			try
+			{
+				facade.SalvarFoto(foto, file);
 
-			facade.SalvarFoto(foto, file);
-			
+				return RedirectToAction("Index");
+			}
+			catch
+			{
+				return View(foto);
+			}
+		}
+		
+		//
+		// GET: /ManterFotoAlterarFoto/5
+		public ActionResult AlterarFoto(int Codigo)
+		{
+			Foto foto = facade.PesquisarFoto(Codigo);
+			return View(foto);
+		}
+
+		//
+		// POST: /ManterFoto/AlterarFoto/5
+		[HttpPost]
+		public ActionResult AlterarFoto(Foto foto, HttpPostedFileBase file)
+		{
+			try
+			{
+				facade.SalvarFoto(foto, file);
+				return RedirectToAction("Index");
+			}
+			catch
+			{
+				return View(foto);
+			}
+		}
+
+		//
+		// GET: /ManterFoto/ExluirFoto/5
+		public ActionResult ExcluirFoto(int Codigo)
+		{
+			facade.ExcluirFoto(Codigo);
 			return RedirectToAction("Index");
 		}
-
-
-		[HttpPost]
-		[ValidateInput(false)]
-		public ActionResult Upload(HttpPostedFileBase file)
-		{
-			string caminho = string.Empty;
-			string nome = string.Empty;
-
-			if (file.ContentLength > 0)
-			{
-				nome = Path.GetFileName(file.FileName);
-				caminho = string.Format(@"{0}\{1}", Server.MapPath("~/Temp"), nome);
-
-				file.SaveAs(caminho);
-			}
-
-
-			return View();
-		}
-    }
+	}
 }

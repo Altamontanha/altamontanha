@@ -1,7 +1,43 @@
-﻿@model AltaMontanha.Models.Dominio.Foto
+﻿@model IEnumerable<AltaMontanha.Models.Dominio.Foto>
 
 @{
-	ViewBag.Title = "Index";
+    ViewBag.Title = "Pesquisa de Foto";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
+<div class="clear"></div>
+<div id="divGrid">
+	<h3>Fotos:</h3>
+	<div class="grid">
+		<table>
+			<tr>
+				<th>
+					Legenda
+				</th>
+				<th>
+					Autor
+				</th>
+				<th></th>
+				<th></th>
+			</tr>
+
+		@foreach (var item in Model) {
+			<tr>
+				<td>
+					@item.Legenda
+				</td>
+				<td>
+					@item.Autor
+				</td>
+				<td class="action">
+					@Html.ActionLink("Alterar", "AlterarFoto", new { Codigo = item.Codigo }, new { @class = "edit" })
+				</td>
+				<td class="action">
+					@Html.ActionLink("Excluir", "ExcluirFoto", new { Codigo = item.Codigo }, new { @class = "delete" })
+				</td>
+			</tr>
+		}
+		</table>
+		<br />
+	</div>
+</div>

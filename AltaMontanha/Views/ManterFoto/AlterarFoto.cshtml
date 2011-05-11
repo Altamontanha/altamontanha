@@ -1,0 +1,34 @@
+﻿@model AltaMontanha.Models.Dominio.Foto
+@{
+	ViewBag.Title = "Alterar Foto";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="clear"></div>
+
+@using (Html.BeginForm("AlterarFoto", "ManterFoto", FormMethod.Post, new { @encType = "multipart/form-data" }))
+{
+	@Html.ValidationSummary(true)
+	<fieldset>
+		<legend>Foto</legend>
+		<p>
+			@Html.LabelFor(model => model.Autor)
+			@Html.TextBoxFor(model => model.Autor, new { @class = "text-long" })
+			@Html.ValidationMessageFor(model => model.Autor)
+		</p>
+		<p>
+			@Html.LabelFor(model => model.Fonte)
+			@Html.TextBoxFor(model => model.Fonte, new { @class = "text-long" })
+			@Html.ValidationMessageFor(model => model.Fonte)
+		</p>
+		<p>
+			@Html.LabelFor(model => model.Legenda)
+			@Html.TextAreaFor(model => model.Legenda)
+			@Html.ValidationMessageFor(model => model.Legenda)
+		</p>
+		<p>
+			<input type="file" name="file" value="Foto" />
+		</p>
+		<p><input type="submit" value="Cadastrar" /></p>
+	</fieldset>
+}

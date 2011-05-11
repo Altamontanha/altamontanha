@@ -8,12 +8,28 @@ using System.IO;
 using System.Transactions;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Text.RegularExpressions;
 
 namespace AltaMontanha.Models.Fachada
 {
 	public class MultimidiaFacade
 	{
 		#region Foto
+
+		public Dominio.Foto PesquisarFoto(int codigo)
+		{
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IFotoDAO fotoDAO = fabrica.GetFotoDAO();
+
+				return fotoDAO.Pesquisar(codigo);
+			}
+			catch (Exception e)
+			{
+				throw e;
+			}
+		}
 
 		public IList<Dominio.Foto> PesquisarFoto(Dominio.Foto foto)
 		{
@@ -34,55 +50,59 @@ namespace AltaMontanha.Models.Fachada
 		{
 			try
 			{
-				Dominio.Foto fotoPequena = null;
-				Dominio.Foto fotoMedia = null;
-				Dominio.Foto fotoGrande = null;
-
-				//using (TransactionScope transacao = new TransactionScope())
+				// TODO: utilizar Enum?
+				List<string> tamanhos = new List<string>(3);
+				tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Grande");
+				tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Media");
+				tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Pequena");
+				
+				// TODO: verificar transação
+				// using (TransactionScope transacao = new TransactionScope())
 				//{
 				if (foto == null)
 					throw new ArgumentNullException("foto");
 
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IFotoDAO fotoDAO = fabrica.GetFotoDAO();
+				string caminho = string.Empty;
 
-				// Grande
-				fotoGrande = foto.Clone();
-				fotoGrande.Caminho = this.GerarCaminhoImagem(file, "Grande");
-				
-				this.SalvarImagem
-				(
-					this.RedimensionarImagem(file.InputStream, 640, 480),
-					fotoGrande.Caminho
-				);
+				foto.Caminho = this.GerarCaminhoImagem(file);
 
-				// Media
-				fotoMedia = foto.Clone();
-				fotoMedia.FotoPai = fotoGrande;
-				fotoMedia.Caminho = this.GerarCaminhoImagem(file, "Media");
-				
-				this.SalvarImagem
-				(
-					this.RedimensionarImagem(file.InputStream, 320, 240),
-					fotoMedia.Caminho
-				);
+				Regex r = new Regex(@"^.*\\([A-z])+$");
+				int l = 640;
+				int a = 480;
 
-				// Pequena
-				fotoPequena = foto.Clone();
-				fotoPequena.FotoPai = fotoMedia;
-				fotoPequena.Caminho = this.GerarCaminhoImagem(file, "Pequena");
+				foreach (string tamanho in tamanhos)
+				{
+					caminho = string.Format("{0}\\{1}\\", tamanho, foto.Caminho);
 
-				this.SalvarImagem
-				(
-					this.RedimensionarImagem(file.InputStream, 160, 120),
-					fotoPequena.Caminho
-				);
-				
-				fotoDAO.Cadastrar(fotoPequena);
-				
+					// TODO: Refactor
+					if (r.Replace(tamanho, "$1").Equals("Pequena"))
+					{
+						l = 160;
+						a = 120;
+					}
+					else if (r.Replace(tamanho, "$1").Equals("Media"))
+					{
+						l = 320;
+						a = 240;
+					}
+
+					this.SalvarImagem
+					(
+						this.RedimensionarImagem(file.InputStream, l, a),
+						caminho
+					);
+				}
+
 				//transacao.Complete();
 
-				return fotoPequena;
+				if (foto.Codigo == 0)
+					fotoDAO.Cadastrar(foto);
+
+				fotoDAO.Alterar(foto);
+
+				return foto;
 				//}
 			}
 			catch (Exception e)
@@ -109,6 +129,21 @@ namespace AltaMontanha.Models.Fachada
 		#endregion
 
 		#region Banner
+
+		public Dominio.Banner PesquisarBanner(int codigo)
+		{
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IBannerDAO bannerDAO = fabrica.GetBannerDAO();
+
+				return bannerDAO.Pesquisar(codigo);
+			}
+			catch (Exception e)
+			{
+				throw new Exception(e.Message);
+			}
+		}
 
 		public IList<Dominio.Banner> PesquisarBanner(Dominio.Banner banner)
 		{
@@ -214,32 +249,42 @@ namespace AltaMontanha.Models.Fachada
 
 			return modificada;
 		}
-		// TODO : Corrigir nome das pastas
+		// TODO : Corrigir arquivo das pastas
 		/// <summary>
 		/// Cria o caminho que a imagem será salva.
 		/// </summary>
 		/// <param name="file"></param>
-		/// <param name="tamanho"></param>
 		/// <returns></returns>
-		private string GerarCaminhoImagem(HttpPostedFileBase file, string tamanho)
+		private string GerarCaminhoImagem(HttpPostedFileBase file)
 		{
+			// TODO: utilizar Enum?
+			List<string> tamanhos = new List<string>(3);
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Grande");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Media");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Pequena");
+
+			string arquivo = string.Empty;
+			string data = string.Empty;
+			string diretorio = string.Empty;
 			string caminho = string.Empty;
-			string nome = string.Empty;
-			string pasta = string.Empty;
 			DirectoryInfo dir = null;
 
 			if (file.ContentLength > 0)
 			{
-				nome = DateTime.Now.ToString().Replace("/","").Replace(":", "").Replace(" ", "") + Path.GetFileName(file.FileName);
-				caminho = HttpContext.Current.Server.MapPath("~/App_Data/Foto");
-				pasta = string.Format("{0}_{1}", DateTime.Now.Month, DateTime.Now.Year);
-
-				caminho = string.Format(@"{0}\{1}\{2}", caminho, tamanho, pasta);
-
-				if (!Directory.Exists(caminho))
-					dir = Directory.CreateDirectory(caminho);
+				// formato: ANO_MES\DATAHORANOMEARQUIVO, exemplo: 2011_05\20110510102011Arquivo.jpg
+				data = string.Format("{0}_{1}", DateTime.Now.Year, DateTime.Now.Month.ToString("00"));
+				arquivo = new Regex(@"[^0-9]").Replace(DateTime.Now.ToString(), "") + Path.GetFileName(file.FileName);
 				
-				caminho = string.Format(@"{0}\{1}", caminho, nome);
+				foreach (string tamanho in tamanhos)
+				{
+
+					diretorio = string.Format(@"{0}\{1}", tamanho, data);
+
+					if (!Directory.Exists(diretorio))
+						dir = Directory.CreateDirectory(diretorio);
+				
+					caminho = string.Format(@"{0}\{1}", data, arquivo);
+				}
 
 			}
 
