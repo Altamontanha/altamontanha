@@ -28,21 +28,30 @@ namespace AltaMontanha.Controllers
 		[ValidateInput(false)]
 		public ActionResult CadastrarFoto(Models.Dominio.Foto foto, HttpPostedFileBase file)
 		{
+
+			facade.SalvarFoto(foto, file);
+			
+			return RedirectToAction("Index");
+		}
+
+
+		[HttpPost]
+		[ValidateInput(false)]
+		public ActionResult Upload(HttpPostedFileBase file)
+		{
 			string caminho = string.Empty;
 			string nome = string.Empty;
 
 			if (file.ContentLength > 0)
 			{
 				nome = Path.GetFileName(file.FileName);
-				caminho = Path.Combine(Server.MapPath("~/Temp"));
-				file.SaveAs(caminho); //TODO: verificar erro/permissão no caminho???
+				caminho = string.Format(@"{0}\{1}", Server.MapPath("~/Temp"), nome);
+
+				file.SaveAs(caminho);
 			}
 
-			foto.Caminho = string.Format(@"{0}\{1}",caminho, nome);
 
-			facade.SalvarFoto(foto);
-			
-			return RedirectToAction("Index");
+			return View();
 		}
     }
 }

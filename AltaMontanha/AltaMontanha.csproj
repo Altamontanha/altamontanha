@@ -40,6 +40,7 @@
     <Reference Include="NHibernate">
       <HintPath>..\AltaMontanha.HttpModule\Componentes\NHibernate\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages" />
     <Reference Include="System.Web.Helpers" />
@@ -139,6 +140,7 @@
     <Compile Include="Utilitario\Seguranca.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\jquery.Jcrop.css" />
     <Content Include="Content\themes\Cinza\css\ie6.css" />
     <Content Include="Content\themes\Cinza\css\ie7.css" />
     <Content Include="Content\themes\Cinza\css\jNice.css" />
@@ -164,6 +166,7 @@
     <Content Include="Content\themes\Cinza\img\img_seta_menu_abrir.gif" />
     <Content Include="Content\themes\Cinza\img\input-shaddow-hover.gif" />
     <Content Include="Content\themes\Cinza\img\input-shaddow.gif" />
+    <Content Include="Content\themes\Cinza\img\Jcrop.gif" />
     <Content Include="Content\themes\Cinza\img\left-menu-bg.gif" />
     <Content Include="Content\themes\Cinza\img\Logo.png" />
     <Content Include="Content\themes\Cinza\img\next.gif" />
@@ -192,6 +195,7 @@
     <EmbeddedResource Include="Models\Dominio\Banner.hbm.xml" />
     <EmbeddedResource Include="Models\Dominio\Conteudo.hbm.xml" />
     <EmbeddedResource Include="Models\Dominio\Local.hbm.xml" />
+    <Content Include="Scripts\AM\Foto.js" />
     <Content Include="Scripts\AM\Util.js" />
     <Content Include="Scripts\jquery.jcrop.min.js" />
     <Content Include="Scripts\jquery.jnice.js" />
@@ -227,7 +231,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Foto\Grande\" />
+    <Folder Include="App_Data\Foto\Media\" />
+    <Folder Include="App_Data\Foto\Pequena\" />
     <Folder Include="Models\Persistencia\SQLServer\" />
     <Folder Include="Temp\" />
   </ItemGroup>
