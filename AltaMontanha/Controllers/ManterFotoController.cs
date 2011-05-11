@@ -78,7 +78,34 @@ namespace AltaMontanha.Controllers
 			facade.ExcluirFoto(Codigo);
 			return RedirectToAction("Index");
 		}
-		
+		//
+		// GET: /ManterFotoAlterarFoto/5
+		public ActionResult VincularFoto()//(int codConteudo)
+		{
+			Models.Persistencia.Fabrica.IFactoryDAO fabrica = Models.Persistencia.Fabrica.FactoryFactoryDAO.GetFabrica();
+			Models.Persistencia.Abstracao.IFotoDAO fotoDAO = fabrica.GetFotoDAO();
+			
+			ViewData["Fotos"] = fotoDAO.Pesquisar(null);
 
+			return View(ViewData);
+
+			//Foto foto = facade.PesquisarFoto(Codigo);
+			//return View(foto);
+		}
+		//
+		// POST: /ManterFoto/AlterarFoto/5
+		[HttpPost]
+		public ActionResult VincularFoto(FormCollection collection)
+		{
+			Models.Persistencia.Fabrica.IFactoryDAO fabrica = Models.Persistencia.Fabrica.FactoryFactoryDAO.GetFabrica();
+			Models.Persistencia.Abstracao.IFotoDAO fotoDAO = fabrica.GetFotoDAO();
+			Foto foto = new Foto();
+			
+			foto.Legenda = collection["txtLegenda"];
+
+			ViewData["Fotos"] = fotoDAO.Pesquisar(foto);
+
+			return View(ViewData);
+		}
 	}
 }
