@@ -20,7 +20,7 @@ namespace AltaMontanha.Models.Fachada
 			}
 			catch (Exception e)
 			{
-				throw new Exception(e.Message);
+				throw e;
 			}
 		}
 
@@ -35,7 +35,7 @@ namespace AltaMontanha.Models.Fachada
 			}
 			catch (Exception e)
 			{
-				throw new Exception(e.Message);
+				throw e;
 			}
 		}
 		public Dominio.Link SalvarLink(Dominio.Link link)
@@ -56,7 +56,7 @@ namespace AltaMontanha.Models.Fachada
 			}
 			catch (Exception e)
 			{
-				throw new Exception(e.Message);
+				throw e;
 			}
 		}
 
@@ -71,7 +71,7 @@ namespace AltaMontanha.Models.Fachada
 			}
 			catch (Exception e)
 			{
-				throw new Exception(e.Message);
+				throw e;
 			}
 		}
 	}
