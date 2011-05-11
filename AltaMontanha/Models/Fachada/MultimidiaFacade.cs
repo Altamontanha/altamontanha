@@ -16,6 +16,11 @@ namespace AltaMontanha.Models.Fachada
 	{
 		#region Foto
 
+		/// <summary>
+		/// Consulta de uma foto já cadastrada.
+		/// </summary>
+		/// <param name="codigo">código da foto</param>
+		/// <returns>foto referente ao código informado</returns>
 		public Dominio.Foto PesquisarFoto(int codigo)
 		{
 			try
@@ -30,7 +35,11 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
+		/// <summary>
+		/// Consulta de fotos cadastradas.
+		/// </summary>
+		/// <param name="foto">objeto fotos com os parametros de consulta</param>
+		/// <returns>lista das fotos referentes a pesquisa.</returns>
 		public IList<Dominio.Foto> PesquisarFoto(Dominio.Foto foto)
 		{
 			try
@@ -45,7 +54,12 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
+		/// <summary>
+		/// Cadastra uma nova foto em banco
+		/// </summary>
+		/// <param name="foto">objetos com os dados da foto</param>
+		/// <param name="file">arquivo da foto</param>
+		/// <returns>Foto cadastrada com o código gerado</returns>
 		public Dominio.Foto SalvarFoto(Dominio.Foto foto, HttpPostedFileBase file)
 		{
 			try
@@ -110,7 +124,11 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
+		/// <summary>
+		/// Exclui uma foto do sistema.
+		/// </summary>
+		/// <param name="codigo">código da foto</param>
+		/// <returns>caso a foto tenha sido excluida</returns>
 		public bool ExcluirFoto(int codigo)
 		{
 			try
@@ -127,7 +145,106 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
+		//
+		public void VincularFoto()
+		{
 
+		}
+		/// <summary>
+		/// Redimensiona o tamanho da imagem.
+		/// </summary>
+		/// <param name="stream"></param>
+		/// <param name="altura"></param>
+		/// <param name="largura"></param>
+		/// <returns></returns>
+		private Bitmap RedimensionarImagem(Stream stream, int altura, int largura)
+		{
+			// Carrega imagem original
+			Bitmap original = (Bitmap)Image.FromStream(stream);
+			// Bitmap para nova imagem com o novo tamanho
+			Bitmap modificada = new Bitmap(altura, largura);
+			// Redimensiona imagem
+			Graphics g = Graphics.FromImage(modificada);
+			g.DrawImage(original, new Rectangle(0, 0, modificada.Width, modificada.Height), 0, 0, original.Width, original.Height, GraphicsUnit.Pixel);
+			g.Dispose();
+
+			return modificada;
+		}
+		/// <summary>
+		/// Cria o caminho que a imagem será salva.
+		/// </summary>
+		/// <param name="file"></param>
+		/// <returns></returns>
+		private string GerarCaminhoImagem(HttpPostedFileBase file)
+		{
+			// TODO: utilizar Enum?
+			List<string> tamanhos = new List<string>(3);
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Grande");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Media");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Pequena");
+
+			string arquivo = string.Empty;
+			string data = string.Empty;
+			string diretorio = string.Empty;
+			string caminho = string.Empty;
+			DirectoryInfo dir = null;
+
+			if (file.ContentLength > 0)
+			{
+				// formato: ANO_MES\DATAHORANOMEARQUIVO, exemplo: 2011_05\20110510102011Arquivo.jpg
+				data = string.Format("{0}_{1}", DateTime.Now.Year, DateTime.Now.Month.ToString("00"));
+				arquivo = new Regex(@"[^0-9]").Replace(DateTime.Now.ToString(), "") + Path.GetFileName(file.FileName);
+				
+				foreach (string tamanho in tamanhos)
+				{
+
+					diretorio = string.Format(@"{0}\{1}", tamanho, data);
+
+					if (!Directory.Exists(diretorio))
+						dir = Directory.CreateDirectory(diretorio);
+				
+					caminho = string.Format(@"{0}/{1}", data, arquivo);
+				}
+
+			}
+
+			return caminho;
+		}
+		/// <summary>
+		/// Salva uma imagem com jpeg.
+		/// </summary>
+		/// <param name="imagem"></param>
+		/// <param name="caminho"></param>
+		public void SalvarImagem(Bitmap imagem, string caminho)
+		{
+			if (imagem == null)
+				throw new ArgumentNullException("imagem");
+			if (string.IsNullOrEmpty(caminho))
+				throw new ArgumentNullException("caminho");
+
+			imagem.Save(caminho, ImageFormat.Jpeg);
+		}
+		/// <summary>
+		/// Exclui as imagens referentes a uma foto do disco.
+		/// </summary>
+		/// <param name="caminho">Caminho relativo da Imagem</param>
+		public void ExcluirImagem(string caminho)
+		{
+			// TODO: utilizar Enum?
+			List<string> tamanhos = new List<string>(3);
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Grande");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Media");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Pequena");
+			
+			foreach (string tamanho in tamanhos)
+			{
+				if (File.Exists(string.Format(@"{0}\{1}", tamanho, caminho.Replace("/", @"\"))))
+					File.Delete(string.Format(@"{0}\{1}", tamanho, caminho.Replace("/", @"\")));	
+			}
+
+			
+		}
+		
 		#endregion
 
 		#region Banner
@@ -209,9 +326,6 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
-		#endregion
-
 		/// <summary>
 		/// Salva um arquivo de Multimidia em disco.
 		/// </summary>
@@ -246,96 +360,7 @@ namespace AltaMontanha.Models.Fachada
 			}
 
 		}
-		/// <summary>
-		/// Redimensiona o tamanho da imagem.
-		/// </summary>
-		/// <param name="stream"></param>
-		/// <param name="altura"></param>
-		/// <param name="largura"></param>
-		/// <returns></returns>
-		private Bitmap RedimensionarImagem(Stream stream, int altura, int largura)
-		{
-			// Carrega imagem original
-			Bitmap original = (Bitmap)Image.FromStream(stream);
-			// Bitmap para nova imagem com o novo tamanho
-			Bitmap modificada = new Bitmap(altura, largura);
-			// Redimensiona imagem
-			Graphics g = Graphics.FromImage(modificada);
-			g.DrawImage(original, new Rectangle(0, 0, modificada.Width, modificada.Height), 0, 0, original.Width, original.Height, GraphicsUnit.Pixel);
-			g.Dispose();
 
-			return modificada;
-		}
-		/// <summary>
-		/// Cria o caminho que a imagem será salva.
-		/// </summary>
-		/// <param name="file"></param>
-		/// <returns></returns>
-		private string GerarCaminhoImagem(HttpPostedFileBase file)
-		{
-			// TODO: utilizar Enum?
-			List<string> tamanhos = new List<string>(3);
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Grande");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Media");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Pequena");
-
-			string arquivo = string.Empty;
-			string data = string.Empty;
-			string diretorio = string.Empty;
-			string caminho = string.Empty;
-			DirectoryInfo dir = null;
-
-			if (file.ContentLength > 0)
-			{
-				// formato: ANO_MES\DATAHORANOMEARQUIVO, exemplo: 2011_05\20110510102011Arquivo.jpg
-				data = string.Format("{0}_{1}", DateTime.Now.Year, DateTime.Now.Month.ToString("00"));
-				arquivo = new Regex(@"[^0-9]").Replace(DateTime.Now.ToString(), "") + Path.GetFileName(file.FileName);
-				
-				foreach (string tamanho in tamanhos)
-				{
-
-					diretorio = string.Format(@"{0}\{1}", tamanho, data);
-
-					if (!Directory.Exists(diretorio))
-						dir = Directory.CreateDirectory(diretorio);
-				
-					caminho = string.Format(@"{0}/{1}", data, arquivo);
-				}
-
-			}
-
-			return caminho;
-		}
-		/// <summary>
-		/// Salva uma imagem com jpeg.
-		/// </summary>
-		/// <param name="imagem"></param>
-		/// <param name="caminho"></param>
-		public void SalvarImagem(Bitmap imagem, string caminho)
-		{
-			if (imagem == null)
-				throw new ArgumentNullException("imagem");
-			if (string.IsNullOrEmpty(caminho))
-				throw new ArgumentNullException("caminho");
-
-			imagem.Save(caminho, ImageFormat.Jpeg);
-		}
-
-		public void ExcluirImagem(string caminho)
-		{
-			// TODO: utilizar Enum?
-			List<string> tamanhos = new List<string>(3);
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Grande");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Media");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Pequena");
-			
-			foreach (string tamanho in tamanhos)
-			{
-				if (File.Exists(string.Format(@"{0}\{1}", tamanho, caminho.Replace("/", @"\"))))
-					File.Delete(string.Format(@"{0}\{1}", tamanho, caminho.Replace("/", @"\")));	
-			}
-
-			
-		}
+		#endregion
 	}
 }

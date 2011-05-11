@@ -20,12 +20,20 @@ namespace AltaMontanha.Controllers
 			IList<Foto> fotos = facade.PesquisarFoto(null);
             return View(fotos);
         }
-
+		/// <summary>
+		/// Responsável pelo carregamento da tela de cadastro de foto.
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult CadastrarFoto()
 		{
 			return View();
 		}
-
+		/// <summary>
+		/// Responsável pelo cadastro da foto
+		/// </summary>
+		/// <param name="foto"></param>
+		/// <param name="file"></param>
+		/// <returns></returns>
 		[HttpPost]
 		[ValidateInput(false)]
 		public ActionResult CadastrarFoto(Models.Dominio.Foto foto, HttpPostedFileBase file)
@@ -41,7 +49,6 @@ namespace AltaMontanha.Controllers
 				return View(foto);
 			}
 		}
-		
 		//
 		// GET: /ManterFotoAlterarFoto/5
 		public ActionResult AlterarFoto(int Codigo)
@@ -49,7 +56,6 @@ namespace AltaMontanha.Controllers
 			Foto foto = facade.PesquisarFoto(Codigo);
 			return View(foto);
 		}
-
 		//
 		// POST: /ManterFoto/AlterarFoto/5
 		[HttpPost]
@@ -65,7 +71,6 @@ namespace AltaMontanha.Controllers
 				return View(foto);
 			}
 		}
-
 		//
 		// GET: /ManterFoto/ExluirFoto/5
 		public ActionResult ExcluirFoto(int Codigo)
@@ -73,5 +78,7 @@ namespace AltaMontanha.Controllers
 			facade.ExcluirFoto(Codigo);
 			return RedirectToAction("Index");
 		}
+		
+
 	}
 }

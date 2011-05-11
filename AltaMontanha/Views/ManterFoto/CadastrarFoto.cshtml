@@ -40,22 +40,6 @@
 		<p>
 			<input type="file" name="file" value="Foto" />
 		</p>
-		@*<div id="cropContainer">
-			<div id="cropPreview">
-				<img src="@(Model != null) ? Model.Caminho : string.Empty" id="preview" title="preview" alt="preview" />
-			</div>
-			<div id="cropDisplay">
-				<img src="@(Model != null) ? Model.Caminho : string.Empty" id="profileImageEditor" title="display" alt="display" />
-			</div>
-		</div>
-			@Html.HiddenFor(x=>x.Left)
-			@Html.HiddenFor(x=>x.Right)
-			@Html.HiddenFor(x=>x.Top)
-			@Html.HiddenFor(x=>x.Bottom)
-			@Html.HiddenFor(x => x.Caminho)
-			<input type='submit' name='action' value='Crop' />
-
-		<br />*@
 		<p><input type="submit" value="Cadastrar" /></p>
 	</fieldset>
 }
