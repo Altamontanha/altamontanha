@@ -69,28 +69,28 @@ namespace AltaMontanha.Models.Fachada
 				foto.Caminho = this.GerarCaminhoImagem(file);
 
 				Regex r = new Regex(@"^.*\\([A-z]+)$");
-				int l = 640;
-				int a = 480;
+				int largura = 640;
+				int altura = 480;
 
 				foreach (string tamanho in tamanhos)
 				{
-					caminho = string.Format("{0}\\{1}", tamanho, foto.Caminho);
+					caminho = string.Format("{0}\\{1}", tamanho, foto.Caminho.Replace("/", @"\"));
 
 					// TODO: Refactor
 					if (r.Replace(tamanho, "$1").Equals("Pequena"))
 					{
-						l = 160;
-						a = 120;
+						largura = 160;
+						altura = 120;
 					}
 					else if (r.Replace(tamanho, "$1").Equals("Media"))
 					{
-						l = 320;
-						a = 240;
+						largura = 320;
+						altura = 240;
 					}
 
 					this.SalvarImagem
 					(
-						this.RedimensionarImagem(file.InputStream, l, a),
+						this.RedimensionarImagem(file.InputStream, largura, altura),
 						caminho
 					);
 				}
@@ -117,6 +117,8 @@ namespace AltaMontanha.Models.Fachada
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IFotoDAO fotoDAO = fabrica.GetFotoDAO();
+
+				this.ExcluirImagem(fotoDAO.Pesquisar(codigo).Caminho);
 
 				return fotoDAO.Excluir(codigo);
 			}
@@ -264,7 +266,6 @@ namespace AltaMontanha.Models.Fachada
 
 			return modificada;
 		}
-		// TODO : Corrigir arquivo das pastas
 		/// <summary>
 		/// Cria o caminho que a imagem será salva.
 		/// </summary>
@@ -298,7 +299,7 @@ namespace AltaMontanha.Models.Fachada
 					if (!Directory.Exists(diretorio))
 						dir = Directory.CreateDirectory(diretorio);
 				
-					caminho = string.Format(@"{0}\{1}", data, arquivo);
+					caminho = string.Format(@"{0}/{1}", data, arquivo);
 				}
 
 			}
@@ -318,6 +319,23 @@ namespace AltaMontanha.Models.Fachada
 				throw new ArgumentNullException("caminho");
 
 			imagem.Save(caminho, ImageFormat.Jpeg);
+		}
+
+		public void ExcluirImagem(string caminho)
+		{
+			// TODO: utilizar Enum?
+			List<string> tamanhos = new List<string>(3);
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Grande");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Media");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Pequena");
+			
+			foreach (string tamanho in tamanhos)
+			{
+				if (File.Exists(string.Format(@"{0}\{1}", tamanho, caminho.Replace("/", @"\"))))
+					File.Delete(string.Format(@"{0}\{1}", tamanho, caminho.Replace("/", @"\")));	
+			}
+
+			
 		}
 	}
 }
