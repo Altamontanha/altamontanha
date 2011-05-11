@@ -68,13 +68,13 @@ namespace AltaMontanha.Models.Fachada
 
 				foto.Caminho = this.GerarCaminhoImagem(file);
 
-				Regex r = new Regex(@"^.*\\([A-z])+$");
+				Regex r = new Regex(@"^.*\\([A-z]+)$");
 				int l = 640;
 				int a = 480;
 
 				foreach (string tamanho in tamanhos)
 				{
-					caminho = string.Format("{0}\\{1}\\", tamanho, foto.Caminho);
+					caminho = string.Format("{0}\\{1}", tamanho, foto.Caminho);
 
 					// TODO: Refactor
 					if (r.Replace(tamanho, "$1").Equals("Pequena"))
