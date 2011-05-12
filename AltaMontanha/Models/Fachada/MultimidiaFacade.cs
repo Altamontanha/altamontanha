@@ -78,7 +78,9 @@ namespace AltaMontanha.Models.Fachada
 					this.RedimensionarImagem(file.InputStream, 160, 120),
 					HttpContext.Current.Server.MapPath(path + foto.Caminho)
 				);
-				
+
+				foto.Galeria = false;
+
 				if (foto.Codigo == 0)
 					return fotoDAO.Cadastrar(foto);
 
@@ -148,12 +150,14 @@ namespace AltaMontanha.Models.Fachada
 					);
 				}
 
-				//transacao.Complete();
+				foto.Galeria = true;
 
 				if (foto.Codigo == 0)
 					fotoDAO.Cadastrar(foto);
 
 				fotoDAO.Alterar(foto);
+
+				//transacao.Complete();
 
 				return foto;
 				//}
@@ -163,7 +167,6 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
 		/// <summary>
 		/// Exclui uma foto do sistema.
 		/// </summary>
@@ -280,7 +283,6 @@ namespace AltaMontanha.Models.Fachada
 				if (File.Exists(string.Format(@"{0}\{1}", tamanho, caminho.Replace("/", @"\"))))
 					File.Delete(string.Format(@"{0}\{1}", tamanho, caminho.Replace("/", @"\")));	
 		}
-
 		/// <summary>
 		/// Exclui a imagem referentes a uma foto do disco.
 		/// </summary>

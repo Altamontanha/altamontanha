@@ -26,10 +26,6 @@ namespace AltaMontanha.Models.Dominio
 		[StringLength(75)]
 		public virtual string Fonte { get; set; }
 
-		// TODO: remover?
-		public Foto Clone()
-		{
-			return (Foto) this.MemberwiseClone();
-		}
+		public virtual bool Galeria { get; set; }
 	}
 }

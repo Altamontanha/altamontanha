@@ -16,5 +16,8 @@
 		<property name="Fonte" not-null="false" access="property" type="String">
 			<column name="Fonte" length="75" />
 		</property>
+		<property name="Galeria" not-null="false" access="property" type="Boolean">
+			<column name="Galeria" length="1" />
+		</property>
 	</class>
 </hibernate-mapping>

@@ -35,6 +35,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			if (!string.IsNullOrEmpty(objeto.Fonte))
 				criteria = criteria.Add(Expression.Eq("Fonte", objeto.Fonte));
 
+			criteria = criteria.Add(Expression.Eq("Galeria", objeto.Galeria));
+
 			IList<Dominio.Foto> fotos = criteria.List<Dominio.Foto>();
 
 			return fotos;

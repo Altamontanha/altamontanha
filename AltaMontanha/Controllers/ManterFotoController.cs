@@ -17,7 +17,10 @@ namespace AltaMontanha.Controllers
         // GET: /ManterFoto/
 		public ActionResult Index()
         {
-			IList<Foto> fotos = facade.PesquisarFoto(null);
+			Foto foto = new Foto();
+			foto.Galeria = true;
+			IList<Foto> fotos = facade.PesquisarFoto(foto);
+
             return View(fotos);
         }
 		/// <summary>
@@ -84,8 +87,8 @@ namespace AltaMontanha.Controllers
 		{
 			Models.Persistencia.Fabrica.IFactoryDAO fabrica = Models.Persistencia.Fabrica.FactoryFactoryDAO.GetFabrica();
 			Models.Persistencia.Abstracao.IFotoDAO fotoDAO = fabrica.GetFotoDAO();
-			
-			ViewData["Fotos"] = fotoDAO.Pesquisar(null);
+
+			ViewData["Fotos"] = fotoDAO.Pesquisar( new Foto() { Galeria=true } );
 
 			return View(ViewData);
 
