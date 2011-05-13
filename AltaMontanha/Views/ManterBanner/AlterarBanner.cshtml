@@ -1,0 +1,71 @@
+﻿@model AltaMontanha.Models.Dominio.Banner
+
+@{
+    ViewBag.Title = "Banner: Alterar";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.maskedinput.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.ui.datepicker.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/AM/Util.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+	j(document).ready(function () {
+		ConfigurarHoverCalendario();
+		ConfigurarCalendario("#DataInicial");
+		ConfigurarCalendario("#DataFinal");
+	});
+</script>
+
+<h2>@ViewBag.Title</h2>
+<div class="clear"></div>
+
+@using (Html.BeginForm("AlterarBanner", "ManterBanner", FormMethod.Post, new { @encType = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Banner</legend>
+
+		<p>
+			<input type="file" name="file" value="Foto" />
+		</p>
+         <p>
+            @Html.LabelFor(model => model.Local)
+        	@Html.DropDownListFor(model => model.Local.Codigo, (SelectList)ViewData["Locais"])
+			@Html.ValidationMessageFor(model => model.Local.Codigo)
+		</p>
+        <p>
+            @Html.LabelFor(model => model.Titulo)
+            @Html.EditorFor(model => model.Titulo)
+            @Html.ValidationMessageFor(model => model.Titulo)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.DataInicial)
+            @Html.EditorFor(model => model.DataInicial)
+            @Html.ValidationMessageFor(model => model.DataInicial)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.DataFinal)
+            @Html.EditorFor(model => model.DataFinal)
+            @Html.ValidationMessageFor(model => model.DataFinal)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Multimidia)
+            @Html.EditorFor(model => model.Multimidia)
+            @Html.ValidationMessageFor(model => model.Multimidia)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Randomico)
+            @Html.EditorFor(model => model.Randomico)
+            @Html.ValidationMessageFor(model => model.Randomico)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Ativo)
+            @Html.EditorFor(model => model.Ativo)
+            @Html.ValidationMessageFor(model => model.Ativo)
+        </p>
+        <p>
+            <input type="submit" value="Alterar" />
+        </p>
+    </fieldset>
+}

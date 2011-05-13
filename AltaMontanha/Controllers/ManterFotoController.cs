@@ -35,7 +35,7 @@ namespace AltaMontanha.Controllers
 		/// Responsável pelo cadastro da foto
 		/// </summary>
 		/// <param name="foto"></param>
-		/// <param name="file"></param>
+		/// <param name="arquivo"></param>
 		/// <returns></returns>
 		[HttpPost]
 		[ValidateInput(false)]

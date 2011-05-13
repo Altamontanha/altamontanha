@@ -31,11 +31,11 @@ namespace AltaMontanha.Controllers
         //
 		// POST: /ManterBanner/CadastrarBanner
         [HttpPost]
-		public ActionResult CadastrarBanner(Banner banner)
+		public ActionResult CadastrarBanner(Banner banner, HttpPostedFileBase file)
         {
             try
             {
-				facade.SalvarBanner(banner);
+				facade.SalvarBanner(banner, file);
                 return RedirectToAction("Index");
             }
             catch
@@ -57,11 +57,11 @@ namespace AltaMontanha.Controllers
         //
 		// POST: /ManterBanner/AlterarBanner/5
         [HttpPost]
-		public ActionResult AlterarBanner(Banner banner)
+		public ActionResult AlterarBanner(Banner banner, HttpPostedFileBase file)
         {
             try
             {
-				facade.SalvarBanner(banner);
+				facade.SalvarBanner(banner, file);
                 return RedirectToAction("Index");
             }
             catch

@@ -127,7 +127,7 @@ namespace AltaMontanha.Models.Fachada
 		/// Cadastra ou altera um usuário.
 		/// </summary>
 		/// <param name="usuario">objeto com as informações de um usuário</param>
-		/// <param name="file">arquivo da foto do usuário.</param>
+		/// <param name="arquivo">arquivo da foto do usuário.</param>
 		/// <returns>usuário com o código gerado</returns>
 		public Dominio.Usuario SalvarUsuario(Dominio.Usuario usuario, HttpPostedFileBase file)
 		{

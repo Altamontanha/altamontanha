@@ -11,7 +11,7 @@ namespace AltaMontanha.Models.Dominio
 		public string Descricao { get; set; }
 		public int Altura { get; set; }
 		public int Largura { get; set; }
-		//public string Local { get; set; } // TODO: como fazer?
-		public Banner Banner { get; set; }
+		public string Nome { get; set; }
+		//public IList<Banner> ListaBanner { get; set; } //TODO: trocar
 	}
 }

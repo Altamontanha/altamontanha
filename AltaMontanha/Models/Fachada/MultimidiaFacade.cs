@@ -58,7 +58,7 @@ namespace AltaMontanha.Models.Fachada
 		/// Cadastra uma nova foto em banco
 		/// </summary>
 		/// <param name="foto">objetos com os dados da foto</param>
-		/// <param name="file">arquivo da foto</param>
+		/// <param name="arquivo">arquivo da foto</param>
 		/// <returns>Foto cadastrada com o código gerado</returns>
 		public Dominio.Foto SalvarFoto(Dominio.Foto foto, HttpPostedFileBase file)
 		{
@@ -69,7 +69,7 @@ namespace AltaMontanha.Models.Fachada
 
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IFotoDAO fotoDAO = fabrica.GetFotoDAO();
-				string path = "~/AppData/Foto/";
+				string path = "~/App_Data/Foto/";
 
 				foto.Caminho = string.Format("Usuario/{0}.jpg", foto.Legenda);
 
@@ -99,7 +99,7 @@ namespace AltaMontanha.Models.Fachada
 		/// Salvando todos os tamanhos necessários para galeria.
 		/// </summary>
 		/// <param name="foto">objetos com os dados da foto</param>
-		/// <param name="file">arquivo da foto</param>
+		/// <param name="arquivo">arquivo da foto</param>
 		/// <returns>Foto cadastrada com o código gerado</returns>
 		public Dominio.Foto SalvarFotoGaleria(Dominio.Foto foto, HttpPostedFileBase file)
 		{
@@ -107,9 +107,9 @@ namespace AltaMontanha.Models.Fachada
 			{
 				// TODO: utilizar Enum?
 				List<string> tamanhos = new List<string>(3);
-				tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Grande");
-				tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Media");
-				tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Pequena");
+				tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Grande");
+				tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Media");
+				tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Pequena");
 
 				// TODO: verificar transação
 				// using (TransactionScope transacao = new TransactionScope())
@@ -216,15 +216,15 @@ namespace AltaMontanha.Models.Fachada
 		/// <summary>
 		/// Cria o caminho que a imagem será salva.
 		/// </summary>
-		/// <param name="file"></param>
+		/// <param name="arquivo"></param>
 		/// <returns></returns>
 		private string GerarCaminhoImagem(HttpPostedFileBase file)
 		{
 			// TODO: utilizar Enum?
 			List<string> tamanhos = new List<string>(3);
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Grande");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Media");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Pequena");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Grande");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Media");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Pequena");
 
 			string arquivo = string.Empty;
 			string data = string.Empty;
@@ -275,9 +275,9 @@ namespace AltaMontanha.Models.Fachada
 		{
 			// TODO: utilizar Enum?
 			List<string> tamanhos = new List<string>(3);
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Grande");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Media");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Pequena");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Grande");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Media");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Pequena");
 			
 			foreach (string tamanho in tamanhos)
 				if (File.Exists(string.Format(@"{0}\{1}", tamanho, caminho.Replace("/", @"\"))))
@@ -289,7 +289,7 @@ namespace AltaMontanha.Models.Fachada
 		/// <param name="caminho">Caminho relativo da Imagem</param>
 		public void ExcluirImagem(string caminho)
 		{
-			string path = HttpContext.Current.Server.MapPath("~/AppData/Foto");
+			string path = HttpContext.Current.Server.MapPath("~/App_Data/Foto");
 
 			if (File.Exists(string.Format(@"{0}\{1}",path, caminho.Replace("/", @"\"))))
 				File.Delete(string.Format(@"{0}\{1}", path, caminho.Replace("/", @"\")));
@@ -299,6 +299,11 @@ namespace AltaMontanha.Models.Fachada
 
 		#region Banner
 
+		/// <summary>
+		/// Pesquisar banner por código
+		/// </summary>
+		/// <param name="codigo">Código do banner</param>
+		/// <returns>Banner</returns>
 		public Dominio.Banner PesquisarBanner(int codigo)
 		{
 			try
@@ -314,6 +319,11 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Pesquisa banner com os atributos que estiverem preenchidos
+		/// </summary>
+		/// <param name="banner">Banner para pesquisa</param>
+		/// <returns>List<Banner></returns>
 		public IList<Dominio.Banner> PesquisarBanner(Dominio.Banner banner)
 		{
 			try
@@ -329,6 +339,10 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Pesquisa local pelos atributos que estiverem preenchidos
+		/// </summary>
+		/// <param name="local">Local para pesquisa</param>
 		public IList<Dominio.Local> PesquisarLocal(Dominio.Local local)
 		{
 			try
@@ -344,7 +358,12 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
-		public Dominio.Banner SalvarBanner(Dominio.Banner banner)
+		/// <summary>
+		/// Salva o banner e o arquivo
+		/// </summary>
+		/// <param name="banner">Banner</param>
+		/// <param name="arquivo">Arquivo de imagem ou multimídia</param>
+		public Dominio.Banner SalvarBanner(Dominio.Banner banner, HttpPostedFileBase arquivo)
 		{
 			try
 			{
@@ -354,7 +373,25 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IBannerDAO bannerDAO = fabrica.GetBannerDAO();
 
-				return bannerDAO.Cadastrar(banner);
+				string path = "~/App_Data/Banner";
+
+				banner.Caminho = string.Format("Banner/{0}", arquivo.FileName);
+
+				if (!banner.Multimidia)
+					this.SalvarImagem
+					(
+						this.RedimensionarImagem(arquivo.InputStream, banner.Local.Altura, banner.Local.Largura),
+						HttpContext.Current.Server.MapPath(path + banner.Caminho)
+					);
+				else
+					this.SalvarArquivo(path, arquivo);
+
+				if (banner.Codigo == 0)
+					return bannerDAO.Cadastrar(banner);
+
+				bannerDAO.Alterar(banner);
+
+				return banner;
 			}
 			catch (Exception e)
 			{
@@ -369,6 +406,7 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IBannerDAO bannerDAO = fabrica.GetBannerDAO();
 
+				// TODO: implementar exclusão do arquivo
 				return bannerDAO.Excluir(codigo);
 			}
 			catch (Exception e)
@@ -379,23 +417,28 @@ namespace AltaMontanha.Models.Fachada
 		/// <summary>
 		/// Salva um arquivo de Multimidia em disco.
 		/// </summary>
-		/// <param name="file">Arquivo de upload</param>
+		/// <param name="caminho">Caminho para salvar o arquivo</param>
+		/// <param name="arquivo">Arquivo de upload</param>
 		/// <returns>Caminho</returns>
-		public string SalvarArquivo(HttpPostedFileBase file)
+		public string SalvarArquivo(string caminho, HttpPostedFileBase arquivo)
 		{
 			try
 			{
-				string caminho = string.Empty;
 				string nome = string.Empty;
 
-				if (file.ContentLength > 0)
+				if (arquivo.ContentLength > 0)
 				{
-					nome = Path.GetFileName(file.FileName);
-					caminho = HttpContext.Current.Server.MapPath("~/Temp");
+					caminho = HttpContext.Current.Server.MapPath(caminho);
+
+					DirectoryInfo dir = null;
+					if (!Directory.Exists(caminho))
+						dir = Directory.CreateDirectory(caminho);
+
+					nome = Path.GetFileName(arquivo.FileName);
 
 					caminho = string.Format(@"{0}\{1}", caminho, nome);
 
-					file.SaveAs(caminho);
+					arquivo.SaveAs(caminho);
 				}
 
 				return caminho;
