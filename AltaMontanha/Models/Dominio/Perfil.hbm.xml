@@ -16,9 +16,8 @@
 		</bag>
 		<!-- TODO: mapear corretamente-->
 		<bag name="ListaPermissoes" cascade="save-update" lazy="true" >
-			<key column="CodPermissao" />
+			<key column="CodPerfil" />
 			<one-to-many class="Permissao" />
 		</bag>
-
 	</class>
 </hibernate-mapping>

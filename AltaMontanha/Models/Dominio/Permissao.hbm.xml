@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="AltaMontanha" namespace="AltaMontanha.Models.Dominio">
 	<class name="Permissao" table="TB_Permissao" lazy="false">
-		<id name="Codigo" access="property" column="CodPerfil" type="Int32">
+		<id name="Codigo" access="property" column="CodPermissao" type="Int32">
 			<generator class="identity" />
 		</id>
 		<many-to-one name="Perfil" column="CodPerfil" class="Perfil" not-null="true" />
