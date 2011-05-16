@@ -69,7 +69,7 @@ namespace AltaMontanha.Models.Fachada
 
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IFotoDAO fotoDAO = fabrica.GetFotoDAO();
-				string path = "~/App_Data/Foto/";
+				string path = "~/AppData/Foto/";
 
 				foto.Caminho = string.Format("Usuario/{0}.jpg", foto.Legenda);
 
@@ -107,9 +107,9 @@ namespace AltaMontanha.Models.Fachada
 			{
 				// TODO: utilizar Enum?
 				List<string> tamanhos = new List<string>(3);
-				tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Grande");
-				tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Media");
-				tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Pequena");
+				tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Grande");
+				tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Media");
+				tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Pequena");
 
 				// TODO: verificar transação
 				// using (TransactionScope transacao = new TransactionScope())
@@ -222,9 +222,9 @@ namespace AltaMontanha.Models.Fachada
 		{
 			// TODO: utilizar Enum?
 			List<string> tamanhos = new List<string>(3);
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Grande");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Media");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Pequena");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Grande");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Media");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Pequena");
 
 			string arquivo = string.Empty;
 			string data = string.Empty;
@@ -275,9 +275,9 @@ namespace AltaMontanha.Models.Fachada
 		{
 			// TODO: utilizar Enum?
 			List<string> tamanhos = new List<string>(3);
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Grande");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Media");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/App_Data/Foto") + "\\Pequena");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Grande");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Media");
+			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Pequena");
 			
 			foreach (string tamanho in tamanhos)
 				if (File.Exists(string.Format(@"{0}\{1}", tamanho, caminho.Replace("/", @"\"))))
@@ -289,7 +289,7 @@ namespace AltaMontanha.Models.Fachada
 		/// <param name="caminho">Caminho relativo da Imagem</param>
 		public void ExcluirImagem(string caminho)
 		{
-			string path = HttpContext.Current.Server.MapPath("~/App_Data/Foto");
+			string path = HttpContext.Current.Server.MapPath("~/AppData/Foto");
 
 			if (File.Exists(string.Format(@"{0}\{1}",path, caminho.Replace("/", @"\"))))
 				File.Delete(string.Format(@"{0}\{1}", path, caminho.Replace("/", @"\")));
@@ -373,7 +373,7 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IBannerDAO bannerDAO = fabrica.GetBannerDAO();
 
-				string path = "~/App_Data/Banner";
+				string path = "~/AppData/Banner";
 
 				banner.Caminho = string.Format("Banner/{0}", arquivo.FileName);
 
