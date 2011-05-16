@@ -96,6 +96,7 @@
     <Compile Include="Models\Dominio\Perfil.cs" />
     <Compile Include="Models\Dominio\Permissao.cs" />
     <Compile Include="Models\Dominio\Rota.cs" />
+    <Compile Include="Models\Dominio\Tela.cs" />
     <Compile Include="Models\Dominio\Usuario.cs" />
     <Compile Include="Models\Fachada\ConteudoFacade.cs" />
     <Compile Include="Models\Fachada\InformativoFacade.cs" />
@@ -196,6 +197,7 @@
     <EmbeddedResource Include="Models\Dominio\Banner.hbm.xml" />
     <EmbeddedResource Include="Models\Dominio\Conteudo.hbm.xml" />
     <EmbeddedResource Include="Models\Dominio\Local.hbm.xml" />
+    <EmbeddedResource Include="Models\Dominio\Tela.hbm.xml" />
     <Content Include="Scripts\AM\Foto.js" />
     <Content Include="Scripts\AM\Util.js" />
     <Content Include="Scripts\jquery.jcrop.min.js" />

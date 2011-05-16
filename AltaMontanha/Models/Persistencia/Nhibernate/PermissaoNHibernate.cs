@@ -27,11 +27,11 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			if (objeto == null)
 				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Permissao>().List<Dominio.Permissao>();
 
-			if (objeto.Codigo > 0)
-				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
-			if (!string.IsNullOrEmpty(objeto.Nome))
-				criteria = criteria.Add(Expression.Eq("Nome", objeto.Nome));
-
+			if (objeto.Perfil != null)
+				criteria = criteria.Add(Expression.Eq("CodPerfil", objeto.Perfil.Codigo));
+			if (objeto.Tela != null)
+				criteria = criteria.Add(Expression.Eq("CodTela", objeto.Tela.Codigo));
+			
 			IList<Dominio.Permissao> permissoes = criteria.List<Dominio.Permissao>();
 
 			return permissoes;

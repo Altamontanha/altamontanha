@@ -20,6 +20,6 @@ namespace AltaMontanha.Models.Dominio
 		
 		public IList<Usuario> ListaUsuarios { get; set; }
 		// TODO: mapear corretamente: 
-		// public IList<Permissao> ListaPermissoes { get; set; }
+		public IList<Permissao> ListaPermissoes { get; set; }
 	}
 }
