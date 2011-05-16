@@ -2,4 +2,4 @@ bin
 *.csproj.user
 obj
 *.suo
-App_Data
+AppData
