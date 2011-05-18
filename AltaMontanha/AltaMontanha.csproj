@@ -141,6 +141,7 @@
     <Compile Include="Utilitario\BaseController.cs" />
     <Compile Include="Utilitario\Configuracao.cs" />
     <Compile Include="Utilitario\Seguranca.cs" />
+    <Compile Include="Utilitario\Sessao.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\jquery.Jcrop.css" />

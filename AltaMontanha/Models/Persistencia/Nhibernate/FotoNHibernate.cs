@@ -31,7 +31,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			if (objeto.Codigo > 0)
 				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
 			if (!string.IsNullOrEmpty(objeto.Legenda))
-				criteria = criteria.Add(Expression.Eq("Legenda", objeto.Legenda));
+				criteria = criteria.Add(Expression.InsensitiveLike("Legenda", string.Format("%{0}%", objeto.Legenda)));
 			if (!string.IsNullOrEmpty(objeto.Fonte))
 				criteria = criteria.Add(Expression.Eq("Fonte", objeto.Fonte));
 

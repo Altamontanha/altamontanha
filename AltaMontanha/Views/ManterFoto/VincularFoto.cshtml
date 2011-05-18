@@ -34,13 +34,14 @@
 	</style>
 </head>
 <body>
-		<div class="jNice">
-			<div id="wrapper">
-				<div id="main">
-					@using (Html.BeginForm())
-					{
-						<fieldset>
+	<div class="jNice">
+		<div id="wrapper" style="float:left;">
+			<div id="main" style="float:left !important; margin-left:20px;">
+					<fieldset>
+						@using (Html.BeginForm("VincularFoto", "ManterFoto"))
+						{
 							<legend>Foto</legend>
+							<br />
 							<p>
 								@Html.Label("Legenda")
 								@Html.TextBox("txtLegenda", "", new { @class = "text-long" })
@@ -48,32 +49,38 @@
 							<p>
 								@* 
 									TODO: Palavra Chave
-									TODO: Diferenciar fotos de Galeria.
 								*@
 							</p>
 							<p>
-								<input type="submit" value="Pesquisar" /></p>
-							<div id="divGrid">
-								<h3>
-									Fotos:</h3>
+								<input type="submit" value="Pesquisar" id="Vincular" />
+							</p>
+						}
+						@using (Html.BeginForm("SalvarFoto","ManterFoto"))
+						{
+							<div id="divFotos">
+								<h3>Fotos:</h3>
 								<div>
-									@foreach (var item in (IList<Foto>)ViewData["Fotos"])
+									@if (ViewData["Fotos"] != null)
 									{
-										<div style="float:left; margin:5px 20px 35px 5px; border:solid 1px #CCC;">
-											<input type="checkbox" id="chkVincular" class="check-imagem" />
-											<img alt="@item.Legenda" src="@Url.Content("~/AppData/Foto/Pequena/" + item.Caminho)" title="@item.Legenda" />
-											<br />
-											<span style="background-color:#EEE; width:160px; position:absolute;">@item.Legenda</span>
-										</div>
+										foreach (var item in (IList<Foto>)ViewData["Fotos"])
+										{
+											<div style="float:left; margin:5px 20px 35px 5px; border:solid 1px #CCC;">
+												@Html.CheckBox(string.Concat("chkVincular_", item.Codigo), new { @class = "check-imagem", value = item.Codigo })
+												<img alt="@item.Legenda" src="@Url.Content("~/AppData/Foto/Pequena/" + item.Caminho)" title="@item.Legenda" />
+												<br />
+												<span style="background-color:#EEE; width:160px; position:absolute;">@item.Legenda</span>
+											</div>
+										}
 									}
 								</div>
 								<br />
 							</div>
-						</fieldset>
-					 }
-				</div>
-				<div class="clear"></div>
+							<p><input type="submit" value="Salvar" /></p>
+		  				}
+				</fieldset>
 			</div>
+			<div class="clear"></div>
 		</div>
+	</div>
 </body>
 </html>
