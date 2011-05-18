@@ -1,0 +1,33 @@
+﻿@helper SelecionarPalavraChave()
+{
+	<label for="Palavras">Palavras:</label>
+	<input type="text" name="Palavras" id="Palavras" class="text-long" />
+	<input type="button" value="Adicionar" id="CadastrarPalavraChave" />
+
+	<ul id="listaPalavras">
+	</ul>
+
+	<script type="text/javascript">
+		j(document).ready(function () {
+			j('#CadastrarPalavraChave').click(function () {
+				j.post(
+					'/ManterPalavraChave/CadastrarPalavraChave',
+					{ palavras: j('#Palavras').val() },
+					function (data) {
+						j(data).each(function () {
+							j("#listaPalavras").append(
+								"<li id='pcID_" + this.Codigo + "'>" +
+								this.Nome +
+								" (<a href='#pcID_" + this.Codigo + "'>X</a>)</li>"
+							);
+
+							j('a[href^=#pcID]').click(function () {
+								j(j(this).attr("href")).remove();
+							});
+						});
+					}
+				);
+			});
+		});
+	</script>
+}

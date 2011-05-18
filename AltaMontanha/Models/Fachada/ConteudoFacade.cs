@@ -9,6 +9,28 @@ namespace AltaMontanha.Models.Fachada
 {
 	public class ConteudoFacade
 	{
+		#region PalavraChave
+		public Dominio.PalavraChave SalvarPalavraChave(Dominio.PalavraChave palavraChave)
+		{
+			return palavraChave;
+		}
+
+		public IList<Dominio.PalavraChave> PesquisarPalavraChave(Dominio.PalavraChave palavraChave)
+		{
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IPalavraChaveDAO palavraChaveDAO = fabrica.GetPalavraChaveDAO();
+
+				return palavraChaveDAO.Pesquisar(palavraChave);
+			}
+			catch (Exception e)
+			{
+				throw e;
+			}
+		}
+		#endregion
+
 		#region Noticia
 
 		public Dominio.Noticia PesquisarNoticia(int codigo)

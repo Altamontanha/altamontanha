@@ -23,7 +23,7 @@ namespace AltaMontanha.Controllers
         }
         //
         // GET: /ManterArtigo/CadastrarArtigo
-		[Authorize]
+		//[Authorize]
 		public ActionResult CadastrarArtigo()
         {
 			ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null), "Codigo", "Titulo");

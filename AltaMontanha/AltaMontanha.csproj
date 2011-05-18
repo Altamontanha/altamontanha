@@ -76,6 +76,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\ManterNoticiaController.cs" />
+    <Compile Include="Controllers\ManterPalavraChaveController.cs" />
     <Compile Include="Controllers\ManterPerfilController.cs" />
     <Compile Include="Controllers\ManterUsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -377,6 +378,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ManterBanner\AlterarBanner.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Code\HelperPalavraChave.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
