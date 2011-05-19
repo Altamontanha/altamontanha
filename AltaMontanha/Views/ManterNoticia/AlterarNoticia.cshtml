@@ -70,6 +70,10 @@
             @Html.ValidationMessageFor(model => model.Data)
         </p>
 
+		<p>
+			@HelperPalavraChave.SelecionarPalavraChave(Model)
+        </p>
+
         <p>
             <input type="submit" value="Alterar" />
         </p>
