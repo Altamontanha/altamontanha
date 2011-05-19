@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using AltaMontanha.Models.Dominio;
+using AltaMontanha.Models.Fachada;
 
 namespace AltaMontanha.Utilitario
 {
@@ -18,6 +20,21 @@ namespace AltaMontanha.Utilitario
 			set 
 			{
 				HttpContext.Current.Session.Add(chaveFotos, value);
+			}
+		}
+		/// <summary>
+		/// Recupera o usuário logado.
+		/// </summary>
+		public static Usuario UsuarioLogado
+		{
+			get 
+			{
+				IList<Usuario> listaUsuarios = (new UsuarioFacade()).PesquisarUsuario(new Usuario() { Login = HttpContext.Current.User.Identity.Name });
+
+				if (listaUsuarios.Count() != 1)
+					return null;
+
+				return listaUsuarios[0];
 			}
 		}
 	}

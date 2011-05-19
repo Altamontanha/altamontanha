@@ -236,10 +236,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AppData\Banner\" />
     <Folder Include="AppData\Foto\Grande\" />
     <Folder Include="AppData\Foto\Media\" />
     <Folder Include="AppData\Foto\Pequena\" />
     <Folder Include="AppData\Foto\Usuario\" />
+    <Folder Include="AppData\Rota\" />
     <Folder Include="Models\Persistencia\SQLServer\" />
   </ItemGroup>
   <ItemGroup>

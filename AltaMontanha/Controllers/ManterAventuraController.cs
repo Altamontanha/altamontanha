@@ -35,13 +35,12 @@ namespace AltaMontanha.Controllers
 		[HttpPost]
 		[Authorize]
 		[ValidateInput(false)]
-		public ActionResult CadastrarAventura(Aventura aventura)
+		public ActionResult CadastrarAventura(Aventura aventura, HttpPostedFileBase Rota)
 		{
 			try
 			{
-				// TODO: alterar para usuário logado
-				aventura.UsuarioCadastro = new Usuario() { Codigo = 1 };
-				facade.SalvarAventura(aventura);
+				facade.SalvarAventura(aventura, Rota);
+				
 				return RedirectToAction("Index");
 			}
 			catch
@@ -55,6 +54,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult AlterarAventura(int Codigo)
 		{
+			ViewData["Autores"] = new SelectList(usuarioFacade.PesquisarUsuario(null), "Codigo", "Nome");
 			Aventura aventura = facade.PesquisarAventura(Codigo);
 
 			return View(aventura);
@@ -64,11 +64,11 @@ namespace AltaMontanha.Controllers
 		[HttpPost]
 		[Authorize]
 		[ValidateInput(false)]
-		public ActionResult AlterarAventura(Aventura aventura)
+		public ActionResult AlterarAventura(Aventura aventura, HttpPostedFileBase file)
 		{
 			try
 			{
-				facade.SalvarAventura(aventura);
+				facade.SalvarAventura(aventura, file);
 				return RedirectToAction("Index");
 			}
 			catch

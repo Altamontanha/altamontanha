@@ -4,11 +4,16 @@ using System.Linq;
 using System.Web;
 using AltaMontanha.Models.Persistencia.Fabrica;
 using AltaMontanha.Models.Persistencia.Abstracao;
+using System.IO;
+using AltaMontanha.Models.Dominio;
+using System.Text.RegularExpressions;
 
 namespace AltaMontanha.Models.Fachada
 {
 	public class ConteudoFacade
 	{
+		UsuarioFacade usuarioFacade = new UsuarioFacade();
+
 		#region PalavraChave
 		public Dominio.PalavraChave SalvarPalavraChave(Dominio.PalavraChave palavraChave)
 		{
@@ -205,7 +210,7 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
-		public Dominio.Aventura SalvarAventura(Dominio.Aventura aventura)
+		public Dominio.Aventura SalvarAventura(Dominio.Aventura aventura, HttpPostedFileBase arquivoRota)
 		{
 			try
 			{
@@ -214,6 +219,20 @@ namespace AltaMontanha.Models.Fachada
 
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IAventuraDAO aventuraDAO = fabrica.GetAventuraDAO();
+								
+				if(aventura.UsuarioCadastro == null)
+					aventura.UsuarioCadastro = Utilitario.Sessao.UsuarioLogado;
+				
+				if (arquivoRota != null)
+				{
+					string caminho = "~/AppData/Rota/";
+					string nomeArquivo = new Regex(@"[^0-9]").Replace(DateTime.Now.ToString(), "") + Path.GetFileName(arquivoRota.FileName);
+
+					if (aventura.Rota == null)
+						aventura.Rota = new Rota() { Caminho = string.Format("Rota/{0}", nomeArquivo) };
+
+					this.SalvaArquivo(caminho, nomeArquivo, arquivoRota);
+				}
 
 				if (aventura.Codigo <= 0)
 					return aventuraDAO.Cadastrar(aventura);
@@ -248,10 +267,32 @@ namespace AltaMontanha.Models.Fachada
 			throw new NotImplementedException();
 		}
 
-		public void SalvaArquivo()
+		public string SalvaArquivo(string caminho, string nomeArquivo, HttpPostedFileBase arquivo)
 		{
-			// TODO : Implementar
-			throw new NotImplementedException();
+			try
+			{
+				if (arquivo.ContentLength > 0)
+				{
+					caminho = HttpContext.Current.Server.MapPath(caminho);
+
+					DirectoryInfo dir = null;
+
+					if (!Directory.Exists(caminho))
+						dir = Directory.CreateDirectory(caminho);
+
+					arquivo.SaveAs(caminho + nomeArquivo);
+				}
+
+				return caminho;
+			}
+			catch (IOException e)
+			{
+				throw new ApplicationException("Erro ao salvar arquivo!", e);
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 
 		#endregion

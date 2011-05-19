@@ -21,7 +21,7 @@
 <h2>@ViewBag.Title</h2>
 <div class="clear"></div>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("CadastrarAventura", "ManterAventura", FormMethod.Post, new { @encType = "multipart/form-data" }))
 {
     @Html.ValidationSummary(true)
     <fieldset>
@@ -57,6 +57,9 @@
             @Html.TextBoxFor(model => model.Data, new { @class = "text-medium" })
             @Html.ValidationMessageFor(model => model.Data)
         </p>
+		<p>
+			<input type="file" name="Rota" value="Rota" />
+		</p>
 		<br />
         <p><input type="submit" value="Salvar" /></p>
     </fieldset>

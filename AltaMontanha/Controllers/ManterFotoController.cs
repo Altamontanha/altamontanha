@@ -9,12 +9,13 @@ using AltaMontanha.Models.Dominio;
 
 namespace AltaMontanha.Controllers
 {
-    public class ManterFotoController : Controller
+    public class ManterFotoController : Utilitario.BaseController
     {
 		Models.Fachada.MultimidiaFacade facade = new Models.Fachada.MultimidiaFacade();
 	
         //
         // GET: /ManterFoto/
+		[Authorize]
 		public ActionResult Index()
         {
 			Foto foto = new Foto();
@@ -27,6 +28,7 @@ namespace AltaMontanha.Controllers
 		/// Responsável pelo carregamento da tela de cadastro de foto.
 		/// </summary>
 		/// <returns></returns>
+		[Authorize]
 		public ActionResult CadastrarFoto()
 		{
 			return View();
@@ -38,6 +40,7 @@ namespace AltaMontanha.Controllers
 		/// <param name="arquivo"></param>
 		/// <returns></returns>
 		[HttpPost]
+		[Authorize]
 		[ValidateInput(false)]
 		public ActionResult CadastrarFoto(Models.Dominio.Foto foto, HttpPostedFileBase file)
 		{
@@ -54,6 +57,7 @@ namespace AltaMontanha.Controllers
 		}
 		//
 		// GET: /ManterFotoAlterarFoto/5
+		[Authorize]
 		public ActionResult AlterarFoto(int Codigo)
 		{
 			Foto foto = facade.PesquisarFoto(Codigo);
@@ -62,6 +66,7 @@ namespace AltaMontanha.Controllers
 		//
 		// POST: /ManterFoto/AlterarFoto/5
 		[HttpPost]
+		[Authorize]
 		public ActionResult AlterarFoto(Foto foto, HttpPostedFileBase file)
 		{
 			try
@@ -76,6 +81,7 @@ namespace AltaMontanha.Controllers
 		}
 		//
 		// GET: /ManterFoto/ExluirFoto/5
+		[Authorize]
 		public ActionResult ExcluirFoto(int Codigo)
 		{
 			facade.ExcluirFoto(Codigo);
@@ -83,6 +89,7 @@ namespace AltaMontanha.Controllers
 		}
 		//
 		// GET: /ManterFotoAlterarFoto/5
+		[Authorize]
 		public ActionResult VincularFoto()//(int codConteudo)
 		{
 			//Models.Persistencia.Fabrica.IFactoryDAO fabrica = Models.Persistencia.Fabrica.FactoryFactoryDAO.GetFabrica();
@@ -98,6 +105,7 @@ namespace AltaMontanha.Controllers
 		//
 		// POST: /ManterFoto/AlterarFoto/5
 		[HttpPost]
+		[Authorize]
 		public ActionResult VincularFoto(FormCollection collection)
 		{
 
@@ -118,6 +126,7 @@ namespace AltaMontanha.Controllers
 		/// <param name="collection"></param>
 		/// <returns></returns>
 		[HttpPost]
+		[Authorize]
 		public ActionResult SalvarFoto(FormCollection collection)
 		{
 			IList<Models.Dominio.Foto> listaFotos = new List<Models.Dominio.Foto>();

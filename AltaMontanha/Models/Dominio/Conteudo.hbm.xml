@@ -47,8 +47,7 @@
 		<join table="TB_Aventura">
 			<key column="CodConteudo" />
 			<many-to-one name="AventuraAnterior" column="CodConteudoPai" class="Aventura" not-null="false" />
-			<!-- TODO: adicionar atributo -->
-			<!--many-to-one name="Rota" column="CodRota" class="Rota" not-null="true" /-->
+			<many-to-one name="Rota" column="CodRota" class="Rota" cascade="all-delete-orphan" not-null="false" />
 			<many-to-one name="Autor" column="CodUsuario" class="Usuario" not-null="true" />
 		</join>
 	</subclass>

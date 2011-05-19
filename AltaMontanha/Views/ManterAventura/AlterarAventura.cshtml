@@ -21,13 +21,14 @@
 <h2>@ViewBag.Title</h2>
 <div class="clear"></div>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("AlterarAventura", "ManterAventura", FormMethod.Post, new { @encType = "multipart/form-data" }))
 {
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Aventura</legend>
 		@Html.HiddenFor(model => model.UsuarioCadastro.Codigo)
-		
+		@Html.HiddenFor(model => model.Rota.Codigo)
+
 		<p>
 			@Html.LabelFor(model => model.Autor)
 			@Html.DropDownListFor(model => model.Autor.Codigo, (IEnumerable<SelectListItem>)ViewData["Autores"])
@@ -59,6 +60,9 @@
             @Html.TextBoxFor(model => model.Data, new { @class = "text-medium" })
             @Html.ValidationMessageFor(model => model.Data)
         </p>
+		<p>
+			<input type="file" name="file" value="file" />
+		</p>
 		<br />
         <p><input type="submit" value="Alterar" /></p>
     </fieldset>

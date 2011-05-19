@@ -87,7 +87,6 @@ namespace AltaMontanha.Models.Fachada
 				fotoDAO.Alterar(foto);
 
 				return foto;
-				//}
 			}
 			catch (Exception e)
 			{
@@ -318,7 +317,6 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
 		/// <summary>
 		/// Pesquisa banner com os atributos que estiverem preenchidos
 		/// </summary>
@@ -338,7 +336,6 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
 		/// <summary>
 		/// Pesquisa local pelos atributos que estiverem preenchidos
 		/// </summary>
@@ -357,7 +354,6 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
 		/// <summary>
 		/// Salva o banner e o arquivo
 		/// </summary>
@@ -398,7 +394,11 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
+		/// <summary>
+		/// Exclui o registro de banner.
+		/// </summary>
+		/// <param name="codigo"></param>
+		/// <returns></returns>
 		public bool ExcluirBanner(int codigo)
 		{
 			try
