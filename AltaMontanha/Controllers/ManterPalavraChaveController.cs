@@ -15,15 +15,9 @@ namespace AltaMontanha.Controllers
 		[HttpPost]
 		public JsonResult CadastrarPalavraChave(string palavras)
 		{
-			string[] palavra = palavras.Split(',');
+			IList<PalavraChave> palavrasChave = facade.SalvarPalavraChave(palavras.Split(','));
 
-			List<PalavraChave> retorno = new List<PalavraChave>();
-			foreach (string p in palavra) 
-			{
-				retorno.Add(facade.SalvarPalavraChave(new PalavraChave() { Nome = p.Trim() }));
-			}
-
-			return Json(retorno, JsonRequestBehavior.AllowGet);
+			return Json(palavrasChave, JsonRequestBehavior.AllowGet);
 		}
     }
 }

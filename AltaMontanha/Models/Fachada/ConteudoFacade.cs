@@ -110,6 +110,9 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				INoticiaDAO noticiaDAO = fabrica.GetNoticiaDAO();
 
+				if (noticia.UsuarioCadastro == null)
+					noticia.UsuarioCadastro = Utilitario.Sessao.UsuarioLogado;
+				
 				if (noticia.Codigo <= 0)
 					return noticiaDAO.Cadastrar(noticia);
 
@@ -180,6 +183,9 @@ namespace AltaMontanha.Models.Fachada
 
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IColunaDAO colunaDAO = fabrica.GetColunaDAO();
+
+				if (coluna.UsuarioCadastro == null)
+					coluna.UsuarioCadastro = Utilitario.Sessao.UsuarioLogado;
 
 				if (coluna.Codigo <= 0)
 					return colunaDAO.Cadastrar(coluna);
@@ -441,6 +447,9 @@ namespace AltaMontanha.Models.Fachada
 
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IArtigoDAO artigoDAO = fabrica.GetArtigoDAO();
+
+				if (artigo.UsuarioCadastro == null)
+					artigo.UsuarioCadastro = Utilitario.Sessao.UsuarioLogado;
 
 				if (artigo.Codigo <= 0)
 					return artigoDAO.Cadastrar(artigo);
