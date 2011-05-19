@@ -220,9 +220,7 @@ namespace AltaMontanha.Models.Fachada
 			IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 			IUsuarioDAO usuarioDAO = fabrica.GetUsuarioDAO();
 			IList<Usuario> listaUsuarios = usuarioDAO.Pesquisar(usuario);
-			
-			//TODO : Criar Mapeamento do objeto permissão.
-
+						
 			if (listaUsuarios.Count != 1)
 				return false;
 			Permissao permissao = listaUsuarios[0].Perfil.ListaPermissoes.FirstOrDefault(obj=> obj.Tela.Nome == nomeFormulario);
