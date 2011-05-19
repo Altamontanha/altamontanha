@@ -15,11 +15,43 @@ namespace AltaMontanha.Models.Fachada
 		UsuarioFacade usuarioFacade = new UsuarioFacade();
 
 		#region PalavraChave
-		public Dominio.PalavraChave SalvarPalavraChave(Dominio.PalavraChave palavraChave)
+		/// <summary>
+		/// Recebendo uma lista de palavras, verifica se já existe e não existindo
+		/// inclui para retonar a lista com todos os objetos das palavras cadastradas 
+		/// ou não.
+		/// </summary>
+		/// <param name="palavras"></param>
+		public IList<Dominio.PalavraChave> SalvarPalavraChave(string[] palavras)
 		{
-			return palavraChave;
+			IList<Dominio.PalavraChave> palavrasChave = new List<Dominio.PalavraChave>();
+
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IPalavraChaveDAO palavraChaveDAO = fabrica.GetPalavraChaveDAO();
+				foreach (string p in palavras)
+				{
+					IList<Dominio.PalavraChave> palavrasTemp = palavraChaveDAO.Pesquisar(new Dominio.PalavraChave() { Nome = p.Trim() });
+
+					if ((palavrasTemp.Count > 0) && (!palavrasChave.Contains(palavrasTemp.First())))
+						palavrasChave.Add(palavrasTemp.First());
+					else
+						palavrasChave.Add(palavraChaveDAO.Cadastrar(new Dominio.PalavraChave() { Nome = p.Trim() }));
+				}
+			}
+			catch (Exception e)
+			{
+				throw e;
+			}
+
+			return palavrasChave;
 		}
 
+		/// <summary>
+		/// Pesquisa palavra-chave por objeto
+		/// </summary>
+		/// <param name="palavraChave"></param>
+		/// <returns></returns>
 		public IList<Dominio.PalavraChave> PesquisarPalavraChave(Dominio.PalavraChave palavraChave)
 		{
 			try

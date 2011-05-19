@@ -27,9 +27,11 @@ namespace AltaMontanha.Models.Dominio
 		[DataType(DataType.Date, ErrorMessage="Formato da data é inválido")]
 		public virtual DateTime Data { get; set; }
 		
+		public virtual IList<PalavraChave> ListaPalavrasChave { get; set; }
+
 		//public virtual List<Foto> ListaFotos { get; set; }
-		//public virtual List<PalavraChave> ListaPalavrasChave { get; set; }
 		//public virtual List<Comentario> ListaComentarios { get; set; }
+		
 		public virtual Usuario UsuarioCadastro { get; set; } // TODO: Adicionar na Documentação.
 	}
 }

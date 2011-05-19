@@ -29,10 +29,11 @@
 			<key column="CodConteudo"/>
 			<one-to-many class="Comentario"></one-to-many>
 		</bag>
+		-->
 		<bag name="ListaPalavrasChave" table="TB_ConteudoPalavraChave" cascade="save-update">
 			<key column="CodConteudo"/>
 			<many-to-many class="PalavraChave" column="CodPalavraChave"></many-to-many>
-		</bag-->
+		</bag>
 		<many-to-one name="UsuarioCadastro" column="CodUsuario" class="Usuario" not-null="true" />
 	</class>
 	<!--Artigo-->
