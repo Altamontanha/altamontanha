@@ -1,0 +1,39 @@
+﻿@helper VisualizarNoticias(IList<AltaMontanha.Models.Dominio.Noticia> listaNoticias)
+{
+	<div id="news-wrap" class="col-260">
+		<h2 class="box-title-small"><span class="title-bg">Notícias</span></h2>
+		@foreach (AltaMontanha.Models.Dominio.Noticia noticia in listaNoticias)
+		{
+			<p><a href="\Noticia\@noticia.Codigo">@noticia.Titulo</a></p>
+		}		
+		@*
+			TODO : Verificar classe no ultimo elemento
+			<p class="no-border"><a href="#">At vero eos et accusamus et iusto odio dignissimos vducimus qui blanditiis</a></p>
+		*@
+	</div>	
+}
+
+@helper VisualizarNoticiasDestaque(IList<AltaMontanha.Models.Dominio.Noticia> listaNoticias)
+{
+	@* TODO: Implementar Helper de ultimas Noticias. *@
+	<div id="destaques-wrap" class="col-340">
+		<h2 class="box-title-small"><span class="title-bg">Destaques</span></h2>
+		<div class="photo-destaque">
+			<a href="#">
+				<img src="images/pic.jpg" width="340px" height="240px" />
+				<div class="news-destaque">
+					<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p> 
+				</div>
+			</a>
+		</div>
+		<ul id="destaque-menu">
+			<li><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+			<li><a href="#">6</a></li>
+			<li><a href="#">7</a></li>
+		</ul>
+	</div>
+}

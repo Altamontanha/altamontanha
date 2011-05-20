@@ -5,32 +5,20 @@
 <!-- container de artigos, Noticias e Colunas. -->
 <div id="main-box">
 	<!-- Noticias em destaque. -->
-	<div id="destaques-wrap" class="col-340">
-		<h2 class="box-title-small"><span class="title-bg">Destaques</span></h2>
-		@* TODO: Helper de ultimas Noticias. *@
-	</div>
+	@HelperNoticia.VisualizarNoticiasDestaque((IList<AltaMontanha.Models.Dominio.Noticia>)ViewData["ListaNoticiasDestaque"])
 	<!-- Noticias em geral. -->
-	<div id="news-wrap" class="col-260">
-		<h2 class="box-title-small"><span class="title-bg">Notícias</span></h2>
-		@* TODO: Helper de Noticias. *@
-	</div>
+	@HelperNoticia.VisualizarNoticias((IList<AltaMontanha.Models.Dominio.Noticia>)ViewData["ListaNoticias"])
 	<!-- container de publicidade referentes banner de 300*250 -->
 	<div class="arroba col-300">
 		<p class="publicidade">Publicidade</p>
-		<img src="/content/themes/publico/img/pic.jpg" width="300px" height="250" alt="publicidade">
+		<img src="/content/themes/publico/img/pic.jpg" width="300px" height="250" alt="publicidade"/>
 		@* TODO: Banner. *@
 	</div>
 	<div class="spliter-940"></div>
 	<!-- Ultimas colunas. -->
-	<div id="colunistas" class="col-340 special-bg">
-		<h2 class="box-title"><span class="title-bg">Colunistas</span><span class="link-more"><a href="#">+ colunistas</a></span></h2>
-		@* TODO: Helper de ultimas Colunas. *@
-	</div>
+	@HelperColuna.VisualizarColunas((IList<AltaMontanha.Models.Dominio.Coluna>) ViewData["ListaColunas"])
 	<!-- Artigos random. -->
-	<div id="artigos" class="col-340 special-bg">
-		<h2 class="box-title"><span class="title-bg">Artigos Técnicos</span><span class="link-more"><a href="#">+ artigos</a></span></h2>
-		@* TODO: Helper de Artigos. *@
-	</div>
+	@HelperArtigo.VisualizarArtigos((IList<AltaMontanha.Models.Dominio.Artigo>) ViewData["ListaArtigos"])
 	<!-- Serviços Especializados. -->
 	<div id="servicos" class="col-220">
 		<h2 class="box-title-small">Serviços Especializados</h2>
@@ -43,21 +31,15 @@
 	</div>
 </div>
 <!-- container de artigos referentes a categoria de histórias do montanhismo. -->
-<div id="historia">
-	<h2 class="box-white-title"><span class="title-blue-bg">História do montanhismo</span><span class="link-more"><a href="#">+ história</a></span></h2>
-	@* TODO: Helper de Artigos história do montanhismo. *@
-</div>
+@HelperArtigo.VisualizarArtigosHistoria((IList<AltaMontanha.Models.Dominio.Artigo>) ViewData["ListaArtigosHistoria"])
 <!-- container de publicidade referentes banner de 200*200 -->
 <div id="quadrado-home">
 	<p class="publicidade">Publicidade</p>
-	<img src="/content/themes/publico/img/pic.jpg" width = "200px" height="200px" alt="publicidade">
+	<img src="/content/themes/publico/img/pic.jpg" width = "200px" height="200px" alt="publicidade"/>
 	@* TODO: Banner. *@
 </div>
 <!-- container de sua-aventura/gente-de-montanha -->
-<div id="sua-aventura">
-	<h2 class="box-title"><span class="title-bg">Sua Aventura</span><span class="link-more"><a href="#">+ aventuras</a></span></h2>
-	@* TODO: Helper de SuaAventura. *@
-</div>
+@HelperAventura.VisualizarAventuras((IList<AltaMontanha.Models.Dominio.Aventura>)ViewData["ListaAventuras"])
 <!-- container de publicidade referentes banner de 728*90 -->
 <div class="super-banner-home"> 
 	<p class="publicidade">Publicidade</p>

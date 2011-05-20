@@ -1,0 +1,16 @@
+﻿@helper VisualizarColunas(IList<AltaMontanha.Models.Dominio.Coluna> listaColunas)
+{
+	<div id="colunistas" class="col-340 special-bg">
+		<h2 class="box-title"><span class="title-bg">Colunistas</span><span class="link-more"><a href="#">+ colunistas</a></span></h2>
+		@foreach (AltaMontanha.Models.Dominio.Coluna coluna in listaColunas)
+		{
+			<div class="colunista-box">
+				<p class="name-colunista">@coluna.Autor.Nome</p>
+				<a href="#">
+					<span class="thumb-border-5"><img src="/Appdata/Foto/Usuario/@coluna.Autor.Foto.Caminho" alt="@coluna.Autor.Nome" width = "90px" height="90px"/></span>
+					<p>@coluna.Titulo</p>
+				</a>
+		</div>
+		}	
+	</div>
+}

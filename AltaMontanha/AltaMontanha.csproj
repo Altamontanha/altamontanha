@@ -409,6 +409,10 @@
     <Content Include="Views\Shared\_LayoutPortal.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\HelperNoticia.cshtml" />
+    <Content Include="App_Code\HelperColuna.cshtml" />
+    <Content Include="App_Code\HelperArtigo.cshtml" />
+    <Content Include="App_Code\HelperAventura.cshtml" />
     <None Include="Content\themes\Publico\font\aller_bd-webfont.eot" />
     <None Include="Content\themes\Publico\font\aller_bd-webfont.ttf" />
     <None Include="Content\themes\Publico\font\aller_bdit-webfont.eot" />

@@ -1,0 +1,24 @@
+﻿@helper VisualizarAventuras(IList<AltaMontanha.Models.Dominio.Aventura> listaAventuras)
+{
+	<div id="sua-aventura">
+		<h2 class="box-title"><span class="title-bg">Sua Aventura</span><span class="link-more"><a href="#">+ aventuras</a></span></h2>
+		<a href="#" class="left-arrow"></a>
+
+		@foreach (AltaMontanha.Models.Dominio.Aventura aventura in listaAventuras)
+		{
+	   		<div id="aventuras-box">
+				<a href="#" class="left-arrow"></a>
+				<div class="aventura-box">
+					<a href="/Aventura/@aventura.Codigo">
+						@* TODO : Link de fotos. *@
+						<img src="images/pic.jpg" alt="@aventura.Titulo" width="160px" height="115px">
+						<p class="name-aventura">@aventura.Autor.Nome</p>
+						<p>@aventura.Titulo</p>
+					</a>
+				</div>
+			</div>
+		}
+
+		<a href="#" class="right-arrow"></a>
+	</div>
+}

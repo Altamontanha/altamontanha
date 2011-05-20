@@ -1,0 +1,34 @@
+﻿@helper VisualizarArtigos(IList<AltaMontanha.Models.Dominio.Artigo> listaArtigos)
+{
+	<div id="artigos" class="col-340 special-bg">
+		<h2 class="box-title"><span class="title-bg">Artigos Técnicos</span><span class="link-more"><a href="#">+ artigos</a></span></h2>
+
+		@foreach (AltaMontanha.Models.Dominio.Artigo artigo in listaArtigos)
+		{
+			<div class="artigo-box">
+				<a href="/artigo/@artigo.Codigo">
+					@*TODO: Caminho das fotos *@
+					<span class="thumb-border-5"><img src="" alt="@artigo.Titulo" width="145px" height="95px"></span>
+					<p>@artigo.Titulo</p>
+				</a>
+			</div>
+		}
+	</div>
+}
+@helper VisualizarArtigosHistoria(IList<AltaMontanha.Models.Dominio.Artigo> listaArtigos)
+{
+	<div id="historia">
+		<h2 class="box-white-title"><span class="title-blue-bg">História do montanhismo</span><span class="link-more"><a href="#">+ história</a></span></h2>
+
+		@foreach (AltaMontanha.Models.Dominio.Artigo artigo in listaArtigos)
+		{
+			<div class="historia-box col-340">
+				<a href="/artigo/@artigo.Codigo">
+					@*TODO: Caminho das fotos *@
+					<img src="images/pic.jpg" alt="@artigo.Titulo" width="145px" height="105px">
+					<p>@artigo.Titulo</p>
+				</a>
+			</div>	
+		}
+	</div>	
+}
