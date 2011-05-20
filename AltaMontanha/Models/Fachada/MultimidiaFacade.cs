@@ -75,7 +75,7 @@ namespace AltaMontanha.Models.Fachada
 
 				this.SalvarImagem
 				(
-					this.RedimensionarImagem(file.InputStream, 160, 120),
+					this.RedimensionarImagem(file.InputStream, 90, 90),
 					HttpContext.Current.Server.MapPath(path + foto.Caminho)
 				);
 
@@ -369,18 +369,10 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IBannerDAO bannerDAO = fabrica.GetBannerDAO();
 
-				string path = "~/AppData/Banner";
+				banner.Caminho = new Regex(@"[^0-9]").Replace(DateTime.Now.ToString(), "") + arquivo.FileName;
+				string path = "~/AppData/Banner/" + banner.Caminho;
 
-				banner.Caminho = string.Format("Banner/{0}", arquivo.FileName);
-
-				if (!banner.Multimidia)
-					this.SalvarImagem
-					(
-						this.RedimensionarImagem(arquivo.InputStream, banner.Local.Altura, banner.Local.Largura),
-						HttpContext.Current.Server.MapPath(path + banner.Caminho)
-					);
-				else
-					this.SalvarArquivo(path, arquivo);
+				this.SalvarArquivo(path, arquivo);
 
 				if (banner.Codigo == 0)
 					return bannerDAO.Cadastrar(banner);
@@ -406,7 +398,12 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IBannerDAO bannerDAO = fabrica.GetBannerDAO();
 
-				// TODO: implementar exclusão do arquivo
+				string path = HttpContext.Current.Server.MapPath("~/AppData/Banner");
+
+				Dominio.Banner banner = bannerDAO.Pesquisar(codigo);
+				if (File.Exists(string.Format(@"{0}\{1}", path, banner.Caminho)))
+					File.Delete(string.Format(@"{0}\{1}", path, banner.Caminho));
+
 				return bannerDAO.Excluir(codigo);
 			}
 			catch (Exception e)
@@ -424,17 +421,15 @@ namespace AltaMontanha.Models.Fachada
 		{
 			try
 			{
-				string nome = string.Empty;
-
 				if (arquivo.ContentLength > 0)
 				{
 					caminho = HttpContext.Current.Server.MapPath(caminho);
+					string nome = Path.GetFileName(caminho);
+					caminho = Path.GetDirectoryName(caminho);
 
 					DirectoryInfo dir = null;
 					if (!Directory.Exists(caminho))
 						dir = Directory.CreateDirectory(caminho);
-
-					nome = Path.GetFileName(arquivo.FileName);
 
 					caminho = string.Format(@"{0}\{1}", caminho, nome);
 

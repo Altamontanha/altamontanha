@@ -39,8 +39,6 @@ namespace AltaMontanha.Controllers
         {
 			try
 			{
-				// TODO: alterar para usuário logado
-				noticia.UsuarioCadastro = new Usuario() { Codigo = 1 };
 				facade.SalvarNoticia(noticia);
 				return RedirectToAction("Index");
 			}

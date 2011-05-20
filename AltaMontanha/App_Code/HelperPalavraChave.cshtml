@@ -1,29 +1,56 @@
-﻿@helper SelecionarPalavraChave()
+﻿@helper SelecionarPalavraChave(AltaMontanha.Models.Dominio.Conteudo conteudo)
 {
 	<label for="Palavras">Palavras:</label>
 	<input type="text" name="Palavras" id="Palavras" class="text-long" />
 	<input type="button" value="Adicionar" id="CadastrarPalavraChave" />
 
 	<ul id="listaPalavras">
+		@if (conteudo != null) 
+		{
+			for (int i = 0; i < conteudo.ListaPalavrasChave.Count; i++)
+			{
+				AltaMontanha.Models.Dominio.PalavraChave palavra = @conteudo.ListaPalavrasChave[i];	
+	   			<li id="@string.Concat("pcID_", palavra.Codigo)">
+					@conteudo.ListaPalavrasChave[i].Nome (<a href="@string.Concat("#pcID_", palavra.Codigo)">X</a>)
+					<input type="hidden" name="@string.Concat("ListaPalavrasChave[",i,"].Codigo")" value="@palavra.Codigo" />
+					<input type="hidden" name="@string.Concat("ListaPalavrasChave[",i,"].Nome")" value="@palavra.Nome" />
+				</li>
+			}
+		}
 	</ul>
 
 	<script type="text/javascript">
 		j(document).ready(function () {
+			// evento para remover palavra-chave da lista
+			j('a[href^=#pcID]').click(function () {
+				j(j(this).attr("href")).remove();
+			});
+
+			// requisição para cadastrar (e retornar) palavras-chave
 			j('#CadastrarPalavraChave').click(function () {
 				j.post(
 					'/ManterPalavraChave/CadastrarPalavraChave',
 					{ palavras: j('#Palavras').val() },
 					function (data) {
+						j('#Palavras').val("");
+						var total = j('#listaPalavras li').size();
 						j(data).each(function () {
+							// inclui palavra-chave na lista
 							j("#listaPalavras").append(
 								"<li id='pcID_" + this.Codigo + "'>" +
 								this.Nome +
-								" (<a href='#pcID_" + this.Codigo + "'>X</a>)</li>"
+								"  (<a href='#pcID_" + this.Codigo + "'>X</a>)" +
+								"  <input type='hidden' name='ListaPalavrasChave[" + total + "].Codigo' value='" + this.Codigo + "' />" +
+								"  <input type='hidden' name='ListaPalavrasChave[" + total + "].Nome' value='" + this.Nome + "' />" +
+								"</li>"
 							);
 
+							// evento para remover palavra-chave da lista
 							j('a[href^=#pcID]').click(function () {
 								j(j(this).attr("href")).remove();
 							});
+
+							total++;
 						});
 					}
 				);

@@ -39,8 +39,6 @@ namespace AltaMontanha.Controllers
 		{
 			try
 			{
-				// TODO: alterar para usuário logado
-				coluna.UsuarioCadastro = new Usuario() { Codigo = 1 };
 				facade.SalvarColuna(coluna);
 				return RedirectToAction("Index");
 			}
@@ -54,6 +52,8 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult AlterarColuna(int Codigo)
 		{
+			ViewData["Autores"] = new SelectList(usuarioFacade.PesquisarUsuario(null), "Codigo", "Nome");
+
 			Coluna coluna = facade.PesquisarColuna(Codigo);
 
 			return View(coluna);
@@ -72,6 +72,8 @@ namespace AltaMontanha.Controllers
 			}
 			catch
 			{
+				ViewData["Autores"] = new SelectList(usuarioFacade.PesquisarUsuario(null), "Codigo", "Nome");
+
 				return View(coluna);
 			}
 		}
