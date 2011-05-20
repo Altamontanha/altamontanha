@@ -23,7 +23,7 @@ namespace AltaMontanha.Controllers
         }
         //
         // GET: /ManterArtigo/CadastrarArtigo
-		//[Authorize]
+		[Authorize]
 		public ActionResult CadastrarArtigo()
         {
 			ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null), "Codigo", "Titulo");
@@ -38,8 +38,6 @@ namespace AltaMontanha.Controllers
         {
             try
             {
-				// TODO: pegar usuário logado
-				artigo.UsuarioCadastro = new Usuario() { Codigo = 1 };
 				facade.SalvarArtigo(artigo);
 				return RedirectToAction("Index");
 			}
@@ -67,8 +65,6 @@ namespace AltaMontanha.Controllers
         {
             try
             {
-				// TODO: verificar como não validar usuário no alterar
-				artigo.UsuarioCadastro = new Usuario() { Codigo = 1 };
 				facade.SalvarArtigo(artigo);
 				return RedirectToAction("Index");
 			}

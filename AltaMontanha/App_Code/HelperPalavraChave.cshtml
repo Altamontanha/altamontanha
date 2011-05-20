@@ -5,23 +5,15 @@
 	<input type="button" value="Adicionar" id="CadastrarPalavraChave" />
 
 	<ul id="listaPalavras">
-		@*
-		@foreach (var ListaPalavrasChave in Model.ListaPalavrasChave)
-		{
-			@Html.HiddenFor(model => ListaPalavrasChave.Codigo)
-		}
-		@foreach (var palavra in Model.ListaPalavrasChave)
-		{
-			@Html.Hidden("palavras", palavra)
-		}
-		*@
-
 		@if (conteudo != null) 
 		{
-			foreach (var palavra in conteudo.ListaPalavrasChave)
+			for (int i = 0; i < conteudo.ListaPalavrasChave.Count; i++)
 			{
+				AltaMontanha.Models.Dominio.PalavraChave palavra = @conteudo.ListaPalavrasChave[i];	
 	   			<li id="@string.Concat("pcID_", palavra.Codigo)">
-					@palavra.Nome (<a href="@string.Concat("#pcID_", palavra.Codigo)">X</a>)
+					@conteudo.ListaPalavrasChave[i].Nome (<a href="@string.Concat("#pcID_", palavra.Codigo)">X</a>)
+					<input type="hidden" name="@string.Concat("ListaPalavrasChave[",i,"].Codigo")" value="@palavra.Codigo" />
+					<input type="hidden" name="@string.Concat("ListaPalavrasChave[",i,"].Nome")" value="@palavra.Nome" />
 				</li>
 			}
 		}
@@ -40,18 +32,25 @@
 					'/ManterPalavraChave/CadastrarPalavraChave',
 					{ palavras: j('#Palavras').val() },
 					function (data) {
+						j('#Palavras').val("");
+						var total = j('#listaPalavras li').size();
 						j(data).each(function () {
 							// inclui palavra-chave na lista
 							j("#listaPalavras").append(
 								"<li id='pcID_" + this.Codigo + "'>" +
 								this.Nome +
-								" (<a href='#pcID_" + this.Codigo + "'>X</a>)</li>"
+								"  (<a href='#pcID_" + this.Codigo + "'>X</a>)" +
+								"  <input type='hidden' name='ListaPalavrasChave[" + total + "].Codigo' value='" + this.Codigo + "' />" +
+								"  <input type='hidden' name='ListaPalavrasChave[" + total + "].Nome' value='" + this.Nome + "' />" +
+								"</li>"
 							);
 
 							// evento para remover palavra-chave da lista
 							j('a[href^=#pcID]').click(function () {
 								j(j(this).attr("href")).remove();
 							});
+
+							total++;
 						});
 					}
 				);
