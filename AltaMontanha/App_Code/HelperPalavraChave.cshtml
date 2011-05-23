@@ -1,6 +1,6 @@
 ﻿@helper SelecionarPalavraChave(AltaMontanha.Models.Dominio.Conteudo conteudo)
 {
-	<label for="Palavras">Palavras:</label>
+	<label for="Palavras">Palavras-chave:</label>
 	<input type="text" name="Palavras" id="Palavras" class="text-long" />
 	<input type="button" value="Adicionar" id="CadastrarPalavraChave" />
 
@@ -12,8 +12,8 @@
 				AltaMontanha.Models.Dominio.PalavraChave palavra = @conteudo.ListaPalavrasChave[i];	
 	   			<li id="@string.Concat("pcID_", palavra.Codigo)">
 					@conteudo.ListaPalavrasChave[i].Nome (<a href="@string.Concat("#pcID_", palavra.Codigo)">X</a>)
-					<input type="hidden" name="@string.Concat("ListaPalavrasChave[",i,"].Codigo")" value="@palavra.Codigo" />
-					<input type="hidden" name="@string.Concat("ListaPalavrasChave[",i,"].Nome")" value="@palavra.Nome" />
+					<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Codigo")" value="@palavra.Codigo" />
+					<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Nome")" value="@palavra.Nome" />
 				</li>
 			}
 		}
@@ -40,14 +40,17 @@
 								"<li id='pcID_" + this.Codigo + "'>" +
 								this.Nome +
 								"  (<a href='#pcID_" + this.Codigo + "'>X</a>)" +
-								"  <input type='hidden' name='ListaPalavrasChave[" + total + "].Codigo' value='" + this.Codigo + "' />" +
-								"  <input type='hidden' name='ListaPalavrasChave[" + total + "].Nome' value='" + this.Nome + "' />" +
+								"  <input type='hidden' name='ListaPalavrasChave.Index' value='" + this.Codigo + "' />" +
+								"  <input type='hidden' name='ListaPalavrasChave[" + this.Codigo + "].Codigo' value='" + this.Codigo + "' />" +
+								"  <input type='hidden' name='ListaPalavrasChave[" + this.Codigo + "].Nome' value='" + this.Nome + "' />" +
 								"</li>"
 							);
 
 							// evento para remover palavra-chave da lista
 							j('a[href^=#pcID]').click(function () {
 								j(j(this).attr("href")).remove();
+								//j(j(this).attr("href")).hide();
+								//j(j(this).attr("href") + " > input").val("");
 							});
 
 							total++;
