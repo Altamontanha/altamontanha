@@ -17,6 +17,19 @@ namespace AltaMontanha.Models.Fachada
 		#region Foto
 
 		/// <summary>
+		/// Array com os tamanhos necessários das fotos que serão redimensionadas
+		/// </summary>
+		private static dynamic[] tamanhos = { 
+											   new { altura = 50,  largura = 50,  caminho = "50x50"   },
+											   new { altura = 145, largura = 95,  caminho = "145x95"  },
+											   new { altura = 145, largura = 105, caminho = "145x105" },
+											   new { altura = 160, largura = 115, caminho = "160x115" },
+											   new { altura = 220, largura = 165, caminho = "220x165" },
+											   new { altura = 340, largura = 240, caminho = "340x240" },
+											   new { altura = 640, largura = 480, caminho = "640x480" },
+										   };
+
+		/// <summary>
 		/// Consulta de uma foto já cadastrada.
 		/// </summary>
 		/// <param name="codigo">código da foto</param>
@@ -27,7 +40,6 @@ namespace AltaMontanha.Models.Fachada
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IFotoDAO fotoDAO = fabrica.GetFotoDAO();
-
 				return fotoDAO.Pesquisar(codigo);
 			}
 			catch (Exception e)
@@ -104,12 +116,6 @@ namespace AltaMontanha.Models.Fachada
 		{
 			try
 			{
-				// TODO: utilizar Enum?
-				List<string> tamanhos = new List<string>(3);
-				tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Grande");
-				tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Media");
-				tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Pequena");
-
 				// TODO: verificar transação
 				// using (TransactionScope transacao = new TransactionScope())
 				//{
@@ -122,29 +128,13 @@ namespace AltaMontanha.Models.Fachada
 
 				foto.Caminho = this.GerarCaminhoImagem(file);
 
-				Regex r = new Regex(@"^.*\\([A-z]+)$");
-				int largura = 640;
-				int altura = 480;
-
-				foreach (string tamanho in tamanhos)
+				foreach (dynamic tamanho in tamanhos)
 				{
-					caminho = string.Format("{0}\\{1}", tamanho, foto.Caminho.Replace("/", @"\"));
-
-					// TODO: Refactor
-					if (r.Replace(tamanho, "$1").Equals("Pequena"))
-					{
-						largura = 160;
-						altura = 120;
-					}
-					else if (r.Replace(tamanho, "$1").Equals("Media"))
-					{
-						largura = 320;
-						altura = 240;
-					}
+					caminho = string.Format("{0}\\{1}\\{2}", HttpContext.Current.Server.MapPath("~/AppData/Foto"), tamanho.caminho, foto.Caminho.Replace("/", @"\"));
 
 					this.SalvarImagem
 					(
-						this.RedimensionarImagem(file.InputStream, largura, altura),
+						this.RedimensionarImagem(file.InputStream, tamanho.largura, tamanho.altura),
 						caminho
 					);
 				}
@@ -219,12 +209,6 @@ namespace AltaMontanha.Models.Fachada
 		/// <returns></returns>
 		private string GerarCaminhoImagem(HttpPostedFileBase file)
 		{
-			// TODO: utilizar Enum?
-			List<string> tamanhos = new List<string>(3);
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Grande");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Media");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Pequena");
-
 			string arquivo = string.Empty;
 			string data = string.Empty;
 			string diretorio = string.Empty;
@@ -237,10 +221,10 @@ namespace AltaMontanha.Models.Fachada
 				data = string.Format("{0}_{1}", DateTime.Now.Year, DateTime.Now.Month.ToString("00"));
 				arquivo = new Regex(@"[^0-9]").Replace(DateTime.Now.ToString(), "") + Path.GetFileName(file.FileName);
 				
-				foreach (string tamanho in tamanhos)
+				foreach (dynamic tamanho in tamanhos)
 				{
 
-					diretorio = string.Format(@"{0}\{1}", tamanho, data);
+					diretorio = string.Format(@"{0}\{1}\{2}", HttpContext.Current.Server.MapPath("~/AppData/Foto"), tamanho.caminho, data);
 
 					if (!Directory.Exists(diretorio))
 						dir = Directory.CreateDirectory(diretorio);
@@ -272,15 +256,9 @@ namespace AltaMontanha.Models.Fachada
 		/// <param name="caminho">Caminho relativo da Imagem</param>
 		public void ExcluirImagemGaleria(string caminho)
 		{
-			// TODO: utilizar Enum?
-			List<string> tamanhos = new List<string>(3);
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Grande");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Media");
-			tamanhos.Add(HttpContext.Current.Server.MapPath("~/AppData/Foto") + "\\Pequena");
-			
-			foreach (string tamanho in tamanhos)
-				if (File.Exists(string.Format(@"{0}\{1}", tamanho, caminho.Replace("/", @"\"))))
-					File.Delete(string.Format(@"{0}\{1}", tamanho, caminho.Replace("/", @"\")));	
+			foreach (dynamic tamanho in tamanhos)
+				if (File.Exists(string.Format(@"{0}\{1}\{2}", HttpContext.Current.Server.MapPath("~/AppData/Foto"), tamanho.caminho, caminho.Replace("/", @"\"))))
+					File.Delete(string.Format(@"{0}\{1}\{2}", HttpContext.Current.Server.MapPath("~/AppData/Foto"), tamanho.caminho, caminho.Replace("/", @"\")));	
 		}
 		/// <summary>
 		/// Exclui a imagem referentes a uma foto do disco.
@@ -290,7 +268,7 @@ namespace AltaMontanha.Models.Fachada
 		{
 			string path = HttpContext.Current.Server.MapPath("~/AppData/Foto");
 
-			if (File.Exists(string.Format(@"{0}\{1}",path, caminho.Replace("/", @"\"))))
+			if (File.Exists(string.Format(@"{0}\{1}", path, caminho.Replace("/", @"\"))))
 				File.Delete(string.Format(@"{0}\{1}", path, caminho.Replace("/", @"\")));
 		}
 
