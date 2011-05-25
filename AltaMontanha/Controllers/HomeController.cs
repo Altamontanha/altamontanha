@@ -3,23 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AltaMontanha.Models.Dominio;
 
 namespace AltaMontanha.Controllers
 {
     public class HomeController : Controller
     {
+		Models.Fachada.ConteudoFacade conteudoFacade = new Models.Fachada.ConteudoFacade();
+
         //
         // GET: /Home/
         public ActionResult Index()
         {
-			ViewData["ListaNoticiasDestaque"] = new List<Models.Dominio.Noticia>();
-			ViewData["ListaNoticias"] = new List<Models.Dominio.Noticia>();
-			ViewData["ListaColunas"] = new List<Models.Dominio.Coluna>();
-			ViewData["ListaArtigos"] = new List<Models.Dominio.Artigo>();
-			ViewData["ListaArtigosHistoria"] = new List<Models.Dominio.Artigo>();
-			ViewData["ListaAventuras"] = new List<Models.Dominio.Aventura>();
+			ViewData["ListaNoticiasDestaque"] = conteudoFacade.PesquisarNoticia(new Noticia() { Destaque = true }, 7);
+			ViewData["ListaNoticias"] = conteudoFacade.PesquisarNoticia(new Noticia() { Destaque = false }, 4);
+			ViewData["ListaColunas"] = conteudoFacade.PesquisarColuna(null, 6);
+			ViewData["ListaAventuras"] = conteudoFacade.PesquisarAventura(null,5);
+			ViewData["ListaArtigos"] = conteudoFacade.PesquisarArtigo(null, 4);
+			ViewData["ListaArtigosHistoria"] = new List<Artigo>();
+			
+			// TODO : Corrigir erro no filtro de categoria...
+			//Artigo filtro = new Artigo();
+			//filtro.ObjCategoria = new Categoria() { Codigo = 3 };
+			//ViewData["ListaArtigosHistoria"] = conteudoFacade.PesquisarArtigo(filtro, 2);
 
-            return View();
+			return View(ViewData);
         }
     }
 }

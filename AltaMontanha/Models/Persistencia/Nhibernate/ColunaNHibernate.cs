@@ -20,6 +20,33 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			return objeto;
 		}
 
+		public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto, int qtde)
+		{
+			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Coluna));
+			criteria.SetMaxResults(qtde);
+			criteria.AddOrder(Order.Desc("Data"));
+			
+			// TODO : O Resultado deve ser apenas da coluna mais nova "SEM REPETIR O AUTOR".
+
+			if (objeto == null)
+				return criteria.List<Dominio.Coluna>();
+
+			if (objeto.Codigo > 0)
+				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
+			if (objeto.Autor != null)
+				criteria = criteria.Add(Expression.Eq("CodUsuario", objeto.Autor.Codigo));
+			if (objeto.UsuarioCadastro != null)
+				criteria = criteria.Add(Expression.Eq("CodUsuarioCadastro", objeto.UsuarioCadastro.Codigo));
+			if (objeto.Data > DateTime.MinValue)
+				criteria = criteria.Add(Expression.Eq("Data", objeto.Data));
+			if (!string.IsNullOrEmpty(objeto.Titulo))
+				criteria = criteria.Add(Expression.Eq("Titulo", objeto.Titulo));
+
+			IList<Dominio.Coluna> colunas = criteria.List<Dominio.Coluna>();
+
+			return colunas;
+		}
+
 		public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto)
 		{
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Coluna));

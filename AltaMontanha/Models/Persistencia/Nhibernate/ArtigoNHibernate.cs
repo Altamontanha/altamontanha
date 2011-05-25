@@ -21,6 +21,29 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			return objeto; 
 		}
 
+		public IList<Dominio.Artigo> Pesquisar(Dominio.Artigo artigo, int qtde)
+		{
+			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Artigo));
+			criteria.SetMaxResults(qtde);
+			criteria.AddOrder(Order.Desc("Data"));
+
+			if (artigo == null)
+				return criteria.List<Dominio.Artigo>();
+
+			if (artigo.Codigo > 0)
+				criteria = criteria.Add(Expression.Eq("Codigo", artigo.Codigo));
+			if (artigo.ObjCategoria != null)
+				criteria = criteria.Add(Expression.Eq("CodCategoria", artigo.ObjCategoria.Codigo));
+			if (artigo.Data > DateTime.MinValue)
+				criteria = criteria.Add(Expression.Eq("Data", artigo.Data));
+			if (!string.IsNullOrEmpty(artigo.Titulo))
+				criteria = criteria.Add(Expression.Eq("Titulo", artigo.Titulo));
+
+			IList<Dominio.Artigo> artigos = criteria.List<Dominio.Artigo>();
+
+			return artigos;
+		}
+
 		public IList<Dominio.Artigo> Pesquisar(Dominio.Artigo objeto)
 		{
 
@@ -31,8 +54,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			if (objeto.Codigo > 0)
 				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
-			if (objeto.Categoria != null)
-				criteria = criteria.Add(Expression.Eq("CodCategoria", objeto.Categoria.Codigo));
+			if (objeto.ObjCategoria != null)
+				criteria = criteria.Add(Expression.Eq("CodCategoria", objeto.ObjCategoria.Codigo));
 			if (objeto.Data > DateTime.MinValue)
 				criteria = criteria.Add(Expression.Eq("Data", objeto.Data));
 			if (!string.IsNullOrEmpty(objeto.Titulo))

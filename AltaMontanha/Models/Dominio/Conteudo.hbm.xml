@@ -40,7 +40,7 @@
 	<subclass name="Artigo" extends="Conteudo" discriminator-value="Artigo" lazy="false">
 		<join table="TB_Artigo">
 			<key column="CodConteudo" />
-			<many-to-one name="Categoria" column="CodCategoria" class="Categoria" not-null="true" />
+			<many-to-one name="ObjCategoria" column="CodCategoria" class="Categoria" not-null="true" />
 		</join>
 	</subclass>
 	<!--Aventura-->

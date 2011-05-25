@@ -6,16 +6,13 @@
 
 		@foreach (AltaMontanha.Models.Dominio.Aventura aventura in listaAventuras)
 		{
-	   		<div id="aventuras-box">
-				<a href="#" class="left-arrow"></a>
-				<div class="aventura-box">
-					<a href="/Aventura/@aventura.Codigo">
-						@* TODO : Link de fotos. *@
-						<img src="images/pic.jpg" alt="@aventura.Titulo" width="160px" height="115px">
-						<p class="name-aventura">@aventura.Autor.Nome</p>
-						<p>@aventura.Titulo</p>
-					</a>
-				</div>
+	   		<div class="aventura-box">
+				<a href="/Aventura/@aventura.Codigo">
+					@* TODO : Link de fotos. *@
+					<img src="/AppData/Foto/" alt="@aventura.Titulo" width="160px" height="115px"/>
+					<p class="name-aventura">@aventura.Autor.Nome</p>
+					<p>@aventura.Titulo</p>
+				</a>
 			</div>
 		}
 

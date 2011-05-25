@@ -85,12 +85,15 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
-		public IList<Dominio.Noticia> PesquisarNoticia(Dominio.Noticia noticia)
+		public IList<Dominio.Noticia> PesquisarNoticia(Dominio.Noticia noticia, int qtde=0)
 		{
 			try
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				INoticiaDAO noticiaDAO = fabrica.GetNoticiaDAO();
+
+				if(qtde > 0)
+					return noticiaDAO.Pesquisar(noticia, qtde);
 
 				return noticiaDAO.Pesquisar(noticia);
 			}
@@ -159,12 +162,15 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
-		public IList<Dominio.Coluna> PesquisarColuna(Dominio.Coluna coluna)
+		public IList<Dominio.Coluna> PesquisarColuna(Dominio.Coluna coluna, int qtde=0)
 		{
 			try
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IColunaDAO colunaDAO = fabrica.GetColunaDAO();
+				
+				if (qtde > 0)
+					return colunaDAO.Pesquisar(coluna, qtde);
 
 				return colunaDAO.Pesquisar(coluna);
 			}
@@ -233,12 +239,15 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
-		public IList<Dominio.Aventura> PesquisarAventura(Dominio.Aventura aventura)
+		public IList<Dominio.Aventura> PesquisarAventura(Dominio.Aventura aventura, int qtde=0)
 		{
 			try
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IAventuraDAO aventuraDAO = fabrica.GetAventuraDAO();
+
+				if(qtde > 0)
+					return aventuraDAO.Pesquisar(aventura, qtde);
 
 				return aventuraDAO.Pesquisar(aventura);
 			}
@@ -269,7 +278,7 @@ namespace AltaMontanha.Models.Fachada
 					if (aventura.Rota == null)
 						aventura.Rota = new Rota() { Caminho = string.Format("Rota/{0}", nomeArquivo) };
 
-					this.SalvaArquivo(caminho, nomeArquivo, arquivoRota);
+					this.SalvarArquivo(caminho, nomeArquivo, arquivoRota);
 				}
 
 				if (aventura.Codigo <= 0)
@@ -305,7 +314,7 @@ namespace AltaMontanha.Models.Fachada
 			throw new NotImplementedException();
 		}
 
-		public string SalvaArquivo(string caminho, string nomeArquivo, HttpPostedFileBase arquivo)
+		public string SalvarArquivo(string caminho, string nomeArquivo, HttpPostedFileBase arquivo)
 		{
 			try
 			{
@@ -423,12 +432,15 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
-		public IList<Dominio.Artigo> PesquisarArtigo(Dominio.Artigo artigo)
+		public IList<Dominio.Artigo> PesquisarArtigo(Dominio.Artigo artigo, int qtde=0)
 		{
 			try
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IArtigoDAO artigoDAO = fabrica.GetArtigoDAO();
+
+				if (qtde > 0)
+					return artigoDAO.Pesquisar(artigo, qtde);
 
 				return artigoDAO.Pesquisar(artigo);
 			}

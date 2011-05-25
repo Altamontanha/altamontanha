@@ -7,6 +7,6 @@ namespace AltaMontanha.Models.Persistencia.Abstracao
 {
 	public interface IColunaDAO : IDAO<Dominio.Coluna>
 	{
-
+		IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto, int qtde);
 	}
 }

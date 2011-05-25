@@ -15,25 +15,42 @@
 
 @helper VisualizarNoticiasDestaque(IList<AltaMontanha.Models.Dominio.Noticia> listaNoticias)
 {
+	<script src="../Scripts/jquery-1.4.4.js" type="text/javascript"></script>
+	<script src="/Scripts/easySlider1.7.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		var j = jQuery.noConflict();
+
+		j(document).ready(function () 
+		{
+			j("#slider").easySlider(
+			{
+				auto: true,
+				continuous: true,
+				numeric: true,
+				speed: 1000,
+				pause: 4000,
+			});
+		});
+	</script>
 	@* TODO: Implementar Helper de ultimas Noticias. *@
 	<div id="destaques-wrap" class="col-340">
-		<h2 class="box-title-small"><span class="title-bg">Destaques</span></h2>
-		<div class="photo-destaque">
-			<a href="#">
-				<img src="images/pic.jpg" width="340px" height="240px" />
-				<div class="news-destaque">
-					<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p> 
-				</div>
-			</a>
+		<div id="slider">
+			<h2 class="box-title-small"><span class="title-bg">Destaques</span></h2>
+			<ul>
+			@foreach (AltaMontanha.Models.Dominio.Noticia noticia in listaNoticias)
+			{
+				<li class="photo-destaque">
+					<div>
+						<a href="#">
+							<img alt="@noticia.Titulo" src="/AppData/Foto/340x240/2011_05/11052011193347IMG_0007.JPG" width="340px" height="240px" />
+							<div class="news-destaque">
+								<p>@noticia.Titulo</p> 
+							</div>
+						</a>
+					</div>
+				</li>
+			}
+			</ul>
 		</div>
-		<ul id="destaque-menu">
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">6</a></li>
-			<li><a href="#">7</a></li>
-		</ul>
 	</div>
 }

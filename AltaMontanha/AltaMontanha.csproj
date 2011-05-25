@@ -221,7 +221,9 @@
     <EmbeddedResource Include="Models\Dominio\Local.hbm.xml" />
     <EmbeddedResource Include="Models\Dominio\Tela.hbm.xml" />
     <Content Include="Scripts\AM\Foto.js" />
+    <Content Include="Scripts\AM\Portal.js" />
     <Content Include="Scripts\AM\Util.js" />
+    <Content Include="Scripts\easySlider1.7.js" />
     <Content Include="Scripts\jquery.jcrop.min.js" />
     <Content Include="Scripts\jquery.jnice.js" />
     <Content Include="Scripts\jquery.maskedinput.js" />
@@ -257,8 +259,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppData\Banner\" />
+    <Folder Include="AppData\Foto\340x240\" />
     <Folder Include="AppData\Foto\Grande\" />
-    <Folder Include="AppData\Foto\Media\" />
     <Folder Include="AppData\Foto\Pequena\" />
     <Folder Include="AppData\Foto\Usuario\" />
     <Folder Include="AppData\Rota\" />

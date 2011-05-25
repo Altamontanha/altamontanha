@@ -20,6 +20,33 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			return objeto; 
 		}
 
+		public IList<Dominio.Aventura> Pesquisar(Dominio.Aventura objeto, int qtde)
+		{
+			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Aventura));
+			criteria.SetMaxResults(qtde);
+			criteria.AddOrder(Order.Desc("Data"));
+			
+			if (objeto == null)
+				return criteria.List<Dominio.Aventura>();
+
+			if (objeto.Codigo > 0)
+				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
+			if (objeto.AventuraAnterior != null)
+				criteria = criteria.Add(Expression.Eq("CodAventuraAnterior", objeto.AventuraAnterior.Codigo));
+			if (objeto.Autor != null)
+				criteria = criteria.Add(Expression.Eq("CodAutor", objeto.Autor.Codigo));
+			if (objeto.UsuarioCadastro != null)
+				criteria = criteria.Add(Expression.Eq("CodUsuario", objeto.UsuarioCadastro.Codigo));
+			if (objeto.Data > DateTime.MinValue)
+				criteria = criteria.Add(Expression.Eq("Data", objeto.Data));
+			if (!string.IsNullOrEmpty(objeto.Titulo))
+				criteria = criteria.Add(Expression.Eq("Titulo", objeto.Titulo));
+
+			IList<Dominio.Aventura> aventuras = criteria.List<Dominio.Aventura>();
+
+			return aventuras;
+		}
+
 		public IList<Dominio.Aventura> Pesquisar(Dominio.Aventura objeto)
 		{
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Aventura));
