@@ -27,5 +27,7 @@ namespace AltaMontanha.Models.Dominio
 		public virtual string Fonte { get; set; }
 
 		public virtual bool Galeria { get; set; }
+
+		public virtual IList<PalavraChave> ListaPalavrasChave { get; set; }
 	}
 }

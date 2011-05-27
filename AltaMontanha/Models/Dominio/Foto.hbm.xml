@@ -19,5 +19,9 @@
 		<property name="Galeria" not-null="false" access="property" type="Boolean">
 			<column name="Galeria" length="1" />
 		</property>
+		<bag name="ListaPalavrasChave" table="TB_FotoPalavraChave" cascade="save-update">
+			<key column="CodFoto"/>
+			<many-to-many class="PalavraChave" column="CodPalavraChave"></many-to-many>
+		</bag>
 	</class>
 </hibernate-mapping>

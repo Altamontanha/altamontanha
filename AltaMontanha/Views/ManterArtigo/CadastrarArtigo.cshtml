@@ -56,11 +56,9 @@
 			@Html.TextBoxFor(model => model.Data, new { @class = "text-medium" })
 			@Html.ValidationMessageFor(model => model.Data)
 		</p>
-
 		<p>
 			@HelperPalavraChave.SelecionarPalavraChave(Model)
 		</p>
-
 		<br />
 		<p><input type="submit" value="Cadastrar" /></p>
 	</fieldset>
