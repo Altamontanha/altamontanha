@@ -20,13 +20,13 @@ namespace AltaMontanha.Models.Fachada
 		/// Array com os tamanhos necessários das fotos que serão redimensionadas
 		/// </summary>
 		private static dynamic[] tamanhos = { 
-											   new { altura = 50,  largura = 50,  caminho = "50x50"   },
-											   new { altura = 145, largura = 95,  caminho = "145x95"  },
-											   new { altura = 145, largura = 105, caminho = "145x105" },
-											   new { altura = 160, largura = 115, caminho = "160x115" },
-											   new { altura = 220, largura = 165, caminho = "220x165" },
-											   new { altura = 340, largura = 240, caminho = "340x240" },
-											   new { altura = 640, largura = 480, caminho = "640x480" },
+											   new { largura = 50,  altura = 50,  caminho = "50x50"   },
+											   new { largura = 145, altura = 95,  caminho = "145x95"  },
+											   new { largura = 145, altura = 105, caminho = "145x105" },
+											   new { largura = 160, altura = 115, caminho = "160x115" },
+											   new { largura = 220, altura = 165, caminho = "220x165" },
+											   new { largura = 340, altura = 240, caminho = "340x240" },
+											   new { largura = 640, altura = 480, caminho = "640x480" },
 										   };
 
 		/// <summary>
