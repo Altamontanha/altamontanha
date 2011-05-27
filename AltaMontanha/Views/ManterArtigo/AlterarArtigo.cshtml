@@ -29,9 +29,9 @@
  		@Html.HiddenFor(model => model.UsuarioCadastro.Codigo)
 		
        <p>
-			@Html.LabelFor(model => model.Categoria.Titulo)
-        	@Html.DropDownListFor(model => model.Categoria.Codigo, (IEnumerable<SelectListItem>)ViewData["Categorias"])
-			@Html.ValidationMessageFor(model => model.Categoria.Codigo)
+			@Html.LabelFor(model => model.ObjCategoria.Titulo)
+        	@Html.DropDownListFor(model => model.ObjCategoria.Codigo, (IEnumerable<SelectListItem>)ViewData["Categorias"])
+			@Html.ValidationMessageFor(model => model.ObjCategoria.Codigo)
 		</p>
 		<p>
             @Html.LabelFor(model => model.Titulo)
