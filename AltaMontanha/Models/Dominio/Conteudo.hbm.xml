@@ -24,16 +24,11 @@
 			<key column="CodConteudo"/>
 			<many-to-many class="Foto" column="CodFoto"></many-to-many>
 		</bag>
-		<!-- TODO: adicionar elementos -->
-		<!--bag name="ListaComentarios" table="TB_Comentario" cascade="save-update">
-			<key column="CodConteudo"/>
-			<one-to-many class="Comentario"></one-to-many>
-		</bag>
-		-->
 		<bag name="ListaPalavrasChave" table="TB_ConteudoPalavraChave" cascade="save-update">
 			<key column="CodConteudo"/>
 			<many-to-many class="PalavraChave" column="CodPalavraChave"></many-to-many>
 		</bag>
+		<many-to-one name="FotoCapa" column="CodFotoCapa" class="Foto" not-null="true" />
 		<many-to-one name="UsuarioCadastro" column="CodUsuario" class="Usuario" not-null="true" />
 	</class>
 	<!--Artigo-->

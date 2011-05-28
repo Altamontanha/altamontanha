@@ -95,6 +95,7 @@
 												var galeria = j("input[name=Galeria_" + this.value + "]").val();
 												window.parent.j("#listaFotos").append(
 													"<li id='fotoID_" + codigo + "'>" + 
+													"  <input type='radio' name='FotoCapa.Codigo' value='" + codigo + "' />" + 
 													"  <a href='#fotoID_" + codigo + "'>X</a>" + 
 													"  <img alt='" + legenda + "' src='@Url.Content("~/AppData/Foto/145x95/")" + caminho + "' title='" + legenda + "' />" +
 													"  <input type='hidden' name='ListaFotos.Index' value = '" + codigo + "' />" +

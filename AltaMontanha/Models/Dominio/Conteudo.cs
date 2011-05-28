@@ -59,7 +59,10 @@ namespace AltaMontanha.Models.Dominio
 		/// </summary>
 		public virtual IList<Foto> ListaFotos { get; set; }
 
-		//public virtual List<Comentario> ListaComentarios { get; set; }
+		/// <summary>
+		/// Foto utilizada como capa do conteúdo
+		/// </summary>
+		public virtual Foto FotoCapa { get; set; }
 		
 		/// <summary>
 		/// Usuário que fez o cadastro do conteúdo
