@@ -16,6 +16,7 @@
 					AltaMontanha.Models.Dominio.PalavraChave palavra = @conteudo.ListaPalavrasChave[i];	
 						<li id="@string.Concat("pcID_", palavra.Codigo)">
 							@conteudo.ListaPalavrasChave[i].Nome (<a href="@string.Concat("#pcID_", palavra.Codigo)">X</a>)
+							<input type="hidden" name="ListaPalavrasChave.Index" value="@palavra.Codigo" />
 							<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Codigo")" value="@palavra.Codigo" />
 							<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Nome")" value="@palavra.Nome" />
 						</li>
@@ -29,6 +30,7 @@
 					AltaMontanha.Models.Dominio.PalavraChave palavra = @conteudo.ListaPalavrasChave[i];	
 						<li id="@string.Concat("pcID_", palavra.Codigo)">
 							@conteudo.ListaPalavrasChave[i].Nome (<a href="@string.Concat("#pcID_", palavra.Codigo)">X</a>)
+							<input type="hidden" name="ListaPalavrasChave.Index" value="@palavra.Codigo" />
 							<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Codigo")" value="@palavra.Codigo" />
 							<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Nome")" value="@palavra.Nome" />
 						</li>
