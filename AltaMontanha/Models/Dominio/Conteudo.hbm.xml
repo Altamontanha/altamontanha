@@ -20,12 +20,12 @@
 		<property name="Data" not-null="true" access="property" type="DateTime">
 			<column name="Data" sql-type="DATETIME"/>
 		</property>
-		<!-- TODO: adicionar elementos -->
-		<!--bag name="ListaFotos" table="TB_ConteudoFoto" cascade="save-update">
+		<bag name="ListaFotos" table="TB_ConteudoFoto" cascade="save-update">
 			<key column="CodConteudo"/>
 			<many-to-many class="Foto" column="CodFoto"></many-to-many>
 		</bag>
-		<bag name="ListaComentarios" table="TB_Comentario" cascade="save-update">
+		<!-- TODO: adicionar elementos -->
+		<!--bag name="ListaComentarios" table="TB_Comentario" cascade="save-update">
 			<key column="CodConteudo"/>
 			<one-to-many class="Comentario"></one-to-many>
 		</bag>
