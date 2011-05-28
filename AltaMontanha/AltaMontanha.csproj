@@ -150,6 +150,7 @@
     <Content Include="Content\themes\Cinza\css\jNice.css" />
     <Content Include="Content\themes\Cinza\css\jquery.css" />
     <Content Include="Content\themes\Cinza\css\layout.css" />
+    <Content Include="Content\themes\Cinza\css\nyroModal.css" />
     <Content Include="Content\themes\Cinza\css\reset.css" />
     <Content Include="Content\themes\Cinza\css\transdmin.css" />
     <Content Include="Content\themes\Cinza\img\ajaxLoader.gif" />
