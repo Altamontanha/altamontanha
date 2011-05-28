@@ -415,6 +415,7 @@
     <Content Include="App_Code\HelperColuna.cshtml" />
     <Content Include="App_Code\HelperArtigo.cshtml" />
     <Content Include="App_Code\HelperAventura.cshtml" />
+    <Content Include="App_Code\HelperFoto.cshtml" />
     <None Include="Content\themes\Publico\font\aller_bd-webfont.eot" />
     <None Include="Content\themes\Publico\font\aller_bd-webfont.ttf" />
     <None Include="Content\themes\Publico\font\aller_bdit-webfont.eot" />
