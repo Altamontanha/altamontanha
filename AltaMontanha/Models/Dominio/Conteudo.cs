@@ -57,7 +57,7 @@ namespace AltaMontanha.Models.Dominio
 		/// <summary>
 		/// Lista de fotos do conteúdo
 		/// </summary>
-		public virtual List<Foto> ListaFotos { get; set; }
+		public virtual IList<Foto> ListaFotos { get; set; }
 
 		//public virtual List<Comentario> ListaComentarios { get; set; }
 		

@@ -1,0 +1,11 @@
+﻿@helper VincularFoto(AltaMontanha.Models.Dominio.Conteudo conteudo)
+{
+	<a href="/ManterFoto/VincularFoto" target="_blank" id="fotos">Fotos</a>
+	<ul id="listaFotos">
+	</ul>
+	<script type="text/javascript">
+		j(document).ready(function () {
+			j("#fotos").nyroModal();
+		});
+	</script>
+}
