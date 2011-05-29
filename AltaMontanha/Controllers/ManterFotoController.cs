@@ -9,7 +9,8 @@ using AltaMontanha.Models.Dominio;
 
 namespace AltaMontanha.Controllers
 {
-    public class ManterFotoController : Utilitario.BaseController
+	[HandleError]
+	public class ManterFotoController : Utilitario.BaseController
     {
 		Models.Fachada.MultimidiaFacade facade = new Models.Fachada.MultimidiaFacade();
 	
@@ -88,14 +89,14 @@ namespace AltaMontanha.Controllers
 			return RedirectToAction("Index");
 		}
 		//
-		// GET: /ManterFotoAlterarFoto/5
+		// GET: /VincularFoto/
 		[Authorize]
-		public ActionResult VincularFoto()//(int codConteudo)
+		public ActionResult VincularFoto()
 		{
 			return View();
 		}
 		//
-		// POST: /ManterFoto/AlterarFoto/5
+		// POST: /ManterFoto/VincularFoto/
 		[HttpPost]
 		[Authorize]
 		public ActionResult VincularFoto(FormCollection collection)
