@@ -33,7 +33,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			if (artigo.Codigo > 0)
 				criteria = criteria.Add(Expression.Eq("Codigo", artigo.Codigo));
 			if (artigo.ObjCategoria != null)
-				criteria = criteria.Add(Expression.Eq("CodCategoria", artigo.ObjCategoria.Codigo));
+				criteria = criteria.Add(Expression.Eq("ObjCategoria.Codigo", artigo.ObjCategoria.Codigo));
 			if (artigo.Data > DateTime.MinValue)
 				criteria = criteria.Add(Expression.Eq("Data", artigo.Data));
 			if (!string.IsNullOrEmpty(artigo.Titulo))
