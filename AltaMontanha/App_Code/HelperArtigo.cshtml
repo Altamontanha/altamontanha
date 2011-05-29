@@ -7,8 +7,9 @@
 		{
 			<div class="artigo-box">
 				<a href="/artigo/@artigo.Codigo">
-					@*TODO: Caminho das fotos *@
-					<span class="thumb-border-5"><img src="" alt="@artigo.Titulo" width="145px" height="95px"></span>
+					<span class="thumb-border-5">
+						<img src="/AppData/Foto/145x95/@artigo.FotoCapa.Caminho" alt="@artigo.FotoCapa.Legenda" width="145px" height="95px" />
+					</span>
 					<p>@artigo.Titulo</p>
 				</a>
 			</div>
@@ -25,7 +26,7 @@
 			<div class="historia-box col-340">
 				<a href="/artigo/@artigo.Codigo">
 					@*TODO: Caminho das fotos *@
-					<img src="images/pic.jpg" alt="@artigo.Titulo" width="145px" height="105px">
+					<img src="/AppData/Foto/145x105/@artigo.FotoCapa.Caminho" alt="@artigo.Titulo" width="145" height="105" />
 					<p>@artigo.Titulo</p>
 				</a>
 			</div>	
