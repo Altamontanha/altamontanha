@@ -1,0 +1,1 @@
+alter table `TB_Foto` change `Legenda` `Legenda` varchar(150) not null;
