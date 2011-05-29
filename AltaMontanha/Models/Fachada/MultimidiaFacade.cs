@@ -168,9 +168,14 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IFotoDAO fotoDAO = fabrica.GetFotoDAO();
 
-				this.ExcluirImagem(fotoDAO.Pesquisar(codigo).Caminho);
+				Dominio.Foto foto = fotoDAO.Pesquisar(codigo);
 
-				return fotoDAO.Excluir(codigo);
+				if (fotoDAO.Excluir(foto.Codigo))
+					this.ExcluirImagemGaleria(foto.Caminho);
+				else
+					return false;
+				
+				return true;
 			}
 			catch (Exception e)
 			{
