@@ -27,7 +27,7 @@ namespace AltaMontanha.Models.Dominio
 		/// Legenda da foto
 		/// </summary>
 		[Required(ErrorMessage = "Legenda é um campo obrigatório")]
-		[StringLength(50)]
+		[StringLength(150)]
 		public virtual string Legenda { get; set; }
 
 		/// <summary>
