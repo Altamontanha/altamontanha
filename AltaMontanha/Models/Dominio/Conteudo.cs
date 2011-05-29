@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AltaMontanha.Models.Dominio
 {
@@ -15,7 +17,22 @@ namespace AltaMontanha.Models.Dominio
 		/// Código do conteúdo
 		/// </summary>
 		public virtual int Codigo { get; set; }
-		
+
+		/// <summary>
+		/// Slug do título utilizado para url amigável 
+		/// </summary>
+		public string Slug
+		{
+			get
+			{
+				string slug;
+				slug = Encoding.ASCII.GetString(Encoding.GetEncoding("Cyrillic").GetBytes(this.Titulo));
+				slug = HttpUtility.HtmlDecode(slug);
+				slug = Regex.Replace(slug, @"[^\w\ ]", "").Trim().Replace(" ", "-");
+				return slug.ToLower();
+			}
+		}
+
 		/// <summary>
 		/// Título do conteúdo
 		/// </summary>

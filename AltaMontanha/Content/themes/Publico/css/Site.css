@@ -652,6 +652,44 @@ div#copyright p{
 div#copyright p.credits{
 	float:right;
 }
+
+/*------------------------------------------------ CLASSES CONTEÚDO -------------------------------------------------*/
+div.fotos
+{
+	float: right;
+	width: 160px;
+}
+
+div.fotos ul li a span 
+{
+	font-size: 12px;
+}
+
+div.fotos ul li 
+{
+	margin-bottom: 25px;
+}
+
+div#conteudo
+{
+	padding: 10px;
+	margin: 0 10px 0 10px;
+	width: 750px;
+	float: left;
+}
+
+div#conteudo h2 
+{
+	font-size: 22px;
+	padding: 5px 0 0 0;
+}
+
+.resumo 
+{
+	font-weight: bold;
+	padding: 15px 0 15px 0;
+}
+
 /*------------------------------------------------ CLASSES GENÉRICAS ------------------------------------------------*/
 .col-220{
 	overflow: hidden;

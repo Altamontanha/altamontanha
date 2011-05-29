@@ -23,10 +23,18 @@ namespace AltaMontanha
 
 			routes.MapRoute
 			(
+				"Artigo",
+				"Artigo/{Codigo}/{Titulo}",
+				new { controller = "Home", action = "VisualizarArtigo" },
+				new { Codigo = @"\d+" }
+			);
+
+			routes.MapRoute
+			(
 				"Default",
 				"{controller}/{action}/{Codigo}",
-                new { controller = "Home", action = "Index", Codigo = UrlParameter.Optional } // Parameter defaults
-            );
+				new { controller = "Home", action = "Index", Codigo = UrlParameter.Optional } // Parameter defaults
+			);
 
 		}
 
