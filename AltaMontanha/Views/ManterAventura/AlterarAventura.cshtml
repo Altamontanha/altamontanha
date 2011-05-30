@@ -23,7 +23,7 @@
 
 @using (Html.BeginForm("AlterarAventura", "ManterAventura", FormMethod.Post, new { @encType = "multipart/form-data" }))
 {
-    @Html.ValidationSummary(false)
+    @Html.ValidationSummary(true)
     <fieldset>
         <legend>Aventura</legend>
 		@Html.HiddenFor(model => model.UsuarioCadastro.Codigo)
