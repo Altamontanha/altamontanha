@@ -8,6 +8,7 @@
 
 .jNiceSelectWrapper ul {
 	height: 99px;
+	z-index:1;
 }
 
 .jNiceSelectWrapper div span {

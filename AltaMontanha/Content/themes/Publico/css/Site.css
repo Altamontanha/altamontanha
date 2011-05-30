@@ -654,13 +654,19 @@ div#copyright p.credits{
 }
 
 /*------------------------------------------------ CLASSES CONTEÚDO -------------------------------------------------*/
-div.fotos
+col-fotos
 {
 	float: right;
+	width: 200px;	
+}
+div.fotos
+{
+	float: left;
 	width: 160px;
+	margin:15px 0 0 0;
 }
 
-div.fotos ul li a span 
+div.fotos ul li a div 
 {
 	font-size: 12px;
 }
@@ -674,7 +680,7 @@ div#conteudo
 {
 	padding: 10px;
 	margin: 0 10px 0 10px;
-	width: 750px;
+	width: 700px;
 	float: left;
 }
 

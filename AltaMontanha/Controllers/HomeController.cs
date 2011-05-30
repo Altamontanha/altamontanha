@@ -13,6 +13,10 @@ namespace AltaMontanha.Controllers
 
 		public ActionResult VisualizarArtigo(int Codigo)
 		{
+			// TODO : Excluir diretiva de compilação.
+			//#if __DEBUG
+			//#endif
+
 			Artigo artigo = conteudoFacade.PesquisarArtigo(Codigo);
 			if (artigo == null)
 				return RedirectToAction("Index");
