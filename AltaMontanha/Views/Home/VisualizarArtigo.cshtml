@@ -4,6 +4,12 @@
     ViewBag.Title = @Model.Titulo + " - AltaMontanha.com";
     Layout = "~/Views/Shared/_LayoutPortal.cshtml";
 }
+<script type="text/javascript">
+	j(function () 
+	{
+		j('.nyroModal').nyroModal();
+	});
+</script>
 <div id="main-box">
 	<div id="conteudo">
 		<h2>@Model.Titulo</h2>

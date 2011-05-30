@@ -45,16 +45,8 @@ namespace AltaMontanha.Controllers
 		[ValidateInput(false)]
 		public ActionResult CadastrarFoto(Models.Dominio.Foto foto, HttpPostedFileBase file)
 		{
-			try
-			{
-				facade.SalvarFotoGaleria(foto, file);
-
-				return RedirectToAction("Index");
-			}
-			catch
-			{
-				return View(foto);
-			}
+			facade.SalvarFotoGaleria(foto, file);
+			return RedirectToAction("CadastrarFoto", "ManterFoto");
 		}
 		//
 		// GET: /ManterFotoAlterarFoto/5
@@ -70,15 +62,8 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult AlterarFoto(Foto foto, HttpPostedFileBase file)
 		{
-			try
-			{
-				facade.SalvarFotoGaleria(foto, file);
-				return RedirectToAction("Index");
-			}
-			catch
-			{
-				return View(foto);
-			}
+			facade.SalvarFotoGaleria(foto, file);
+			return RedirectToAction("Index");
 		}
 		//
 		// GET: /ManterFoto/ExluirFoto/5
