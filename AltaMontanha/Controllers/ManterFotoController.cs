@@ -9,7 +9,8 @@ using AltaMontanha.Models.Dominio;
 
 namespace AltaMontanha.Controllers
 {
-    public class ManterFotoController : Utilitario.BaseController
+	[HandleError]
+	public class ManterFotoController : Utilitario.BaseController
     {
 		Models.Fachada.MultimidiaFacade facade = new Models.Fachada.MultimidiaFacade();
 	
@@ -88,22 +89,14 @@ namespace AltaMontanha.Controllers
 			return RedirectToAction("Index");
 		}
 		//
-		// GET: /ManterFotoAlterarFoto/5
+		// GET: /VincularFoto/
 		[Authorize]
-		public ActionResult VincularFoto()//(int codConteudo)
+		public ActionResult VincularFoto()
 		{
-			//Models.Persistencia.Fabrica.IFactoryDAO fabrica = Models.Persistencia.Fabrica.FactoryFactoryDAO.GetFabrica();
-			//Models.Persistencia.Abstracao.IFotoDAO fotoDAO = fabrica.GetFotoDAO();
-
-			//ViewData["Fotos"] = fotoDAO.Pesquisar( new Foto() { Galeria=true } );
-
 			return View();
-
-			//Foto foto = facade.PesquisarFoto(Codigo);
-			//return View(foto);
 		}
 		//
-		// POST: /ManterFoto/AlterarFoto/5
+		// POST: /ManterFoto/VincularFoto/
 		[HttpPost]
 		[Authorize]
 		public ActionResult VincularFoto(FormCollection collection)
@@ -119,37 +112,6 @@ namespace AltaMontanha.Controllers
 			ViewData["Fotos"] = fotoDAO.Pesquisar(foto);
 
 			return View();
-		}
-		/// <summary>
-		/// vinculação de fotos com conteudo
-		/// </summary>
-		/// <param name="collection"></param>
-		/// <returns></returns>
-		[HttpPost]
-		[Authorize]
-		public ActionResult SalvarFoto(FormCollection collection)
-		{
-			IList<Models.Dominio.Foto> listaFotos = new List<Models.Dominio.Foto>();
-			Models.Persistencia.Fabrica.IFactoryDAO fabrica = Models.Persistencia.Fabrica.FactoryFactoryDAO.GetFabrica();
-			Models.Persistencia.Abstracao.IFotoDAO fotoDAO = fabrica.GetFotoDAO();
-
-			foreach (string key in collection.AllKeys) 
-			{
-				bool teste = collection[key].Contains("true");
-				
-				string[] values = collection.GetValues(key);
-
-				if(values.Count() > 1)
-				{
-					int codigo = Convert.ToInt32(values[0]);
-					listaFotos.Add(fotoDAO.Pesquisar(codigo));
-				}
-			}
-
-			if (listaFotos.Count() > 0)
-				Utilitario.Sessao.ListaFotos = listaFotos;
-
-			return RedirectToAction("VincularFoto");
 		}
 	}
 }

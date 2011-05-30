@@ -1,0 +1,49 @@
+﻿@helper VincularFoto(AltaMontanha.Models.Dominio.Conteudo conteudo)
+	{
+	<a href="/ManterFoto/VincularFoto" target="_blank" id="fotos">Adicionar</a>
+	 
+	<ul id="listaFotos">
+		@if (conteudo != null)
+ {
+	 foreach (AltaMontanha.Models.Dominio.Foto foto in conteudo.ListaFotos)
+	 {
+			<li id="@string.Concat("fotoID_", foto.Codigo)">
+				<div>
+					@if (foto.Codigo == conteudo.FotoCapa.Codigo)
+					{
+						<input type="radio" name="FotoCapa.Codigo" value="@foto.Codigo" checked="checked" />
+					}
+					else
+					{
+						<input type="radio" name="FotoCapa.Codigo" value="@foto.Codigo" />
+					}
+					<a href="@string.Concat("#fotoID_", @foto.Codigo)" class="bt_excluir">X</a>
+					<img alt='@foto.Legenda' src='@string.Concat("/AppData/Foto/145x95/", @foto.Caminho)' title='@foto.Legenda' />
+					<input type='hidden' name='ListaFotos.Index' value = '@foto.Codigo' />
+					<input type='hidden' name='ListaFotos[@foto.Codigo].Codigo' value='@foto.Codigo' />
+					<input type='hidden' name='ListaFotos[@foto.Codigo].Legenda' value='@foto.Legenda' />
+					<input type='hidden' name='ListaFotos[@foto.Codigo].Caminho' value='@foto.Caminho' />
+					<input type='hidden' name='ListaFotos[@foto.Codigo].Autor' value='@foto.Autor' />
+					<input type='hidden' name='ListaFotos[@foto.Codigo].Fonte' value='@foto.Fonte' />
+					<input type='hidden' name='ListaFotos[@foto.Codigo].Galeria' value='@foto.Galeria' />
+				</div>
+			</li>
+	 }
+ }
+	</ul>
+	<script type="text/javascript">
+		function adicionarAcaoRemover() {
+			j('a[href^=#fotoID_]').click(function () {
+				j(j(this).attr("href")).remove();
+			});
+		}
+
+		j(document).ready(function () {
+			// carregar modal no link
+			j("#fotos").nyroModal();
+
+			// ação para remover elementos
+			adicionarAcaoRemover();
+		});
+	</script>
+}

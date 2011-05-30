@@ -150,6 +150,7 @@
     <Content Include="Content\themes\Cinza\css\jNice.css" />
     <Content Include="Content\themes\Cinza\css\jquery.css" />
     <Content Include="Content\themes\Cinza\css\layout.css" />
+    <Content Include="Content\themes\Cinza\css\nyroModal.css" />
     <Content Include="Content\themes\Cinza\css\reset.css" />
     <Content Include="Content\themes\Cinza\css\transdmin.css" />
     <Content Include="Content\themes\Cinza\img\ajaxLoader.gif" />
@@ -415,6 +416,7 @@
     <Content Include="App_Code\HelperColuna.cshtml" />
     <Content Include="App_Code\HelperArtigo.cshtml" />
     <Content Include="App_Code\HelperAventura.cshtml" />
+    <Content Include="App_Code\HelperFoto.cshtml" />
     <None Include="Content\themes\Publico\font\aller_bd-webfont.eot" />
     <None Include="Content\themes\Publico\font\aller_bd-webfont.ttf" />
     <None Include="Content\themes\Publico\font\aller_bdit-webfont.eot" />
@@ -426,6 +428,7 @@
     <None Include="Content\themes\Publico\font\umbrage2-webfont.eot" />
     <None Include="Content\themes\Publico\font\umbrage2-webfont.ttf" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\VisualizarArtigo.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

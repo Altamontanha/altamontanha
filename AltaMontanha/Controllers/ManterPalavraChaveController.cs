@@ -8,7 +8,8 @@ using AltaMontanha.Models.Fachada;
 
 namespace AltaMontanha.Controllers
 {
-    public class ManterPalavraChaveController : Controller
+	[HandleError]
+	public class ManterPalavraChaveController : Controller
     {
 		ConteudoFacade facade = new ConteudoFacade();
 

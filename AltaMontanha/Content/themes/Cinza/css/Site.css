@@ -82,3 +82,51 @@ textarea
 {
 	padding:5px;
 }
+
+#listaPalavras li
+{
+	display: inline;
+	margin-right: 10px;
+}
+
+#listaFotos
+{
+	clear:left;
+}
+
+#listaFotos li
+{
+	margin-right: 10px;
+	display: inline-block;
+}
+
+#listaFotos li div
+{
+	width: 145px;
+	height: 95px;
+}
+
+#listaFotos li div span
+{
+	top: 15px;
+	float: left;
+	position: relative;
+}
+
+#listaFotos li div a.bt_excluir
+{
+	top: 15px;
+	float: right;
+	background-color: White;
+	padding: 2px;
+	text-decoration: none;
+	color: Black;
+	position: relative;
+	font-weight: bold;
+}
+
+.bt_adicionar 
+{
+	margin: 5px 285px 0 0;
+	float:right;
+}

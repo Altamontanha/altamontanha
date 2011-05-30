@@ -64,8 +64,11 @@ namespace AltaMontanha.NHibernate
 
 			if (session != null)
 			{
-				session.Flush();
-				session.Close();
+				if (session.IsConnected)
+				{
+					session.Flush();
+					session.Close();
+				}
 			}
 
 			context.Items[CHAVE] = null;

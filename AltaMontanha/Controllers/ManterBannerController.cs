@@ -8,7 +8,8 @@ using AltaMontanha.Models.Fachada;
 
 namespace AltaMontanha.Controllers
 {
-    public class ManterBannerController : Controller
+	[HandleError]
+	public class ManterBannerController : Controller
     {
 		private MultimidiaFacade facade = new MultimidiaFacade();
 

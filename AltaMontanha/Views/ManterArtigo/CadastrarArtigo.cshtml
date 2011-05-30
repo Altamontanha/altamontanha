@@ -27,9 +27,9 @@
 	<fieldset>
 		<legend>Artigo</legend>
 		<p>
-			@Html.LabelFor(model => model.Categoria)
-			@Html.DropDownListFor(model => model.Categoria.Codigo, (IEnumerable<SelectListItem>)ViewData["Categorias"])
-			@Html.ValidationMessageFor(model => model.Categoria.Codigo)
+			@Html.LabelFor(model => model.ObjCategoria)
+			@Html.DropDownListFor(model => model.ObjCategoria.Codigo, (IEnumerable<SelectListItem>)ViewData["Categorias"])
+			@Html.ValidationMessageFor(model => model.ObjCategoria.Codigo)
 		</p>
 		<p>
 			@Html.LabelFor(model => model.Titulo)
@@ -56,12 +56,19 @@
 			@Html.TextBoxFor(model => model.Data, new { @class = "text-medium" })
 			@Html.ValidationMessageFor(model => model.Data)
 		</p>
-
+	</fieldset>
+	<fieldset>
+		<legend>Palavra-chave</legend>
 		<p>
 			@HelperPalavraChave.SelecionarPalavraChave(Model)
 		</p>
-
-		<br />
-		<p><input type="submit" value="Cadastrar" /></p>
 	</fieldset>
+	<fieldset>
+		<legend>Foto</legend>
+		<p>
+			@HelperFoto.VincularFoto(Model)
+        </p>
+	</fieldset>
+	<br />
+	<p><input type="submit" value="Cadastrar" /></p>
 }

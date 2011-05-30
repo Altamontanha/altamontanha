@@ -1,22 +1,42 @@
-﻿@helper SelecionarPalavraChave(AltaMontanha.Models.Dominio.Conteudo conteudo)
-{
+﻿@helper SelecionarPalavraChave(object entrada)
+	{
+			  
 	<label for="Palavras">Palavras-chave:</label>
+	<input type="button" value="Adicionar" id="CadastrarPalavraChave" class="bt_adicionar" />
 	<input type="text" name="Palavras" id="Palavras" class="text-long" />
-	<input type="button" value="Adicionar" id="CadastrarPalavraChave" />
 
 	<ul id="listaPalavras">
-		@if (conteudo != null) 
-		{
-			for (int i = 0; i < conteudo.ListaPalavrasChave.Count; i++)
-			{
-				AltaMontanha.Models.Dominio.PalavraChave palavra = @conteudo.ListaPalavrasChave[i];	
-	   			<li id="@string.Concat("pcID_", palavra.Codigo)">
-					@conteudo.ListaPalavrasChave[i].Nome (<a href="@string.Concat("#pcID_", palavra.Codigo)">X</a>)
-					<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Codigo")" value="@palavra.Codigo" />
-					<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Nome")" value="@palavra.Nome" />
-				</li>
-			}
-		}
+		@if (entrada != null)
+  {
+	  if (entrada.GetType() == typeof(AltaMontanha.Models.Dominio.Foto))
+	  {
+		  AltaMontanha.Models.Dominio.Foto conteudo = (AltaMontanha.Models.Dominio.Foto)entrada;
+		  for (int i = 0; i < conteudo.ListaPalavrasChave.Count; i++)
+		  {
+			  AltaMontanha.Models.Dominio.PalavraChave palavra = @conteudo.ListaPalavrasChave[i];	
+						<li id="@string.Concat("pcID_", palavra.Codigo)">
+							@conteudo.ListaPalavrasChave[i].Nome (<a href="@string.Concat("#pcID_", palavra.Codigo)">X</a>)
+							<input type="hidden" name="ListaPalavrasChave.Index" value="@palavra.Codigo" />
+							<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Codigo")" value="@palavra.Codigo" />
+							<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Nome")" value="@palavra.Nome" />
+						</li>
+		  }
+	  }
+	  else if (entrada.GetType().IsSubclassOf(typeof(AltaMontanha.Models.Dominio.Conteudo)))
+	  {
+		  AltaMontanha.Models.Dominio.Conteudo conteudo = (AltaMontanha.Models.Dominio.Conteudo)entrada;
+		  for (int i = 0; i < conteudo.ListaPalavrasChave.Count; i++)
+		  {
+			  AltaMontanha.Models.Dominio.PalavraChave palavra = @conteudo.ListaPalavrasChave[i];	
+						<li id="@string.Concat("pcID_", palavra.Codigo)">
+							@conteudo.ListaPalavrasChave[i].Nome (<a href="@string.Concat("#pcID_", palavra.Codigo)">X</a>)
+							<input type="hidden" name="ListaPalavrasChave.Index" value="@palavra.Codigo" />
+							<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Codigo")" value="@palavra.Codigo" />
+							<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Nome")" value="@palavra.Nome" />
+						</li>
+		  }
+	  }
+  }
 	</ul>
 
 	<script type="text/javascript">
@@ -49,8 +69,6 @@
 							// evento para remover palavra-chave da lista
 							j('a[href^=#pcID]').click(function () {
 								j(j(this).attr("href")).remove();
-								//j(j(this).attr("href")).hide();
-								//j(j(this).attr("href") + " > input").val("");
 							});
 
 							total++;

@@ -20,20 +20,15 @@
 		<property name="Data" not-null="true" access="property" type="DateTime">
 			<column name="Data" sql-type="DATETIME"/>
 		</property>
-		<!-- TODO: adicionar elementos -->
-		<!--bag name="ListaFotos" table="TB_ConteudoFoto" cascade="save-update">
+		<bag name="ListaFotos" table="TB_ConteudoFoto" cascade="save-update">
 			<key column="CodConteudo"/>
 			<many-to-many class="Foto" column="CodFoto"></many-to-many>
 		</bag>
-		<bag name="ListaComentarios" table="TB_Comentario" cascade="save-update">
-			<key column="CodConteudo"/>
-			<one-to-many class="Comentario"></one-to-many>
-		</bag>
-		-->
 		<bag name="ListaPalavrasChave" table="TB_ConteudoPalavraChave" cascade="save-update">
 			<key column="CodConteudo"/>
 			<many-to-many class="PalavraChave" column="CodPalavraChave"></many-to-many>
 		</bag>
+		<many-to-one name="FotoCapa" column="CodFotoCapa" class="Foto" not-null="true" />
 		<many-to-one name="UsuarioCadastro" column="CodUsuario" class="Usuario" not-null="true" />
 	</class>
 	<!--Artigo-->
@@ -48,7 +43,7 @@
 		<join table="TB_Aventura">
 			<key column="CodConteudo" />
 			<many-to-one name="AventuraAnterior" column="CodConteudoPai" class="Aventura" not-null="false" />
-			<many-to-one name="Rota" column="CodRota" class="Rota" cascade="all-delete-orphan" not-null="false" />
+			<many-to-one name="Rota" column="CodRota" class="Rota" not-null="false" />
 			<many-to-one name="Autor" column="CodUsuario" class="Usuario" not-null="true" />
 		</join>
 	</subclass>

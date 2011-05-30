@@ -33,7 +33,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			if (artigo.Codigo > 0)
 				criteria = criteria.Add(Expression.Eq("Codigo", artigo.Codigo));
 			if (artigo.ObjCategoria != null)
-				criteria = criteria.Add(Expression.Eq("CodCategoria", artigo.ObjCategoria.Codigo));
+				criteria = criteria.Add(Expression.Eq("ObjCategoria.Codigo", artigo.ObjCategoria.Codigo));
 			if (artigo.Data > DateTime.MinValue)
 				criteria = criteria.Add(Expression.Eq("Data", artigo.Data));
 			if (!string.IsNullOrEmpty(artigo.Titulo))
@@ -73,18 +73,24 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public bool Excluir(int codigo)
 		{
-			try
-			{
-				Dominio.Artigo artigo = Pesquisar(codigo);
+			Dominio.Artigo artigo = Pesquisar(codigo);
 
-				NHibernate.HttpModule.RecuperarSessao.Delete(artigo);
-
-				return true;
-			}
-			catch (Exception)
+			using (ISession session = NHibernate.HttpModule.RecuperarSessao)
+			using (ITransaction transaction = session.BeginTransaction())
 			{
-				throw;
+				try
+				{
+					NHibernate.HttpModule.RecuperarSessao.Delete(artigo);
+					transaction.Commit();
+				}
+				catch (HibernateException e)
+				{
+					transaction.Rollback();
+					throw new ApplicationException(e.InnerException.Message);
+				}
 			}
+
+			return true;
 		}
 	}
 }

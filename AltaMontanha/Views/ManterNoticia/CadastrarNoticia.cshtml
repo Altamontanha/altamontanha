@@ -69,12 +69,21 @@
             @Html.ValidationMessageFor(model => model.Data)
         </p>
 
- 		<p>
+	</fieldset>
+	<fieldset>
+		<legend>Palavra-chave</legend>
+		<p>
 			@HelperPalavraChave.SelecionarPalavraChave(Model)
+		</p>
+	</fieldset>
+	<fieldset>
+		<legend>Foto</legend>
+		<p>
+			@HelperFoto.VincularFoto(Model)
         </p>
-
-        <p>
-            <input type="submit" value="Salvar" />
-        </p>
-    </fieldset>
+	</fieldset>
+	<br />
+    <p>
+        <input type="submit" value="Salvar" />
+    </p>
 }

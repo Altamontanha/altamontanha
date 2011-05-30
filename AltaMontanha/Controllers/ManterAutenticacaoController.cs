@@ -7,6 +7,7 @@ using System.Web.Security;
 
 namespace AltaMontanha.Controllers
 {
+	[HandleError]
 	public class ManterAutenticacaoController : Controller
     {
 		Models.Fachada.UsuarioFacade fachada = new Models.Fachada.UsuarioFacade();

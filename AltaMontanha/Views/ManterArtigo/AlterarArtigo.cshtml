@@ -29,9 +29,9 @@
  		@Html.HiddenFor(model => model.UsuarioCadastro.Codigo)
 		
        <p>
-			@Html.LabelFor(model => model.Categoria.Titulo)
-        	@Html.DropDownListFor(model => model.Categoria.Codigo, (IEnumerable<SelectListItem>)ViewData["Categorias"])
-			@Html.ValidationMessageFor(model => model.Categoria.Codigo)
+			@Html.LabelFor(model => model.ObjCategoria.Titulo)
+        	@Html.DropDownListFor(model => model.ObjCategoria.Codigo, (IEnumerable<SelectListItem>)ViewData["Categorias"])
+			@Html.ValidationMessageFor(model => model.ObjCategoria.Codigo)
 		</p>
 		<p>
             @Html.LabelFor(model => model.Titulo)
@@ -60,10 +60,19 @@
             @Html.TextBoxFor(model => model.Data, new { @class = "text-medium" })
             @Html.ValidationMessageFor(model => model.Data)
         </p>
+	</fieldset>
+	<fieldset>
+		<legend>Palavra-chave</legend>
 		<p>
 			@HelperPalavraChave.SelecionarPalavraChave(Model)
+		</p>
+	</fieldset>
+	<fieldset>
+		<legend>Foto</legend>
+		<p>
+			@HelperFoto.VincularFoto(Model)
         </p>
-		<br />
-        <p><input type="submit" value="Alterar" /></p>
-    </fieldset>
+	</fieldset>
+	<br />
+    <p><input type="submit" value="Alterar" /></p>
 }

@@ -27,7 +27,10 @@
     <fieldset>
         <legend>Aventura</legend>
 		@Html.HiddenFor(model => model.UsuarioCadastro.Codigo)
-		@Html.HiddenFor(model => model.Rota.Codigo)
+		@if (Model.Rota != null)
+		{
+			@Html.HiddenFor(model => model.Rota.Codigo)
+		}
 
 		<p>
 			@Html.LabelFor(model => model.Autor)
@@ -60,13 +63,25 @@
             @Html.TextBoxFor(model => model.Data, new { @class = "text-medium" })
             @Html.ValidationMessageFor(model => model.Data)
         </p>
+	</fieldset>
+	<fieldset>
+		<legend>Palavra-chave</legend>
 		<p>
 			@HelperPalavraChave.SelecionarPalavraChave(Model)
+		</p>
+	</fieldset>
+	<fieldset>
+		<legend>Foto</legend>
+		<p>
+			@HelperFoto.VincularFoto(Model)
         </p>
+	</fieldset>
+	<fieldset>
+		<legend>Arquivo de rota</legend>
 		<p>
 			<input type="file" name="file" value="file" />
 		</p>
-		<br />
-        <p><input type="submit" value="Alterar" /></p>
     </fieldset>
+	<br />
+    <p><input type="submit" value="Alterar" /></p>
 }

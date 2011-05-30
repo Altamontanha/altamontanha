@@ -66,7 +66,12 @@
 										{
 											<div style="float:left; margin:5px 20px 35px 5px; border:solid 1px #CCC;">
 												@Html.CheckBox(string.Concat("chkVincular_", item.Codigo), new { @class = "check-imagem", value = item.Codigo })
-												<img alt="@item.Legenda" src="@Url.Content("~/AppData/Foto/Pequena/" + item.Caminho)" title="@item.Legenda" />
+												@Html.Hidden(string.Concat("Legenda_", item.Codigo), item.Legenda)
+												@Html.Hidden(string.Concat("Caminho_", item.Codigo), item.Caminho)
+												@Html.Hidden(string.Concat("Autor_", item.Codigo), item.Autor)
+												@Html.Hidden(string.Concat("Fonte_", item.Codigo), item.Fonte)
+												@Html.Hidden(string.Concat("Galeria_", item.Codigo), item.Galeria)
+												<img alt="@item.Legenda" src="@Url.Content("~/AppData/Foto/145x95/" + item.Caminho)" title="@item.Legenda" />
 												<br />
 												<span style="background-color:#EEE; width:160px; position:absolute;">@item.Legenda</span>
 											</div>
@@ -75,8 +80,44 @@
 								</div>
 								<br />
 							</div>
-							<p><input type="submit" value="Salvar" /></p>
-		  				}
+							<p><input type="button" id="AdicionarFoto" value="Adicionar" /></p>
+							<script type="text/javascript">
+								j(document).ready(function () {
+									j('#AdicionarFoto').click(function () {
+										j('input[type=checkbox]').each(function () {
+											if (this.checked) 
+											{
+											    var codigo  = this.value;
+												var legenda = j("input[name=Legenda_" + this.value + "]").val();
+												var caminho = j("input[name=Caminho_" + this.value + "]").val();
+												var autor   = j("input[name=Autor_"   + this.value + "]").val();
+												var fonte   = j("input[name=Fonte_"   + this.value + "]").val();
+												var galeria = j("input[name=Galeria_" + this.value + "]").val();
+												window.parent.j("#listaFotos").append(
+													"<li id='fotoID_" + codigo + "'>" + 
+													"  <input type='radio' name='FotoCapa.Codigo' value='" + codigo + "' />" + 
+													"  <a href='#fotoID_" + codigo + "'>X</a>" + 
+													"  <img alt='" + legenda + "' src='@Url.Content("~/AppData/Foto/145x95/")" + caminho + "' title='" + legenda + "' />" +
+													"  <input type='hidden' name='ListaFotos.Index' value = '" + codigo + "' />" +
+													"  <input type='hidden' name='ListaFotos[" + codigo + "].Codigo' value='" + codigo + "' />" +
+													"  <input type='hidden' name='ListaFotos[" + codigo + "].Legenda' value='" + legenda + "' />" +
+													"  <input type='hidden' name='ListaFotos[" + codigo + "].Caminho' value='" + caminho + "' />" +
+													"  <input type='hidden' name='ListaFotos[" + codigo + "].Autor' value='" + autor + "' />" +
+													"  <input type='hidden' name='ListaFotos[" + codigo + "].Fonte' value='" + fonte + "' />" +
+													"  <input type='hidden' name='ListaFotos[" + codigo + "].Galeria' value='" + galeria + "' />" +
+													"</li>"
+												);
+											}
+										});
+										
+										// ação para remover elementos
+										window.parent.adicionarAcaoRemover();
+										
+										alert("As fotos selecionadas foram inseridas com sucesso");
+									});
+								});
+							</script>
+						}
 				</fieldset>
 			</div>
 			<div class="clear"></div>

@@ -8,7 +8,16 @@
 				<p class="name-colunista">@coluna.Autor.Nome</p>
 				<a href="/Coluna/@coluna.Codigo">
 					<span class="thumb-border-5"><img src="/Appdata/Foto/@coluna.Autor.Foto.Caminho" alt="@coluna.Autor.Nome" width = "90px" height="90px"/></span>
-					<p>@coluna.Titulo</p>
+					<p title="@coluna.Titulo">
+						@if (coluna.Titulo.Length > 25)
+						{
+							@string.Concat(coluna.Titulo.Substring(0, 25), "...");
+						}
+						else
+						{
+							@coluna.Titulo;
+						}
+					</p>
 				</a>
 		</div>
 		}	

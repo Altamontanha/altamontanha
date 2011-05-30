@@ -57,13 +57,25 @@
             @Html.TextBoxFor(model => model.Data, new { @class = "text-medium" })
             @Html.ValidationMessageFor(model => model.Data)
         </p>
+	</fieldset>
+	<fieldset>
+		<legend>Palavra-chave</legend>
 		<p>
 			@HelperPalavraChave.SelecionarPalavraChave(Model)
-        </p>
-		<p>
-			<input type="file" name="Rota" value="Rota" />
 		</p>
-		<br />
-        <p><input type="submit" value="Salvar" /></p>
+	</fieldset>
+	<fieldset>
+		<legend>Foto</legend>
+		<p>
+			@HelperFoto.VincularFoto(Model)
+        </p>
+	</fieldset>
+	<fieldset>
+		<legend>Arquivo de rota</legend>
+		<p>
+			<input type="file" name="file" value="file" />
+		</p>
     </fieldset>
+	<br />
+    <p><input type="submit" value="Cadastrar" /></p>
 }

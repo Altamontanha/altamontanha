@@ -31,12 +31,17 @@ namespace AltaMontanha.Models.Fachada
 				IPalavraChaveDAO palavraChaveDAO = fabrica.GetPalavraChaveDAO();
 				foreach (string p in palavras)
 				{
-					IList<Dominio.PalavraChave> palavrasTemp = palavraChaveDAO.Pesquisar(new Dominio.PalavraChave() { Nome = p.Trim() });
+					string nome = p.Trim();
 
-					if ((palavrasTemp.Count > 0) && (!palavrasChave.Contains(palavrasTemp.First())))
-						palavrasChave.Add(palavrasTemp.First());
-					else
-						palavrasChave.Add(palavraChaveDAO.Cadastrar(new Dominio.PalavraChave() { Nome = p.Trim() }));
+					if (nome.Length > 0)
+					{
+						IList<Dominio.PalavraChave> palavrasTemp = palavraChaveDAO.Pesquisar(new Dominio.PalavraChave() { Nome = nome });
+
+						if ((palavrasTemp.Count > 0) && (!palavrasChave.Contains(palavrasTemp.First())))
+							palavrasChave.Add(palavrasTemp.First());
+						else
+							palavrasChave.Add(palavraChaveDAO.Cadastrar(new Dominio.PalavraChave() { Nome = nome }));
+					}
 				}
 			}
 			catch (Exception e)

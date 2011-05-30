@@ -44,18 +44,24 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public bool Excluir(int codigo)
 		{
-			try
-			{
-				Dominio.Permissao permissao = this.Pesquisar(codigo);
+			Dominio.Permissao permissao = this.Pesquisar(codigo);
 
-				NHibernate.HttpModule.RecuperarSessao.Delete(permissao);
-
-				return true;
-			}
-			catch (Exception)
+			using (ISession session = NHibernate.HttpModule.RecuperarSessao)
+			using (ITransaction transaction = session.BeginTransaction())
 			{
-				throw;
+				try
+				{
+					NHibernate.HttpModule.RecuperarSessao.Delete(permissao);
+					transaction.Commit();
+				}
+				catch (HibernateException e)
+				{
+					transaction.Rollback();
+					throw new ApplicationException(e.InnerException.Message);
+				}
 			}
+
+			return true;
 		}
 	}
 }

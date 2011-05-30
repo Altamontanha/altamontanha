@@ -11,6 +11,14 @@ namespace AltaMontanha.Controllers
     {
 		Models.Fachada.ConteudoFacade conteudoFacade = new Models.Fachada.ConteudoFacade();
 
+		public ActionResult VisualizarArtigo(int Codigo)
+		{
+			Artigo artigo = conteudoFacade.PesquisarArtigo(Codigo);
+			if (artigo == null)
+				return RedirectToAction("Index");
+			return View(artigo);
+		}
+
         //
         // GET: /Home/
         public ActionResult Index()
@@ -20,12 +28,10 @@ namespace AltaMontanha.Controllers
 			ViewData["ListaColunas"] = conteudoFacade.PesquisarColuna(null, 6);
 			ViewData["ListaAventuras"] = conteudoFacade.PesquisarAventura(null,5);
 			ViewData["ListaArtigos"] = conteudoFacade.PesquisarArtigo(null, 4);
-			ViewData["ListaArtigosHistoria"] = new List<Artigo>();
-			
-			// TODO : Corrigir erro no filtro de categoria...
-			//Artigo filtro = new Artigo();
-			//filtro.ObjCategoria = new Categoria() { Codigo = 3 };
-			//ViewData["ListaArtigosHistoria"] = conteudoFacade.PesquisarArtigo(filtro, 2);
+
+			Artigo filtro = new Artigo();
+			filtro.ObjCategoria = new Categoria() { Codigo = 1 };
+			ViewData["ListaArtigosHistoria"] = conteudoFacade.PesquisarArtigo(filtro, 2);
 
 			return View(ViewData);
         }

@@ -28,6 +28,7 @@ namespace AltaMontanha.Controllers
 		public ActionResult CadastrarAventura()
 		{
 			ViewData["Autores"] = new SelectList(usuarioFacade.PesquisarUsuario(null), "Codigo", "Nome");
+			ViewData["AventurasAnteriores"] = new SelectList(facade.PesquisarAventura(null), "Codigo", "Titulo");
 			return View();
 		}
 		//
@@ -46,6 +47,7 @@ namespace AltaMontanha.Controllers
 			catch
 			{
 				ViewData["Autores"] = new SelectList(usuarioFacade.PesquisarUsuario(null), "Codigo", "Nome");
+				ViewData["AventurasAnteriores"] = new SelectList(facade.PesquisarAventura(null), "Codigo", "Titulo");
 				return View(aventura);
 			}
 		}
@@ -55,6 +57,7 @@ namespace AltaMontanha.Controllers
 		public ActionResult AlterarAventura(int Codigo)
 		{
 			ViewData["Autores"] = new SelectList(usuarioFacade.PesquisarUsuario(null), "Codigo", "Nome");
+			ViewData["AventurasAnteriores"] = new SelectList(facade.PesquisarAventura(null), "Codigo", "Titulo");
 			Aventura aventura = facade.PesquisarAventura(Codigo);
 
 			return View(aventura);
@@ -66,16 +69,9 @@ namespace AltaMontanha.Controllers
 		[ValidateInput(false)]
 		public ActionResult AlterarAventura(Aventura aventura, HttpPostedFileBase file)
 		{
-			try
-			{
-				facade.SalvarAventura(aventura, file);
-				return RedirectToAction("Index");
-			}
-			catch
-			{
-				ViewData["Autores"] = new SelectList(usuarioFacade.PesquisarUsuario(null), "Codigo", "Nome");
-				return View(aventura);
-			}
+			facade.SalvarAventura(aventura, file);
+			//TODO: throw new Exception("hello");
+			return RedirectToAction("Index");
 		}
 		//
 		// GET: /ManterAventura/ExcluirAventura/5
