@@ -57,7 +57,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 				catch (HibernateException e)
 				{
 					transaction.Rollback();
-					throw new ApplicationException(e.InnerException.Message);
+					throw new ApplicationException("Existem outros registros vinculados, local não pode ser excluído", e.InnerException);
 				}
 			}
 
