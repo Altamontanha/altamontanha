@@ -20,6 +20,7 @@
 		<h2>@Model.Titulo</h2>
 		<p class="data">@String.Format("{0:g}", Model.Data)</p>
 		<p class="resumo">@Model.Resumo</p>
+		@HelperRota.VisualizarRota(@Model.Rota, 690, 200)
 		<div class="texto">
 			@Html.Raw(Model.Texto)
 		</div>
