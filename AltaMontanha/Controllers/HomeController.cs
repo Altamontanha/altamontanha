@@ -11,6 +11,36 @@ namespace AltaMontanha.Controllers
     {
 		Models.Fachada.ConteudoFacade conteudoFacade = new Models.Fachada.ConteudoFacade();
 
+		public ActionResult VisualizarNoticia(int Codigo)
+		{
+			Noticia noticia = conteudoFacade.PesquisarNoticia(Codigo);
+
+			if (noticia == null)
+				return RedirectToAction("Index");
+
+			return View(noticia);
+		}
+
+		public ActionResult VisualizarAventura(int Codigo)
+		{
+			Aventura aventura = conteudoFacade.PesquisarAventura(Codigo);
+
+			if (aventura == null)
+				return RedirectToAction("Index");
+
+			return View(aventura);
+		}
+
+		public ActionResult VisualizarColuna(int Codigo)
+		{
+			Coluna coluna = conteudoFacade.PesquisarColuna(Codigo);
+
+			if (coluna == null)
+				return RedirectToAction("Index");
+
+			return View(coluna);
+		}
+
 		public ActionResult VisualizarArtigo(int Codigo)
 		{
 			// TODO : Excluir diretiva de compilação.
@@ -22,7 +52,6 @@ namespace AltaMontanha.Controllers
 				return RedirectToAction("Index");
 			return View(artigo);
 		}
-
         //
         // GET: /Home/
         public ActionResult Index()

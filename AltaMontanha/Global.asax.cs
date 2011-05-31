@@ -28,7 +28,27 @@ namespace AltaMontanha
 				new { controller = "Home", action = "VisualizarArtigo" },
 				new { Codigo = @"\d+" }
 			);
-
+			routes.MapRoute
+			(
+				"Noticia",
+				"Noticia/{Codigo}/{Titulo}",
+				new { controller = "Home", action = "VisualizarNoticia" },
+				new { Codigo = @"\d+" }
+			);
+			routes.MapRoute
+			(
+				"Coluna",
+				"Coluna/{Codigo}/{Titulo}",
+				new { controller = "Home", action = "VisualizarColuna" },
+				new { Codigo = @"\d+" }
+			);
+			routes.MapRoute
+			(
+				"Aventura",
+				"Aventura/{Codigo}/{Titulo}",
+				new { controller = "Home", action = "VisualizarAventura" },
+				new { Codigo = @"\d+" }
+			);
 			routes.MapRoute
 			(
 				"Default",

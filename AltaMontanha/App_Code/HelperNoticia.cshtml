@@ -4,7 +4,7 @@
 		<h2 class="box-title-small"><span class="title-bg">Notícias</span></h2>
 		@foreach (AltaMontanha.Models.Dominio.Noticia noticia in listaNoticias)
 		{
-			<p><a href="\Noticia\@noticia.Codigo">@noticia.Titulo</a></p>
+			<p><a href="/Noticia/@noticia.Codigo/@noticia.Slug">@noticia.Titulo</a></p>
 		}		
 		@*
 			TODO : Verificar classe no ultimo elemento
@@ -41,7 +41,7 @@
 			{
 				<li class="photo-destaque">
 					<div>
-						<a href="#">
+						<a href="/Noticia/@noticia.Codigo/@noticia.Slug">
 							<img alt="@noticia.Titulo" src="/AppData/Foto/340x240/@noticia.FotoCapa.Caminho" width="340" height="240" />
 							<div class="news-destaque">
 								<p>@noticia.Titulo</p> 

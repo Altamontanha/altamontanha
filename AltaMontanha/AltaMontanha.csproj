@@ -429,6 +429,9 @@
     <None Include="Content\themes\Publico\font\umbrage2-webfont.ttf" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\VisualizarArtigo.cshtml" />
+    <Content Include="Views\Home\VisualizarAventura.cshtml" />
+    <Content Include="Views\Home\VisualizarColuna.cshtml" />
+    <Content Include="Views\Home\VisualizarNoticia.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
