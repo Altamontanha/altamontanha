@@ -10,9 +10,7 @@
 	@HelperNoticia.VisualizarNoticias((IList<AltaMontanha.Models.Dominio.Noticia>)ViewData["ListaNoticias"])
 	<!-- container de publicidade referentes banner de 300*250 -->
 	<div class="arroba col-300">
-		<p class="publicidade">Publicidade</p>
-		<img src="/content/themes/publico/img/pic.jpg" width="300px" height="250" alt="publicidade"/>
-		@* TODO: Banner. *@
+		@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner) ViewData["BannerCima"])
 	</div>
 	<div class="spliter-940"></div>
 	<!-- Ultimas colunas. -->
@@ -34,17 +32,13 @@
 @HelperArtigo.VisualizarArtigosHistoria((IList<AltaMontanha.Models.Dominio.Artigo>) ViewData["ListaArtigosHistoria"])
 <!-- container de publicidade referentes banner de 200*200 -->
 <div id="quadrado-home">
-	<p class="publicidade">Publicidade</p>
-	<img src="/content/themes/publico/img/pic.jpg" width = "200px" height="200px" alt="publicidade"/>
-	@* TODO: Banner. *@
+	@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner) ViewData["BannerMeio"])
 </div>
 <!-- container de sua-aventura/gente-de-montanha -->
 @HelperAventura.VisualizarAventuras((IList<AltaMontanha.Models.Dominio.Aventura>)ViewData["ListaAventuras"])
 <!-- container de publicidade referentes banner de 728*90 -->
 <div class="super-banner-home"> 
-	<p class="publicidade">Publicidade</p>
-	<img src="/content/themes/publico/img/pic.jpg"  height="90px" width="728px" alt="publicidade"/>
-	@* TODO: Banner. *@
+	@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner) ViewData["BannerBaixo"])
 </div>
 <!-- container de sites relacionados ex.: Rumos, Roteiros, Aconcagua.-->
 <div id="partners-box">

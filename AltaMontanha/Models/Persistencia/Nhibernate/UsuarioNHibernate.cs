@@ -35,7 +35,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			if (!string.IsNullOrEmpty(objeto.Senha))
 				criteria = criteria.Add(Expression.Eq("Senha", objeto.Senha));
 			if (objeto.Perfil != null)
-				criteria = criteria.Add(Expression.Eq("CodPerfil", objeto.Perfil.Codigo));
+				criteria = criteria.Add(Expression.Eq("Perfil.Codigo", objeto.Perfil.Codigo));
 			
 			IList<Dominio.Usuario> usuarios = criteria.List<Dominio.Usuario>();
 			

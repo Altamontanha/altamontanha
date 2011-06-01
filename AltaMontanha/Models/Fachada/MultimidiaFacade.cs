@@ -282,6 +282,29 @@ namespace AltaMontanha.Models.Fachada
 		#region Banner
 
 		/// <summary>
+		/// Pesquisa banner com o código do local
+		/// </summary>
+		/// <param name="banner">Banner para pesquisa</param>
+		/// <returns>List<Banner></returns>
+		public Dominio.Banner PesquisarBannerPorLocal(int codigo)
+		{
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IBannerDAO bannerDAO = fabrica.GetBannerDAO();
+
+				Dominio.Banner banner = new Dominio.Banner();
+				banner.Local = new Dominio.Local() { Codigo = codigo };
+
+				IList<Dominio.Banner> banners = bannerDAO.Pesquisar(banner);
+				return banners.First();
+			}
+			catch (Exception e)
+			{
+				throw e;
+			}
+		}
+		/// <summary>
 		/// Pesquisar banner por código
 		/// </summary>
 		/// <param name="codigo">Código do banner</param>

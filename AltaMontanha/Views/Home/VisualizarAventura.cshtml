@@ -27,9 +27,7 @@
 	</div>
 	<div class="col-fotos">
 		<div id="quadrado-home">
-			<p class="publicidade">Publicidade</p>
-			<img src="/content/themes/publico/img/pic.jpg" width = "200px" height="200px" alt="publicidade"/>
-			@* TODO: Banner. *@
+			@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner) ViewData["BannerInterna"])
 		</div>
 		<div class="fotos">
 			<ul>

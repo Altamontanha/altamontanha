@@ -35,6 +35,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 				criteria = criteria.Add(Expression.Eq("DataFinal", objeto.DataFinal));
 			if (!string.IsNullOrEmpty(objeto.Titulo))
 				criteria = criteria.Add(Expression.Eq("Titulo", objeto.Titulo));
+			if (objeto.Local != null)
+				criteria = criteria.Add(Expression.Eq("Local.Codigo", objeto.Local.Codigo));
 
 			IList<Dominio.Banner> banners = criteria.List<Dominio.Banner>();
 
