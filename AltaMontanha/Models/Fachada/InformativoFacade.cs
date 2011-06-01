@@ -9,6 +9,10 @@ namespace AltaMontanha.Models.Fachada
 {
 	public class InformativoFacade
 	{
+		/// <summary>
+		/// Pesquisa links pelos atributos do link
+		/// </summary>
+		/// <param name="link">objeto para pesquisa</param>
 		public IList<Dominio.Link> PesquisarLink(Dominio.Link link)
 		{
 			try
@@ -24,6 +28,10 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Pesquisa link pelo código
+		/// </summary>
+		/// <param name="codigo">código para pesquisa</param>
 		public Dominio.Link PesquisarLink(int codigo)
 		{
 			try
@@ -38,6 +46,11 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
+
+		/// <summary>
+		/// Salva o link
+		/// </summary>
+		/// <param name="link">link para salvar</param>
 		public Dominio.Link SalvarLink(Dominio.Link link)
 		{
 			try
@@ -60,6 +73,10 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Exclui link pelo código
+		/// </summary>
+		/// <param name="codigo">código do link</param>
 		public bool ExcluirLink(int codigo)
 		{
 			try

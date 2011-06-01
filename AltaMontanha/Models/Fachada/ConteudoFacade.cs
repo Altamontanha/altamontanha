@@ -20,7 +20,7 @@ namespace AltaMontanha.Models.Fachada
 		/// inclui para retonar a lista com todos os objetos das palavras cadastradas 
 		/// ou não.
 		/// </summary>
-		/// <param name="palavras"></param>
+		/// <param name="palavras">Lista de palavras para salvar</param>
 		public IList<Dominio.PalavraChave> SalvarPalavraChave(string[] palavras)
 		{
 			IList<Dominio.PalavraChave> palavrasChave = new List<Dominio.PalavraChave>();
@@ -53,10 +53,9 @@ namespace AltaMontanha.Models.Fachada
 		}
 
 		/// <summary>
-		/// Pesquisa palavra-chave por objeto
+		/// Pesquisa palavras-chave por objeto
 		/// </summary>
-		/// <param name="palavraChave"></param>
-		/// <returns></returns>
+		/// <param name="palavraChave">Objeto para filtro</param>
 		public IList<Dominio.PalavraChave> PesquisarPalavraChave(Dominio.PalavraChave palavraChave)
 		{
 			try
@@ -75,6 +74,10 @@ namespace AltaMontanha.Models.Fachada
 
 		#region Noticia
 
+		/// <summary>
+		/// Pesquisa notícia por código
+		/// </summary>
+		/// <param name="codigo">Código para filtro</param>
 		public Dominio.Noticia PesquisarNoticia(int codigo)
 		{
 			try
@@ -90,6 +93,11 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Pesquisa notícias pelos atributos da notícia passada
+		/// </summary>
+		/// <param name="noticia">Objeto para filtro</param>
+		/// <param name="qtde">Quantidade de registros a retornar ("0" para todos)</param>
 		public IList<Dominio.Noticia> PesquisarNoticia(Dominio.Noticia noticia, int qtde=0)
 		{
 			try
@@ -108,6 +116,10 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Salva a notícia
+		/// </summary>
+		/// <param name="noticia">Objeto para salvar</param>
 		public Dominio.Noticia SalvarNoticia(Dominio.Noticia noticia)
 		{
 			try
@@ -133,6 +145,10 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Exclui a notícia pelo código
+		/// </summary>
+		/// <param name="codigo">Código para exclusão</param>
 		public bool ExcluirNoticia(int codigo)
 		{
 			try
@@ -152,6 +168,10 @@ namespace AltaMontanha.Models.Fachada
 		
 		#region Coluna
 
+		/// <summary>
+		/// Pesquisa a coluna pelo código
+		/// </summary>
+		/// <param name="codigo">Código para filtro</param>
 		public Dominio.Coluna PesquisarColuna(int codigo)
 		{
 			try
@@ -167,6 +187,11 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Pesquisa colunas utilizando os atributos da coluna passada
+		/// </summary>
+		/// <param name="coluna">Objeto para filtro</param>
+		/// <param name="qtde">Quantidade de registros a retornar ("0" para todos)</param>
 		public IList<Dominio.Coluna> PesquisarColuna(Dominio.Coluna coluna, int qtde=0)
 		{
 			try
@@ -185,6 +210,10 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Salva a coluna
+		/// </summary>
+		/// <param name="coluna">Objeto para salvar</param>
 		public Dominio.Coluna SalvarColuna(Dominio.Coluna coluna)
 		{
 			try
@@ -210,6 +239,10 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Exclui a coluna pelo código
+		/// </summary>
+		/// <param name="codigo">Código para exclusão</param>
 		public bool ExcluirColuna(int codigo)
 		{
 			try
@@ -229,6 +262,10 @@ namespace AltaMontanha.Models.Fachada
 
 		#region Aventura
 
+		/// <summary>
+		/// Pesquisa aventura pelo código
+		/// </summary>
+		/// <param name="codigo">Código para filtro</param>
 		public Dominio.Aventura PesquisarAventura(int codigo)
 		{
 			try
@@ -244,6 +281,11 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Pesquisa aventuras utilizando os atributos da aventura 
+		/// </summary>
+		/// <param name="aventura">Objeto para filtro</param>
+		/// <param name="qtde">Quantidade de registros para retornar ("0" para todos)</param>
 		public IList<Dominio.Aventura> PesquisarAventura(Dominio.Aventura aventura, int qtde=0)
 		{
 			try
@@ -262,6 +304,11 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Salva a aventura e o arquivo vinculado
+		/// </summary>
+		/// <param name="aventura">Objeto para salvar</param>
+		/// <param name="arquivoRota">Arquivo de rota para salvar</param>
 		public Dominio.Aventura SalvarAventura(Dominio.Aventura aventura, HttpPostedFileBase arquivoRota)
 		{
 			try
@@ -298,6 +345,10 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Exclui a aventura pelo código
+		/// </summary>
+		/// <param name="codigo">Código para exclusão</param>
 		public bool ExcluirAventura(int codigo)
 		{
 			try
@@ -319,7 +370,13 @@ namespace AltaMontanha.Models.Fachada
 			throw new NotImplementedException();
 		}
 
-		public string SalvarArquivo(string caminho, string nomeArquivo, HttpPostedFileBase arquivo)
+		/// <summary>
+		/// Salva o arquivo utilizando o caminho e o nome
+		/// </summary>
+		/// <param name="caminho">Caminho que deverá salvar o arquivo</param>
+		/// <param name="nomeArquivo">Nome do arquivo para utilizar</param>
+		/// <param name="arquivo">Arquivo para salvar</param>
+		private string SalvarArquivo(string caminho, string nomeArquivo, HttpPostedFileBase arquivo)
 		{
 			try
 			{
@@ -353,6 +410,10 @@ namespace AltaMontanha.Models.Fachada
 
 		#region Categoria
 
+		/// <summary>
+		/// Pesquisa categorias pelos atributos da categoria 
+		/// </summary>
+		/// <param name="categoria">Objeto para filtro</param>
 		public IList<Dominio.Categoria> PesquisarCategoria(Dominio.Categoria categoria)
 		{
 			try
@@ -368,6 +429,10 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Pesquisa categoria pelo código
+		/// </summary>
+		/// <param name="codigo">Código para filtro</param>
 		public Dominio.Categoria PesquisarCategoria(int codigo)
 		{
 			try
@@ -383,6 +448,10 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Salva a categoria
+		/// </summary>
+		/// <param name="categoria">Objeto para salvar</param>
 		public Dominio.Categoria SalvarCategoria(Dominio.Categoria categoria)
 		{
 			try
@@ -405,6 +474,10 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Exclui a categoria pelo código
+		/// </summary>
+		/// <param name="codigo">Código para exclusão</param>
 		public bool ExcluirCategoria(int codigo)
 		{
 			try
@@ -422,6 +495,10 @@ namespace AltaMontanha.Models.Fachada
 
 		#endregion
 
+		/// <summary>
+		/// Pesquisa artigo pelo código
+		/// </summary>
+		/// <param name="codigo">Código para filtro</param>
 		public Dominio.Artigo PesquisarArtigo(int codigo)
 		{
 			try
@@ -437,6 +514,11 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Pesquisa artigo pelos atributos do artigo
+		/// </summary>
+		/// <param name="artigo">Filtro para pesquisa</param>
+		/// <param name="qtde">Quantidade de registros de retorno ("0" para todos)</param>
 		public IList<Dominio.Artigo> PesquisarArtigo(Dominio.Artigo artigo, int qtde=0)
 		{
 			try
@@ -455,6 +537,10 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Salva o artigo
+		/// </summary>
+		/// <param name="artigo">Objeto para salvar</param>
 		public Dominio.Artigo SalvarArtigo(Dominio.Artigo artigo)
 		{
 			try
@@ -480,6 +566,10 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 
+		/// <summary>
+		/// Exclui o artigo pelo código
+		/// </summary>
+		/// <param name="codigo">código para exclusão</param>
 		public bool ExcluirArtigo(int codigo)
 		{
 			try
