@@ -9,7 +9,7 @@ using AltaMontanha.Models.Fachada;
 namespace AltaMontanha.Controllers
 {
 	[HandleError]
-	public class ManterNoticiaController : Controller
+	public class ManterNoticiaController : Utilitario.BaseController
     {
 		private ConteudoFacade facade = new ConteudoFacade();
 
