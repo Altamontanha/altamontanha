@@ -14,7 +14,7 @@
 			<key column="CodPerfil" />
 			<one-to-many class="Usuario" />
 		</bag>
-		<bag name="ListaPermissoes" cascade="save-update" lazy="true" >
+		<bag name="ListaPermissoes" cascade="none" lazy="true" >
 			<key column="CodPerfil" />
 			<one-to-many class="Permissao" />
 		</bag>
