@@ -182,11 +182,6 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-		//
-		public void VincularFoto()
-		{
-
-		}
 		/// <summary>
 		/// Redimensiona o tamanho da imagem.
 		/// </summary>
