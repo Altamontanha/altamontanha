@@ -38,8 +38,37 @@ namespace AltaMontanha.Utilitario
 
 			string tela = string.Format("/{0}/{1}", controle, acao);
 
-			if(!fachada.VerificarAcesso(usuario, tela))
+			if (!fachada.VerificarAcesso(usuario, tela))
 				FormsAuthentication.RedirectToLoginPage();
+			else
+			{
+				IList<Models.Dominio.Permissao> permissoes = fachada.PesquisarUsuario(usuario).First().Perfil.ListaPermissoes;
+
+				IList<Models.Dominio.Tela> menu = new List<Models.Dominio.Tela>();
+				foreach (Models.Dominio.Permissao permissao in permissoes) 
+				{
+					if (permissao.Tela.Nome.Equals("/ManterArtigo/"))
+						menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
+					else if (permissao.Tela.Nome.Equals("/ManterColuna/"))
+						menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
+					else if (permissao.Tela.Nome.Equals("/ManterNoticia/"))
+						menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
+					else if (permissao.Tela.Nome.Equals("/ManterAventura/"))
+						menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
+					else if (permissao.Tela.Nome.Equals("/ManterFoto/"))
+						menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
+					else if (permissao.Tela.Nome.Equals("/ManterUsuario/"))
+						menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
+					else if (permissao.Tela.Nome.Equals("/ManterPerfil/"))
+						menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
+					else if (permissao.Tela.Nome.Equals("/ManterLink/"))
+						menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
+					else if (permissao.Tela.Nome.Equals("/ManterBanner/"))
+						menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
+				}
+				
+				ViewData["Menu"] = menu;
+			}
 		}
 	}
 }

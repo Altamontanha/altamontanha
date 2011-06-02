@@ -26,14 +26,10 @@
 			<h1 class="logo"><a href="#"><span>Página Principal</span></a></h1>
 			<div id="mainNav">
 				<ul class="level1">
-					<li>@Html.ActionLink("Usuário", "Index", "ManterUsuario")</li>
-					<li>@Html.ActionLink("Perfil", "Index", "ManterPerfil")</li>
-					<li>@Html.ActionLink("Link", "Index", "ManterLink")</li>
-					<li>@Html.ActionLink("Artigo", "Index", "ManterArtigo")</li>
-					<li>@Html.ActionLink("Coluna", "Index", "ManterColuna")</li>
-					<li>@Html.ActionLink("Notícia", "Index", "ManterNoticia")</li>
-					<li>@Html.ActionLink("Aventura", "Index", "ManterAventura")</li>
-					<li>@Html.ActionLink("Foto", "Index", "ManterFoto")</li>
+					@foreach (var menu in (IList<AltaMontanha.Models.Dominio.Tela>)ViewData["Menu"])
+					{
+					<li>@Html.ActionLink(menu.Nome.Replace("/", "").Replace("Manter", ""), "Index", menu.Nome.Replace("/", ""))</li>
+					}
 					<li>@Html.ActionLink("Sair", "Sair", "ManterAutenticacao")</li>
 				</ul>
 			</div>
