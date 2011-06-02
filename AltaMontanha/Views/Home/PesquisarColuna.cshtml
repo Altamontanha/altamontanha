@@ -1,0 +1,33 @@
+﻿@model IEnumerable<AltaMontanha.Models.Dominio.Coluna>
+
+@{
+    ViewBag.Title = "Colunas - AltaMontanha.com";
+    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+}
+
+<div id="main-box">
+	<div id="conteudo">
+		<h2>Colunas</h2>
+
+		<div class="texto">
+			<ul id="listagem">
+			@foreach (var coluna in Model)
+			{
+			<li>
+				<a href="/Coluna/@coluna.Codigo/@coluna.Slug">
+					<img src="/AppData/Foto/50x50/@coluna.FotoCapa.Caminho" align="left" alt="@coluna.FotoCapa.Legenda" width="50" height="50" />
+					<br />
+					@coluna.Titulo<br />
+					Data: @String.Format("{0:dd/MM/yyyy}", coluna.Data)
+				</a>
+			</li>
+			}
+			</ul>
+		</div>
+	</div>
+	<div class="col-fotos">
+		<div id="quadrado-home">
+			@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner) ViewData["BannerInterna"])
+		</div>
+	</div>
+</div>

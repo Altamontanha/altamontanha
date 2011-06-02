@@ -26,11 +26,14 @@
 			<h1 class="logo"><a href="#"><span>Página Principal</span></a></h1>
 			<div id="mainNav">
 				<ul class="level1">
-					@foreach (var menu in (IList<AltaMontanha.Models.Dominio.Tela>)ViewData["Menu"])
+					@if (ViewData["Menu"] != null)
 					{
-					<li>@Html.ActionLink(menu.Nome.Replace("/", "").Replace("Manter", ""), "Index", menu.Nome.Replace("/", ""))</li>
+						foreach (var menu in (IList<AltaMontanha.Models.Dominio.Tela>)ViewData["Menu"])
+						{
+						<li>@Html.ActionLink(menu.Nome.Replace("/", "").Replace("Manter", ""), "Index", menu.Nome.Replace("/", ""))</li>
+						}
+						<li>@Html.ActionLink("Sair", "Sair", "ManterAutenticacao")</li>
 					}
-					<li>@Html.ActionLink("Sair", "Sair", "ManterAutenticacao")</li>
 				</ul>
 			</div>
 			<div id="containerHolder">

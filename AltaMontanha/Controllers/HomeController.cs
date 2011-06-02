@@ -12,6 +12,13 @@ namespace AltaMontanha.Controllers
 		Models.Fachada.ConteudoFacade conteudoFacade = new Models.Fachada.ConteudoFacade();
 		Models.Fachada.MultimidiaFacade multimidiaFacade = new Models.Fachada.MultimidiaFacade();
 
+		public ActionResult PesquisarNoticia()
+		{
+			ViewData["BannerInterna"] = multimidiaFacade.PesquisarBannerPorLocal(4);
+			IList<Noticia> noticias = conteudoFacade.PesquisarNoticia(null);
+			return View(noticias);
+		}
+
 		public ActionResult VisualizarNoticia(int Codigo)
 		{
 			Noticia noticia = conteudoFacade.PesquisarNoticia(Codigo);
@@ -21,6 +28,13 @@ namespace AltaMontanha.Controllers
 				return RedirectToAction("Index");
 
 			return View(noticia);
+		}
+
+		public ActionResult PesquisarAventura()
+		{
+			ViewData["BannerInterna"] = multimidiaFacade.PesquisarBannerPorLocal(4);
+			IList<Aventura> aventuras = conteudoFacade.PesquisarAventura(null);
+			return View(aventuras);
 		}
 
 		public ActionResult VisualizarAventura(int Codigo)
@@ -34,6 +48,13 @@ namespace AltaMontanha.Controllers
 			return View(aventura);
 		}
 
+		public ActionResult PesquisarColuna()
+		{
+			ViewData["BannerInterna"] = multimidiaFacade.PesquisarBannerPorLocal(4);
+			IList<Coluna> colunas = conteudoFacade.PesquisarColuna(null);
+			return View(colunas);
+		}
+
 		public ActionResult VisualizarColuna(int Codigo)
 		{
 			Coluna coluna = conteudoFacade.PesquisarColuna(Codigo);
@@ -43,6 +64,13 @@ namespace AltaMontanha.Controllers
 				return RedirectToAction("Index");
 
 			return View(coluna);
+		}
+
+		public ActionResult PesquisarArtigo()
+		{
+			ViewData["BannerInterna"] = multimidiaFacade.PesquisarBannerPorLocal(4);
+			IList<Artigo> artigos = conteudoFacade.PesquisarArtigo(null);
+			return View(artigos);
 		}
 
 		public ActionResult VisualizarArtigo(int Codigo)

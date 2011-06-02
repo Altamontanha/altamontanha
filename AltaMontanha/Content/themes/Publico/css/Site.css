@@ -696,6 +696,16 @@ div#conteudo h2
 	padding: 15px 0 15px 0;
 }
 
+#listagem li
+{
+	padding: 15px 0 15px 0;
+}
+
+#listagem li img
+{
+	padding: 5px 15px 5px 5px;
+}
+
 /*------------------------------------------------ CLASSES GENÉRICAS ------------------------------------------------*/
 .col-220{
 	overflow: hidden;

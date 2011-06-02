@@ -30,10 +30,22 @@ namespace AltaMontanha
 			);
 			routes.MapRoute
 			(
+				"Artigos",
+				"Artigos",
+				new { controller = "Home", action = "PesquisarArtigo" }
+			);
+			routes.MapRoute
+			(
 				"Noticia",
 				"Noticia/{Codigo}/{Titulo}",
 				new { controller = "Home", action = "VisualizarNoticia" },
 				new { Codigo = @"\d+" }
+			);
+			routes.MapRoute
+			(
+				"Noticias",
+				"Noticias",
+				new { controller = "Home", action = "PesquisarNoticia" }
 			);
 			routes.MapRoute
 			(
@@ -44,10 +56,22 @@ namespace AltaMontanha
 			);
 			routes.MapRoute
 			(
+				"Colunas",
+				"Colunas",
+				new { controller = "Home", action = "PesquisarColuna" }
+			);
+			routes.MapRoute
+			(
 				"Aventura",
 				"Aventura/{Codigo}/{Titulo}",
 				new { controller = "Home", action = "VisualizarAventura" },
 				new { Codigo = @"\d+" }
+			);
+			routes.MapRoute
+			(
+				"Aventuras",
+				"Aventuras",
+				new { controller = "Home", action = "PesquisarAventura" }
 			);
 			routes.MapRoute
 			(
