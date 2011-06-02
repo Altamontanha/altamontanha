@@ -130,3 +130,12 @@ textarea
 	margin: 5px 285px 0 0;
 	float:right;
 }
+
+#listaTelas ul li
+{
+	width: 280px;
+	padding: 5px;
+	display: inline-block;
+	/*height: 200px;
+	overflow: auto;*/
+}

@@ -83,6 +83,23 @@ namespace AltaMontanha.Models.Fachada
 
 		#endregion
 
+		#region Tela
+		public IList<Dominio.Tela> PesquisarTela(Dominio.Tela tela)
+		{
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				ITelaDAO telaDAO = fabrica.GetTelaDAO();
+
+				return telaDAO.Pesquisar(tela);
+			}
+			catch (Exception e)
+			{
+				throw e;
+			}
+		}
+		#endregion
+
 		#region Usuario
 
 		/// <summary>

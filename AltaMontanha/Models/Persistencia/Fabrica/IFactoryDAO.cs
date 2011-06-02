@@ -23,5 +23,6 @@ namespace AltaMontanha.Models.Persistencia.Fabrica
 		Abstracao.IRotaDAO GetRotaDAO();
 		Abstracao.IUsuarioDAO GetUsuarioDAO();
 		Abstracao.IPermissaoDAO GetPermissaoDAO ( );
+		Abstracao.ITelaDAO GetTelaDAO();
 	}
 }

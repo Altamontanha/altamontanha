@@ -69,6 +69,11 @@ namespace AltaMontanha.Models.Persistencia.Fabrica
 		{
 			return new Nhibernate.RotaNHibernate();
 		}
+
+		public Abstracao.ITelaDAO GetTelaDAO()
+		{
+			return new Nhibernate.TelaNHibernate();
+		}
 		/// <summary>
 		/// Retorna um objeto DAO para MySQL
 		/// </summary>

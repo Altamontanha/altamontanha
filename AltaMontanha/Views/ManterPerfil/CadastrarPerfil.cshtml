@@ -14,7 +14,8 @@
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Perfil</legend>
-        <p>
+
+		<p>
             @Html.LabelFor(model => model.Nome)
             @Html.TextBoxFor(model => model.Nome, new { @class="text-long" })
             @Html.ValidationMessageFor(model => model.Nome)
@@ -24,6 +25,23 @@
             @Html.TextAreaFor(model => model.Descricao)
             @Html.ValidationMessageFor(model => model.Descricao)
         </p>
+		<fieldset>
+			<legend>Permissões</legend>
+			<div id="listaTelas">
+				<ul>
+				@if (ViewData["Telas"] != null)
+				{
+					foreach (var tela in (IList<AltaMontanha.Models.Dominio.Tela>)ViewData["Telas"])
+					{
+						<li>
+							<input type="hidden" name="ListaPermissoes.Index" value="@tela.Codigo" />
+							<input type="checkbox" name="ListaPermissoes[@tela.Codigo].Codigo" value="@tela.Codigo" /> @tela.Nome
+						</li>
+					}
+				}
+				</ul>
+			</div>
+		</fieldset>
 		<br />
         <p><input type="submit" value="Adicionar" /></p>
     </fieldset>

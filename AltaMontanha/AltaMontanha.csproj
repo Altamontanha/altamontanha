@@ -104,6 +104,7 @@
     <Compile Include="Models\Fachada\InformativoFacade.cs" />
     <Compile Include="Models\Fachada\MultimidiaFacade.cs" />
     <Compile Include="Models\Fachada\UsuarioFacade.cs" />
+    <Compile Include="Models\Persistencia\Abstracao\ITelaDAO.cs" />
     <Compile Include="Models\Persistencia\Abstracao\IArtigoDAO.cs" />
     <Compile Include="Models\Persistencia\Abstracao\IAventuraDAO.cs" />
     <Compile Include="Models\Persistencia\Abstracao\IBannerDAO.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Models\Persistencia\Nhibernate\CategoriaNHibernate.cs" />
     <Compile Include="Models\Persistencia\Nhibernate\ColunaNHibernate.cs" />
     <Compile Include="Models\Persistencia\Nhibernate\ComentarioNHibernate.cs" />
+    <Compile Include="Models\Persistencia\Nhibernate\TelaNHibernate.cs" />
     <Compile Include="Models\Persistencia\Nhibernate\FotoNHibernate.cs" />
     <Compile Include="Models\Persistencia\Nhibernate\LinkNHibernate.cs" />
     <Compile Include="Models\Persistencia\Nhibernate\LocalNHibernate.cs" />

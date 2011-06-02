@@ -34,7 +34,8 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult CadastrarPerfil()
         {
-            return View();
+			ViewData["Telas"] = facade.PesquisarTela(null);
+			return View();
         } 
         //
 		// POST: /ManterPerfil/CadastrarPerfil
@@ -49,7 +50,8 @@ namespace AltaMontanha.Controllers
             }
             catch
             {
-                return View(perfil);
+				ViewData["Telas"] = facade.PesquisarTela(null);
+				return View(perfil);
 			}
         }
         //
@@ -58,6 +60,7 @@ namespace AltaMontanha.Controllers
 		public ActionResult AlterarPerfil(int Codigo)
         {
 			Perfil perfil = facade.PesquisarPerfil(Codigo);
+			ViewData["Telas"] = facade.PesquisarTela(null);
 
 			return View(perfil);
 		}
@@ -74,6 +77,7 @@ namespace AltaMontanha.Controllers
 			}
 			catch
 			{
+				ViewData["Telas"] = facade.PesquisarTela(null);
 				return View(perfil);
 			}
 		}

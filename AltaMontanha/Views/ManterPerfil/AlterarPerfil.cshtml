@@ -14,9 +14,16 @@
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Perfil</legend>
+
+		@foreach (var usuario in Model.ListaUsuarios)
+		{ 
+			@Html.Hidden("ListaUsuarios.Index", usuario.Codigo)
+			@Html.Hidden("ListaUsuarios[" + usuario.Codigo + "].Codigo", usuario.Codigo)
+		}
+
         <p>
             @Html.LabelFor(model => model.Nome)
-            @Html.TextBoxFor(model => model.Nome, new { @class = "text-long"})
+            @Html.TextBoxFor(model => model.Nome, new { @class = "text-long" })
             @Html.ValidationMessageFor(model => model.Nome)
         </p>
         <p>
@@ -24,6 +31,23 @@
             @Html.TextAreaFor(model => model.Descricao)
             @Html.ValidationMessageFor(model => model.Descricao)
         </p>
+		<fieldset>
+			<legend>Permissões</legend>
+			<div id="listaTelas">
+				<ul>
+				@if (ViewData["Telas"] != null)
+				{
+					foreach (var tela in (IList<AltaMontanha.Models.Dominio.Tela>)ViewData["Telas"])
+					{
+						<li>
+							<input type="hidden" name="ListaPermissoes.Index" value="@tela.Codigo" />
+							<input type="checkbox" name="ListaPermissoes[@tela.Codigo].Codigo" value="@tela.Codigo" @(Model.ListaPermissoes.Any(attribute => attribute.Tela == tela) ? "checked='checked'" : "") /> @tela.Nome
+						</li>
+					}
+				}
+				</ul>
+			</div>
+		</fieldset>
 		<br />
         <p><input type="submit" value="Salvar" /></p>
     </fieldset>

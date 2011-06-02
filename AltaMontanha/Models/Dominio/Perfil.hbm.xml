@@ -10,11 +10,10 @@
 		<property name="Descricao" not-null="true" access="property" type="String">
 			<column name="Descricao" length="200" />
 		</property>
-		<bag name="ListaUsuarios" cascade="save-update" lazy="true" >
+		<bag name="ListaUsuarios" cascade="none" inverse="true" lazy="true" >
 			<key column="CodPerfil" />
 			<one-to-many class="Usuario" />
 		</bag>
-		<!-- TODO: mapear corretamente-->
 		<bag name="ListaPermissoes" cascade="save-update" lazy="true" >
 			<key column="CodPerfil" />
 			<one-to-many class="Permissao" />
