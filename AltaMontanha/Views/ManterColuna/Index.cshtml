@@ -23,7 +23,7 @@
 					@item.Titulo
 				</td>
 				<td>
-					@String.Format("{0:g}", item.Data)
+					@String.Format("{0:dd/MM/yyyy}", item.Data)
 				</td>
 				<td class="action">
 					@Html.ActionLink("Alterar", "AlterarColuna", new { Codigo = item.Codigo }, new { @class = "edit" })
