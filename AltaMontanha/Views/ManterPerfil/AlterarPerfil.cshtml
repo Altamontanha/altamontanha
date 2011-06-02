@@ -41,7 +41,12 @@
 					{
 						<li>
 							<input type="hidden" name="ListaPermissoes.Index" value="@tela.Codigo" />
-							<input type="checkbox" name="ListaPermissoes[@tela.Codigo].Codigo" value="@tela.Codigo" @(Model.ListaPermissoes.Any(attribute => attribute.Tela == tela) ? "checked='checked'" : "") /> @tela.Nome
+							<input type="hidden" name="ListaPermissoes[@tela.Codigo].Perfil.Codigo" value="@Model.Codigo" />
+							<input type="checkbox" name="ListaPermissoes[@tela.Codigo].Tela.Codigo" value="@tela.Codigo" @(Model.ListaPermissoes.Any(attribute => attribute.Tela == tela) ? "checked=checked" : "") /> @tela.Nome
+							@if (Model.ListaPermissoes.Any(attribute => attribute.Tela == tela))
+						    {
+							<input type="hidden" name="ListaPermissoes[@tela.Codigo].Codigo" value="@Model.ListaPermissoes.Where(obj => obj.Tela == tela).First().Codigo" />
+							}
 						</li>
 					}
 				}

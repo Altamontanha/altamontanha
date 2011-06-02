@@ -45,6 +45,13 @@ namespace AltaMontanha.Controllers
         {
             try
             {
+				IList<Permissao> permissoes = new List<Permissao>();
+				foreach (Permissao p in perfil.ListaPermissoes)
+				{
+					if (p.Tela != null)
+						permissoes.Add(p);
+				}
+				perfil.ListaPermissoes = permissoes;
 				facade.SalvarPerfil(perfil);
 				return RedirectToAction("Index");
             }
@@ -72,6 +79,13 @@ namespace AltaMontanha.Controllers
         {
 			try
 			{
+				IList<Permissao> permissoes = new List<Permissao>();
+				foreach (Permissao p in perfil.ListaPermissoes)
+				{
+					if (p.Tela != null)
+						permissoes.Add(p);
+				}
+				perfil.ListaPermissoes = permissoes;
 				facade.SalvarPerfil(perfil);
 				return RedirectToAction("Index");
 			}
