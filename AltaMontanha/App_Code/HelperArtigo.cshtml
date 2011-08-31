@@ -1,7 +1,7 @@
 ﻿@helper VisualizarArtigos(IList<AltaMontanha.Models.Dominio.Artigo> listaArtigos)
 {
 	<div id="artigos" class="col-340 special-bg">
-		<h2 class="box-title"><span class="title-bg">Artigos Técnicos</span><span class="link-more"><a href="#">+ artigos</a></span></h2>
+		<h2 class="box-title"><span class="title-bg">Artigos Técnicos</span><span class="link-more"><a href="/artigos">+ artigos</a></span></h2>
 
 		@foreach (AltaMontanha.Models.Dominio.Artigo artigo in listaArtigos)
 		{
@@ -19,7 +19,7 @@
 @helper VisualizarArtigosHistoria(IList<AltaMontanha.Models.Dominio.Artigo> listaArtigos)
 {
 	<div id="historia">
-		<h2 class="box-white-title"><span class="title-blue-bg">História do montanhismo</span><span class="link-more"><a href="#">+ história</a></span></h2>
+		<h2 class="box-white-title"><span class="title-blue-bg">História do montanhismo</span><span class="link-more"><a href="/artigos">+ história</a></span></h2>
 
 		@foreach (AltaMontanha.Models.Dominio.Artigo artigo in listaArtigos)
 		{
