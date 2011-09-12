@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="AltaMontanha" namespace="AltaMontanha.Models.Dominio">
-	<class name="Categoria" table="TB_Categoria" lazy="false">
+	<class name="Categoria" table="tb_categoria" lazy="false">
 		<id name="Codigo" access="property" column="CodCategoria" type="Int32">
 			<generator class="identity" />
 		</id>

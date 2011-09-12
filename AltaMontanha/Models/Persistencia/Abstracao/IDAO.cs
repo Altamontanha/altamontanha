@@ -10,7 +10,7 @@ namespace AltaMontanha.Models.Persistencia.Abstracao
 		void Alterar(T objeto);
 		T Cadastrar(T objeto);
 		IList<T> Pesquisar(T objeto);
-		T Pesquisar(int codigo); // TODO: Adicionar na documentação.
+		T Pesquisar(int codigo);
 		bool Excluir(int codigo);
 	}
 }

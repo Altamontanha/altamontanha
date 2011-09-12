@@ -7,6 +7,6 @@ namespace AltaMontanha.Models.Persistencia.Abstracao
 {
 	public interface ITelaDAO : IDAO<Dominio.Tela>
 	{
-		IList<Dominio.Tela> Pesquisar(Dominio.Tela objeto);
+		new IList<Dominio.Tela> Pesquisar(Dominio.Tela objeto);
 	}
 }

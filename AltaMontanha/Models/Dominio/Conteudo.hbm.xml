@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="AltaMontanha" namespace="AltaMontanha.Models.Dominio" >
-	<class name="Conteudo" table="TB_Conteudo" lazy="false">
+	<class name="Conteudo" table="tb_conteudo" lazy="false">
 		<id name="Codigo" access="property" column="CodConteudo" type="Int32">
 			<generator class="identity" />
 		</id>
@@ -20,11 +20,16 @@
 		<property name="Data" not-null="true" access="property" type="DateTime">
 			<column name="Data" sql-type="DATETIME"/>
 		</property>
-		<bag name="ListaFotos" table="TB_ConteudoFoto" cascade="save-update">
+		<set name="ListaFotos" table="tb_conteudoFoto">
+			<key column="CodConteudo"/>
+			<many-to-many class="Foto" column="CodFoto"/>
+		</set>
+		<!--<bag name="ListaFotos" table="tb_conteudofoto" cascade="save-update">
 			<key column="CodConteudo"/>
 			<many-to-many class="Foto" column="CodFoto"></many-to-many>
-		</bag>
-		<bag name="ListaPalavrasChave" table="TB_ConteudoPalavraChave" cascade="save-update">
+		</bag>-->
+		
+		<bag name="ListaPalavrasChave" table="tb_conteudopalavrachave" cascade="save-update">
 			<key column="CodConteudo"/>
 			<many-to-many class="PalavraChave" column="CodPalavraChave"></many-to-many>
 		</bag>
@@ -33,14 +38,14 @@
 	</class>
 	<!--Artigo-->
 	<subclass name="Artigo" extends="Conteudo" discriminator-value="Artigo" lazy="false">
-		<join table="TB_Artigo">
+		<join table="tb_artigo">
 			<key column="CodConteudo" />
 			<many-to-one name="ObjCategoria" column="CodCategoria" class="Categoria" not-null="true" />
 		</join>
 	</subclass>
 	<!--Aventura-->
 	<subclass name="Aventura" extends="Conteudo" discriminator-value="Aventura" lazy="false">
-		<join table="TB_Aventura">
+		<join table="tb_aventura">
 			<key column="CodConteudo" />
 			<many-to-one name="AventuraAnterior" column="CodConteudoPai" class="Aventura" not-null="false" />
 			<many-to-one name="Rota" column="CodRota" class="Rota" not-null="false" />
@@ -49,14 +54,14 @@
 	</subclass>
 	<!--Coluna-->
 	<subclass name="Coluna" extends="Conteudo" discriminator-value="Coluna" lazy="false">
-		<join table="TB_Coluna">
+		<join table="tb_coluna">
 			<key column="CodConteudo" />
 			<many-to-one name="Autor" column="CodUsuario" class="Usuario" not-null="true" />
 		</join>
 	</subclass>
 	<!--Noticia-->
 	<subclass name="Noticia" extends="Conteudo" discriminator-value="Coluna" lazy="false">
-		<join table="TB_Noticia">
+		<join table="tb_noticia">
 			<key column="CodConteudo" />
 			<property name="Fonte" not-null="true" access="property" type="String">
 				<column name="Fonte" length="75"/>

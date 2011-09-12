@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="AltaMontanha" namespace="AltaMontanha.Models.Dominio" >
-	<class name="Foto" table="TB_Foto" lazy="false">
+	<class name="Foto" table="tb_foto" lazy="false">
 		<id name="Codigo" access="property" column="CodFoto" type="Int32">
 			<generator class="identity" />
 		</id>
@@ -19,7 +19,7 @@
 		<property name="Galeria" not-null="false" access="property" type="Boolean">
 			<column name="Galeria" length="1" />
 		</property>
-		<bag name="ListaPalavrasChave" table="TB_FotoPalavraChave" cascade="save-update">
+		<bag name="ListaPalavrasChave" table="tb_fotopalavrachave" cascade="save-update">
 			<key column="CodFoto"/>
 			<many-to-many class="PalavraChave" column="CodPalavraChave"></many-to-many>
 		</bag>
