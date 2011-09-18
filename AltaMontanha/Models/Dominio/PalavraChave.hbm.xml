@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="AltaMontanha" namespace="AltaMontanha.Models.Dominio">
-	<class name="PalavraChave" table="TB_PalavraChave" lazy="false">
+	<class name="PalavraChave" table="tb_palavrachave" lazy="false">
 		<id name="Codigo" access="property" column="CodPalavraChave" type="Int32">
 			<generator class="identity" />
 		</id>
