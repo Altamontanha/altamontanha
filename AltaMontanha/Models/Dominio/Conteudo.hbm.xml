@@ -20,7 +20,7 @@
 		<property name="Data" not-null="true" access="property" type="DateTime">
 			<column name="Data" sql-type="DATETIME"/>
 		</property>
-		<set name="ListaFotos" table="tb_conteudoFoto">
+		<set name="ListaFotos" table="tb_conteudofoto">
 			<key column="CodConteudo"/>
 			<many-to-many class="Foto" column="CodFoto"/>
 		</set>
