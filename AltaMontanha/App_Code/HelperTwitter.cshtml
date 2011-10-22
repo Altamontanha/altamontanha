@@ -1,0 +1,40 @@
+﻿@helper GerarWidget()
+{
+	<h2 class="footer-title">Twitter</h2>
+	<script type="text/javascript" src="http://widgets.twimg.com/j/2/widget.js"></script>
+	<script type="text/javascript">
+		new TWTR.Widget({
+			version: 2,
+			type: 'profile',
+			rpp: 3,
+			interval: 2000,
+			width: 300,
+			height: 105,
+			theme: {
+				shell: {
+					background: '#0084b4',
+					color: '#ffffff'
+				},
+				tweets: {
+					background: '#ffffff',
+					color: '#0084b4',
+					links: '#0084b4'
+				}
+			},
+			features: {
+				scrollbar: true,
+				loop: false,
+				live: true,
+				hashtags: false,
+				timestamp: true,
+				avatars: false,
+				behavior: 'default'
+			}
+		}).render().setUser('AltaMontanhacom').start();
+	</script>
+}
+
+@helper GerarTweet()
+{
+	<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="altamontanhacom">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>	
+}

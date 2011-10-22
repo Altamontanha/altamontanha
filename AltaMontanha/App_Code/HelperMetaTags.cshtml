@@ -1,0 +1,23 @@
+﻿@helper Gerar(object obj)
+{
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="GOOGLEBOT" content="all" />
+		<meta name="MSNBot" content="all" />
+		<meta name="InktomiSlurp" content="all" />
+		<meta name="Alexa" content="all" />
+		<meta name="Voyager" content="all" />
+		<meta name="Unknownrobot" content="all" />
+		<meta name="Robots" content="all" />
+		<meta name="Revisit-after" content="7" />
+		<meta name="Expires" content="none" />
+		<meta name="Audience" content="all" />
+		<meta name="Author" content="AltaMontanha.com" />
+	
+	if(@obj.GetType().IsSubclassOf(typeof(AltaMontanha.Models.Dominio.Conteudo)))
+	{
+		AltaMontanha.Models.Dominio.Conteudo conteudo =(AltaMontanha.Models.Dominio.Conteudo)obj;
+		
+		<meta name = "Keywords" content="@conteudo.Titulo, montanhismo, alpinismo, trekking, escalada, turismo de aventura" />
+		<meta name = "Description" content="@conteudo.Titulo: @conteudo.Resumo" />
+	}
+}

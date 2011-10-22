@@ -1,0 +1,33 @@
+﻿@helper GerarCurtir(AltaMontanha.Models.Dominio.Conteudo conteudo)
+{
+	<p>
+		<iframe src="http://www.facebook.com/plugins/like.php?href=http://www.altamontanha.com/@conteudo.GetType().Name.ToLower()/@conteudo.Codigo/@conteudo.Slug" style="border: medium none; overflow: hidden; width: 200px; height: 27px;" allowtransparency="true" frameborder="0" scrolling="no"></iframe>
+	</p>
+}
+
+@helper GerarComentario(AltaMontanha.Models.Dominio.Conteudo conteudo)
+{
+	<div id="comentario">
+		<div id="fb-root"></div>
+		<fb:comments href="http://altamontanha.com/@conteudo.GetType().Name.ToLower()/@conteudo.Codigo/@conteudo.Slug" num_posts="3" width="695px"></fb:comments>
+	</div>
+}
+
+@helper GerarActivity()
+{
+	<h2 class="footer-title">Facebook</h2>
+	<div id="fb-root"></div>
+	<script type="text/javascript">
+		(function (d, s, id) 
+		{
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) 
+				return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+			fjs.parentNode.insertBefore(js, fjs);
+		}
+		(document, 'script', 'facebook-jssdk'));
+	</script>
+	<div style="background-color:#FFF;" class="fb-activity" data-site="altamontanha.com" data-width="300" data-height="195" data-header="false" data-recommendations="false"></div>
+}

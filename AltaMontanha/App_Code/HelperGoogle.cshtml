@@ -1,0 +1,68 @@
+﻿@helper GerarFriends()
+{
+	<h2 class="footer-title">Google</h2>
+	<script type="text/javascript" src="http://www.google.com/friendconnect/script/friendconnect.js"></script>
+	<div id="div-7391715679938197995" style="width:300px; height:195px; margin-left:-2px; z-index:-2; border-left:1px solid #ccc; border:solid 1px blue;"></div>
+	<script type="text/javascript">
+		var skin = {};
+		skin['BORDER_COLOR'] = 'transparent';
+		skin['ENDCAP_BG_COLOR'] = '#F0f0f0';
+		skin['ENDCAP_TEXT_COLOR'] = '#333333';
+		skin['ENDCAP_LINK_COLOR'] = '#990000';
+		skin['ALTERNATE_BG_COLOR'] = '#transparent';
+		skin['CONTENT_BG_COLOR'] = '#F0f0f0';
+		skin['CONTENT_LINK_COLOR'] = '#990000';
+		skin['CONTENT_TEXT_COLOR'] = '#333333';
+		skin['CONTENT_SECONDARY_LINK_COLOR'] = '#990000';
+		skin['CONTENT_SECONDARY_TEXT_COLOR'] = '#666666';
+		skin['CONTENT_HEADLINE_COLOR'] = '#333333';
+		skin['NUMBER_ROWS'] = '6';
+		google.friendconnect.container.setParentUrl('/' /* location of rpc_relay.html and canvas.html */);
+		google.friendconnect.container.renderMembersGadget({ id: 'div-7391715679938197995', site: '07569085838704721653'},skin);
+	</script>
+
+}
+
+@helper GerarAnalitics()
+{
+	<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+
+		try 
+		{
+			var pageTracker = _gat._getTracker("UA-1447050-1");
+			pageTracker._trackPageview();
+		}
+		catch (err) 
+		{
+
+		}
+	</script>
+}
+
+@helper GerarBusca()
+{
+	<div id="busca">
+		<form action="/busca">
+			<input type="hidden" name="cx" value="partner-pub-7801590803120340:ni9l3w-v9gu" />
+			<input type="hidden" name="cof" value="FORID:10" />
+			<input type="hidden" name="ie" value="ISO-8859-1" />
+			<input type="text" name="q" class="search-field" />
+			<input type="submit" name="sa" class="search-bt" value="BUSCAR" />
+		</form>
+	</div>
+}
+
+@helper GerarResultadoBusca()
+{
+	<div id="cse-search-results"></div>
+	<script type="text/javascript">
+		var googleSearchIframeName = "cse-search-results";
+		var googleSearchFormName = "cse-search-box";
+		var googleSearchFrameWidth = 728;
+		var googleSearchDomain = "www.google.com.br";
+		var googleSearchPath = "/cse";
+	</script>
+	<script type="text/javascript" src="http://www.google.com/afsonline/show_afs_search.js"></script>
+}
