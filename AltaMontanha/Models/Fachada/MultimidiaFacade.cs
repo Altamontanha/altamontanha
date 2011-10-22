@@ -87,8 +87,7 @@ namespace AltaMontanha.Models.Fachada
 
 				this.SalvarImagem
 				(
-					this.RedimensionarImagem(file.InputStream, 90, 90),
-					HttpContext.Current.Server.MapPath(path + foto.Caminho)
+					this.RedimensionarImagem(file.InputStream, 90, 90),HttpContext.Current.Server.MapPath(path + foto.Caminho)
 				);
 
 				foto.Galeria = false;

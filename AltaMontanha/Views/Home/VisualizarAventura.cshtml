@@ -18,21 +18,30 @@
 <div id="main-box">
 	<div id="conteudo">
 		<h2>@Model.Titulo</h2>
-		<p class="data">@String.Format("{0:dd/MM/yyyy}", Model.Data)</p>
+		<p class="data">@String.Format("{0:dd/MM/yyyy - HH:mm}", Model.Data)</p>
+		<dl style="margin-top:5px">
+			<dd style="float:left; margin-right:20px;">@HelperFaceBook.GerarCurtir(Model)</dd>
+			<dt style="margin-right:20px;">@HelperTwitter.GerarTweet()</dt>
+		</dl>
 		<p class="resumo">@Model.Resumo</p>
-		@HelperRota.VisualizarRota(@Model.Rota, 690, 200)
 		<div class="texto">
 			@Html.Raw(Model.Texto)
 		</div>
+		@HelperRota.VisualizarRota(@Model.Rota, 690, 300)
+		<!-- container de publicidade referentes banner de 728*90 -->
+		<div class="super-banner-home"> 
+			@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner)ViewData["BannerBaixo"])
+		</div>
+		@HelperFaceBook.GerarComentario(Model)
 	</div>
 	<div class="col-fotos">
 		<div id="quadrado-home">
-			@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner) ViewData["BannerInterna"])
+			@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner)ViewData["BannerInterna"])
 		</div>
 		<div class="fotos">
 			<ul>
 				@foreach (var foto in Model.ListaFotos)
-				{
+	{
 					<li>
 						<a href="/AppData/Foto/640x480/@foto.Caminho" class="nyroModal" title="@foto.Legenda" rel="galeria">
 							<img src="/AppData/Foto/145x95/@foto.Caminho" alt="@foto.Legenda" />

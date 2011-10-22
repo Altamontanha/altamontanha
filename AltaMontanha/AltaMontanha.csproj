@@ -212,7 +212,9 @@
     </Content>
     <EmbeddedResource Include="Models\Dominio\Perfil.hbm.xml" />
     <EmbeddedResource Include="Models\Dominio\Usuario.hbm.xml" />
-    <EmbeddedResource Include="Models\Dominio\Foto.hbm.xml" />
+    <EmbeddedResource Include="Models\Dominio\Foto.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Models\Dominio\Link.hbm.xml" />
     <EmbeddedResource Include="Models\Dominio\Categoria.hbm.xml" />
     <EmbeddedResource Include="Models\Dominio\PalavraChave.hbm.xml" />
@@ -421,6 +423,10 @@
     <Content Include="App_Code\HelperFoto.cshtml" />
     <Content Include="App_Code\HelperRota.cshtml" />
     <Content Include="App_Code\HelperBanner.cshtml" />
+    <Content Include="App_Code\HelperFaceBook.cshtml" />
+    <Content Include="App_Code\HelperGoogle.cshtml" />
+    <Content Include="App_Code\HelperTwitter.cshtml" />
+    <Content Include="App_Code\HelperMetaTags.cshtml" />
     <None Include="Content\themes\Publico\font\aller_bd-webfont.eot" />
     <None Include="Content\themes\Publico\font\aller_bd-webfont.ttf" />
     <None Include="Content\themes\Publico\font\aller_bdit-webfont.eot" />
@@ -441,6 +447,7 @@
     <Content Include="Views\Home\PesquisarAventura.cshtml" />
     <Content Include="Views\Home\PesquisarColuna.cshtml" />
     <Content Include="Views\ManterAutenticacao\_Sidebar.cshtml" />
+    <Content Include="Views\Home\VisualizarBusca.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -694,7 +694,22 @@ div#conteudo h2
 {
 	font-weight: bold;
 	padding: 15px 0 15px 0;
+	text-align: justify;
 }
+
+.texto
+{
+	margin-top:15px;
+	text-align :justify;	
+}
+
+.data
+{
+	margin: 3px 0 10px 0;
+	font-size: 12px;
+	font-style:italic;
+}
+
 
 #listagem li
 {

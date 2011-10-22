@@ -27,6 +27,7 @@
 	margin: 0;
     font-size: 1.1em;
 	color: #ddd;
+	z-index: 1000;
 }
 .nyroModalCont {
 	position: absolute;

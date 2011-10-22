@@ -5,7 +5,9 @@ using System.Text;
 using System.Web;
 using NHibernate;
 using NHibernate.Cfg;
+using System.Security;
 
+[assembly: AllowPartiallyTrustedCallers]
 namespace AltaMontanha.NHibernate
 {
 	public class HttpModule : IHttpModule

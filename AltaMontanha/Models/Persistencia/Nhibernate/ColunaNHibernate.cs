@@ -22,12 +22,25 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto, int qtde)
 		{
+			// TODO : O Resultado deve ser apenas da coluna mais nova "SEM REPETIR O AUTOR".
+			// Falta retornar somente a data na subquery (esta retornando o campo do grpup by).
+			// Criar outro metodo pra isso.
+			//var subCriteria = DetachedCriteria.For(typeof(Dominio.Coluna));
+			//subCriteria.CreateAlias("Autor", "A");
+
+			//subCriteria.SetProjection(Projections.ProjectionList()
+			//    .Add(Projections.Max("Data"))
+			//    .Add(Projections.GroupProperty("A.Login"))); // Suprimir esse campo
+
+			//ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Coluna))
+			//           .Add(Subqueries.PropertyIn("Data", subCriteria));
+
+			//return criteria.List<Dominio.Coluna>();
+
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Coluna));
 			criteria.SetMaxResults(qtde);
 			criteria.AddOrder(Order.Desc("Data"));
-			
-			// TODO : O Resultado deve ser apenas da coluna mais nova "SEM REPETIR O AUTOR".
-
+						
 			if (objeto == null)
 				return criteria.List<Dominio.Coluna>();
 

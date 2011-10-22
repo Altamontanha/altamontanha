@@ -23,59 +23,66 @@ namespace AltaMontanha
 
 			routes.MapRoute
 			(
+				"busca",
+				"busca",
+				new { controller = "Home", action = "VisualizarBusca" }
+			);
+
+			routes.MapRoute
+			(
 				"Artigo",
-				"Artigo/{Codigo}/{Titulo}",
+				"artigo/{Codigo}/{Titulo}",
 				new { controller = "Home", action = "VisualizarArtigo" },
 				new { Codigo = @"\d+" }
 			);
 			routes.MapRoute
 			(
-				"Artigos",
-				"Artigos",
+				"artigos",
+				"artigos",
 				new { controller = "Home", action = "PesquisarArtigo" }
 			);
 			routes.MapRoute
 			(
-				"Noticia",
-				"Noticia/{Codigo}/{Titulo}",
+				"noticia",
+				"noticia/{Codigo}/{Titulo}",
 				new { controller = "Home", action = "VisualizarNoticia" },
 				new { Codigo = @"\d+" }
 			);
 			routes.MapRoute
 			(
-				"Noticias",
-				"Noticias",
+				"noticias",
+				"noticias",
 				new { controller = "Home", action = "PesquisarNoticia" }
 			);
 			routes.MapRoute
 			(
-				"Coluna",
-				"Coluna/{Codigo}/{Titulo}",
+				"coluna",
+				"coluna/{Codigo}/{Titulo}",
 				new { controller = "Home", action = "VisualizarColuna" },
 				new { Codigo = @"\d+" }
 			);
 			routes.MapRoute
 			(
-				"Colunas",
-				"Colunas",
+				"colunas",
+				"colunas",
 				new { controller = "Home", action = "PesquisarColuna" }
 			);
 			routes.MapRoute
 			(
-				"Aventura",
-				"Aventura/{Codigo}/{Titulo}",
+				"aventura",
+				"aventura/{Codigo}/{Titulo}",
 				new { controller = "Home", action = "VisualizarAventura" },
 				new { Codigo = @"\d+" }
 			);
 			routes.MapRoute
 			(
-				"Aventuras",
-				"Aventuras",
+				"aventuras",
+				"aventuras",
 				new { controller = "Home", action = "PesquisarAventura" }
 			);
 			routes.MapRoute
 			(
-				"Default",
+				"default",
 				"{controller}/{action}/{Codigo}",
 				new { controller = "Home", action = "Index", Codigo = UrlParameter.Optional } // Parameter defaults
 			);

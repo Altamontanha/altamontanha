@@ -10,7 +10,16 @@
 					<span class="thumb-border-5">
 						<img src="/AppData/Foto/145x95/@artigo.FotoCapa.Caminho" alt="@artigo.FotoCapa.Legenda" width="145px" height="95px" />
 					</span>
-					<p>@artigo.Titulo</p>
+                    <p title="@artigo.Titulo">
+                        @if (artigo.Titulo.Length > 35)
+						{
+							@string.Concat(artigo.Titulo.Substring(0, 35), "...");
+						}
+						else
+						{
+							@artigo.Titulo;
+						}
+                    </p>
 				</a>
 			</div>
 		}

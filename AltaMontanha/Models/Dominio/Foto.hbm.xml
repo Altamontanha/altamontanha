@@ -19,7 +19,7 @@
 		<property name="Galeria" not-null="false" access="property" type="Boolean">
 			<column name="Galeria" length="1" />
 		</property>
-		<bag name="ListaPalavrasChave" table="tb_fotopalavrachave" cascade="save-update">
+        <bag name="ListaPalavrasChave" table="tb_fotopalavrachave" cascade="save-update">
 			<key column="CodFoto"/>
 			<many-to-many class="PalavraChave" column="CodPalavraChave"></many-to-many>
 		</bag>

@@ -23,7 +23,8 @@ namespace AltaMontanha.Controllers
 		{
 			Noticia noticia = conteudoFacade.PesquisarNoticia(Codigo);
 			ViewData["BannerInterna"] = multimidiaFacade.PesquisarBannerPorLocal(4);
-
+			ViewData["BannerBaixo"] = multimidiaFacade.PesquisarBannerPorLocal(3);
+			
 			if (noticia == null)
 				return RedirectToAction("Index");
 
@@ -41,7 +42,8 @@ namespace AltaMontanha.Controllers
 		{
 			Aventura aventura = conteudoFacade.PesquisarAventura(Codigo);
 			ViewData["BannerInterna"] = multimidiaFacade.PesquisarBannerPorLocal(4);
-
+			ViewData["BannerBaixo"] = multimidiaFacade.PesquisarBannerPorLocal(3);
+			
 			if (aventura == null)
 				return RedirectToAction("Index");
 
@@ -59,7 +61,8 @@ namespace AltaMontanha.Controllers
 		{
 			Coluna coluna = conteudoFacade.PesquisarColuna(Codigo);
 			ViewData["BannerInterna"] = multimidiaFacade.PesquisarBannerPorLocal(4);
-
+			ViewData["BannerBaixo"] = multimidiaFacade.PesquisarBannerPorLocal(3);
+			
 			if (coluna == null)
 				return RedirectToAction("Index");
 
@@ -77,9 +80,18 @@ namespace AltaMontanha.Controllers
 		{
 			Artigo artigo = conteudoFacade.PesquisarArtigo(Codigo);
 			ViewData["BannerInterna"] = multimidiaFacade.PesquisarBannerPorLocal(4);
+			ViewData["BannerBaixo"] = multimidiaFacade.PesquisarBannerPorLocal(3);
+
 			if (artigo == null)
 				return RedirectToAction("Index");
 			return View(artigo);
+		}
+
+		public ActionResult VisualizarBusca()
+		{
+			ViewData["BannerBaixo"] = multimidiaFacade.PesquisarBannerPorLocal(3);
+
+			return View(ViewData);
 		}
         //
         // GET: /Home/
@@ -92,11 +104,8 @@ namespace AltaMontanha.Controllers
 			ViewData["ListaNoticias"] = conteudoFacade.PesquisarNoticia(new Noticia() { Destaque = false }, 4);
 			ViewData["ListaColunas"] = conteudoFacade.PesquisarColuna(null, 6);
 			ViewData["ListaAventuras"] = conteudoFacade.PesquisarAventura(null,5);
-			ViewData["ListaArtigos"] = conteudoFacade.PesquisarArtigo(null, 4);
-
-			Artigo filtro = new Artigo();
-			filtro.ObjCategoria = new Categoria() { Codigo = 1 };
-			ViewData["ListaArtigosHistoria"] = conteudoFacade.PesquisarArtigo(filtro, 2);
+			ViewData["ListaArtigos"] = conteudoFacade.PesquisarArtigoArtigoTecnico(null);
+			ViewData["ListaArtigosHistoria"] = conteudoFacade.PesquisarArtigoHistoria(null);
 
 			return View(ViewData);
         }

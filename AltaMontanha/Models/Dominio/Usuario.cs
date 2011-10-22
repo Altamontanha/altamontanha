@@ -31,5 +31,10 @@ namespace AltaMontanha.Models.Dominio
 
 		[Required(ErrorMessage = "Foto é um campo obrigatório")]
 		public virtual Foto Foto { get; set; }
+
+		public override string ToString()
+		{
+			return Login;
+		}
 	}
 }

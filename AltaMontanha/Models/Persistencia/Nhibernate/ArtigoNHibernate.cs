@@ -20,7 +20,12 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
 			return objeto; 
 		}
-
+        /// <summary>
+        /// Pesquisa de Artigos
+        /// </summary>
+        /// <param name="artigo"></param>
+        /// <param name="qtde">LIMIT RESULT SET</param>
+        /// <returns></returns>
 		public IList<Dominio.Artigo> Pesquisar(Dominio.Artigo artigo, int qtde)
 		{
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Artigo));
@@ -29,7 +34,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			if (artigo == null)
 				return criteria.List<Dominio.Artigo>();
-
+			
 			if (artigo.Codigo > 0)
 				criteria = criteria.Add(Expression.Eq("Codigo", artigo.Codigo));
 			if (artigo.ObjCategoria != null)
@@ -55,7 +60,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			if (objeto.Codigo > 0)
 				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
 			if (objeto.ObjCategoria != null)
-				criteria = criteria.Add(Expression.Eq("CodCategoria", objeto.ObjCategoria.Codigo));
+				criteria = criteria.Add(Expression.Eq("ObjCategoria.Codigo", objeto.ObjCategoria.Codigo));
 			if (objeto.Data > DateTime.MinValue)
 				criteria = criteria.Add(Expression.Eq("Data", objeto.Data));
 			if (!string.IsNullOrEmpty(objeto.Titulo))

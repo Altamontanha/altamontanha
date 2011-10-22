@@ -98,14 +98,14 @@ namespace AltaMontanha.Models.Fachada
 		/// </summary>
 		/// <param name="noticia">Objeto para filtro</param>
 		/// <param name="qtde">Quantidade de registros a retornar ("0" para todos)</param>
-		public IList<Dominio.Noticia> PesquisarNoticia(Dominio.Noticia noticia, int qtde=0)
+		public IList<Dominio.Noticia> PesquisarNoticia(Dominio.Noticia noticia, int qtde = 0)
 		{
 			try
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				INoticiaDAO noticiaDAO = fabrica.GetNoticiaDAO();
 
-				if(qtde > 0)
+				if (qtde > 0)
 					return noticiaDAO.Pesquisar(noticia, qtde);
 
 				return noticiaDAO.Pesquisar(noticia);
@@ -124,7 +124,7 @@ namespace AltaMontanha.Models.Fachada
 		{
 			try
 			{
-				if(noticia == null)
+				if (noticia == null)
 					throw new ArgumentNullException("noticia");
 
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
@@ -132,7 +132,7 @@ namespace AltaMontanha.Models.Fachada
 
 				if (noticia.UsuarioCadastro == null)
 					noticia.UsuarioCadastro = Utilitario.Sessao.UsuarioLogado;
-				
+
 				if (noticia.Codigo <= 0)
 					return noticiaDAO.Cadastrar(noticia);
 
@@ -155,7 +155,7 @@ namespace AltaMontanha.Models.Fachada
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				INoticiaDAO noticiaDAO = fabrica.GetNoticiaDAO();
-							
+
 				return noticiaDAO.Excluir(codigo);
 			}
 			catch (Exception e)
@@ -165,7 +165,7 @@ namespace AltaMontanha.Models.Fachada
 		}
 
 		#endregion
-		
+
 		#region Coluna
 
 		/// <summary>
@@ -192,17 +192,14 @@ namespace AltaMontanha.Models.Fachada
 		/// </summary>
 		/// <param name="coluna">Objeto para filtro</param>
 		/// <param name="qtde">Quantidade de registros a retornar ("0" para todos)</param>
-		public IList<Dominio.Coluna> PesquisarColuna(Dominio.Coluna coluna, int qtde=0)
+		public IList<Dominio.Coluna> PesquisarColuna(Dominio.Coluna coluna, int qtde = 0)
 		{
 			try
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IColunaDAO colunaDAO = fabrica.GetColunaDAO();
-				
-				if (qtde > 0)
-					return colunaDAO.Pesquisar(coluna, qtde);
 
-				return colunaDAO.Pesquisar(coluna);
+				return colunaDAO.Pesquisar(coluna, qtde);				
 			}
 			catch (Exception e)
 			{
@@ -218,7 +215,7 @@ namespace AltaMontanha.Models.Fachada
 		{
 			try
 			{
-				if(coluna == null)
+				if (coluna == null)
 					throw new ArgumentNullException("coluna");
 
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
@@ -249,7 +246,7 @@ namespace AltaMontanha.Models.Fachada
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IColunaDAO colunaDAO = fabrica.GetColunaDAO();
-							
+
 				return colunaDAO.Excluir(codigo);
 			}
 			catch (Exception e)
@@ -286,14 +283,14 @@ namespace AltaMontanha.Models.Fachada
 		/// </summary>
 		/// <param name="aventura">Objeto para filtro</param>
 		/// <param name="qtde">Quantidade de registros para retornar ("0" para todos)</param>
-		public IList<Dominio.Aventura> PesquisarAventura(Dominio.Aventura aventura, int qtde=0)
+		public IList<Dominio.Aventura> PesquisarAventura(Dominio.Aventura aventura, int qtde = 0)
 		{
 			try
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IAventuraDAO aventuraDAO = fabrica.GetAventuraDAO();
 
-				if(qtde > 0)
+				if (qtde > 0)
 					return aventuraDAO.Pesquisar(aventura, qtde);
 
 				return aventuraDAO.Pesquisar(aventura);
@@ -313,15 +310,15 @@ namespace AltaMontanha.Models.Fachada
 		{
 			try
 			{
-				if(aventura == null)
+				if (aventura == null)
 					throw new ArgumentNullException("aventura");
 
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IAventuraDAO aventuraDAO = fabrica.GetAventuraDAO();
-								
-				if(aventura.UsuarioCadastro == null)
+
+				if (aventura.UsuarioCadastro == null)
 					aventura.UsuarioCadastro = Utilitario.Sessao.UsuarioLogado;
-				
+
 				if (arquivoRota != null)
 				{
 					string caminho = "~/AppData/Rota/";
@@ -355,7 +352,7 @@ namespace AltaMontanha.Models.Fachada
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IAventuraDAO aventuraDAO = fabrica.GetAventuraDAO();
-							
+
 				return aventuraDAO.Excluir(codigo);
 			}
 			catch (Exception e)
@@ -484,7 +481,7 @@ namespace AltaMontanha.Models.Fachada
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				ICategoriaDAO categoriaDAO = fabrica.GetCategoriaDAO();
-							
+
 				return categoriaDAO.Excluir(codigo);
 			}
 			catch (Exception e)
@@ -513,13 +510,12 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
 		/// <summary>
 		/// Pesquisa artigo pelos atributos do artigo
 		/// </summary>
 		/// <param name="artigo">Filtro para pesquisa</param>
 		/// <param name="qtde">Quantidade de registros de retorno ("0" para todos)</param>
-		public IList<Dominio.Artigo> PesquisarArtigo(Dominio.Artigo artigo, int qtde=0)
+		public IList<Dominio.Artigo> PesquisarArtigo(Dominio.Artigo artigo, int qtde = 0)
 		{
 			try
 			{
@@ -536,7 +532,58 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
+		/// <summary>
+		/// Pesquisa artigo pelos atributos do artigo usado para trazer apenas artigos
+		/// para visualizacao no container de artigos.
+		/// </summary>
+		/// <param name="artigo">Filtro para pesquisa</param>
+		/// <param name="qtde">Quantidade de registros de retorno ("0" para todos)</param>
+		public IList<Dominio.Artigo> PesquisarArtigoArtigoTecnico(Dominio.Artigo artigo, int qtde = 4)
+		{
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IArtigoDAO artigoDAO = fabrica.GetArtigoDAO();
+				IList<Artigo> lista = artigoDAO.Pesquisar(artigo);
+								
+				// Remove os Itens de Historia do montanhismo.
+				((List<Artigo>)lista).RemoveAll(p => p.ObjCategoria.Codigo == 2);
 
+				return (IList<Artigo>)((List<Artigo>)lista).GetRange(0,qtde);
+			}
+			catch (Exception e)
+			{
+				throw e;
+			}
+		}
+		/// <summary>
+		/// Pesquisa artigo pelos atributos do artigo usado para trazer apenas artigos
+		/// para visualizacao no container de Historia do montanhismo.
+		/// </summary>
+		/// <param name="artigo">Filtro para pesquisa</param>
+		/// <param name="qtde">Quantidade de registros de retorno ("0" para todos)</param>
+		public IList<Dominio.Artigo> PesquisarArtigoHistoria(Dominio.Artigo artigo, int qtde = 2)
+		{
+			try
+			{
+				if (artigo == null)
+					artigo = new Artigo();
+
+				artigo.ObjCategoria = new Categoria() { Codigo = 2 };
+
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IArtigoDAO artigoDAO = fabrica.GetArtigoDAO();
+
+				if (qtde > 0)
+					return artigoDAO.Pesquisar(artigo, qtde);
+
+				return artigoDAO.Pesquisar(artigo);
+			}
+			catch (Exception e)
+			{
+				throw e;
+			}
+		}
 		/// <summary>
 		/// Salva o artigo
 		/// </summary>
@@ -545,7 +592,7 @@ namespace AltaMontanha.Models.Fachada
 		{
 			try
 			{
-				if(artigo == null)
+				if (artigo == null)
 					throw new NotImplementedException("artigo");
 
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
@@ -565,7 +612,6 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
 		/// <summary>
 		/// Exclui o artigo pelo código
 		/// </summary>
@@ -576,7 +622,7 @@ namespace AltaMontanha.Models.Fachada
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IArtigoDAO artigoDAO = fabrica.GetArtigoDAO();
-							
+
 				return artigoDAO.Excluir(codigo);
 			}
 			catch (Exception e)

@@ -20,15 +20,10 @@
 		<property name="Data" not-null="true" access="property" type="DateTime">
 			<column name="Data" sql-type="DATETIME"/>
 		</property>
-		<set name="ListaFotos" table="tb_conteudofoto">
-			<key column="CodConteudo"/>
-			<many-to-many class="Foto" column="CodFoto"/>
-		</set>
-		<!--<bag name="ListaFotos" table="tb_conteudofoto" cascade="save-update">
+		<bag name="ListaFotos" table="tb_conteudofoto" cascade="save-update">
 			<key column="CodConteudo"/>
 			<many-to-many class="Foto" column="CodFoto"></many-to-many>
-		</bag>-->
-		
+		</bag>
 		<bag name="ListaPalavrasChave" table="tb_conteudopalavrachave" cascade="save-update">
 			<key column="CodConteudo"/>
 			<many-to-many class="PalavraChave" column="CodPalavraChave"></many-to-many>
@@ -60,10 +55,10 @@
 		</join>
 	</subclass>
 	<!--Noticia-->
-	<subclass name="Noticia" extends="Conteudo" discriminator-value="Coluna" lazy="false">
+	<subclass name="Noticia" extends="Conteudo" discriminator-value="Noticia" lazy="false">
 		<join table="tb_noticia">
 			<key column="CodConteudo" />
-			<property name="Fonte" not-null="true" access="property" type="String">
+			<property name="Fonte" not-null="true" access="property" type="string">
 				<column name="Fonte" length="75"/>
 			</property>
 			<property name="Destaque" not-null="true" access="property" type="bool">
