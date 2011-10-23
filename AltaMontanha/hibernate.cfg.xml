@@ -4,9 +4,12 @@
 	    <!--<property name="connection.provider">NHibernate.Connection.DriverConnectionProvider</property>-->
 		<property name="dialect">NHibernate.Dialect.MySQLDialect</property>
 		<property name="connection.driver_class">NHibernate.Driver.MySqlDataDriver</property>
-		<property name="connection.connection_string">Server=172.16.27.168; Database=altamontanha; Uid=root;</property>
-	    <property name="proxyfactory.factory_class">NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu</property>
+		<!--<property name="connection.connection_string">Server=172.16.27.168; Database=altamontanha; Uid=root;</property>-->
+		<property name="connection.connection_string">Server=200.98.197.227; Database=altamontan; User ID=altamontan; Password=AM2004</property>
+		<property name="proxyfactory.factory_class">NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu</property>
 	    <property name="show_sql">true</property>
 	    <mapping assembly="AltaMontanha"/>
+
 	</session-factory>
+
 </hibernate-configuration>

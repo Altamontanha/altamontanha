@@ -20,10 +20,13 @@
 		<property name="Data" not-null="true" access="property" type="DateTime">
 			<column name="Data" sql-type="DATETIME"/>
 		</property>
-		<bag name="ListaFotos" table="tb_conteudofoto" cascade="save-update">
+		<idbag name="ListaFotos" table="tb_conteudofoto" cascade="save-update" inverse="true">
+			<collection-id type="Int32" column="CodConteudoFoto">
+				<generator class ="identity"/>
+			</collection-id>
 			<key column="CodConteudo"/>
 			<many-to-many class="Foto" column="CodFoto"></many-to-many>
-		</bag>
+		</idbag>
 		<bag name="ListaPalavrasChave" table="tb_conteudopalavrachave" cascade="save-update">
 			<key column="CodConteudo"/>
 			<many-to-many class="PalavraChave" column="CodPalavraChave"></many-to-many>

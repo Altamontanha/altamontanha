@@ -17,7 +17,8 @@
 					{
 						<input type="radio" name="FotoCapa.Codigo" value="@foto.Codigo" />
 					}
-					<a href="@string.Concat("#fotoID_", @foto.Codigo)" class="bt_excluir">X</a>
+
+					<a href='@string.Concat("#fotoID_", @foto.Codigo)' class='bt_excluir'>X</a>
 					<img alt='@foto.Legenda' src='@string.Concat("/AppData/Foto/145x95/", @foto.Caminho)' title='@foto.Legenda' />
 					<input type='hidden' name='ListaFotos.Index' value = '@foto.Codigo' />
 					<input type='hidden' name='ListaFotos[@foto.Codigo].Codigo' value='@foto.Codigo' />
@@ -38,9 +39,11 @@
 			});
 		}
 
-		j(document).ready(function () {
+		j(document).ready(function () 
+		{
 			// carregar modal no link
-			j("#fotos").nyroModal();
+			j("#fotos").nyroModal({ sizes: { initW: 800, initH: 600, w: 800, h: 600, minW:800, minH:600 } });
+			j.nmObj({ sizes: { initW: 800, initH: 600, w: 800, h: 600, minW: 800, minH: 600} });
 
 			// ação para remover elementos
 			adicionarAcaoRemover();

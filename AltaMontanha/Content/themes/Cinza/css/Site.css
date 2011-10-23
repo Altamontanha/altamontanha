@@ -113,16 +113,17 @@ textarea
 	position: relative;
 }
 
-#listaFotos li div a.bt_excluir
+#listaFotos li a
 {
-	top: 15px;
-	float: right;
-	background-color: White;
-	padding: 2px;
-	text-decoration: none;
-	color: Black;
-	position: relative;
-	font-weight: bold;
+	top: 15px !important;
+	float: right !important;
+	background-color: White !important;
+	padding: 2px !important;
+	text-decoration: none !important;
+	color: Black !important;
+	position: relative !important;
+	font-weight: bold !important;
+	border: 1px solid #CCC !important;
 }
 
 .bt_adicionar 
