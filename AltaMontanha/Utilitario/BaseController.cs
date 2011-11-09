@@ -26,7 +26,7 @@ namespace AltaMontanha.Utilitario
 		/// No momento que é verificado o acesso á página
 		/// verifica-se também se o usuário tem acesso ao formulário.
 		/// </summary>
-		/// <param name="filterContext"></param>
+		/// <param name="filterContext"></param>	 
 		protected override void OnAuthorization(AuthorizationContext filterContext)
 		{
 			base.OnAuthorization(filterContext);

@@ -37,6 +37,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AltaMontanha.HttpModule\Componentes\NHibernate\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.4.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\AltaMontanha.HttpModule\Componentes\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\AltaMontanha.HttpModule\Componentes\NHibernate\NHibernate.dll</HintPath>
     </Reference>
@@ -124,6 +129,7 @@
     <Compile Include="Models\Persistencia\Fabrica\FactoryFactoryDAO.cs" />
     <Compile Include="Models\Persistencia\Fabrica\FactoryNHibernate.cs" />
     <Compile Include="Models\Persistencia\Fabrica\IFactoryDAO.cs" />
+    <Compile Include="Models\Persistencia\MySQL\ConteudoMySQL.cs" />
     <Compile Include="Models\Persistencia\Nhibernate\ArtigoNHibernate.cs" />
     <Compile Include="Models\Persistencia\Nhibernate\AventuraNHibernate.cs" />
     <Compile Include="Models\Persistencia\Nhibernate\BannerNHibernate.cs" />
@@ -271,12 +277,15 @@
     <Folder Include="AppData\Foto\Pequena\" />
     <Folder Include="AppData\Foto\Usuario\" />
     <Folder Include="AppData\Rota\" />
-    <Folder Include="Models\Persistencia\SQLServer\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AltaMontanha.HttpModule\AltaMontanha.HttpModule.csproj">
       <Project>{F1146BDF-A5C7-492C-B08B-C18FF1295DD4}</Project>
       <Name>AltaMontanha.HttpModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Otaviano.Conexao\Otaviano.Conexao.csproj">
+      <Project>{D2B11757-D40C-4E54-9323-7F85A40EB38E}</Project>
+      <Name>Otaviano.Conexao</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -16,7 +16,11 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public Dominio.Noticia Cadastrar(Dominio.Noticia objeto)
 		{
+			MySQL.ConteudoMySQL conteudoDAO = new MySQL.ConteudoMySQL();
+			
 			objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+			conteudoDAO.VincularFotos(objeto);
+
 			return objeto;
 		}
 
