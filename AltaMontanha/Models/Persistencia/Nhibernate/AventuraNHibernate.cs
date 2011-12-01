@@ -16,12 +16,26 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public Dominio.Aventura Cadastrar(Dominio.Aventura objeto)
 		{
-			MySQL.ConteudoMySQL conteudoDAO = new MySQL.ConteudoMySQL();
+			using (ISession session = NHibernate.HttpModule.RecuperarSessao)
+			using (ITransaction transaction = session.BeginTransaction())
+			{
+				try
+				{
+					MySQL.ConteudoMySQL conteudoDAO = new MySQL.ConteudoMySQL();
 
-			objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
-			conteudoDAO.VincularFotos(objeto);
+					objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+					conteudoDAO.VincularFotos(objeto);
+					conteudoDAO.VincularPalavraChave(objeto);
+					transaction.Commit();
 
-			return objeto; 
+					return objeto;
+				}
+				catch
+				{
+					transaction.Rollback();
+					throw;
+				}
+			}
 		}
 
 		public IList<Dominio.Aventura> Pesquisar(Dominio.Aventura objeto, int qtde)

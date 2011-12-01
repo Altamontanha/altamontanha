@@ -46,6 +46,39 @@ namespace AltaMontanha.Models.Persistencia.MySQL
 				throw ex;
 			}
 		}
-	}
 
+		public Dominio.Conteudo VincularPalavraChave(Dominio.Conteudo conteudo)
+		{
+			string sql = string.Empty;
+
+			try
+			{
+				sql = "INSERT INTO tb_conteudopalavrachave (CodConteudo, CodPalavraChave)" +
+					   "VALUES(@CodConteudo, @CodPalavraChave);" +
+					   "SELECT LAST_INSERT_ID();";
+
+				foreach (var item in conteudo.ListaPalavrasChave)
+				{
+
+					IDataParameter[] parametros = new IDataParameter[]
+					{
+						new MySqlParameter("@CodConteudo", conteudo.Codigo),
+						new MySqlParameter("@CodPalavraChave", item.Codigo)
+					};
+
+					item.Codigo = Convert.ToInt32(this.conexao.ExecutarEscalar(sql, CommandType.Text, parametros));
+				}
+
+				return conteudo;
+			}
+			catch (MySqlException ex)
+			{
+				throw new ApplicationException("Ocorreu um erro ao acessar o banco de dados!", ex);
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+	}
 }
