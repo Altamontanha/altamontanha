@@ -65,9 +65,10 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 		{
 
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Artigo));
+			criteria.AddOrder(Order.Desc("Data"));
 
 			if (objeto == null)
-				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Artigo>().List<Dominio.Artigo>();
+				return criteria.List<Dominio.Artigo>();
 
 			if (objeto.Codigo > 0)
 				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));

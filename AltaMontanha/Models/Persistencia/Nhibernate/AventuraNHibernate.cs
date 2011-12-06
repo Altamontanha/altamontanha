@@ -62,9 +62,10 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 		public IList<Dominio.Aventura> Pesquisar(Dominio.Aventura objeto)
 		{
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Aventura));
+			criteria.AddOrder(Order.Desc("Data"));
 
 			if (objeto == null)
-				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Aventura>().List<Dominio.Aventura>();
+				return criteria.List<Dominio.Aventura>();
 
 			if (objeto.Codigo > 0)
 				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));

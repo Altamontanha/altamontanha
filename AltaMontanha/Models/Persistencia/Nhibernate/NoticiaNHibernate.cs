@@ -61,9 +61,10 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 		public IList<Dominio.Noticia> Pesquisar(Dominio.Noticia objeto)
 		{
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Noticia));
+			criteria.AddOrder(Order.Desc("Data"));
 
 			if (objeto == null)
-				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Noticia>().List<Dominio.Noticia>();
+				return criteria.List<Dominio.Noticia>();
 
 			if (objeto.Codigo > 0)
 				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
