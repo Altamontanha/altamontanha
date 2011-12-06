@@ -129,6 +129,7 @@
     <Compile Include="Models\Persistencia\Fabrica\FactoryFactoryDAO.cs" />
     <Compile Include="Models\Persistencia\Fabrica\FactoryNHibernate.cs" />
     <Compile Include="Models\Persistencia\Fabrica\IFactoryDAO.cs" />
+    <Compile Include="Models\Persistencia\MySQL\ColunaMySQL.cs" />
     <Compile Include="Models\Persistencia\MySQL\ConteudoMySQL.cs" />
     <Compile Include="Models\Persistencia\Nhibernate\ArtigoNHibernate.cs" />
     <Compile Include="Models\Persistencia\Nhibernate\AventuraNHibernate.cs" />

@@ -11,7 +11,7 @@ namespace AltaMontanha.Models.Persistencia.Fabrica
 		Abstracao.IAventuraDAO GetAventuraDAO();
 		Abstracao.IBannerDAO GetBannerDAO();
 		Abstracao.ICategoriaDAO GetCategoriaDAO();
-		Abstracao.IColunaDAO GetColunaDAO();
+		Abstracao.IColunaDAO GetColunaDAO(bool hibernate = true);
 		Abstracao.IComentarioDAO GetComentarioDAO();
 		// Abstracao.IConteudoDAO GetArtigoDAO(); // TODO: Verificar necessidade desse método.
 		Abstracao.IFotoDAO GetFotoDAO();

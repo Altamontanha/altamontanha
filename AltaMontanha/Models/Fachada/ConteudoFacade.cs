@@ -167,7 +167,7 @@ namespace AltaMontanha.Models.Fachada
 		#endregion
 
 		#region Coluna
-
+		
 		/// <summary>
 		/// Pesquisa a coluna pelo código
 		/// </summary>
@@ -186,27 +186,35 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
 		/// <summary>
 		/// Pesquisa colunas utilizando os atributos da coluna passada
 		/// </summary>
 		/// <param name="coluna">Objeto para filtro</param>
 		/// <param name="qtde">Quantidade de registros a retornar ("0" para todos)</param>
-		public IList<Dominio.Coluna> PesquisarColuna(Dominio.Coluna coluna, int qtde = 0)
+		public IList<Dominio.Coluna> PesquisarColuna(Dominio.Coluna coluna, int qtde = 0, bool ultimas = false)
 		{
+			// TODO : Refactorin this shit...
 			try
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
-				IColunaDAO colunaDAO = fabrica.GetColunaDAO();
-
-				return colunaDAO.Pesquisar(coluna, qtde);				
+				
+				if (!ultimas)
+				{
+					IColunaDAO colunaDAO = fabrica.GetColunaDAO();
+					return colunaDAO.Pesquisar(coluna, qtde);
+				}
+				else
+				{
+					Persistencia.MySQL.ColunaMySQL colunaDAO = (Persistencia.MySQL.ColunaMySQL) fabrica.GetColunaDAO(false);
+					return colunaDAO.PesquisarUltimasColunas();
+				}
+				
 			}
 			catch (Exception e)
 			{
 				throw e;
 			}
 		}
-
 		/// <summary>
 		/// Salva a coluna
 		/// </summary>
@@ -235,7 +243,6 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
 		/// <summary>
 		/// Exclui a coluna pelo código
 		/// </summary>

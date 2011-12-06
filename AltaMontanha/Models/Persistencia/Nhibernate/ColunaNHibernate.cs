@@ -37,39 +37,40 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			// TODO : O Resultado deve ser apenas da coluna mais nova "SEM REPETIR O AUTOR".
 			// Falta retornar somente a data na subquery (esta retornando o campo do grpup by).
 			// Criar outro metodo pra isso.
-			var subCriteria = DetachedCriteria.For(typeof(Dominio.Coluna));
-			subCriteria.CreateAlias("Autor", "A");
+			//var subCriteria = DetachedCriteria.For(typeof(Dominio.Coluna));
+			//subCriteria.CreateAlias("Autor", "A");
 
-			subCriteria.SetProjection(Projections.ProjectionList()
-				.Add(Projections.Max("Data"))
-				.Add(Projections.GroupProperty("A.Login"))); // Suprimir esse campo
+			//subCriteria.SetProjection(Projections.ProjectionList()
+			//    .Add(Projections.Max("Data"))
+			//    .Add(Projections.Property("Codigo"))
+			//    .Add(Projections.GroupProperty("A.Login")));
 
-			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Coluna))
-					   .Add(Subqueries.PropertyIn("Data", subCriteria));
+			//ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Coluna))
+			//    .Add(Subqueries.PropertyIn("Data", subCriteria));
 
-			return criteria.List<Dominio.Coluna>();
+			//return criteria.List<Dominio.Coluna>();
 
-			//ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Coluna));
-			//criteria.SetMaxResults(qtde);
-			//criteria.AddOrder(Order.Desc("Data"));
-						
-			//if (objeto == null)
-			//    return criteria.List<Dominio.Coluna>();
+			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Coluna));
+			criteria.SetMaxResults(qtde);
+			criteria.AddOrder(Order.Desc("Data"));
 
-			//if (objeto.Codigo > 0)
-			//    criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
-			//if (objeto.Autor != null)
-			//    criteria = criteria.Add(Expression.Eq("CodUsuario", objeto.Autor.Codigo));
-			//if (objeto.UsuarioCadastro != null)
-			//    criteria = criteria.Add(Expression.Eq("CodUsuarioCadastro", objeto.UsuarioCadastro.Codigo));
-			//if (objeto.Data > DateTime.MinValue)
-			//    criteria = criteria.Add(Expression.Eq("Data", objeto.Data));
-			//if (!string.IsNullOrEmpty(objeto.Titulo))
-			//    criteria = criteria.Add(Expression.Eq("Titulo", objeto.Titulo));
+			if (objeto == null)
+				return criteria.List<Dominio.Coluna>();
 
-			//IList<Dominio.Coluna> colunas = criteria.List<Dominio.Coluna>();
+			if (objeto.Codigo > 0)
+				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
+			if (objeto.Autor != null)
+				criteria = criteria.Add(Expression.Eq("CodUsuario", objeto.Autor.Codigo));
+			if (objeto.UsuarioCadastro != null)
+				criteria = criteria.Add(Expression.Eq("CodUsuarioCadastro", objeto.UsuarioCadastro.Codigo));
+			if (objeto.Data > DateTime.MinValue)
+				criteria = criteria.Add(Expression.Eq("Data", objeto.Data));
+			if (!string.IsNullOrEmpty(objeto.Titulo))
+				criteria = criteria.Add(Expression.Eq("Titulo", objeto.Titulo));
 
-			//return colunas;
+			IList<Dominio.Coluna> colunas = criteria.List<Dominio.Coluna>();
+
+			return colunas;
 		}
 
 		public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto)

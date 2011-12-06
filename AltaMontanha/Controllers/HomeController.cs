@@ -102,7 +102,7 @@ namespace AltaMontanha.Controllers
 			ViewData["BannerBaixo"] = multimidiaFacade.PesquisarBannerPorLocal(3);
 			ViewData["ListaNoticiasDestaque"] = conteudoFacade.PesquisarNoticia(new Noticia() { Destaque = true }, 7);
 			ViewData["ListaNoticias"] = conteudoFacade.PesquisarNoticia(new Noticia() { Destaque = false }, 4);
-			ViewData["ListaColunas"] = conteudoFacade.PesquisarColuna(null, 6);
+			ViewData["ListaColunas"] = conteudoFacade.PesquisarColuna(null, 6, true);
 			ViewData["ListaAventuras"] = conteudoFacade.PesquisarAventura(null,5);
 			ViewData["ListaArtigos"] = conteudoFacade.PesquisarArtigoArtigoTecnico(null);
 			ViewData["ListaArtigosHistoria"] = conteudoFacade.PesquisarArtigoHistoria(null);

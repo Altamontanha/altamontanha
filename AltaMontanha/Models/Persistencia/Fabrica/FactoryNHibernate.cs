@@ -25,8 +25,11 @@ namespace AltaMontanha.Models.Persistencia.Fabrica
 			return new Nhibernate.CategoriaNHibernate();
 		}
 
-		public Abstracao.IColunaDAO GetColunaDAO()
+		public Abstracao.IColunaDAO GetColunaDAO(bool hibernate = true)
 		{
+			if (!hibernate)
+				return new MySQL.ColunaMySQL();
+
 			return new Nhibernate.ColunaNHibernate();
 		}
 

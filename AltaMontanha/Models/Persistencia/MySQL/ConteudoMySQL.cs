@@ -9,10 +9,10 @@ using System.Configuration;
 
 namespace AltaMontanha.Models.Persistencia.MySQL
 {
-	public class ConteudoMySQL //: Abstracao.IConteudo
+	public class ConteudoMySQL
 	{
 		private Conexao conexao = ConexaoFactory.GetConexao(TipoProvedorDados.MySQL, ConfigurationManager.ConnectionStrings["StringConexao"].ConnectionString);
-		// TODO : testar em artigo
+		
 		public Dominio.Conteudo VincularFotos(Dominio.Conteudo conteudo)
 		{
 			string sql = string.Empty;
