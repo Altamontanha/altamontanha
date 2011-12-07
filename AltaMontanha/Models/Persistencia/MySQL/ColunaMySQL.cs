@@ -52,6 +52,7 @@ namespace AltaMontanha.Models.Persistencia.MySQL
 					coluna = new Dominio.Coluna();
 
 					coluna.Codigo = Convert.ToInt32(reader["CodConteudo"]);
+					coluna.Titulo = Convert.ToString(reader["Titulo"]);
 					coluna.Autor = new Dominio.Usuario()
 					{
 						Codigo = Convert.ToInt32(reader["CodUsuario"]),
@@ -65,6 +66,7 @@ namespace AltaMontanha.Models.Persistencia.MySQL
 						}
 					};
 
+					ListaColuna.Add(coluna);
 				}
 
 				return ListaColuna;
