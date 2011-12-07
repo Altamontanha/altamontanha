@@ -161,6 +161,14 @@ a{
 	text-decoration: none;
 	color: #587EA2;
 }
+
+.texto a
+{
+	text-decoration: none;
+	color: #00F;
+	font-size: 14px;
+}
+
 a:hover{
 	text-decoration: underline;
 }
