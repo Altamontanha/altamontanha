@@ -541,6 +541,7 @@ div#partners-box h2{
 div#partners-box h2 span.title-bg{
 	margin: 0;
 }
+
 p.partner-photo-news{
 	margin: 5px 0px;
 }
@@ -714,8 +715,8 @@ div#conteudo h2
 
 .data
 {
-	margin: 3px 0 10px 0;
-	font-size: 12px;
+	margin: 5px 10px;
+	font-size: 11px;
 	font-style:italic;
 }
 
