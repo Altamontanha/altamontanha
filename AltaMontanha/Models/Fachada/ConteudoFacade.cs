@@ -639,5 +639,11 @@ namespace AltaMontanha.Models.Fachada
 		}
 
 		#endregion
+
+		public Dominio.Conteudo PesquisarConteudo(int codigo)
+		{
+			// TODO : Pesquisar Conteúdos...
+			return null;
+		}
 	}
 }

@@ -460,6 +460,7 @@
     <Content Include="Views\Home\PesquisarColuna.cshtml" />
     <Content Include="Views\ManterAutenticacao\_Sidebar.cshtml" />
     <Content Include="Views\Home\VisualizarBusca.cshtml" />
+    <Content Include="Views\Home\PesquisarColunista.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

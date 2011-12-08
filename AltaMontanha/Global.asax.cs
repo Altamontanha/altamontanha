@@ -23,63 +23,23 @@ namespace AltaMontanha
 
 			routes.MapRoute
 			(
+				"Redirecionar",
+				"colunas.asp",
+				new { controller = "Home", action = "RedirecionarConteudo" }
+			);
+			
+			routes.MapRoute
+			(
 				"busca",
 				"busca",
 				new { controller = "Home", action = "VisualizarBusca" }
 			);
+			
+			MvcApplication.RotearArtigos(routes);
+			MvcApplication.RotearNoticias(routes);
+			MvcApplication.RotearColunas(routes);
+			MvcApplication.RotearAventuras(routes);
 
-			routes.MapRoute
-			(
-				"Artigo",
-				"artigo/{Codigo}/{Titulo}",
-				new { controller = "Home", action = "VisualizarArtigo" },
-				new { Codigo = @"\d+" }
-			);
-			routes.MapRoute
-			(
-				"artigos",
-				"artigos",
-				new { controller = "Home", action = "PesquisarArtigo" }
-			);
-			routes.MapRoute
-			(
-				"noticia",
-				"noticia/{Codigo}/{Titulo}",
-				new { controller = "Home", action = "VisualizarNoticia" },
-				new { Codigo = @"\d+" }
-			);
-			routes.MapRoute
-			(
-				"noticias",
-				"noticias",
-				new { controller = "Home", action = "PesquisarNoticia" }
-			);
-			routes.MapRoute
-			(
-				"coluna",
-				"coluna/{Codigo}/{Titulo}",
-				new { controller = "Home", action = "VisualizarColuna" },
-				new { Codigo = @"\d+" }
-			);
-			routes.MapRoute
-			(
-				"colunas",
-				"colunas",
-				new { controller = "Home", action = "PesquisarColuna" }
-			);
-			routes.MapRoute
-			(
-				"aventura",
-				"aventura/{Codigo}/{Titulo}",
-				new { controller = "Home", action = "VisualizarAventura" },
-				new { Codigo = @"\d+" }
-			);
-			routes.MapRoute
-			(
-				"aventuras",
-				"aventuras",
-				new { controller = "Home", action = "PesquisarAventura" }
-			);
 			routes.MapRoute
 			(
 				"default",
@@ -96,5 +56,85 @@ namespace AltaMontanha
 			RegisterGlobalFilters(GlobalFilters.Filters);
 			RegisterRoutes(RouteTable.Routes);
 		}
+
+		#region Utilitarios Global
+		
+		private static void RotearAventuras(RouteCollection routes)
+		{
+			routes.MapRoute
+					 (
+						 "aventura",
+						 "aventura/{Codigo}/{Titulo}",
+						 new { controller = "Home", action = "VisualizarAventura" },
+						 new { Codigo = @"\d+" }
+					 );
+			routes.MapRoute
+			(
+				"aventuras",
+				"aventuras",
+				new { controller = "Home", action = "PesquisarAventura" }
+			);
+		}
+
+		private static void RotearColunas(RouteCollection routes)
+		{
+			routes.MapRoute
+			(
+				"coluna",
+				"coluna/{Codigo}/{Titulo}",
+				new { controller = "Home", action = "VisualizarColuna" },
+				new { Codigo = @"\d+" }
+			);
+			routes.MapRoute
+			(
+				"colunas",
+				"colunas/{Codigo}/{Colunista}",
+				new { controller = "Home", action = "PesquisarColuna" },
+				new { Codigo = @"\d+" }
+			);
+			routes.MapRoute
+			(
+				"colunistas",
+				"colunistas",
+				new { controller = "Home", action = "PesquisarColunista" }
+			);
+		}
+
+		private static void RotearNoticias(RouteCollection routes)
+		{
+
+			routes.MapRoute
+			(
+				"noticia",
+				"noticia/{Codigo}/{Titulo}",
+				new { controller = "Home", action = "VisualizarNoticia" },
+				new { Codigo = @"\d+" }
+			);
+			routes.MapRoute
+			(
+				"noticias",
+				"noticias",
+				new { controller = "Home", action = "PesquisarNoticia" }
+			);
+		}
+
+		private static void RotearArtigos(RouteCollection routes)
+		{
+			routes.MapRoute
+			(
+				"Artigo",
+				"artigo/{Codigo}/{Titulo}",
+				new { controller = "Home", action = "VisualizarArtigo" },
+				new { Codigo = @"\d+" }
+			);
+			routes.MapRoute
+			(
+				"artigos",
+				"artigos",
+				new { controller = "Home", action = "PesquisarArtigo" }
+			);
+		}
+
+		#endregion
 	}
 }

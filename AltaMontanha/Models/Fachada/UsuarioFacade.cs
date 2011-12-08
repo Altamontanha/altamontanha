@@ -165,7 +165,7 @@ namespace AltaMontanha.Models.Fachada
 
 				if (file != null)
 					usuario.Foto = MultimidiaFacade.SalvarFoto(usuario.Foto, file);
-
+	
 				if (usuario.Codigo <= 0)
 					return usuarioDAO.Cadastrar(usuario);
 

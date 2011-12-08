@@ -165,7 +165,7 @@ a{
 .texto a
 {
 	text-decoration: none;
-	color: #00F;
+	color: #A39900;
 	font-size: 14px;
 }
 
@@ -673,7 +673,7 @@ div.fotos
 {
 	float: left;
 	width: 160px;
-	margin:15px 0 0 0;
+	margin:15px 0 0 30px;
 }
 
 div.fotos ul li a div 
@@ -710,7 +710,8 @@ div#conteudo h2
 .texto
 {
 	margin-top:15px;
-	text-align :justify;	
+	text-align :justify;
+	line-height: 22px; 	
 }
 
 .data
