@@ -5,6 +5,7 @@ using System.Web;
 using NH = NHibernate;
 using NHibernate;
 using NHibernate.Criterion;
+using NHibernate.SqlCommand;
 
 namespace AltaMontanha.Models.Persistencia.Nhibernate
 {
@@ -39,6 +40,18 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			
 			IList<Dominio.Usuario> usuarios = criteria.List<Dominio.Usuario>();
 			
+			return usuarios;
+		}
+		
+		public IList<Dominio.Usuario> PesquisarColunista()
+		{
+			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Coluna));
+			
+			criteria.CreateCriteria("Autor", JoinType.InnerJoin);
+			criteria.SetProjection(Projections.GroupProperty("Autor"));
+			
+			IList<Dominio.Usuario> usuarios = criteria.List<Dominio.Usuario>();
+
 			return usuarios;
 		}
 		

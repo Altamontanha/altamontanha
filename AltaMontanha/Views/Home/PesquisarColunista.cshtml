@@ -12,8 +12,8 @@
 			@foreach (var colunista in Model)
 			{
 			<li>
-				<a href="/colunas/@colunista.Codigo">
-					<img src="/AppData/Foto/50x50/@colunista.Foto.Caminho" align="left" alt="@colunista.Nome" width="50" height="50" />
+				<a href="/colunas/@colunista.Codigo/@colunista.Slug">
+					<img src="/AppData/Foto/@colunista.Foto.Caminho" align="left" alt="@colunista.Nome" width="50" height="50" />
 					<br />
 					@colunista.Nome<br />
 				</a>

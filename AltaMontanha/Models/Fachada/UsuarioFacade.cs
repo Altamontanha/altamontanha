@@ -141,6 +141,25 @@ namespace AltaMontanha.Models.Fachada
 			}
 		}
 		/// <summary>
+		/// Consulta de Colunistas
+		/// </summary>
+		/// <param name="usuario">objeto com parametros de pesquisa</param>
+		/// <returns>lista de usuarios</returns>
+		public IList<Dominio.Usuario> PesquisarColunista()
+		{
+			try
+			{
+				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
+				IUsuarioDAO usuarioDAO = fabrica.GetUsuarioDAO();
+
+				return usuarioDAO.PesquisarColunista();
+			}
+			catch (Exception e)
+			{
+				throw e;
+			}
+		}
+		/// <summary>
 		/// Cadastra ou altera um usuário.
 		/// </summary>
 		/// <param name="usuario">objeto com as informações de um usuário</param>

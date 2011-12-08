@@ -49,24 +49,21 @@ namespace AltaMontanha.Controllers
 			return View(aventura);
 		}
 
-		public ActionResult PesquisarColuna()
+		public ActionResult PesquisarColuna(int Codigo)
 		{
-			ViewData["BannerInterna"] = multimidiaFacade.PesquisarBannerPorLocal(4);
-			IList<Coluna> colunas = conteudoFacade.PesquisarColuna(null);
+			Models.Dominio.Coluna coluna = new Coluna() { Autor = new Usuario() { Codigo = Codigo } };
+
+			IList<Coluna> colunas = conteudoFacade.PesquisarColuna(coluna);
+			this.RegistrarBannerInternas();
+
 			return View(colunas);
 		}
 
 		public ActionResult PesquisarColunista()
 		{
-			Usuario usuario = new Usuario()
-			{
-				Perfil = new Perfil() 
-				{
-					Codigo = 3
-				}
-			};
+			Usuario usuario = new Usuario(){ Perfil = new Perfil() { Codigo = 3 } };
 
-			IList<Usuario> colunistas = usuarioFacade.PesquisarUsuario(usuario);
+			IList<Usuario> colunistas = usuarioFacade.PesquisarColunista();
 			this.RegistrarBannerInternas();
 
 			return View(colunistas);
