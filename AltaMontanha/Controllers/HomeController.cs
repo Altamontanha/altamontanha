@@ -91,6 +91,20 @@ namespace AltaMontanha.Controllers
 
 			return Redirect(string.Format("{0}/{1}/{2}", conteudo.GetType().ToString().Replace("AltaMontanha.Models.Dominio.", ""), conteudo.Codigo, conteudo.Slug));
 		}
+
+
+		public ActionResult RedirecionarFoto(string Tamanho, string Nome)
+		{
+			switch (Tamanho)
+			{
+				case "max":
+					return Redirect("/AppData/Foto/640x480/" + Nome);
+		
+				default:
+					return Redirect("/");
+			}
+			
+		}
 		
 		public ActionResult PesquisarArtigo()
 		{

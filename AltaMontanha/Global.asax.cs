@@ -30,7 +30,15 @@ namespace AltaMontanha
 				"colunas.asp",
 				new { controller = "Home", action = "RedirecionarConteudo" }
 			);
-			
+
+			routes.MapRoute
+			(
+				"RedirecionarFotos",
+				"images/{Tamanho}/{Nome}",
+				new { controller = "Home", action = "RedirecionarFoto" }
+			);
+
+
 			routes.MapRoute
 			(
 				"busca",
