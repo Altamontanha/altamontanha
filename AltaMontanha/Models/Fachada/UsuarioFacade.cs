@@ -152,7 +152,10 @@ namespace AltaMontanha.Models.Fachada
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IUsuarioDAO usuarioDAO = fabrica.GetUsuarioDAO();
 
-				return usuarioDAO.PesquisarColunista();
+				List<Dominio.Usuario> lista = (List<Dominio.Usuario>)usuarioDAO.PesquisarColunista();
+				lista.RemoveAll(p => p.Codigo == 1);
+
+				return lista;
 			}
 			catch (Exception e)
 			{
