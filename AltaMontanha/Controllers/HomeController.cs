@@ -88,8 +88,8 @@ namespace AltaMontanha.Controllers
 			
 			HttpContext.Response.StatusCode = 302;
             HttpContext.Response.Clear();
-			
-			return RedirectToAction(string.Format("{0}/{1}/{2}", conteudo.GetType(), conteudo.Codigo, conteudo.Slug));
+
+			return Redirect(string.Format("{0}/{1}/{2}", conteudo.GetType().ToString().Replace("AltaMontanha.Models.Dominio.", ""), conteudo.Codigo, conteudo.Slug));
 		}
 		
 		public ActionResult PesquisarArtigo()

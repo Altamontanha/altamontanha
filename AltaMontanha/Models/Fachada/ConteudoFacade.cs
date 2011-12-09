@@ -642,7 +642,28 @@ namespace AltaMontanha.Models.Fachada
 
 		public Dominio.Conteudo PesquisarConteudo(int codigo)
 		{
-			// TODO : Pesquisar Conteúdos...
+			Dominio.Conteudo conteudo = null;
+
+			conteudo = this.PesquisarNoticia(codigo);
+
+			if (conteudo != null)
+				return conteudo;
+
+			conteudo = this.PesquisarArtigo(codigo);
+
+			if (conteudo != null)
+				return conteudo;
+
+			conteudo = this.PesquisarAventura(codigo);
+
+			if (conteudo != null)
+				return conteudo;
+
+			conteudo = this.PesquisarColuna(codigo);
+
+			if (conteudo != null)
+				return conteudo;
+			
 			return null;
 		}
 	}

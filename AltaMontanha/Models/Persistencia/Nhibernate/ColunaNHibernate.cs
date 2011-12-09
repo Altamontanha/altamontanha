@@ -35,7 +35,10 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 		public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto, int qtde)
 		{
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Coluna));
-			criteria.SetMaxResults(qtde);
+			
+			if ((qtde > 0))
+				criteria.SetMaxResults(qtde);
+			
 			criteria.AddOrder(Order.Desc("Data"));
 
 			if (objeto == null)

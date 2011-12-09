@@ -19,6 +19,9 @@ namespace AltaMontanha
 
 		public static void RegisterRoutes(RouteCollection routes)
 		{
+			// TODO : Maper fotos.
+			// www.altamontanha.com/images/max/50.jpg
+
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 			routes.MapRoute
