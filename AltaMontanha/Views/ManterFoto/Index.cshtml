@@ -12,6 +12,9 @@
 		<table>
 			<tr>
 				<th>
+					Foto
+				</th>
+				<th>
 					Legenda
 				</th>
 				<th>
@@ -20,9 +23,12 @@
 				<th></th>
 				<th></th>
 			</tr>
-
-		@foreach (var item in Model) {
+		@foreach (var item in Model) 
+		{
 			<tr>
+				<td>
+					<img src="/AppData/Foto/50x50/@item.Caminho" alt="@item.Legenda" width="50" height="50" />
+				</td>
 				<td>
 					@item.Legenda
 				</td>

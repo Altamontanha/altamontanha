@@ -33,9 +33,9 @@ namespace AltaMontanha
 
 			routes.MapRoute
 			(
-				"RedirecionarFotos",
-				"images/{Tamanho}/{Nome}",
-				new { controller = "Home", action = "RedirecionarFoto" }
+				"Login",
+				"Interna/Login",
+				new { controller = "ManterAutenticacao", action = "Autenticar" }
 			);
 
 
