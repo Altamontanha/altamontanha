@@ -439,6 +439,7 @@
     <Content Include="App_Code\HelperGoogle.cshtml" />
     <Content Include="App_Code\HelperTwitter.cshtml" />
     <Content Include="App_Code\HelperMetaTags.cshtml" />
+    <Content Include="App_Code\HelperGrid.cshtml" />
     <None Include="Content\themes\Publico\font\aller_bd-webfont.eot" />
     <None Include="Content\themes\Publico\font\aller_bd-webfont.ttf" />
     <None Include="Content\themes\Publico\font\aller_bdit-webfont.eot" />

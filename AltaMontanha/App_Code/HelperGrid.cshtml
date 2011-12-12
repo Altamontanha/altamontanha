@@ -1,0 +1,63 @@
+﻿@helper GerarPaginacao(System.Collections.IList lista, int pagina, string controller)
+{
+	if (!lista.GetType().IsGenericType)
+	{
+		throw new ArgumentException("Parâmetro deve ser uma lista genérica");
+	}
+
+	int totalPaginas = Convert.ToInt32(Math.Round((double)(lista.Count / 50), 1));
+	int paginaInicial;
+	int paginaFinal;
+
+	// Valida quando a página é multiplo de 10
+	// e calcula de forma diferenciada.
+	if ((pagina % 50) == 0)
+	{
+		paginaInicial = (int)(pagina / 50);
+	}
+	else
+	{
+		paginaInicial = (((int)pagina / 50) * 50) + 1;
+	}
+	
+	// Calcula a pagina final da paginação.
+	paginaFinal = paginaInicial + 49;
+
+	// Caso a paginação final for maior que o total de páginas.
+	if (paginaFinal > totalPaginas)
+	{
+		paginaFinal = totalPaginas;
+	}
+	
+	<div class="paginacao">Página(s):
+
+	@if (paginaInicial > 50)
+	{
+		<a href="\@controller\?pagina=(@paginaInicial-1)">...</a>
+	}
+	
+	@for (int i = paginaInicial; i <= paginaFinal; i++)
+	{
+		// Verifica se é a pagina corrente (selecionada)
+		// e não exibe em forma de link.
+		if (pagina != i)
+		{
+			<a href="@string.Format("/{0}/pagina={1}", controller, i)">@i</a>
+		}
+		else
+		{
+			<span>@pagina</span>
+		}
+	}
+
+	@if (totalPaginas > paginaFinal)
+	{
+		<a href="@string.Format("/{0}/pagina={1}", controller, paginaFinal + 1)">...</a>
+	}
+	@if (paginaInicial > paginaFinal)
+	{
+		<span>1</span>
+	}
+	
+	</div>
+}
