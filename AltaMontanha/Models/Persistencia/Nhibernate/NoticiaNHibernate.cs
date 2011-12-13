@@ -33,7 +33,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			
 		}
 
-		public IList<Dominio.Noticia> Pesquisar(Dominio.Noticia objeto, int qtde)
+		public IList<Dominio.Noticia> Pesquisar(Dominio.Noticia objeto, short qtde)
 		{
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Noticia));
 			criteria.SetMaxResults(qtde);
@@ -58,7 +58,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			return noticias;
 		}
 
-		public IList<Dominio.Noticia> Pesquisar(Dominio.Noticia objeto)
+		public IList<Dominio.Noticia> Pesquisar(Dominio.Noticia objeto, int pagina = 0)
 		{
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Noticia));
 			criteria.AddOrder(Order.Desc("Data"));

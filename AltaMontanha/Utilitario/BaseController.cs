@@ -70,5 +70,45 @@ namespace AltaMontanha.Utilitario
 				ViewData["Menu"] = menu;
 			}
 		}
+
+		/// <summary>
+		/// Usado por handlers que necessitem recuperar parâmetros através da URL
+		/// </summary>
+		/// <param name="parametro">Nome do parâmetro na url</param>
+		/// <returns></returns>
+		protected int RecuperarParametroInteiro(string parametro)
+		{
+			try
+			{
+				string strValor = this.RecuperarParametroString(parametro);
+				if (!string.IsNullOrEmpty(strValor))
+					return int.Parse(strValor);
+			}
+			catch
+			{
+				throw new ApplicationException("Valor incorreto informado no endereço web.");
+			}
+
+			return -1;
+		}
+		/// <summary>
+		/// Usado por handlers que necessitem recuperar parâmetros através da URL ou post.
+		/// </summary>
+		/// <param name="parametro">Nome do parâmetro na url ou form (post)</param>
+		/// <returns></returns>
+		protected string RecuperarParametroString(string parametro)
+		{
+			string valor = string.Empty;
+
+			// QueryString
+			if (this.Request.QueryString[parametro] != null)
+				valor = this.Server.UrlDecode(this.Request.QueryString[parametro].ToString());
+			// Form
+			if (string.IsNullOrEmpty(valor))
+				if (this.Request.Form[parametro] != null)
+					valor = this.Server.UrlDecode(this.Request.Form[parametro].ToString());
+
+			return valor;
+		}
 	}
 }

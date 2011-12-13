@@ -9,7 +9,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 {
 	public class TelaNHibernate : Abstracao.ITelaDAO
 	{
-		public IList<Dominio.Tela> Pesquisar(Dominio.Tela objeto)
+		public IList<Dominio.Tela> Pesquisar(Dominio.Tela objeto, int pagina = 0)
 		{
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Tela));
 

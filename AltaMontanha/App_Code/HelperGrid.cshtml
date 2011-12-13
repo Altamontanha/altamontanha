@@ -1,27 +1,23 @@
-﻿@helper GerarPaginacao(System.Collections.IList lista, int pagina, string controller)
+﻿@helper GerarPaginacao(int total, int pagina, string controller)
 {
-	if (!lista.GetType().IsGenericType)
-	{
-		throw new ArgumentException("Parâmetro deve ser uma lista genérica");
-	}
-
-	int totalPaginas = Convert.ToInt32(Math.Round((double)(lista.Count / 50), 1));
+	int totalPaginas = Convert.ToInt32(Math.Round((double)(total / AltaMontanha.Utilitario.Constante.TamanhoPagina), 1));
 	int paginaInicial;
 	int paginaFinal;
-
+	int tamanhoPagina = AltaMontanha.Utilitario.Constante.TamanhoPagina;
+	
 	// Valida quando a página é multiplo de 10
 	// e calcula de forma diferenciada.
-	if ((pagina % 50) == 0)
+	if ((pagina % tamanhoPagina) == 0)
 	{
-		paginaInicial = (int)(pagina / 50);
+		paginaInicial = (int)(pagina / tamanhoPagina);
 	}
 	else
 	{
-		paginaInicial = (((int)pagina / 50) * 50) + 1;
+		paginaInicial = (((int)pagina / tamanhoPagina) * tamanhoPagina) + 1;
 	}
 	
 	// Calcula a pagina final da paginação.
-	paginaFinal = paginaInicial + 49;
+	paginaFinal = paginaInicial + (tamanhoPagina-1);
 
 	// Caso a paginação final for maior que o total de páginas.
 	if (paginaFinal > totalPaginas)
@@ -31,9 +27,9 @@
 	
 	<div class="paginacao">Página(s):
 
-	@if (paginaInicial > 50)
+	@if (paginaInicial > tamanhoPagina)
 	{
-		<a href="\@controller\?pagina=(@paginaInicial-1)">...</a>
+		<a href="@string.Format("/{0}/?pagina={1}", controller, paginaInicial - 1)">...</a>
 	}
 	
 	@for (int i = paginaInicial; i <= paginaFinal; i++)
@@ -42,7 +38,7 @@
 		// e não exibe em forma de link.
 		if (pagina != i)
 		{
-			<a href="@string.Format("/{0}/pagina={1}", controller, i)">@i</a>
+			<a href="@string.Format("/{0}/?pagina={1}", controller, i)">@i</a>
 		}
 		else
 		{
@@ -52,7 +48,7 @@
 
 	@if (totalPaginas > paginaFinal)
 	{
-		<a href="@string.Format("/{0}/pagina={1}", controller, paginaFinal + 1)">...</a>
+		<a href="@string.Format("/{0}/?pagina={1}", controller, paginaFinal + 1)">...</a>
 	}
 	@if (paginaInicial > paginaFinal)
 	{

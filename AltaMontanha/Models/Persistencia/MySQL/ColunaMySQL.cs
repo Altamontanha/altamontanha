@@ -91,7 +91,7 @@ namespace AltaMontanha.Models.Persistencia.MySQL
 
 		#region Interface methods
 
-		public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto, int qtde)
+		public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto, short qtde)
 		{
 			throw new NotImplementedException();
 		}
@@ -106,17 +106,17 @@ namespace AltaMontanha.Models.Persistencia.MySQL
 			throw new NotImplementedException();
 		}
 
-		public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto)
-		{
-			throw new NotImplementedException();
-		}
-
 		public Dominio.Coluna Pesquisar(int codigo)
 		{
 			throw new NotImplementedException();
 		}
 
 		public bool Excluir(int codigo)
+		{
+			throw new NotImplementedException();
+		}
+
+		public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto, int pagina = 0)
 		{
 			throw new NotImplementedException();
 		}

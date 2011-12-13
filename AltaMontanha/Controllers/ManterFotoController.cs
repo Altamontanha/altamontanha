@@ -21,7 +21,15 @@ namespace AltaMontanha.Controllers
         {
 			Foto foto = new Foto();
 			foto.Galeria = true;
-			IList<Foto> fotos = facade.PesquisarFoto(foto);
+			int pagina = RecuperarParametroInteiro("pagina");
+
+			if (pagina <= 0)
+				pagina = 1;
+
+			IList<Foto> fotos = facade.PesquisarFoto(foto, pagina);
+			// TODO : refactoring.
+			ViewData["Total"] = facade.PesquisarFoto(foto).Count;
+			ViewData["pagina"] = pagina;
 
             return View(fotos);
         }
