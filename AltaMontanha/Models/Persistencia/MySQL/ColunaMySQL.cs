@@ -22,28 +22,34 @@ namespace AltaMontanha.Models.Persistencia.MySQL
 
 			try
 			{
-				sql = @"SELECT DISTINCT
-							C.CodConteudo,
-							C.Titulo, 
-							C.Data, 
-							U.CodUsuario, 
-							U.Nome,
-							U.Login,
-							F.CodFoto,
-							F.Caminho,
-							F.Legenda
-						FROM tb_conteudo C
-						INNER JOIN tb_coluna COL ON (COL.codConteudo = C.codConteudo)
-						INNER JOIN tb_usuario U ON (U.codUsuario = COL.codUsuario)
-						INNER JOIN tb_foto F ON (F.CodFoto = U.codFoto)
-						INNER JOIN (
-										SELECT MAX(DATA), CodConteudo
-										FROM tb_conteudo C2
-										GROUP BY codUsuario, CodConteudo
-									)
-									tb ON tb.CodConteudo = C.CodConteudo
-						ORDER BY C.Data DESC
-						LIMIT 6";
+				sql = @"SELECT
+						tb.CodConteudo,
+						C.CodConteudo,
+						C.Titulo, 
+						C.Data, 
+						U.CodUsuario, 
+						U.Nome,
+						U.Login,
+						F.CodFoto,
+						F.Caminho,
+						F.Legenda
+					FROM tb_conteudo C
+					INNER JOIN tb_coluna COL ON (COL.codConteudo = C.codConteudo)
+					INNER JOIN tb_usuario U ON (U.codUsuario = COL.codUsuario)
+					INNER JOIN tb_foto F ON (F.CodFoto = U.codFoto)
+					INNER JOIN 
+					(
+						SELECT usu.codusuario, (SELECT colq.codconteudo
+					FROM tb_conteudo AS conq
+					INNER JOIN tb_coluna AS colq ON ( colq.codconteudo = conq.codconteudo ) 
+					WHERE colq.codusuario = usu.codusuario
+					ORDER BY data DESC 
+					LIMIT 1) AS CodConteudo
+						FROM tb_usuario AS usu
+
+					) tb ON tb.CodConteudo = C.CodConteudo
+					ORDER BY C.Data DESC
+					LIMIT 6";
 
 				reader = this.conexao.ExecutarDataReader(sql, CommandType.Text);
 
@@ -91,7 +97,7 @@ namespace AltaMontanha.Models.Persistencia.MySQL
 
 		#region Interface methods
 
-		public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto, int qtde)
+		public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto, short qtde)
 		{
 			throw new NotImplementedException();
 		}
@@ -106,17 +112,17 @@ namespace AltaMontanha.Models.Persistencia.MySQL
 			throw new NotImplementedException();
 		}
 
-		public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto)
-		{
-			throw new NotImplementedException();
-		}
-
 		public Dominio.Coluna Pesquisar(int codigo)
 		{
 			throw new NotImplementedException();
 		}
 
 		public bool Excluir(int codigo)
+		{
+			throw new NotImplementedException();
+		}
+
+		public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto, int pagina = 0)
 		{
 			throw new NotImplementedException();
 		}

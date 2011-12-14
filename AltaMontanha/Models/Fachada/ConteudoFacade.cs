@@ -92,13 +92,12 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
 		/// <summary>
 		/// Pesquisa notícias pelos atributos da notícia passada
 		/// </summary>
 		/// <param name="noticia">Objeto para filtro</param>
 		/// <param name="qtde">Quantidade de registros a retornar ("0" para todos)</param>
-		public IList<Dominio.Noticia> PesquisarNoticia(Dominio.Noticia noticia, int qtde = 0)
+		public IList<Dominio.Noticia> PesquisarNoticia(Dominio.Noticia noticia, short qtde = 0)
 		{
 			try
 			{
@@ -115,7 +114,6 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
 		/// <summary>
 		/// Salva a notícia
 		/// </summary>
@@ -144,7 +142,6 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
 		/// <summary>
 		/// Exclui a notícia pelo código
 		/// </summary>
@@ -191,7 +188,7 @@ namespace AltaMontanha.Models.Fachada
 		/// </summary>
 		/// <param name="coluna">Objeto para filtro</param>
 		/// <param name="qtde">Quantidade de registros a retornar ("0" para todos)</param>
-		public IList<Dominio.Coluna> PesquisarColuna(Dominio.Coluna coluna, int qtde = 0, bool ultimas = false)
+		public IList<Dominio.Coluna> PesquisarColuna(Dominio.Coluna coluna, short qtde = 0, bool ultimas = false)
 		{
 			// TODO : Refactorin this shit...
 			try
@@ -284,13 +281,12 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
 		/// <summary>
 		/// Pesquisa aventuras utilizando os atributos da aventura 
 		/// </summary>
 		/// <param name="aventura">Objeto para filtro</param>
 		/// <param name="qtde">Quantidade de registros para retornar ("0" para todos)</param>
-		public IList<Dominio.Aventura> PesquisarAventura(Dominio.Aventura aventura, int qtde = 0)
+		public IList<Dominio.Aventura> PesquisarAventura(Dominio.Aventura aventura, short qtde = 0)
 		{
 			try
 			{
@@ -307,7 +303,6 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
 		/// <summary>
 		/// Salva a aventura e o arquivo vinculado
 		/// </summary>
@@ -348,7 +343,6 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
 		/// <summary>
 		/// Exclui a aventura pelo código
 		/// </summary>
@@ -367,13 +361,6 @@ namespace AltaMontanha.Models.Fachada
 				throw e;
 			}
 		}
-
-		public void ConvertToKml()
-		{
-			// TODO : Implementar
-			throw new NotImplementedException();
-		}
-
 		/// <summary>
 		/// Salva o arquivo utilizando o caminho e o nome
 		/// </summary>
@@ -522,7 +509,7 @@ namespace AltaMontanha.Models.Fachada
 		/// </summary>
 		/// <param name="artigo">Filtro para pesquisa</param>
 		/// <param name="qtde">Quantidade de registros de retorno ("0" para todos)</param>
-		public IList<Dominio.Artigo> PesquisarArtigo(Dominio.Artigo artigo, int qtde = 0)
+		public IList<Dominio.Artigo> PesquisarArtigo(Dominio.Artigo artigo, short qtde = 0)
 		{
 			try
 			{
@@ -545,7 +532,7 @@ namespace AltaMontanha.Models.Fachada
 		/// </summary>
 		/// <param name="artigo">Filtro para pesquisa</param>
 		/// <param name="qtde">Quantidade de registros de retorno ("0" para todos)</param>
-		public IList<Dominio.Artigo> PesquisarArtigoArtigoTecnico(Dominio.Artigo artigo, int qtde = 4)
+		public IList<Dominio.Artigo> PesquisarArtigoArtigoTecnico(Dominio.Artigo artigo, short qtde = 4)
 		{
 			try
 			{
@@ -569,7 +556,7 @@ namespace AltaMontanha.Models.Fachada
 		/// </summary>
 		/// <param name="artigo">Filtro para pesquisa</param>
 		/// <param name="qtde">Quantidade de registros de retorno ("0" para todos)</param>
-		public IList<Dominio.Artigo> PesquisarArtigoHistoria(Dominio.Artigo artigo, int qtde = 2)
+		public IList<Dominio.Artigo> PesquisarArtigoHistoria(Dominio.Artigo artigo, short qtde = 2)
 		{
 			try
 			{

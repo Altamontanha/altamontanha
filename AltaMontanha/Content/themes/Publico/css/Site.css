@@ -412,6 +412,7 @@ div#news-wrap a:hover{
 div.colunista-box{
 	width: 100px;
 	float: left;
+	height: 170px;
 	margin: 10px 0 15px 10px;
 }
 div.colunista-box .name-colunista{

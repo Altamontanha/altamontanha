@@ -38,7 +38,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
         /// <param name="artigo"></param>
         /// <param name="qtde">LIMIT RESULT SET</param>
         /// <returns></returns>
-		public IList<Dominio.Artigo> Pesquisar(Dominio.Artigo artigo, int qtde)
+		public IList<Dominio.Artigo> Pesquisar(Dominio.Artigo artigo, short qtde)
 		{
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Artigo));
 			criteria.SetMaxResults(qtde);
@@ -61,7 +61,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			return artigos;
 		}
 
-		public IList<Dominio.Artigo> Pesquisar(Dominio.Artigo objeto)
+		public IList<Dominio.Artigo> Pesquisar(Dominio.Artigo objeto, int pagina = 0)
 		{
 
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Artigo));

@@ -44,7 +44,7 @@
 			</tr>
 		}
 		</table>
-		@HelperGrid.GerarPaginacao((System.Collections.IList) Model, 50, "ManterFoto");
+		@HelperGrid.GerarPaginacao(Convert.ToInt32(ViewData["Total"]), Convert.ToInt32(ViewData["Pagina"]), "ManterFoto")
 		<br />
 	</div>
 </div>

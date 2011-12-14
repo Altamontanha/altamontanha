@@ -32,7 +32,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			}
 		}
 
-		public IList<Dominio.Aventura> Pesquisar(Dominio.Aventura objeto, int qtde)
+		public IList<Dominio.Aventura> Pesquisar(Dominio.Aventura objeto, short qtde)
 		{
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Aventura));
 			criteria.SetMaxResults(qtde);
@@ -59,7 +59,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			return aventuras;
 		}
 
-		public IList<Dominio.Aventura> Pesquisar(Dominio.Aventura objeto)
+		public IList<Dominio.Aventura> Pesquisar(Dominio.Aventura objeto, int pagina = 0)
 		{
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Aventura));
 			criteria.AddOrder(Order.Desc("Data"));

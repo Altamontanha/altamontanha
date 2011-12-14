@@ -20,7 +20,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			return objeto;
 		}
 
-		public IList<Dominio.Rota> Pesquisar(Dominio.Rota objeto)
+		public IList<Dominio.Rota> Pesquisar(Dominio.Rota objeto, int pagina = 0)
 		{
 			return new List<Dominio.Rota>(){this.Pesquisar(objeto.Codigo)};
 		}

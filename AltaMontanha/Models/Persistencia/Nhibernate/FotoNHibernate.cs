@@ -21,12 +21,18 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			return objeto;
 		}
 
-		public IList<Dominio.Foto> Pesquisar(Dominio.Foto objeto)
+		public IList<Dominio.Foto> Pesquisar(Dominio.Foto objeto, int pagina = 0)
 		{
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Foto));
+			
+			if (pagina > 0)
+			{
+				criteria.SetFirstResult(pagina * Utilitario.Constante.TamanhoPagina);
+				criteria.SetMaxResults(Utilitario.Constante.TamanhoPagina);
+			}
 
 			if (objeto == null)
-				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Foto>().List<Dominio.Foto>();
+				return criteria.List<Dominio.Foto>();
 
 			if (objeto.Codigo > 0)
 				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));

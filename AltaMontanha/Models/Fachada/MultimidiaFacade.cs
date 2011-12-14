@@ -52,14 +52,14 @@ namespace AltaMontanha.Models.Fachada
 		/// </summary>
 		/// <param name="foto">objeto fotos com os parametros de consulta</param>
 		/// <returns>lista das fotos referentes a pesquisa.</returns>
-		public IList<Dominio.Foto> PesquisarFoto(Dominio.Foto foto)
+		public IList<Dominio.Foto> PesquisarFoto(Dominio.Foto foto, int pagina = 0)
 		{
 			try
 			{
 				IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
 				IFotoDAO fotoDAO = fabrica.GetFotoDAO();
 
-				return fotoDAO.Pesquisar(foto);
+				return fotoDAO.Pesquisar(foto, pagina);
 			}
 			catch (Exception e)
 			{

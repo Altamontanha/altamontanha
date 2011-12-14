@@ -20,7 +20,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			return objeto;
 		}
 
-		public IList<Dominio.Banner> Pesquisar(Dominio.Banner objeto)
+		public IList<Dominio.Banner> Pesquisar(Dominio.Banner objeto, int pagina = 0)
 		{
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Banner));
 
