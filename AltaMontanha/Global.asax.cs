@@ -89,7 +89,7 @@ namespace AltaMontanha
 			routes.MapRoute
 			(
 				"coluna",
-				"coluna/{Codigo}/{Titulo}",
+				"colunas/{Codigo}/{Titulo}",
 				new { controller = "Home", action = "VisualizarColuna" },
 				new { Codigo = @"\d+" }
 			);
