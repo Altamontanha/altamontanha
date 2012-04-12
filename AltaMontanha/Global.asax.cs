@@ -24,7 +24,7 @@ namespace AltaMontanha
 			routes.MapRoute
 			(
 				"Redirecionar",
-				"colunas.asp",
+				"coluna.asp",
 				new { controller = "Home", action = "RedirecionarConteudo" }
 			);
 
