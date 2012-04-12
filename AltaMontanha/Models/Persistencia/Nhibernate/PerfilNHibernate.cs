@@ -12,7 +12,20 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 	{
 		public void Alterar(Dominio.Perfil objeto)
 		{
-			NHibernate.HttpModule.RecuperarSessao.Update(objeto);
+            //ITransaction transaction  = NHibernate.HttpModule.RecuperarSessao.BeginTransaction();
+            string query = "delete from tb_permissao where CodPerfil = " + objeto.Codigo;
+            var sql = NHibernate.HttpModule.RecuperarSessao.CreateSQLQuery(query);
+            sql.ExecuteUpdate();
+
+            foreach(Dominio.Permissao pr in objeto.ListaPermissoes)
+            {
+                query = "insert into tb_permissao(CodTela, CodPerfil) values(" + pr.Tela.Codigo + ", " + objeto.Codigo + ")";
+                sql = NHibernate.HttpModule.RecuperarSessao.CreateSQLQuery(query);
+                sql.ExecuteUpdate();
+            }
+            
+           // transaction.Commit();      
+			
 		}
 
 		public Dominio.Perfil Cadastrar(Dominio.Perfil objeto)

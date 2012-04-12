@@ -10,6 +10,11 @@ namespace AltaMontanha.Models.Persistencia.Fabrica
 			return new Nhibernate.ArtigoNHibernate();
 		}
 
+        public Abstracao.IDepoimentoDAO GetDepoimentoDAO()
+        {
+            return new Nhibernate.DepoimentoNHibernate();
+        }
+
 		public Abstracao.IAventuraDAO GetAventuraDAO()
 		{
 			return new Nhibernate.AventuraNHibernate();

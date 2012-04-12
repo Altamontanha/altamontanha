@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="AltaMontanha" namespace="AltaMontanha.Models.Dominio" >
+	<class name="Depoimento" table="tb_depoimento" lazy="false">
+		<id name="Codigo" access="property" column="Codigo" type="Int32">
+			<generator class="identity" />
+		</id>
+		<property name="Autor" not-null="true" access="property" type="String">
+			<column name="Autor" length="300" sql-type="TEXT"/>
+		</property>
+		<property name="Texto" not-null="true" access="property" type="String">
+			<column name="Texto" sql-type="TEXT"/>
+		</property>
+		<property name="Data" not-null="true" access="property" type="DateTime">
+			<column name="Data" sql-type="DATETIME"/>
+		</property>
+	</class>
+</hibernate-mapping>

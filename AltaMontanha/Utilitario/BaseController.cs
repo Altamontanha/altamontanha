@@ -65,6 +65,8 @@ namespace AltaMontanha.Utilitario
 						menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
 					else if (permissao.Tela.Nome.Equals("/ManterBanner/"))
 						menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
+                    else if (permissao.Tela.Nome.Equals("/ManterDepoimento/"))
+                        menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
 				}
 				
 				ViewData["Menu"] = menu;

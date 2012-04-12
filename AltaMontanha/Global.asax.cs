@@ -47,6 +47,7 @@ namespace AltaMontanha
 			MvcApplication.RotearNoticias(routes);
 			MvcApplication.RotearColunas(routes);
 			MvcApplication.RotearAventuras(routes);
+            MvcApplication.RotearDepoimentos(routes);
 
 			routes.MapRoute
 			(
@@ -106,7 +107,27 @@ namespace AltaMontanha
 				"colunistas",
 				new { controller = "Home", action = "PesquisarColunista" }
 			);
+
+
 		}
+
+        private static void RotearDepoimentos(RouteCollection routes)
+        {
+
+            routes.MapRoute
+            (
+                "depoimento",
+                "depoimento/{Codigo}/{Titulo}",
+                new { controller = "Home", action = "VisualizarDepoimento" },
+                new { Codigo = @"\d+" }
+            );
+            routes.MapRoute
+            (
+                "depoimentos",
+                "depoimentos",
+                new { controller = "Home", action = "PesquisarDepoimento" }
+            );
+        }
 
 		private static void RotearNoticias(RouteCollection routes)
 		{
