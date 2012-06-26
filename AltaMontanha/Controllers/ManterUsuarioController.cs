@@ -5,19 +5,20 @@ using System.Web;
 using System.Web.Mvc;
 using AltaMontanha.Models.Dominio;
 using AltaMontanha.Models.Fachada;
+using System.Collections;
 
 namespace AltaMontanha.Controllers
 {
 	[HandleError]
     public class ManterUsuarioController : Utilitario.BaseController
     {
-		UsuarioFacade facade = new UsuarioFacade();
 
         //
         // GET: /ManterUsuario/
 		[Authorize]
 		public ActionResult Index()
         {
+            UsuarioFacade facade = new UsuarioFacade();
 			IList<Usuario> usuarios = facade.PesquisarUsuario(null);
             return View(usuarios);
         }
@@ -26,6 +27,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult VisualizarUsuario(int Codigo)
         {
+            UsuarioFacade facade = new UsuarioFacade();
 			return View(facade.PesquisarUsuario(Codigo));
         }
 		//
@@ -33,6 +35,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult CadastrarUsuario()
         {
+            UsuarioFacade facade = new UsuarioFacade();
 			ViewData["Perfis"] = new SelectList(facade.PesquisarPerfil(null).ToList(), "Codigo", "Nome");
 
             return View();
@@ -43,6 +46,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult CadastrarUsuario(Usuario usuario, HttpPostedFileBase file)
         {
+            UsuarioFacade facade = new UsuarioFacade();
 			try
 			{
 				facade.SalvarUsuario(usuario, file);
@@ -59,8 +63,12 @@ namespace AltaMontanha.Controllers
 		[Authorize]
         public ActionResult AlterarUsuario(int Codigo)
         {
+            UsuarioFacade facade = new UsuarioFacade();
 			ViewData["Perfis"] = new SelectList(facade.PesquisarPerfil(null).ToList(), "Codigo", "Nome");
-			return View(facade.PesquisarUsuario(Codigo));
+
+            Usuario usuario = facade.PesquisarUsuario(Codigo);
+
+            return View(usuario);
         }
 		//
         // POST: /ManterUsuario/AlterarUsuario/5
@@ -68,6 +76,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult AlterarUsuario(Usuario usuario, HttpPostedFileBase file)
         {
+            UsuarioFacade facade = new UsuarioFacade();
 			//TODO: na alteração a senha não é obrigatória (?)
             try
             {
@@ -85,6 +94,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
         public ActionResult ExcluirUsuario(int Codigo)
         {
+            UsuarioFacade facade = new UsuarioFacade();
 			facade.ExcluirUsuario(Codigo);
             return RedirectToAction("Index");
         }

@@ -1,13 +1,13 @@
 ﻿@{
     ViewBag.Title = "Busca - Altamontanha.com";
-    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+    Layout = "~/Views/Shared/_LayoutNovo.cshtml";
 }
 <div id="main-box">
 	<div id="conteudo">
 		<h2>@ViewBag.Title</h2>
 		@HelperGoogle.GerarResultadoBusca()	
 		<div class="super-banner-home"> 
-			@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner) ViewData["BannerBaixo"])
+			@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner)ViewData["BannerBaixo"], Html)
 		</div>
 	</div>
 </div> 

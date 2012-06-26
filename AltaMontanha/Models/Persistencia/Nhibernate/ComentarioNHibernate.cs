@@ -11,12 +11,23 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 	{
 		public void Alterar(Dominio.Comentario objeto)
 		{
-			NHibernate.HttpModule.RecuperarSessao.Update(objeto);
+            NHibernate.HttpModule.RecuperarSessao.Update(objeto);
+
+            NHibernate.HttpModule.RecuperarSessao.Flush();
 		}
 
 		public Dominio.Comentario Cadastrar(Dominio.Comentario objeto)
-		{
-			objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+        {
+            try
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Begin();
+                objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Rollback();
+            }
 			return objeto;
 		}
 
@@ -36,6 +47,23 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			return comentarios;
 		}
+
+        public IList<Dominio.Comentario> Pesquisar(Dominio.Comentario objeto, int qtde, int pagina)
+        {
+            ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Comentario));
+
+            if (objeto == null)
+                return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Comentario>().List<Dominio.Comentario>();
+
+            if (objeto.Codigo > 0)
+                criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
+            if (!string.IsNullOrEmpty(objeto.Nome))
+                criteria = criteria.Add(Expression.Eq("Nome", objeto.Nome));
+
+            IList<Dominio.Comentario> comentarios = criteria.List<Dominio.Comentario>();
+
+            return comentarios;
+        }
 
 		public Dominio.Comentario Pesquisar(int codigo)
 		{
@@ -63,5 +91,6 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			return true;
 		}
-	}
+
+    }
 }

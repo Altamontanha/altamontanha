@@ -1,0 +1,198 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="StyleSheet" href="http://www.webventure.com.br/wvagencia/parceiros/barra/css/wvbarra.css"
+        type="text/css">
+    <script src="http://www.webventure.com.br/wvagencia/parceiros/barra/js/wvbarra.js"
+        type="text/javascript"></script>
+    <noscript>
+        <a target='_blank' href='http://www.wvproducoes.com.br/banners/www/delivery/ck.php?n=2b381d7'>
+            <img border='0' alt='' src='http://www.wvproducoes.com.br/banners/www/delivery/avw.php?zoneid=157&amp;n=2b381d7' /></a>
+    </noscript>
+    <!-- Código Superbanner -->
+    <script type='text/javascript'>
+        BarraWV_ExibirFinal();
+    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title</title>
+    @HelperMetaTags.Gerar(Model)
+    <link rel="shortcut icon" href="/content/themes/publico/img/favicon.ico" type="image/x-icon" />
+    <link rel="Stylesheet" href="/content/themes/publico/css/style.css" type="text/css" />
+    <link rel="Stylesheet" href="/content/themes/cinza/css/nyroModal.css" type="text/css" />
+    <script type="text/javascript" src="http://connect.facebook.net/pt_BR/all.js#xfbml=1"></script>
+    <script type="text/javascript" src="http://www.google.com.br/cse/brand?form=cse-search-box&amp;lang=pt"></script>
+    <script type="text/javascript">
+        window.___gcfg = { lang: 'pt-br' };
+        (function () {
+            var po = document.createElement("script");
+            po.type = "text/javascript"; po.async = true; po.src = "https://apis.google.com/js/plusone.js";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(po, s);
+        })();</script>
+    <!--meta property="fb:admins" content="{519870568,834495192,1638649000,1168946094,129041196730,100003265657538}" /-->
+    <meta property="fb:app_id" content="136774603316" />
+    <script type="text/javascript" src="../../Scripts/jquery-1.4.4.js"></script>
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-31378274-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+</script>
+</head>
+<body>
+    <div id="content-wrap">
+        <div id="header-wrap">
+            <div class="logo">
+                <a href="/">
+                    <img src="/content/themes/publico/img/logo.png" /></a></div>
+            <div class="super-banner-top">
+                @HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner)ViewData["BannerSuperior"], Html)
+            </div>
+            <div id="menu-wrap">
+                @HelperGoogle.GerarBusca()
+                <ul id="nav-bar">
+                    <li>
+                        @if (Request.Path.ToLower().Contains("/noticia"))
+                        {
+                            <a class="active" href="/noticias" title="Notícias atualizadas diariamente">NOTÍCIAS</a>
+                        }
+                        else
+                        {
+                            <a href="/noticias" title="Notícias atualizadas diariamente">NOTÍCIAS</a>
+                        }
+                    </li>
+                    <li>
+                        @if (Request.Path.ToLower().Contains("/artigo"))
+                        {
+                            <a class="active" href="/artigos" title="Artigos técnicos divididos em mais de 10 categorias">
+                                ARTIGOS</a>
+                        }
+                        else
+                        {
+                            <a href="/artigos" title="Artigos técnicos divididos em mais de 10 categorias">ARTIGOS</a>
+                        }
+                    </li>
+                    <li>
+                        @if (Request.Path.ToLower().Contains("/colunista"))
+                        {
+                            <a class="active" href="/colunas" title="Leia as colunas dos mais variados colunistas">
+                                COLUNAS</a>
+                        }
+                        else
+                        {
+                            <a href="/colunas" title="Leia as colunas dos mais variados colunistas">COLUNAS</a>
+                        }
+                    </li>
+                    <li>
+                        @if (Request.Path.ToLower().Contains("/aventura"))
+                        {
+                            <a class="active" href="/aventuras" title="Veja as aventura enviadas pelos nossos leitores">
+                                SUA AVENTURA</a>
+                        }
+                        else
+                        {
+                            <a href="/aventuras" title="Veja as aventura enviadas pelos nossos leitores">SUA AVENTURA</a>
+                        }</li>
+                    <li>
+                        @if (Request.Path.ToLower().Contains("/fotos"))
+                        {
+                            <a class="active" href="/fotos" title="Site de fotos de montanha - Em Breve">FOTOS</a>
+                        }
+                        else
+                        {
+                            <a href="/fotos" title="Site de fotos de montanha - Em Breve">FOTOS</a>
+                        }</li>
+                    <li class="more-selector"><a href="#/">MAIS&nbsp;<img src="../../Content/themes/Publico/img/seta_baixo.png" /></a>
+                        <ul>
+                            <li><a href="http://www.rumos.net.br" title="Portal virtual de Pontos e trilhas de GPS">
+                                RUMOS</a></li>
+                            <li><a href="/roteiros" title="Conheça alguns roteiros que selecionamos para você conhecer os Andes melhor">
+                                ROTEIROS ANDINOS</a></li>
+                            <li><a href="/Servicos" title="Conheça alguns de nossos patrocinadores">
+                                SERVIÇOS ESPECIALIZADOS</a></li>
+                            <li><a href="/contato" title="Entre em contato">CONTATO</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div id="menu-shadow">
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+
+            $("li.more-selector").hover(function () {
+                $(this).find("ul:first").fadeIn(300);
+            }, function () {
+                $(this).find("ul:first").fadeOut(300);
+            });
+    
+        </script>
+        <div id="main-bg">
+            <div id="main-wrap">
+                @RenderBody()
+                <!-- container de publicidade referentes banner de 728*90 -->
+                <div class="super-banner-home">
+                    @HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner)ViewData["BannerInferior"], Html)
+                </div>
+            </div>
+        </div>
+        <div id="spliter-footer">
+        </div>
+        <div id="footer-wrap">
+            <div id="footer-box">
+                <div class="col-300">
+                    @HelperTwitter.GerarWidget()
+                </div>
+                <div class="col-300">
+                    @HelperFaceBook.GerarActivity()
+                </div>
+                <div class="col-300">
+                    @HelperGoogle.GerarFriends()
+                </div>
+                <p class="aviso-footer">
+                    <span>Atenção!!!</span> O Portal AltaMontanha.com alerta que as atividades de montanhismo
+                    são adrenantes e viciam logo ao seu primeiro uso. Os perigos existem, principalmente
+                    quando os limites não são respeitados, porém é uma atividade muito segura se praticada
+                    com moderação, consciência e respeito à natureza!
+                </p>
+                <ul class="social-media">
+                    <li>Siga-nos</li>
+                    <li class="facebook"><a href="https://www.facebook.com/altamontanha" title="Facebook">
+                    </a></li>
+                    <li class="google"><a href="https://plus.google.com/101716217633193135893/posts"
+                        title="Google+"></a></li>
+                    <li class="twitter"><a href="http://twitter.com/#!/AltaMontanhacom" title="Twitter">
+                    </a></li>
+                </ul>
+                <div id="nav-bar-footer">
+                    <ul>
+                        <li class="logo"><a href="/">Home</a></li>
+                        <li><a href="/noticias">Notícias</a></li>
+                        <li><a href="/artigos">Artigos</a></li>
+                        <li><a href="/colunas">Colunas</a></li>
+                        <li><a href="/contato">Contato</a></li>
+                        <li><a href="/aventuras">Sua Aventura</a></li>
+                        <li><a href="/fotos">Fotos</a></li>
+                        <li><a href="/roteiros">Roteiros Andinos</a></li>
+                    </ul>
+                </div>
+                <div id="copyright">
+                    <p>
+                        Copyright © 2011 Alta Montanha. Todos os direitos reservados</p>
+                    <p class="credits">
+                        design por:<a href="http://www.digitalsquare.com.br" target="_blank">Digital Square</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

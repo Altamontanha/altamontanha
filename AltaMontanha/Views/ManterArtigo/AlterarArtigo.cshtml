@@ -1,79 +1,79 @@
 ﻿@model AltaMontanha.Models.Dominio.Artigo
-
 @{
-	ViewBag.Title = "Alteração de Artigo";
+    ViewBag.Title = "Alteração de Artigo";
 }
-
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.maskedinput.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.ui.datepicker.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/AM/Util.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")" type="text/javascript"></script>  
+<script src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/valida.js")" type="text/javascript"></script>
 <script type="text/javascript">
-	j(document).ready(function () {
-		ConfigurarHoverCalendario();
-		ConfigurarCalendario("#Data");
-		CKEDITOR.replace("Texto");
-	});
+    j(document).ready(function () {
+        ConfigurarHoverCalendario();
+        //ConfigurarCalendario("#Data");
+        CKEDITOR.replace("Texto");
+    });
+
 </script>
-
 <h2>@ViewBag.Title</h2>
-<div class="clear"></div>
-
-@using (Html.BeginForm()) 
+<div class="clear">
+</div>
+@using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Artigo</legend>
- 		@Html.HiddenFor(model => model.UsuarioCadastro.Codigo)
-		
-       <p>
-			<label>Categoria</label>
-        	@Html.DropDownListFor(model => model.ObjCategoria.Codigo, (IEnumerable<SelectListItem>)ViewData["Categorias"])
-			@Html.ValidationMessageFor(model => model.ObjCategoria.Codigo)
-		</p>
-		<p>
+        @Html.HiddenFor(model => model.UsuarioCadastro.Codigo)
+        <p>
+            <label>
+                Categoria</label>
+            @Html.DropDownListFor(model => model.ObjCategoria.Codigo, (IEnumerable<SelectListItem>)ViewData["Categorias"])
+            @Html.ValidationMessageFor(model => model.ObjCategoria.Codigo)
+        </p>
+        <p>
             @Html.LabelFor(model => model.Titulo)
-            @Html.TextBoxFor(model => model.Titulo, new { @class = "text-long"})
+            @Html.TextBoxFor(model => model.Titulo, new { @class = "text-long" })
             @Html.ValidationMessageFor(model => model.Titulo)
         </p>
-
         <p>
             @Html.LabelFor(model => model.AnteTitulo)
             @Html.TextAreaFor(model => model.AnteTitulo)
             @Html.ValidationMessageFor(model => model.AnteTitulo)
         </p>
-		<p>
+        <p>
             @Html.LabelFor(model => model.Resumo)
             @Html.TextAreaFor(model => model.Resumo)
             @Html.ValidationMessageFor(model => model.Resumo)
         </p>
-
         <p>
             @Html.LabelFor(model => model.Texto)
             @Html.TextAreaFor(model => model.Texto)
             @Html.ValidationMessageFor(model => model.Texto)
         </p>
-		<p>
+        <p>
             @Html.LabelFor(model => model.Data)
-            @Html.TextBoxFor(model => model.Data, new { @class = "text-medium" })
+            @Html.EditorFor(model => model.Data, new { @class = "text-medium" })
             @Html.ValidationMessageFor(model => model.Data)
         </p>
-	</fieldset>
-	<fieldset>
-		<legend>Palavra-chave</legend>
-		<p>
-			@HelperPalavraChave.SelecionarPalavraChave(Model)
-		</p>
-	</fieldset>
-	<fieldset>
-		<legend>Foto</legend>
-		<p>
-			@HelperFoto.VincularFoto(Model)
+    </fieldset>
+    <fieldset>
+        <legend>Palavra-chave</legend>
+        <p>
+            @HelperPalavraChave.SelecionarPalavraChave(Model)
         </p>
-	</fieldset>
-	<br />
-	<p><input type="submit" value="Alterar" /></p>
-	<br />
+    </fieldset>
+    <fieldset>
+        <legend>Foto</legend>
+        <p>
+            @HelperFoto.VincularFoto(Model)
+            @Html.ValidationMessageFor(model => model.ListaFotos)
+            @Html.ValidationMessageFor(model => model.FotoCapa)
+        </p>
+    </fieldset>
+    <br />
+    <p>
+        <input type="submit" value="Alterar" /></p>
+    <br />
 }

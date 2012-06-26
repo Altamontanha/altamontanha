@@ -14,7 +14,9 @@ namespace AltaMontanha.Models.Dominio
 		public DateTime DataInicial { get; set; }
 		public DateTime DataFinal { get; set; }
 		public bool Multimidia { get; set; }
-		public bool Randomico { get; set; }
-		public bool Ativo { get; set; }
+        public bool Randomico { get; set; }
+        public bool Ativo { get; set; }
+        public bool AtivarCodigo { get; set; }
+        public string CodigoHTML { get; set; }
 	}
 }

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="AltaMontanha" namespace="AltaMontanha.Models.Dominio" >
+	<class name="Servico" table="tb_empresas" lazy="false">
+		<id name="Codigo" access="property" column="Id" type="Int32">
+			<generator class="identity" />
+		</id>
+		<property name="Nome" not-null="true" access="property" type="String">
+			<column name="Nome" sql-type="TEXT" />
+		</property>
+        <property name="Cidade" not-null="true" access="property" type="String">
+            <column name="Cidade" sql-type="TEXT" />
+        </property>
+        <property name="ResumoCapa" column="resumo_capa" not-null="true" access="property" type="String">
+            <column name="ResumoCapa" sql-type="TEXT" />
+        </property>
+        <property name="Telefone" not-null="true" access="property" type="String">
+            <column name="Telefone" sql-type="TEXT" />
+        </property>
+        <property name="Logomarca" not-null="true" access="property" type="String">
+            <column name="Logomarca" sql-type="TEXT" />
+        </property>
+        <property name="Endereco" not-null="true" access="property" type="String">
+            <column name="Endereco" sql-type="TEXT" />
+        </property>
+        <property name="Site" not-null="true" access="property" type="String">
+            <column name="Site" sql-type="TEXT" />
+        </property>
+        <property name="Email" not-null="true" access="property" type="String">
+            <column name="email" sql-type="TEXT" />
+        </property>
+        <property name="Descricao" not-null="true" access="property" type="String">
+            <column name="descricao" sql-type="TEXT" />
+        </property>
+        <property name="Ativo" not-null="true" access="property" type="Boolean">
+            <column name="ativo" sql-type="bool" />
+        </property>
+        <property name="Pagante" access="property">
+            <column name="pagante" not-null="false" unique="false" sql-type="Int32" />
+        </property>
+        <!--<join table="tb_empresascategoria">
+            <key column="CodCategoria" />
+            <many-to-one name="Categoria" column="grupo" class="CategoriaEmpresa" not-null="true" />
+        </join>-->
+        <!--<bag name="Categoria" table="tb_empresascategoria" cascade="save-update">
+            <key column="Grupo"/>
+            <many-to-many class="CategoriaEmpresa" column="CodCategoria"></many-to-many>
+        </bag>-->
+        <many-to-one name="Categoria" column="Grupo" class="CategoriaEmpresa" not-null="true" />
+	</class>
+</hibernate-mapping>

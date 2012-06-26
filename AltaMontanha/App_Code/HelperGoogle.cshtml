@@ -1,6 +1,9 @@
 ﻿@helper GerarFriends()
 {
-	<h2 class="footer-title">Google</h2>
+	<h2 class="footer-title">Google+</h2>
+    <g:plus href="https://plus.google.com/101716217633193135893" rel="publisher" width="300px" height="195px" theme="light"></g:plus>
+    
+	@*<h2 class="footer-title">Google</h2>
 	<script type="text/javascript" src="http://www.google.com/friendconnect/script/friendconnect.js"></script>
 	<div id="div-7391715679938197995" style="width:300px; height:195px; margin-left:-2px; z-index:-2; border-left:1px solid #ccc; border:solid 1px blue;"></div>
 	<script type="text/javascript">
@@ -19,12 +22,12 @@
 		skin['NUMBER_ROWS'] = '6';
 		google.friendconnect.container.setParentUrl('/' /* location of rpc_relay.html and canvas.html */);
 		google.friendconnect.container.renderMembersGadget({ id: 'div-7391715679938197995', site: '07569085838704721653'},skin);
-	</script>
+	</script>*@
 
 }
 
 @helper GerarAnalitics()
-{
+    {
 	<script type="text/javascript">
 		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -42,7 +45,7 @@
 }
 
 @helper GerarBusca()
-{
+    {
 	<div id="busca">
 		<form action="/busca">
 			<input type="hidden" name="cx" value="partner-pub-7801590803120340:ni9l3w-v9gu" />
@@ -55,7 +58,7 @@
 }
 
 @helper GerarResultadoBusca()
-{
+    {
 	<div id="cse-search-results"></div>
 	<script type="text/javascript">
 		var googleSearchIframeName = "cse-search-results";

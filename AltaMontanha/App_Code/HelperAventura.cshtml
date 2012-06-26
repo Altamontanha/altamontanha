@@ -1,20 +1,22 @@
 ﻿@helper VisualizarAventuras(IList<AltaMontanha.Models.Dominio.Aventura> listaAventuras)
-{
-	<div id="sua-aventura">
-		<h2 class="box-title"><span class="title-bg">Gente de Montanha</span><span class="link-more"><a href="/aventuras">+ aventuras</a></span></h2>
-		<a href="#" class="left-arrow"></a>
-
-		@foreach (AltaMontanha.Models.Dominio.Aventura aventura in listaAventuras)
-		{
-	   		<div class="aventura-box">
-				<a href="/Aventura/@aventura.Codigo/@aventura.Slug">
-					<img src="/AppData/Foto/160x115/@aventura.FotoCapa.Caminho" alt="@aventura.FotoCapa.Legenda" width="160" height="115"/>
-					<p class="name-aventura">@aventura.Autor.Nome</p>
-					<p>@aventura.Titulo</p>
-				</a>
-			</div>
-		}
-
-		<a href="#" class="right-arrow"></a>
-	</div>
+    {
+    <div id="sua-aventura">
+        <h2 class="box-title">
+            <span class="title-bg">Sua Aventura</span><span class="link-more"><a href="/aventuras">+
+                aventuras</a></span></h2>
+        <div id="aventuras-box">
+            @*<a href="#" class="left-arrow"></a>*@
+            @foreach (AltaMontanha.Models.Dominio.Aventura aventura in listaAventuras)
+            {
+                <div class="aventura-box">
+                    <a href="/Aventura/@aventura.Codigo/@aventura.Slug">
+                        <img src="/ManterFoto/Foto/@aventura.FotoCapa.Caminho?Tamanho=300" alt="@aventura.FotoCapa.Legenda" width="160" height="115"/>
+                        <p class="name-aventura">@aventura.Autor.Nome</p>
+                        <p>@aventura.Titulo</p>
+                    </a>
+                </div>
+            }
+            @*<a href="#" class="right-arrow"></a>*@
+        </div>
+    </div>
 }

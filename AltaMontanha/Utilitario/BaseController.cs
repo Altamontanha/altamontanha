@@ -38,7 +38,7 @@ namespace AltaMontanha.Utilitario
 
 			string tela = string.Format("/{0}/{1}", controle, acao);
 
-			if (!fachada.VerificarAcesso(usuario, tela))
+			if (!fachada.VerificarAcesso(usuario, tela) && (controle != "ManterFoto" && acao != "Foto"))
 				FormsAuthentication.RedirectToLoginPage();
 			else
 			{
@@ -62,10 +62,10 @@ namespace AltaMontanha.Utilitario
 					else if (permissao.Tela.Nome.Equals("/ManterPerfil/"))
 						menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
 					else if (permissao.Tela.Nome.Equals("/ManterLink/"))
-						menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
-					else if (permissao.Tela.Nome.Equals("/ManterBanner/"))
-						menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
-                    else if (permissao.Tela.Nome.Equals("/ManterDepoimento/"))
+                        menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
+                    else if (permissao.Tela.Nome.Equals("/ManterBanner/"))
+                        menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
+                    else if (permissao.Tela.Nome.Equals("/ManterServico/"))
                         menu.Add(new Models.Dominio.Tela() { Nome = permissao.Tela.Nome });
 				}
 				

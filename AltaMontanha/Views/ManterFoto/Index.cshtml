@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AltaMontanha.Models.Dominio.Foto>
+@model IEnumerable<AltaMontanha.Models.Dominio.Foto>
 
 @{
     ViewBag.Title = "Pesquisa de Foto";
@@ -27,7 +27,7 @@
 		{
 			<tr>
 				<td>
-					<img src="/AppData/Foto/50x50/@item.Caminho" alt="@item.Legenda" width="50" height="50" />
+					<img src="/ManterFoto/Foto/@item.Caminho?Tamanho=340" alt="@item.Legenda" width="120"/>
 				</td>
 				<td>
 					@item.Legenda
@@ -44,7 +44,7 @@
 			</tr>
 		}
 		</table>
-		@HelperGrid.GerarPaginacao(Convert.ToInt32(ViewData["Total"]), Convert.ToInt32(ViewData["Pagina"]), "ManterFoto")
+		@HelperGrid.GerarPaginacao(Convert.ToInt32(ViewData["Total"]), Convert.ToInt32(ViewData["Pagina"]), "ManterFoto", AltaMontanha.Utilitario.Constante.TamanhoPagina)
 		<br />
 	</div>
 </div>

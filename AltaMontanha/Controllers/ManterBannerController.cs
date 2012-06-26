@@ -11,12 +11,12 @@ namespace AltaMontanha.Controllers
 	[HandleError]
 	public class ManterBannerController : Utilitario.BaseController
     {
-		private MultimidiaFacade facade = new MultimidiaFacade();
 
         //
         // GET: /Banner/
         public ActionResult Index()
         {
+            MultimidiaFacade facade = new MultimidiaFacade();
 			IList<Banner> banners = facade.PesquisarBanner(null);
             return View(banners);
         }
@@ -25,6 +25,7 @@ namespace AltaMontanha.Controllers
         // GET: /ManterBanner/CadastrarBanner
 		public ActionResult CadastrarBanner()
         {
+            MultimidiaFacade facade = new MultimidiaFacade();
 			ViewData["Locais"] = new SelectList(facade.PesquisarLocal(null), "Codigo", "Descricao");
 			return View();
         } 
@@ -32,8 +33,10 @@ namespace AltaMontanha.Controllers
         //
 		// POST: /ManterBanner/CadastrarBanner
         [HttpPost]
+        [ValidateInput(false)]
 		public ActionResult CadastrarBanner(Banner banner, HttpPostedFileBase file)
         {
+            MultimidiaFacade facade = new MultimidiaFacade();
             try
             {
 				facade.SalvarBanner(banner, file);
@@ -50,6 +53,7 @@ namespace AltaMontanha.Controllers
 		// GET: /ManterBanner/AlterarBanner/5
 		public ActionResult AlterarBanner(int Codigo)
         {
+            MultimidiaFacade facade = new MultimidiaFacade();
 			Banner banner = facade.PesquisarBanner(Codigo);
 			ViewData["Locais"] = new SelectList(facade.PesquisarLocal(null), "Codigo", "Descricao");
 			return View(banner);
@@ -58,8 +62,10 @@ namespace AltaMontanha.Controllers
         //
 		// POST: /ManterBanner/AlterarBanner/5
         [HttpPost]
+        [ValidateInput(false)]
 		public ActionResult AlterarBanner(Banner banner, HttpPostedFileBase file)
         {
+            MultimidiaFacade facade = new MultimidiaFacade();
             try
             {
 				facade.SalvarBanner(banner, file);
@@ -76,6 +82,7 @@ namespace AltaMontanha.Controllers
         // GET: /ManterBanner/ExluirBanner/5
         public ActionResult ExcluirBanner(int Codigo)
         {
+            MultimidiaFacade facade = new MultimidiaFacade();
 			facade.ExcluirBanner(Codigo);
 			return RedirectToAction("Index");
         }

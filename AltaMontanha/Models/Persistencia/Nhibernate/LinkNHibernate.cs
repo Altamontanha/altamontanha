@@ -11,12 +11,23 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 	{
 		public void Alterar(Dominio.Link objeto)
 		{
-			NHibernate.HttpModule.RecuperarSessao.Update(objeto);
+            NHibernate.HttpModule.RecuperarSessao.Update(objeto);
+
+            NHibernate.HttpModule.RecuperarSessao.Flush();
 		}
 
 		public Dominio.Link Cadastrar(Dominio.Link objeto)
-		{
-			objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+        {
+            try
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Begin();
+                objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Rollback();
+            }
 			return objeto;
 		}
 
@@ -36,6 +47,23 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			return links;
 		}
+
+        public IList<Dominio.Link> Pesquisar(Dominio.Link objeto, int qtde, int pagina)
+        {
+            ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Link));
+
+            if (objeto == null)
+                return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Link>().List<Dominio.Link>();
+
+            if (objeto.Codigo > 0)
+                criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
+            if (!string.IsNullOrEmpty(objeto.Titulo))
+                criteria = criteria.Add(Expression.Eq("Titulo", objeto.Titulo));
+
+            IList<Dominio.Link> links = criteria.List<Dominio.Link>();
+
+            return links;
+        }
 
 		public Dominio.Link Pesquisar(int codigo)
 		{
@@ -63,5 +91,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			return true;
 		}
-	}
+
+
+    }
 }

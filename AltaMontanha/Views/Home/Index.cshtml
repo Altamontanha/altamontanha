@@ -1,46 +1,55 @@
 ﻿@{
     ViewBag.Title = "AltaMontanha.com";
-    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+    Layout = "~/Views/Shared/_LayoutNovo.cshtml";
 }
 <!-- container de artigos, Noticias e Colunas. -->
 <div id="main-box">
-	<!-- Noticias em destaque. -->
-	@HelperNoticia.VisualizarNoticiasDestaque((IList<AltaMontanha.Models.Dominio.Noticia>)ViewData["ListaNoticiasDestaque"])
-	<!-- Noticias em geral. -->
-	@HelperNoticia.VisualizarNoticias((IList<AltaMontanha.Models.Dominio.Noticia>)ViewData["ListaNoticias"])
-	<!-- container de publicidade referentes banner de 300*250 -->
-	<div class="arroba col-300">
-		@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner) ViewData["BannerCima"])
-	</div>
-	<div class="spliter-940"></div>
-	<!-- Ultimas colunas. -->
-	@HelperColuna.VisualizarColunas((IList<AltaMontanha.Models.Dominio.Coluna>) ViewData["ListaColunas"])
-	<!-- Artigos random. -->
-	@HelperArtigo.VisualizarArtigos((IList<AltaMontanha.Models.Dominio.Artigo>) ViewData["ListaArtigos"])
-	<!-- Serviços Especializados. -->
-	<div id="servicos" class="col-220">
-		<h2 class="box-title-small">Serviços Especializados</h2>
-		@* TODO: Serviços especializados. *@
-	</div>
-	<!-- Fotos de Montanha. -->
-	<div id="fotos-montanha" class="col-220">
-		<h2 class="box-title-small">Fotos de Montanha</h2>
-		@* TODO: Fotos de Montanha. *@
-	</div>
+    <!-- Noticias em destaque. -->
+    @HelperNoticia.VisualizarNoticiasDestaque((IList<AltaMontanha.Models.Dominio.Noticia>)ViewData["ListaNoticiasDestaque"])
+    <!-- Noticias em geral. -->
+    @HelperNoticia.VisualizarNoticias((IList<AltaMontanha.Models.Dominio.Noticia>)ViewData["ListaNoticias"])
+    <!-- container de publicidade referentes banner de 300*250 -->
+    <div class="arroba col-300">
+        @HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner)ViewData["BannerCapaSuperior"], Html)
+    </div>
+    <div class="spliter-940">
+    </div>
+    <!-- Ultimas colunas. -->
+    @HelperColuna.VisualizarColunas((IList<AltaMontanha.Models.Dominio.Coluna>)ViewData["ListaColunas"])
+    <!-- Artigos random. -->
+    @HelperArtigo.VisualizarArtigos((IList<AltaMontanha.Models.Dominio.Artigo>)ViewData["ListaArtigos"])
+    <!-- Serviços Especializados. -->
+    <div id="servicos" class="col-220 special-bg">
+        @HelperServico.VisualizarLateral((AltaMontanha.Models.Dominio.Servico)ViewData["ServicoLateral"], ViewBag.Categorias, "220")
+        <br />
+        &nbsp;
+    </div>
+    <!-- Fotos de Montanha. -->
+    <div id="fotos-montanha" class="col-220 special-bg">
+        <h2 class="box-title-small">
+            <span class="title-bg">Fotos de Montanha</span>
+        </h2>
+        <center>
+            <img src="/AppData/Foto/fotos_temp.jpg" title="EM BREVE" width="200" height="185"></center>
+    </div>
+</div>
+<div class="super-banner-home">
+    @HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner)ViewData["BannerMeio"], Html)
 </div>
 <!-- container de artigos referentes a categoria de histórias do montanhismo. -->
-@HelperArtigo.VisualizarArtigosHistoria((IList<AltaMontanha.Models.Dominio.Artigo>) ViewData["ListaArtigosHistoria"])
-<!-- container de publicidade referentes banner de 200*200 -->
-<div id="quadrado-home">
-	@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner) ViewData["BannerMeio"])
+@HelperArtigo.VisualizarArtigosSaude((IList<AltaMontanha.Models.Dominio.Artigo>)ViewData["ListaArtigosSaude"])
+<div class="arroba-main-home col-300">
+    @HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner)ViewData["BannerCapaMeio"], Html)
+</div>
+<div id="partners-box">
+    @HelperArtigo.VisualizarArtigoColunas((AltaMontanha.Models.Dominio.Artigo)ViewData["ListaArtigoEquipamentos"], "Equipamentos")
+    @HelperArtigo.VisualizarArtigoColunas((AltaMontanha.Models.Dominio.Artigo)ViewData["ListaArtigoMeioAmbiente"], "Meio Ambiente")
+    @HelperArtigo.VisualizarArtigoColunas((AltaMontanha.Models.Dominio.Artigo)ViewData["ListaArtigoHistoria"], "História")
+    @HelperArtigo.VisualizarArtigoColunas((AltaMontanha.Models.Dominio.Artigo)ViewData["ListaArtigoEntrevistas"], "Entrevista")
 </div>
 <!-- container de sua-aventura/gente-de-montanha -->
 @HelperAventura.VisualizarAventuras((IList<AltaMontanha.Models.Dominio.Aventura>)ViewData["ListaAventuras"])
-<!-- container de publicidade referentes banner de 728*90 -->
-<div class="super-banner-home"> 
-	@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner) ViewData["BannerBaixo"])
-</div>
 <!-- container de sites relacionados ex.: Rumos, Roteiros, Aconcagua.-->
 <div id="partners-box">
-	@* TODO: Helper de sites relacionados. *@
+    @* TODO: Helper de sites relacionados. *@
 </div>

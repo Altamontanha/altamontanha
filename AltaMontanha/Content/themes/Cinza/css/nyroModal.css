@@ -12,31 +12,37 @@
 .nmReposition {
 	position: absolute;
 }
-.nyroModalCloseButton {
+.nyroModal div
+{
+	text-align: center;
+}
+.nyroModalCloseButton{
 	top: -13px;
 	right: -13px;
 	width: 12px;
 	height: 12px;
 	text-indent: -9999em;
-	background: url(../img/close.gif);
+	/*background: url(../img/close.gif);*/
 	z-index:1000;
 }
-.nyroModalTitle {
+#nyroModalTitle {
 	top: -26px;
 	left: 0;
 	margin: 0;
     font-size: 1.1em;
 	color: #ddd;
 	z-index: 1000;
+	width: inherit;
+	text-align: center;
 }
-.nyroModalCont {
+#nyroModalCont {
 	position: absolute;
 	border: 4px solid #777;
 	margin: 25px;
 	background: #fff;
 	z-index:1000;
 }
-.nyroModalCont iframe {
+#nyroModalCont iframe {
 	width: 100%;
 	height: 600px;
 	overflow-x: hidden;

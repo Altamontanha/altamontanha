@@ -1,37 +1,62 @@
 ﻿@model AltaMontanha.Models.Dominio.Foto
 @{
-	ViewBag.Title = "Alterar Foto";
+    ViewBag.Title = "Alterar Foto";
 }
-
 <h2>@ViewBag.Title</h2>
-<div class="clear"></div>
-
+<div class="clear">
+</div>
 @using (Html.BeginForm("AlterarFoto", "ManterFoto", FormMethod.Post, new { @encType = "multipart/form-data" }))
 {
-	@Html.ValidationSummary(true)
-	<fieldset>
-		<legend>Foto</legend>
-		<p>
-			@Html.LabelFor(model => model.Autor)
-			@Html.TextBoxFor(model => model.Autor, new { @class = "text-long" })
-			@Html.ValidationMessageFor(model => model.Autor)
-		</p>
-		<p>
-			@Html.LabelFor(model => model.Fonte)
-			@Html.TextBoxFor(model => model.Fonte, new { @class = "text-long" })
-			@Html.ValidationMessageFor(model => model.Fonte)
-		</p>
-		<p>
-			@Html.LabelFor(model => model.Legenda)
-			@Html.TextAreaFor(model => model.Legenda)
-			@Html.ValidationMessageFor(model => model.Legenda)
-		</p>
-		<p>
-			<input type="file" name="file" value="Foto" />
-		</p>
-		<p>
-			@HelperPalavraChave.SelecionarPalavraChave(Model)
-		</p>
-		<p><input type="submit" value="Cadastrar" /></p>
-	</fieldset>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Foto</legend>
+        <p>
+            @Html.LabelFor(model => model.Autor)
+            @Html.TextBoxFor(model => model.Autor, new { @class = "text-long" })
+            @Html.ValidationMessageFor(model => model.Autor)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Fonte)
+            @Html.TextBoxFor(model => model.Fonte, new { @class = "text-long" })
+            @Html.ValidationMessageFor(model => model.Fonte)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Legenda)
+            @Html.TextAreaFor(model => model.Legenda)
+            @Html.ValidationMessageFor(model => model.Legenda)
+        </p>
+        <p>
+            <input type="file" name="file" value="Foto" />
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Caminho, "URL")
+            <label class="text-long" style="width: auto;">
+                &lt;img src="@ViewBag.InicioCaminho@Model.Caminho" /&gt;</label>
+            @Html.HiddenFor(model => Model.Caminho)
+        </p>
+        <p>
+            <label>
+                Preview</label>
+            <img src="@ViewBag.InicioCaminho@Model.Caminho" width="250px" height="auto" />
+        </p>
+        <p>
+            @HelperPalavraChave.SelecionarPalavraChave(Model)
+        </p>
+        <p>
+            <input type="submit" value="Cadastrar" /></p>
+    </fieldset>
 }
+<script language="javascript">
+    j("form").submit(function () {
+        var Autor = j("input[name=Autor]").val();
+        var Fonte = j("input[name=Fonte]").val();
+
+        if (Autor.length == 0 && Fonte.length == 0) {
+            alert("Preencha ao menos um Autor e/ou uma Fonte!");
+            j("input[name=Autor]").focus();
+            return false;
+        }
+        else
+            return true;
+    });
+</script>

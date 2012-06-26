@@ -1,0 +1,37 @@
+﻿@helper VisualizarLateral(AltaMontanha.Models.Dominio.Servico servico, IList<AltaMontanha.Models.Dominio.CategoriaEmpresa> categorias, string Tamanho = "full")
+    {
+    <h2 class="box-title-small">
+        <span class="title-bg">Serviços Especializados</span>
+    </h2>
+    <form action="/Servicos" name="FormServico" id="FormServico" method="post">
+    <input type="hidden" id="CategoriaServico" name="@servico.Categoria.Categoria" value="@servico.Categoria.CodCategoria" />
+    <ul class="ListCategorias">
+        <li><a href="javascript:Servico()" title="Serviços Especializados">
+            @servico.Categoria.Categoria</a>
+            <ul>
+                @foreach (AltaMontanha.Models.Dominio.CategoriaEmpresa categoria in categorias)
+                {
+                    <li><a href='javascript:Servico("@categoria.Categoria", @categoria.CodCategoria)' title="@categoria.Categoria">
+                        @categoria.Categoria</a></li>
+                }
+            </ul>
+        </li>
+    </ul>
+    <br />
+    <center>
+        <a href="/Servicos/Servico/@servico.Codigo">
+            <img src="/ManterFoto/Foto/Servicos/@servico.Logomarca?Tamanho=@Tamanho" alt="@servico.Nome" width="@(Tamanho + "px")" height="@((int.Parse(Tamanho) / 1.44).ToString() + "px")" />
+        </a>
+    </center>
+    </form>
+    
+    <script type="text/javascript">
+
+        function Servico(name, value) {
+            document.getElementById("CategoriaServico").name = name;
+            document.getElementById("CategoriaServico").value = value;
+            document.FormServico.submit();
+        }
+    
+    </script>
+}

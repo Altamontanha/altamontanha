@@ -1,59 +1,91 @@
-﻿@helper GerarPaginacao(int total, int pagina, string controller)
-{
-	int totalPaginas = Convert.ToInt32(Math.Round((double)(total / AltaMontanha.Utilitario.Constante.TamanhoPagina), 1));
-	int paginaInicial;
-	int paginaFinal;
-	int tamanhoPagina = AltaMontanha.Utilitario.Constante.TamanhoPagina;
-	
-	// Valida quando a página é multiplo de 10
-	// e calcula de forma diferenciada.
-	if ((pagina % tamanhoPagina) == 0)
-	{
-		paginaInicial = (int)(pagina / tamanhoPagina);
-	}
-	else
-	{
-		paginaInicial = (((int)pagina / tamanhoPagina) * tamanhoPagina) + 1;
-	}
-	
-	// Calcula a pagina final da paginação.
-	paginaFinal = paginaInicial + (tamanhoPagina-1);
+﻿@helper GerarPaginacao(int total, int pagina, string controller, int TamanhoPagina, bool OnClick = false)
+    {
+        int totalPaginas = Convert.ToInt32(Math.Ceiling((double)total / (double)TamanhoPagina));
+        int paginaInicial;
+        int paginaFinal;
 
-	// Caso a paginação final for maior que o total de páginas.
-	if (paginaFinal > totalPaginas)
-	{
-		paginaFinal = totalPaginas;
-	}
-	
-	<div class="paginacao">Página(s):
+        // Valida quando a página é multiplo de 10
+        // e calcula de forma diferenciada.
+        if ((pagina % TamanhoPagina) == 0)
+        {
+            paginaInicial = ((int)(pagina / TamanhoPagina) - 1) * TamanhoPagina + 1;
+        }
+        else
+        {
+            paginaInicial = (((int)pagina / TamanhoPagina) * TamanhoPagina) + 1;
+        }
 
-	@if (paginaInicial > tamanhoPagina)
-	{
-		<a href="@string.Format("/{0}/?pagina={1}", controller, paginaInicial - 1)">...</a>
-	}
-	
-	@for (int i = paginaInicial; i <= paginaFinal; i++)
-	{
-		// Verifica se é a pagina corrente (selecionada)
-		// e não exibe em forma de link.
-		if (pagina != i)
-		{
-			<a href="@string.Format("/{0}/?pagina={1}", controller, i)">@i</a>
-		}
-		else
-		{
-			<span>@pagina</span>
-		}
-	}
+        // Calcula a pagina final da paginação.
+        paginaFinal = paginaInicial + (TamanhoPagina - 1);
 
-	@if (totalPaginas > paginaFinal)
-	{
-		<a href="@string.Format("/{0}/?pagina={1}", controller, paginaFinal + 1)">...</a>
-	}
-	@if (paginaInicial > paginaFinal)
-	{
-		<span>1</span>
-	}
+        // Caso a paginação final for maior que o total de páginas.
+        if (paginaFinal > totalPaginas)
+        {
+            paginaFinal = totalPaginas;
+        }
 	
-	</div>
+    <div class="paginacao clear">
+        Página(s):
+        @if (paginaInicial > TamanhoPagina)
+        {
+            if (!OnClick)
+            {
+            <a href="@string.Format("/{0}/?pagina={1}", controller, paginaInicial - 1)">...</a>
+            }
+            else
+            {
+            <a href="javascript:MudarPagina(@(paginaInicial - 1))">...</a>
+            }
+
+        }
+        @for (int i = paginaInicial; i <= paginaFinal; i++)
+        {
+            // Verifica se é a pagina corrente (selecionada)
+            // e não exibe em forma de link.
+            if (pagina != i)
+            {
+                if (!OnClick)
+                {
+            <a href="@string.Format("/{0}/?pagina={1}", controller, i)">@i</a>
+                }
+                else
+                {
+            <a href="javascript:MudarPagina(@i)">@i</a>
+                }
+            }
+            else
+            {
+            <span>@pagina</span>
+            }
+        }
+        @if (totalPaginas > paginaFinal)
+        {
+
+            if (!OnClick)
+            {
+            <a href="@string.Format("/{0}/?pagina={1}", controller, paginaFinal + 1)">...</a>
+            }
+            else
+            {
+            <a href="javascript:MudarPagina(@(paginaFinal + 1))">...</a>
+            }
+        }
+        @if (paginaInicial > paginaFinal)
+        {
+            <span>1</span>
+        }
+    </div>
+
+    
+    <script language="javascript">
+
+        function MudarPagina(pagina) {
+            document.FiltroCategoria.getAttribute('action').replace('/', '').replace('/', '');
+            document.FiltroCategoria.setAttribute('action', document.FiltroCategoria.getAttribute('action') + "?pagina=" + pagina);
+            //alert(document.FiltroCategoria.getAttribute('action'));
+            document.FiltroCategoria.submit();
+        }
+
+    </script>
+
 }

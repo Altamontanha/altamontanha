@@ -11,18 +11,30 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 	{
 		public void Alterar(Dominio.Banner objeto)
 		{
-			NHibernate.HttpModule.RecuperarSessao.Update(objeto);
+            NHibernate.HttpModule.RecuperarSessao.Update(objeto);
+
+            NHibernate.HttpModule.RecuperarSessao.Flush();
 		}
 
 		public Dominio.Banner Cadastrar(Dominio.Banner objeto)
-		{
-			objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+        {
+            try
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Begin();
+                objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Rollback();
+            }
 			return objeto;
 		}
 
 		public IList<Dominio.Banner> Pesquisar(Dominio.Banner objeto, int pagina = 0)
 		{
-			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Banner));
+            ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Banner));
+            criteria.AddOrder(Order.Desc("Codigo"));
 
 			if (objeto == null)
 				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Banner>().List<Dominio.Banner>();
@@ -42,6 +54,11 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			return banners;
 		}
+
+        public IList<Dominio.Banner> Pesquisar(Dominio.Banner objeto, int qtde, int pagina)
+        {
+            throw new NotImplementedException();
+        }
 
 		public Dominio.Banner Pesquisar(int codigo)
 		{
@@ -69,5 +86,6 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			return true;
 		}
-	}
+
+    }
 }

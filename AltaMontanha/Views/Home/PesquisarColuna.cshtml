@@ -1,36 +1,39 @@
 ﻿@model IEnumerable<AltaMontanha.Models.Dominio.Coluna>
 
 @{
-    ViewBag.Title = "Colunas - AltaMontanha.com";
-    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+    ViewBag.Title = "AltaMontanha.com - Colunas";
+    Layout = "~/Views/Shared/_LayoutNovo.cshtml";
 }
 
 <div id="main-box">
-	<div id="conteudo">
+    <div id="conteudoPrincipal">
 		<h2>Colunas</h2>
-
+        @HelperColunista.FiltroColunista(ViewBag.Usuarios, @HttpContext.Current.Request.Path, ViewBag.TotalMaterias, ViewBag.CodigoColunista, Html)
+        <br />
 		<div>
 			<ul id="listagem">
-			@foreach (var coluna in Model)
-			{
-			<li>
-				<a href="/Coluna/@coluna.Codigo/@coluna.Slug">
-					<img src="/AppData/Foto/50x50/@coluna.FotoCapa.Caminho" align="left" alt="@coluna.FotoCapa.Legenda" width="50" height="50" />
-					<br />
-					@coluna.Titulo<br />
-					Data: @String.Format("{0:dd/MM/yyyy}", coluna.Data)
-				</a>
-			</li>
-			}
+                @foreach (var coluna in Model)
+                {
+                    <li><a href="/Colunas/@coluna.Codigo/@coluna.Slug">
+                        <center>
+                            <img src="/ManterFoto/Foto/@coluna.FotoCapa.Caminho?Tamanho=340" alt="@coluna.FotoCapa.Legenda" width="280" height="198" />
+                        </center>
+                        <div class="clear">
+                        </div>
+                        <p class="texto">
+                            @coluna.Titulo
+                            <p class="data center">
+                                Autor: @coluna.Autor.Nome
+                            </p>
+                            <p class="data center">
+                                Data: @String.Format("{0:dd/MM/yyyy}", coluna.Data)</p>
+                        </p>
+                    </a></li>
+                }
 			</ul>
 		</div>
-		<div class="super-banner-home"> 
-			@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner)ViewData["BannerBaixo"])
-		</div>
-	</div>
-	<div class="col-fotos">
-		<div id="quadrado-home">
-			@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner) ViewData["BannerInterna"])
-		</div>
+        <center>
+            @HelperGrid.GerarPaginacao(int.Parse(ViewBag.TotalMaterias.ToString()), int.Parse(ViewBag.Pagina.ToString()), "Colunas", AltaMontanha.Utilitario.Constante.TamanhoMaterias, true)
+        </center>
 	</div>
 </div>

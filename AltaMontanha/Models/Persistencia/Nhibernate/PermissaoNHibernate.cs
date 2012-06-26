@@ -11,12 +11,23 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 	{
 		public void Alterar(Dominio.Permissao objeto)
 		{
-			NHibernate.HttpModule.RecuperarSessao.Update(objeto);
+            NHibernate.HttpModule.RecuperarSessao.Update(objeto);
+
+            NHibernate.HttpModule.RecuperarSessao.Flush();
 		}
 
 		public Dominio.Permissao Cadastrar(Dominio.Permissao objeto)
-		{
-			objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+        {
+            try
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Begin();
+                objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Rollback();
+            }
 			return objeto;
 		}
 
@@ -36,6 +47,23 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			return permissoes;
 		}
+
+        public IList<Dominio.Permissao> Pesquisar(Dominio.Permissao objeto, int qtde, int pagina)
+        {
+            ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Permissao));
+
+            if (objeto == null)
+                return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Permissao>().List<Dominio.Permissao>();
+
+            if (objeto.Perfil != null)
+                criteria = criteria.Add(Expression.Eq("CodPerfil", objeto.Perfil.Codigo));
+            if (objeto.Tela != null)
+                criteria = criteria.Add(Expression.Eq("CodTela", objeto.Tela.Codigo));
+
+            IList<Dominio.Permissao> permissoes = criteria.List<Dominio.Permissao>();
+
+            return permissoes;
+        }
 
 		public Dominio.Permissao Pesquisar(int codigo)
 		{
@@ -63,5 +91,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			return true;
 		}
-	}
+
+
+    }
 }

@@ -10,11 +10,6 @@ namespace AltaMontanha.Models.Persistencia.Fabrica
 			return new Nhibernate.ArtigoNHibernate();
 		}
 
-        public Abstracao.IDepoimentoDAO GetDepoimentoDAO()
-        {
-            return new Nhibernate.DepoimentoNHibernate();
-        }
-
 		public Abstracao.IAventuraDAO GetAventuraDAO()
 		{
 			return new Nhibernate.AventuraNHibernate();
@@ -91,9 +86,19 @@ namespace AltaMontanha.Models.Persistencia.Fabrica
 			return new UsuarioNHibernate();
 		}
 
-		public Abstracao.IPermissaoDAO GetPermissaoDAO()
-		{
-			return new Nhibernate.PermissaoNHibernate();
-		}
+        public Abstracao.IPermissaoDAO GetPermissaoDAO()
+        {
+            return new Nhibernate.PermissaoNHibernate();
+        }
+
+        public Abstracao.IServicoDAO GetServicoDAO()
+        {
+            return new Nhibernate.ServicoNHibernate();
+        }
+
+        public Abstracao.ICategoriaEmpresaDAO GetCategoriaEmpresaDAO()
+        {
+            return new Nhibernate.CategoriaEmpresaNHibernate();
+        }
 	}
 }

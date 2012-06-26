@@ -1,0 +1,51 @@
+﻿@model AltaMontanha.Models.Dominio.Email
+@{
+    ViewBag.Title = "Contato - AltaMontanha.com";
+    Layout = "~/Views/Shared/_LayoutNovo.cshtml";
+}
+@using (Html.BeginForm())
+{
+   
+    <div id="main-box">
+        <div id="contato">
+            <h2>
+                Contato</h2>
+            @if (ViewBag.Mensagem != null)
+            {
+                <br /><h4>
+                    @ViewBag.Mensagem</h4>
+            }
+            else
+            {
+                <br />
+                @Html.LabelFor(Model => Model.Nome)
+                <br />
+                @Html.TextBoxFor(Model => Model.Nome)
+                @Html.ValidationMessageFor(Model => Model.Nome)
+                <br />
+                <br />
+                @Html.LabelFor(Model => Model.EMail)
+                <br />
+                @Html.TextBoxFor(Model => Model.EMail)
+                @Html.ValidationMessageFor(Model => Model.EMail)
+                <br />
+                <br />
+                @Html.LabelFor(Model => Model.Assunto)
+                <br />
+                @Html.TextBoxFor(Model => Model.Assunto)
+                @Html.ValidationMessageFor(Model => Model.Assunto)
+                <br />
+                <br />
+                @Html.LabelFor(Model => Model.Comentario)
+                <br />
+                @Html.TextAreaFor(Model => Model.Comentario)
+                @Html.ValidationMessageFor(Model => Model.Comentario)
+                <br />
+                <br />
+                <br />
+                <br />
+                <input type="submit" name="Enviar" value="Enviar" />
+            }
+        </div>
+    </div>
+}

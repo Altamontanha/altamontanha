@@ -10,7 +10,6 @@ namespace AltaMontanha.Controllers
 	[HandleError]
 	public class ManterAutenticacaoController : Controller
     {
-		Models.Fachada.UsuarioFacade fachada = new Models.Fachada.UsuarioFacade();
 
 		//
 		// GET: /ManterAutenticacaoController/Autenticar
@@ -22,7 +21,8 @@ namespace AltaMontanha.Controllers
 		// POST: /ManterAutenticacaoController/Autenticar
 		[HttpPost]
 		public ActionResult Autenticar(Models.Dominio.Usuario usuario, string returnUrl)
-		{
+        {
+            Models.Fachada.UsuarioFacade fachada = new Models.Fachada.UsuarioFacade();
 			// TODO: como mandar a mensagem de usuário e senha inválidos?
 			if (fachada.AutenticarUsuario(usuario))
 			{

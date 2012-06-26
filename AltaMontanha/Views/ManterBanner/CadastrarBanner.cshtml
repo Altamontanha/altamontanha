@@ -65,6 +65,16 @@
             @Html.ValidationMessageFor(model => model.Ativo)
         </p>
         <p>
+            @Html.LabelFor(model => model.AtivarCodigo)
+            @Html.CheckBoxFor(model => model.AtivarCodigo)
+            @Html.ValidationMessageFor(model => model.AtivarCodigo)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.CodigoHTML)
+            @Html.TextAreaFor(model => model.CodigoHTML)
+            @Html.ValidationMessageFor(model => model.CodigoHTML)
+        </p>
+        <p>
             <input type="submit" value="Cadastrar" />
         </p>
     </fieldset>

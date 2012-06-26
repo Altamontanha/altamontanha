@@ -1,44 +1,79 @@
 ﻿@helper VisualizarArtigos(IList<AltaMontanha.Models.Dominio.Artigo> listaArtigos)
-{
-	<div id="artigos" class="col-340 special-bg">
-		<h2 class="box-title"><span class="title-bg">Artigos Técnicos</span><span class="link-more"><a href="/artigos">+ artigos</a></span></h2>
-
-		@foreach (AltaMontanha.Models.Dominio.Artigo artigo in listaArtigos)
-		{
-			<div class="artigo-box">
-				<a href="/Artigo/@artigo.Codigo/@artigo.Slug">
-					<span class="thumb-border-5">
-						<img src="/AppData/Foto/145x95/@artigo.FotoCapa.Caminho" alt="@artigo.FotoCapa.Legenda" width="145px" height="95px" />
-					</span>
+    {
+    <div id="artigos" class="col-340 special-bg">
+        <h2 class="box-title">
+            <span class="title-bg">Artigos Técnicos</span><span class="link-more"><a href="/artigos">+
+                artigos</a></span></h2>
+        @for (int i = 0; i < listaArtigos.Count; i++)
+        {
+            AltaMontanha.Models.Dominio.Artigo artigo = listaArtigos[i];
+            <div class="artigo-box">
+                <a href="/Artigo/@artigo.Codigo/@artigo.Slug"><span class="thumb-border-5">
+                    <img src="/ManterFoto/Foto/@artigo.FotoCapa.Caminho?Tamanho=340" alt="@artigo.FotoCapa.Legenda" width="145px" height="95px" />
+                </span>
                     <p title="@artigo.Titulo">
                         @if (artigo.Titulo.Length > 35)
-						{
-							@string.Concat(artigo.Titulo.Substring(0, 35), "...");
-						}
-						else
-						{
-							@artigo.Titulo;
-						}
+                        {
+                            @string.Concat(artigo.Titulo.Substring(0, 35), "...");
+                        }
+                        else
+                        {
+                            @artigo.Titulo;
+                        }
                     </p>
-				</a>
-			</div>
-		}
-	</div>
+                </a>
+            </div>
+            if (i == 1)
+            {
+            <div style="clear: both;">
+            </div>   
+            }
+        }
+    </div>
 }
 @helper VisualizarArtigosHistoria(IList<AltaMontanha.Models.Dominio.Artigo> listaArtigos)
-{
-	<div id="historia">
-		<h2 class="box-white-title"><span class="title-blue-bg">História do montanhismo</span><span class="link-more"><a href="/artigos">+ história</a></span></h2>
-
-		@foreach (AltaMontanha.Models.Dominio.Artigo artigo in listaArtigos)
-		{
-			<div class="historia-box col-340">
-				<a href="/Artigo/@artigo.Codigo/@artigo.Slug">
-					@*TODO: Caminho das fotos *@
-					<img src="/AppData/Foto/145x105/@artigo.FotoCapa.Caminho" alt="@artigo.Titulo" width="145" height="105" />
-					<p>@artigo.Titulo</p>
-				</a>
-			</div>	
-		}
-	</div>	
+    {
+    <div id="historia">
+        <h2 class="box-white-title">
+            <span class="title-blue-bg">História do montanhismo</span><span class="link-more"><a
+                href="/artigos">+ história</a></span></h2>
+        @foreach (AltaMontanha.Models.Dominio.Artigo artigo in listaArtigos)
+        {
+            <div class="historia-box col-340">
+                <a href="/Artigo/@artigo.Codigo/@artigo.Slug">@*TODO: Caminho das fotos *@
+                    <img src="/ManterFoto/Foto/@artigo.FotoCapa.Caminho?Tamanho=340" alt="@artigo.Titulo" width="170" height="120" />
+                    <p>@artigo.Titulo</p>
+                </a>
+            </div>	
+        }
+    </div>	
+}
+@helper VisualizarArtigosSaude(IList<AltaMontanha.Models.Dominio.Artigo> listaArtigos)
+    {
+    <div id="saude-treinamento">
+        <h2 class="box-white-title">
+            <span class="title-blue-bg">Saúde e treinamento</span><span class="link-more"><a
+                href="/artigos">+ artigos</a></span></h2>
+        @foreach (AltaMontanha.Models.Dominio.Artigo artigo in listaArtigos)
+        {
+            <div align="center" class="saude-treinamento-box">
+                <a href="/Artigo/@artigo.Codigo/@artigo.Slug">@*TODO: Caminho das fotos *@
+                    <img src="/ManterFoto/Foto/@artigo.FotoCapa.Caminho?Tamanho=340" alt="@artigo.Titulo" width="155" />
+                    <p>@artigo.Titulo</p>
+                </a>
+            </div>	
+        }
+    </div>	
+}
+@helper VisualizarArtigoColunas(AltaMontanha.Models.Dominio.Artigo artigo, string Titulo)
+    {
+    <div class="col-220">
+        <h2 class="box-title-small">
+            <span class="title-bg">@Titulo</span></h2>
+        <p class="partner-photo-news">
+            <a href="/Artigo/@artigo.Codigo/@artigo.Slug">
+                <img src="/ManterFoto/Foto/@artigo.FotoCapa.Caminho?Tamanho=340" height="160px" width="220px" /><br>
+                <span>@artigo.Titulo</span> </a>
+        </p>
+    </div>
 }

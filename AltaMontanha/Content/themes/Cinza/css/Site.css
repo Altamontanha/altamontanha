@@ -97,7 +97,8 @@ textarea
 #listaFotos li
 {
 	margin-right: 10px;
-	display: inline-block;
+	float: left;
+	/*display: inline-block;*/
 }
 
 #listaFotos li div

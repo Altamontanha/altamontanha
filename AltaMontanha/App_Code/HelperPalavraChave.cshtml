@@ -1,62 +1,69 @@
 ﻿@helper SelecionarPalavraChave(object entrada)
-	{
+    {
 			  
-	<label for="Palavras">Palavras-chave:</label>
-	<input type="button" value="Adicionar" id="CadastrarPalavraChave" class="bt_adicionar" />
-	<input type="text" name="Palavras" id="Palavras" class="text-long" />
+    <label for="Palavras">
+        Palavras-chave:</label>
+    <input type="button" value="Adicionar" id="CadastrarPalavraChave" class="bt_adicionar" />
+    <input type="text" name="Palavras" id="Palavras" class="text-long" />
 
-	<ul id="listaPalavras">
-		@if (entrada != null)
-  {
-	  if (entrada.GetType() == typeof(AltaMontanha.Models.Dominio.Foto))
-	  {
-		  AltaMontanha.Models.Dominio.Foto conteudo = (AltaMontanha.Models.Dominio.Foto)entrada;
-		  for (int i = 0; i < conteudo.ListaPalavrasChave.Count; i++)
-		  {
-			  AltaMontanha.Models.Dominio.PalavraChave palavra = @conteudo.ListaPalavrasChave[i];	
-						<li id="@string.Concat("pcID_", palavra.Codigo)">
-							@conteudo.ListaPalavrasChave[i].Nome (<a href="@string.Concat("#pcID_", palavra.Codigo)">X</a>)
-							<input type="hidden" name="ListaPalavrasChave.Index" value="@palavra.Codigo" />
-							<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Codigo")" value="@palavra.Codigo" />
-							<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Nome")" value="@palavra.Nome" />
-						</li>
-		  }
-	  }
-	  else if (entrada.GetType().IsSubclassOf(typeof(AltaMontanha.Models.Dominio.Conteudo)))
-	  {
-		  AltaMontanha.Models.Dominio.Conteudo conteudo = (AltaMontanha.Models.Dominio.Conteudo)entrada;
-		  for (int i = 0; i < conteudo.ListaPalavrasChave.Count; i++)
-		  {
-			  AltaMontanha.Models.Dominio.PalavraChave palavra = @conteudo.ListaPalavrasChave[i];	
-						<li id="@string.Concat("pcID_", palavra.Codigo)">
-							@conteudo.ListaPalavrasChave[i].Nome (<a href="@string.Concat("#pcID_", palavra.Codigo)">X</a>)
-							<input type="hidden" name="ListaPalavrasChave.Index" value="@palavra.Codigo" />
-							<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Codigo")" value="@palavra.Codigo" />
-							<input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Nome")" value="@palavra.Nome" />
-						</li>
-		  }
-	  }
-  }
-	</ul>
+    <ul id="listaPalavras">
+        @if (entrada != null)
+        {
+            if (entrada.GetType() == typeof(AltaMontanha.Models.Dominio.Foto))
+            {
+                AltaMontanha.Models.Dominio.Foto conteudo = (AltaMontanha.Models.Dominio.Foto)entrada;
+                if (conteudo.ListaPalavrasChave != null)
+                {
+                    for (int i = 0; i < conteudo.ListaPalavrasChave.Count; i++)
+                    {
+                        AltaMontanha.Models.Dominio.PalavraChave palavra = @conteudo.ListaPalavrasChave[i];	
+            <li id="@string.Concat("pcID_", palavra.Codigo)">
+                @conteudo.ListaPalavrasChave[i].Nome (<a href="@string.Concat("#pcID_", palavra.Codigo)">X</a>)
+                <input type="hidden" name="ListaPalavrasChave.Index" value="@palavra.Codigo" />
+                <input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Codigo")" value="@palavra.Codigo" />
+                <input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Nome")" value="@palavra.Nome" />
+            </li>
+                    }
+                }
+            }
+            else if (entrada.GetType().IsSubclassOf(typeof(AltaMontanha.Models.Dominio.Conteudo)))
+            {
+                AltaMontanha.Models.Dominio.Conteudo conteudo = (AltaMontanha.Models.Dominio.Conteudo)entrada;
+                if (conteudo.ListaPalavrasChave != null)
+                {
+                    for (int i = 0; i < conteudo.ListaPalavrasChave.Count; i++)
+                    {
+                        AltaMontanha.Models.Dominio.PalavraChave palavra = @conteudo.ListaPalavrasChave[i];	
+            <li id="@string.Concat("pcID_", palavra.Codigo)">
+                @conteudo.ListaPalavrasChave[i].Nome (<a href="@string.Concat("#pcID_", palavra.Codigo)">X</a>)
+                <input type="hidden" name="ListaPalavrasChave.Index" value="@palavra.Codigo" />
+                <input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Codigo")" value="@palavra.Codigo" />
+                <input type="hidden" name="@string.Concat("ListaPalavrasChave[", palavra.Codigo, "].Nome")" value="@palavra.Nome" />
+            </li>
+                    }
+                }
+            }
+        }
+    </ul>
 
-	<script type="text/javascript">
-		j(document).ready(function () {
-			// evento para remover palavra-chave da lista
-			j('a[href^=#pcID]').click(function () {
-				j(j(this).attr("href")).remove();
-			});
+    <script type="text/javascript">
+        j(document).ready(function () {
+            // evento para remover palavra-chave da lista
+            j('a[href^=#pcID]').click(function () {
+                j(j(this).attr("href")).remove();
+            });
 
-			// requisição para cadastrar (e retornar) palavras-chave
-			j('#CadastrarPalavraChave').click(function () {
-				j.post(
+            // requisição para cadastrar (e retornar) palavras-chave
+            j('#CadastrarPalavraChave').click(function () {
+                j.post(
 					'/ManterPalavraChave/CadastrarPalavraChave',
 					{ palavras: j('#Palavras').val() },
 					function (data) {
-						j('#Palavras').val("");
-						var total = j('#listaPalavras li').size();
-						j(data).each(function () {
-							// inclui palavra-chave na lista
-							j("#listaPalavras").append(
+					    j('#Palavras').val("");
+					    var total = j('#listaPalavras li').size();
+					    j(data).each(function () {
+					        // inclui palavra-chave na lista
+					        j("#listaPalavras").append(
 								"<li id='pcID_" + this.Codigo + "'>" +
 								this.Nome +
 								"  (<a href='#pcID_" + this.Codigo + "'>X</a>)" +
@@ -66,16 +73,16 @@
 								"</li>"
 							);
 
-							// evento para remover palavra-chave da lista
-							j('a[href^=#pcID]').click(function () {
-								j(j(this).attr("href")).remove();
-							});
+					        // evento para remover palavra-chave da lista
+					        j('a[href^=#pcID]').click(function () {
+					            j(j(this).attr("href")).remove();
+					        });
 
-							total++;
-						});
+					        total++;
+					    });
 					}
 				);
-			});
-		});
-	</script>
+            });
+        });
+    </script>
 }

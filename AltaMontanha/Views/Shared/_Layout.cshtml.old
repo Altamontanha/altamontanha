@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>@ViewBag.Title</title>
+		<!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="/Content/Cinza/css/ie6.css" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" type="text/css" media="screen" href="/Content/Cinza/css/ie7.css" /><![endif]-->
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/ie6.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/ie7.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/jNice.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/jquery.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/layout.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/reset.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/transdmin.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/Site.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/nyroModal.css" />
+		<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")"></script>
+		<script type="text/javascript">var j = jQuery.noConflict();</script>
+		<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.jnice.js")"></script>
+			<script src="@Url.Content("~/Scripts/jquery.nyromodal.js")" type="text/javascript"></script>
+	</head>
+	<body>
+		<div class="jNice">
+			<div id="wrapper">
+				<h1 class="logo"><a href="#"><span>Página Principal</span></a></h1>
+				<div id="mainNav">
+					<ul class="level1">
+					@if (ViewData["Menu"] != null)
+					{
+						foreach (var menu in (IList<AltaMontanha.Models.Dominio.Tela>)ViewData["Menu"])
+						{
+						<li>@Html.ActionLink(menu.Nome.Replace("/", "").Replace("Manter", ""), "Index", menu.Nome.Replace("/", ""))</li>
+						}
+						<li>@Html.ActionLink("Sair", "Sair", "ManterAutenticacao")</li>
+					}
+					</ul>
+				</div>
+				<div id="containerHolder">
+					<div id="container">
+						<div id="sidebar">
+							@Html.Partial("../" + @ViewContext.RouteData.Values["Controller"] + "/_Sidebar")
+						</div>  
+						<div id="main">
+							@RenderBody()
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

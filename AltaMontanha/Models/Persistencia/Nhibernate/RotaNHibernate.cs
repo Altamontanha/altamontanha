@@ -11,12 +11,23 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 	{
 		public void Alterar(Dominio.Rota objeto)
 		{
-			NHibernate.HttpModule.RecuperarSessao.Update(objeto);
+            NHibernate.HttpModule.RecuperarSessao.Update(objeto);
+
+            NHibernate.HttpModule.RecuperarSessao.Flush();
 		}
 
 		public Dominio.Rota Cadastrar(Dominio.Rota objeto)
-		{
-			objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+        {
+            try
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Begin();
+                objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Rollback();
+            }
 			return objeto;
 		}
 
@@ -24,6 +35,11 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 		{
 			return new List<Dominio.Rota>(){this.Pesquisar(objeto.Codigo)};
 		}
+
+        public IList<Dominio.Rota> Pesquisar(Dominio.Rota objeto, int qtde, int pagina)
+        {
+            return new List<Dominio.Rota>() { this.Pesquisar(objeto.Codigo) };
+        }
 
 		public Dominio.Rota Pesquisar(int codigo)
 		{
@@ -51,5 +67,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			return true;
 		}
-	}
+
+
+    }
 }

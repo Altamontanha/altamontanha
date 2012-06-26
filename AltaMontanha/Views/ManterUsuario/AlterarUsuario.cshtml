@@ -31,7 +31,10 @@
             @Html.TextBoxFor(model => model.Nome, new { @class="text-long"})
             @Html.ValidationMessageFor(model => model.Nome)
         </p>
-
+		<p>
+            @Html.LabelFor(model => model.Bio)
+            @Html.TextAreaFor(model => model.Bio, new { @class = "text-long" })
+        </p>
         <p>
 		    @Html.LabelFor(model => model.Email)
             @Html.TextBoxFor(model => model.Email, new { @class = "text-long" })
@@ -41,6 +44,10 @@
 		    @Html.LabelFor(model => model.Perfil)
         	@Html.DropDownListFor(model => model.Perfil.Codigo, (SelectList) ViewData["Perfis"])
 			@Html.ValidationMessageFor(model => model.Perfil.Codigo)
+		</p>
+        <p>
+            @Html.LabelFor(model => model.Colunista)
+        	@Html.CheckBoxFor(model => model.Colunista)
 		</p>
 		<p>
 			@Html.LabelFor(model => model.Foto)

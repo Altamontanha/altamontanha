@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using AltaMontanha.Models;
 
 namespace AltaMontanha
 {
@@ -24,7 +25,7 @@ namespace AltaMontanha
 			routes.MapRoute
 			(
 				"Redirecionar",
-				"coluna.asp",
+				"colunas.asp",
 				new { controller = "Home", action = "RedirecionarConteudo" }
 			);
 
@@ -36,18 +37,24 @@ namespace AltaMontanha
 			);
 
 
-			routes.MapRoute
-			(
-				"busca",
-				"busca",
-				new { controller = "Home", action = "VisualizarBusca" }
-			);
+            routes.MapRoute
+            (
+                "busca",
+                "busca",
+                new { controller = "Home", action = "VisualizarBusca" }
+            );
+
+            routes.MapRoute
+            (
+                "foto",
+                "ManterFoto/Foto/{*fotoContent}",
+                new { controller = "ManterFoto", action = "Foto" }
+            );
 			
 			MvcApplication.RotearArtigos(routes);
 			MvcApplication.RotearNoticias(routes);
 			MvcApplication.RotearColunas(routes);
 			MvcApplication.RotearAventuras(routes);
-            MvcApplication.RotearDepoimentos(routes);
 
 			routes.MapRoute
 			(
@@ -61,6 +68,8 @@ namespace AltaMontanha
 		protected void Application_Start()
 		{
 			AreaRegistration.RegisterAllAreas();
+
+            ModelBinders.Binders.Add(typeof(DateTime), new DateTimeBinder());
 
 			RegisterGlobalFilters(GlobalFilters.Filters);
 			RegisterRoutes(RouteTable.Routes);
@@ -87,47 +96,42 @@ namespace AltaMontanha
 
 		private static void RotearColunas(RouteCollection routes)
 		{
-			routes.MapRoute
-			(
-				"coluna",
-				"colunas/{Codigo}/{Titulo}",
-				new { controller = "Home", action = "VisualizarColuna" },
-				new { Codigo = @"\d+" }
-			);
-			routes.MapRoute
-			(
-				"colunas",
-				"colunas/{Codigo}/{Colunista}",
-				new { controller = "Home", action = "PesquisarColuna" },
-				new { Codigo = @"\d+" }
-			);
-			routes.MapRoute
-			(
-				"colunistas",
-				"colunistas",
-				new { controller = "Home", action = "PesquisarColunista" }
-			);
-
-
-		}
-
-        private static void RotearDepoimentos(RouteCollection routes)
-        {
+            //routes.MapRoute
+            //(
+            //    "coluna",
+            //    "coluna/{Codigo}/{Titulo}",
+            //    new { controller = "Home", action = "VisualizarColuna" },
+            //    new { Codigo = @"\d+" }
+            //);
+            //routes.MapRoute
+            //(
+            //    "colunas",
+            //    "colunas/{Codigo}/{Colunista}",
+            //    new { controller = "Home", action = "PesquisarColuna" },
+            //    new { Codigo = @"\d+" }
+            //);
+            //routes.MapRoute
+            //(
+            //    "colunistas",
+            //    "colunistas",
+            //    new { controller = "Home", action = "PesquisarColunista" }
+            //);
 
             routes.MapRoute
             (
-                "depoimento",
-                "depoimento/{Codigo}/{Titulo}",
-                new { controller = "Home", action = "VisualizarDepoimento" },
+                "colunas",
+                "colunas",
+                new { controller = "Home", action = "PesquisarColuna" }
+            );
+            routes.MapRoute
+            (
+                "coluna",
+                "colunas/{Codigo}/{Titulo}",
+                new { controller = "Home", action = "VisualizarColuna" },
                 new { Codigo = @"\d+" }
             );
-            routes.MapRoute
-            (
-                "depoimentos",
-                "depoimentos",
-                new { controller = "Home", action = "PesquisarDepoimento" }
-            );
-        }
+
+		}
 
 		private static void RotearNoticias(RouteCollection routes)
 		{

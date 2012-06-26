@@ -26,6 +26,23 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 			return telas;
 		}
 
+        public IList<Dominio.Tela> Pesquisar(Dominio.Tela objeto, int qtde, int pagina)
+        {
+            ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Tela));
+
+            if (objeto == null)
+                return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Tela>().List<Dominio.Tela>();
+
+            if (objeto.Codigo > 0)
+                criteria = criteria.Add(Expression.Eq("CodTela", objeto.Codigo));
+            if (objeto.Nome != null)
+                criteria = criteria.Add(Expression.Eq("Nome", objeto.Nome));
+
+            IList<Dominio.Tela> telas = criteria.List<Dominio.Tela>();
+
+            return telas;
+        }
+
 		public Dominio.Tela Pesquisar(int codigo)
 		{
 			return NHibernate.HttpModule.RecuperarSessao.Get<Dominio.Tela>(codigo);
@@ -33,12 +50,24 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 		public void Alterar(Dominio.Tela objeto)
 		{
-			NHibernate.HttpModule.RecuperarSessao.Update(objeto);
+            NHibernate.HttpModule.RecuperarSessao.Update(objeto);
+
+            NHibernate.HttpModule.RecuperarSessao.Flush();
 		}
 
 		public Dominio.Tela Cadastrar(Dominio.Tela objeto)
-		{
-			objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+        {
+            try
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Begin();
+                objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Rollback();
+            }
+
 			return objeto;
 		}
 
@@ -63,5 +92,7 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			return true;
 		}
-	}
+
+
+    }
 }

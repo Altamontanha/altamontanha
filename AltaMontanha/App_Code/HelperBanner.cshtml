@@ -1,40 +1,107 @@
-﻿@helper VisualizarBanner(AltaMontanha.Models.Dominio.Banner banner)
-{
-	<p class="publicidade">Publicidade</p>
-	if (banner.Multimidia)
-	{
-		<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="@banner.Local.Largura" height="@banner.Local.Altura" id="@string.Concat("banner_", banner.Codigo)" align="middle">
-			<param name="movie" value="/AppData/Banner/@banner.Caminho" />
-			<param name="quality" value="high" />
-			<!--param name="bgcolor" value="#ffffff" /-->
-			<param name="play" value="true" />
-			<param name="loop" value="true" />
-			<param name="wmode" value="opaque" />
-			<param name="scale" value="noscale" />
-			<param name="menu" value="true" />
-			<param name="devicefont" value="false" />
-			<param name="salign" value="" />
-			<param name="allowScriptAccess" value="sameDomain" />
-			<!--[if !IE]>-->
-			<object type="application/x-shockwave-flash" data="/AppData/Banner/@banner.Caminho" width="@banner.Local.Largura" height="@banner.Local.Altura">
-				<param name="movie" value="/AppData/Banner/@banner.Caminho" />
-				<param name="quality" value="high" />
-				<!--param name="bgcolor" value="#ffffff" /-->
-				<param name="play" value="true" />
-				<param name="loop" value="true" />
-				<param name="wmode" value="opaque" />
-				<param name="scale" value="noscale" />
-				<param name="menu" value="true" />
-				<param name="devicefont" value="false" />
-				<param name="salign" value="" />
-				<param name="allowScriptAccess" value="sameDomain" />
-			<!--<![endif]-->
-				<a href="http://www.adobe.com/go/getflash">
-					<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
-				</a>
-			<!--[if !IE]>-->
-			</object>
-			<!--<![endif]-->
-		</object>
-	}
+﻿@helper VisualizarBanner(AltaMontanha.Models.Dominio.Banner banner, object Html = null)
+    {
+    <p class="publicidade">
+        Publicidade</p>
+        if (banner != null)
+        {
+            if (banner.Multimidia)
+            {
+                if (banner.AtivarCodigo)
+                {
+                    try
+                    {
+                        System.Web.Mvc.WebViewPage<object> HtmlPage = (System.Web.Mvc.WebViewPage<object>)Html;
+    <div>
+        @HtmlPage.Html.Raw(banner.CodigoHTML)
+    </div>
+                    }
+                    catch
+                    {
+
+                    }
+                    
+                    try
+                    {
+                        System.Web.Mvc.HtmlHelper<AltaMontanha.Models.Dominio.Noticia> HtmlHelper = (System.Web.Mvc.HtmlHelper<AltaMontanha.Models.Dominio.Noticia>)Html;
+    <div>
+        @HtmlHelper.Raw(banner.CodigoHTML)
+    </div>
+                    }
+                    catch { }
+
+                    try
+                    {
+                        System.Web.Mvc.HtmlHelper<AltaMontanha.Models.Dominio.Coluna> HtmlHelper = (System.Web.Mvc.HtmlHelper<AltaMontanha.Models.Dominio.Coluna>)Html;
+    <div>
+        @HtmlHelper.Raw(banner.CodigoHTML)
+    </div>
+                    }
+                    catch { }
+
+                    try
+                    {
+                        System.Web.Mvc.HtmlHelper<AltaMontanha.Models.Dominio.Artigo> HtmlHelper = (System.Web.Mvc.HtmlHelper<AltaMontanha.Models.Dominio.Artigo>)Html;
+    <div>
+        @HtmlHelper.Raw(banner.CodigoHTML)
+    </div>
+                    }
+                    catch { }
+
+                    try
+                    {
+                        System.Web.Mvc.HtmlHelper<AltaMontanha.Models.Dominio.Aventura> HtmlHelper = (System.Web.Mvc.HtmlHelper<AltaMontanha.Models.Dominio.Aventura>)Html;
+    <div>
+        @HtmlHelper.Raw(banner.CodigoHTML)
+    </div>
+                    }
+                    catch { }
+                    
+                    try
+                    {
+                        System.Web.Mvc.HtmlHelper<object> HtmlHelper = (System.Web.Mvc.HtmlHelper<object>)Html;
+    <div>
+        @HtmlHelper.Raw(banner.CodigoHTML)
+    </div>
+                    }
+                    catch { }
+                }
+                else
+                {
+    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="@banner.Local.Largura" height="@banner.Local.Altura" id="@string.Concat("banner_", banner.Codigo)" align="middle">
+        <param name="movie" value="/AppData/Banner/@banner.Caminho" />
+        <param name="quality" value="high" />
+        <!--param name="bgcolor" value="#ffffff" /-->
+        <param name="play" value="true" />
+        <param name="loop" value="true" />
+        <param name="wmode" value="opaque" />
+        <param name="scale" value="noscale" />
+        <param name="menu" value="true" />
+        <param name="devicefont" value="false" />
+        <param name="salign" value="" />
+        <param name="allowScriptAccess" value="sameDomain" />
+        <!--[if !IE]>-->
+        <object type="application/x-shockwave-flash" data="/AppData/Banner/@banner.Caminho" width="@banner.Local.Largura" height="@banner.Local.Altura">
+            <param name="movie" value="/AppData/Banner/@banner.Caminho" />
+            <param name="quality" value="high" />
+            <!--param name="bgcolor" value="#ffffff" /-->
+            <param name="play" value="true" />
+            <param name="loop" value="true" />
+            <param name="wmode" value="opaque" />
+            <param name="scale" value="noscale" />
+            <param name="menu" value="true" />
+            <param name="devicefont" value="false" />
+            <param name="salign" value="" />
+            <param name="allowScriptAccess" value="sameDomain" />
+            <!--<![endif]-->
+            <a href="http://www.adobe.com/go/getflash">
+                <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif"
+                    alt="Get Adobe Flash player" />
+            </a>
+            <!--[if !IE]>-->
+        </object>
+        <!--<![endif]-->
+    </object>
+                }
+            }
+        }
 }

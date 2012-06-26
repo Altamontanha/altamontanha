@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutNovo.cshtml";
+}
+<div id="main-box">
+    <div id="contato">
+        <h2>
+            Erro!</h2>
+        <br />
+        @if (ViewBag.Mensagem.ToString().Length > 0)
+        {
+        <h4>@ViewBag.Mensagem</h4>
+        }
+        else
+        {
+        <h4>Ocorreu um erro no site! Tente novamente mais tarde!</h4>
+        }
+    </div>
+</div>

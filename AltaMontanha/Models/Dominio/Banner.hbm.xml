@@ -23,8 +23,14 @@
 		<property name="Randomico" not-null="true" access="property" type="bool">
 			<column name="Randomico" sql-type="BOOL" />
 		</property>
-		<property name="Ativo" not-null="true" access="property" type="bool">
-			<column name="Ativo" sql-type="BOOL" />
-		</property>
+        <property name="Ativo" not-null="true" access="property" type="bool">
+            <column name="Ativo" sql-type="BOOL" />
+        </property>
+        <property name="AtivarCodigo" not-null="true" access="property" type="bool">
+            <column name="AtivarCodigo" sql-type="BOOL" />
+        </property>
+        <property name="CodigoHTML" column="Codigo" not-null="true" access="property" type="String">
+            <column name="Codigo" sql-type="Text" />
+        </property>
 	</class>
 </hibernate-mapping>

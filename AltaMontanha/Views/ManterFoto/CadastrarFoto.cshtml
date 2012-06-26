@@ -41,3 +41,17 @@
 		<p><input type="submit" value="Cadastrar" /></p>
 	</fieldset>
 }
+<script language="javascript">
+    j("form").submit(function () {
+        var Autor = j("input[name=Autor]").val();
+        var Fonte = j("input[name=Fonte]").val();
+
+        if (Autor.length == 0 && Fonte.length == 0) {
+            alert("Preencha ao menos um Autor e/ou uma Fonte!");
+            j("input[name=Autor]").focus();
+            return false;
+        }
+        else
+            return true;
+    });
+</script>

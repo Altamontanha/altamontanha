@@ -1,52 +1,96 @@
-﻿@helper VincularFoto(AltaMontanha.Models.Dominio.Conteudo conteudo)
-	{
-	<a href="/ManterFoto/VincularFoto" target="_blank" id="fotos">Adicionar</a>
+@helper VincularFoto(AltaMontanha.Models.Dominio.Conteudo conteudo)
+    {
+     
+    <script type="text/javascript">
+
+        j("form").submit(function () {
+            var ContFotos = 0;
+            var FotoCapa = false;
+            j("#listaFotos li").each(function () {
+                ContFotos++;
+
+            });
+
+            var value = j('input[name=FotoCapa.Codigo]:checked').map(function () {
+                return this.value;
+            }).get();
+
+            if (value.toString().length > 0)
+                FotoCapa = true;
+
+            if (ContFotos == 0) {
+                alert("Voce deve incluir ao menos uma foto");
+                return false;
+            }
+            else if (FotoCapa == false) {
+                alert("Voce deve selecionar ao menos uma foto de capa");
+                return false;
+            }
+            else {
+                return true;
+            }
+        });
+    </script>
+     
+     
+    <a href="/ManterFoto/VincularFoto?Id=@(conteudo == null ? 0 : conteudo.Codigo)" target="_blank" class="nyroModal" id="fotos">
+        Adicionar</a>
 	 
-	<ul id="listaFotos">
-		@if (conteudo != null)
- {
-	 foreach (AltaMontanha.Models.Dominio.Foto foto in conteudo.ListaFotos)
-	 {
-			<li id="@string.Concat("fotoID_", foto.Codigo)">
-				<div>
-					@if (foto.Codigo == conteudo.FotoCapa.Codigo)
-					{
-						<input type="radio" name="FotoCapa.Codigo" value="@foto.Codigo" checked="checked" />
-					}
-					else
-					{
-						<input type="radio" name="FotoCapa.Codigo" value="@foto.Codigo" />
-					}
+    <ul id="listaFotos">
+        @if (conteudo != null)
+        {
+            if (conteudo.ListaFotos != null)
+            {
+                foreach (AltaMontanha.Models.Dominio.Foto foto in conteudo.ListaFotos)
+                {
+            <li id="@string.Concat("fotoID_", foto.Codigo)">
+                <div>
+                    @if (conteudo.FotoCapa != null)
+                    {
+                        if (foto.Codigo == conteudo.FotoCapa.Codigo)
+                        {
+                        <input type="radio" name="FotoCapa.Codigo" value="@foto.Codigo" checked="checked" />
+                        }
+                        else
+                        {
+                        <input type="radio" name="FotoCapa.Codigo" value="@foto.Codigo" />
+                        }
+                    }
+                    else
+                    {
+                        <input type="radio" name="FotoCapa.Codigo" value="@foto.Codigo" />
+                    }
+                    <a href='@string.Concat("#fotoID_", @foto.Codigo)' class='bt_excluir'>X</a>
+                    <img alt='@foto.Legenda' src='@string.Concat("/ManterFoto/Foto/", @foto.Caminho + "?Tamanho=340")' title='@foto.Legenda' width="160"/>
+                    <input type='hidden' name='ListaFotos.Index' value = '@foto.Codigo' />
+                    <input type='hidden' name='ListaFotos[@foto.Codigo].Codigo' value='@foto.Codigo' />
+                    <input type='hidden' name='ListaFotos[@foto.Codigo].Legenda' value='@foto.Legenda' />
+                    <input type='hidden' name='ListaFotos[@foto.Codigo].Caminho' value='@foto.Caminho' />
+                    <input type='hidden' name='ListaFotos[@foto.Codigo].Autor' value='@foto.Autor' />
+                    <input type='hidden' name='ListaFotos[@foto.Codigo].Fonte' value='@foto.Fonte' />
+                    <input type='hidden' name='ListaFotos[@foto.Codigo].Galeria' value='@foto.Galeria' />
+                </div>
+            </li>
+                }
+            }
+        }
+    </ul>     
+        
+    <script type="text/javascript">
+        function adicionarAcaoRemover() {
+            j('a[href^=#fotoID_]').click(function () {
+                j(j(this).attr("href")).remove();
+            });
+        }
 
-					<a href='@string.Concat("#fotoID_", @foto.Codigo)' class='bt_excluir'>X</a>
-					<img alt='@foto.Legenda' src='@string.Concat("/AppData/Foto/145x95/", @foto.Caminho)' title='@foto.Legenda' />
-					<input type='hidden' name='ListaFotos.Index' value = '@foto.Codigo' />
-					<input type='hidden' name='ListaFotos[@foto.Codigo].Codigo' value='@foto.Codigo' />
-					<input type='hidden' name='ListaFotos[@foto.Codigo].Legenda' value='@foto.Legenda' />
-					<input type='hidden' name='ListaFotos[@foto.Codigo].Caminho' value='@foto.Caminho' />
-					<input type='hidden' name='ListaFotos[@foto.Codigo].Autor' value='@foto.Autor' />
-					<input type='hidden' name='ListaFotos[@foto.Codigo].Fonte' value='@foto.Fonte' />
-					<input type='hidden' name='ListaFotos[@foto.Codigo].Galeria' value='@foto.Galeria' />
-				</div>
-			</li>
-	 }
- }
-	</ul>
-	<script type="text/javascript">
-		function adicionarAcaoRemover() {
-			j('a[href^=#fotoID_]').click(function () {
-				j(j(this).attr("href")).remove();
-			});
-		}
+        j(document).ready(function () {
+            // carregar modal no link
+            j("#fotos").nyroModal({ sizes: { initW: 800, initH: 600, w: 800, h: 600, minW: 800, minH: 600} });
 
-		j(document).ready(function () 
-		{
-			// carregar modal no link
-			j("#fotos").nyroModal({ sizes: { initW: 800, initH: 600, w: 800, h: 600, minW:800, minH:600 } });
-			j.nmObj({ sizes: { initW: 800, initH: 600, w: 800, h: 600, minW: 800, minH: 600} });
+            j.nmObj({ sizes: { initW: 800, initH: 600, w: 800, h: 600, minW: 800, minH: 600} });
 
-			// ação para remover elementos
-			adicionarAcaoRemover();
-		});
-	</script>
+            // ação para remover elementos
+            adicionarAcaoRemover();
+        });
+    </script>
 }

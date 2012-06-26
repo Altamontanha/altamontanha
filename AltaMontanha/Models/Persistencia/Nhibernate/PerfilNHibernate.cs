@@ -12,25 +12,23 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 	{
 		public void Alterar(Dominio.Perfil objeto)
 		{
-            //ITransaction transaction  = NHibernate.HttpModule.RecuperarSessao.BeginTransaction();
-            string query = "delete from tb_permissao where CodPerfil = " + objeto.Codigo;
-            var sql = NHibernate.HttpModule.RecuperarSessao.CreateSQLQuery(query);
-            sql.ExecuteUpdate();
+            NHibernate.HttpModule.RecuperarSessao.Update(objeto);
 
-            foreach(Dominio.Permissao pr in objeto.ListaPermissoes)
-            {
-                query = "insert into tb_permissao(CodTela, CodPerfil) values(" + pr.Tela.Codigo + ", " + objeto.Codigo + ")";
-                sql = NHibernate.HttpModule.RecuperarSessao.CreateSQLQuery(query);
-                sql.ExecuteUpdate();
-            }
-            
-           // transaction.Commit();      
-			
+            NHibernate.HttpModule.RecuperarSessao.Flush();
 		}
 
 		public Dominio.Perfil Cadastrar(Dominio.Perfil objeto)
-		{
-			objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+        {
+            try
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Begin();
+                objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Rollback();
+            }
 			return objeto;
 		}
 
@@ -50,6 +48,23 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			return perfis;
 		}
+
+        public IList<Dominio.Perfil> Pesquisar(Dominio.Perfil objeto, int qtde, int pagina)
+        {
+            ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Perfil));
+
+            if (objeto == null)
+                return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Perfil>().List<Dominio.Perfil>();
+
+            if (objeto.Codigo > 0)
+                criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
+            if (!string.IsNullOrEmpty(objeto.Nome))
+                criteria = criteria.Add(Expression.Eq("Nome", objeto.Nome));
+
+            IList<Dominio.Perfil> perfis = criteria.List<Dominio.Perfil>();
+
+            return perfis;
+        }
 
 		public Dominio.Perfil Pesquisar(int codigo)
 		{
@@ -77,5 +92,6 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			return true;
 		}
-	}
+
+    }
 }

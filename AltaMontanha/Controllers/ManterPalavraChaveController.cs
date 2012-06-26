@@ -11,11 +11,11 @@ namespace AltaMontanha.Controllers
 	[HandleError]
 	public class ManterPalavraChaveController : Controller
     {
-		ConteudoFacade facade = new ConteudoFacade();
 
 		[HttpPost]
 		public JsonResult CadastrarPalavraChave(string palavras)
-		{
+        {
+            ConteudoFacade facade = new ConteudoFacade();
 			IList<PalavraChave> palavrasChave = facade.SalvarPalavraChave(palavras.Split(','));
 
 			return Json(palavrasChave, JsonRequestBehavior.AllowGet);

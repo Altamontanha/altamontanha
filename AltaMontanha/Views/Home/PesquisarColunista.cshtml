@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<AltaMontanha.Models.Dominio.Usuario>
 
 @{
-	ViewBag.Title = "Colunistas - AltaMontanha.com";
-	Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+	ViewBag.Title = "AltaMontanha.com - Colunistas";
+	Layout = "~/Views/Shared/_LayoutNovo.cshtml";
 }
 <div id="main-box">
 	<div id="conteudo">
@@ -13,21 +13,19 @@
 			{
 			<li>
 				<a href="/colunas/@colunista.Codigo/@colunista.Slug">
-					<img src="/AppData/Foto/@colunista.Foto.Caminho" align="left" alt="@colunista.Nome" width="50" height="50" />
+					<img src="/AppData/Foto/Usuario/@colunista.Foto.Caminho" align="left" alt="@colunista.Nome" width="50" height="50" />
 					<br />
-					@colunista.Nome<br />
+					@colunista.Nome
+                    <p class="data">@colunista.Bio.Substring(0, @colunista.Bio.Substring(0, 90).LastIndexOf(' ')) ...</p>
 				</a>
 			</li>
 			}
 			</ul>
 		</div>
-		<div class="super-banner-home"> 
-			@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner)ViewData["BannerBaixo"])
-		</div>
 	</div>
-	<div class="col-fotos">
+@*	<div class="col-fotos">
 		<div id="quadrado-home">
-			@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner) ViewData["BannerInterna"])
+			@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner) ViewData["BannerInterna"], Html)
 		</div>
-	</div>
+	</div>*@
 </div>

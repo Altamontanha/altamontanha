@@ -430,13 +430,18 @@ div.colunista-box a{
 	line-height: 16px;
 	font-weight: bold;
 	}
-	
-div.artigo-box{
+div.artigo-box {
+    width: 155px;
+    height: 170px;
+    float: left;
+    margin: 10px 0 15px 10px;
+}
+/*div.artigo-box{
 	width: 155px;
 	height: 170px;
 	float: left;
 	margin: 10px 0 15px 10px;
-}
+}*/
 div.artigo-box a p{
 	float: left;
 	margin-top: 5px;

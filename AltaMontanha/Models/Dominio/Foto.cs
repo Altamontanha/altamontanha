@@ -9,8 +9,13 @@ namespace AltaMontanha.Models.Dominio
 	/// <summary>
 	/// Entidade referente as fotos do portal
 	/// </summary>
-	public class Foto
-	{ 
+	public class Foto : IDisposable
+    {
+        private string _Autor;
+        private string _Fonte;
+        private string _Caminho;
+
+
 		/// <summary>
 		/// Código da foto
 		/// </summary>
@@ -18,9 +23,18 @@ namespace AltaMontanha.Models.Dominio
 		/// <summary>
 		/// Autor da foto
 		/// </summary>
-		[Required(ErrorMessage = "Autor é um campo obrigatório")]
 		[StringLength(150)]
-		public virtual string Autor { get; set; }
+        public virtual string Autor
+        {
+            get
+            {
+                return _Autor;
+            }
+            set
+            {
+                _Autor = (value == null ? "" : value);
+            }
+        }
 		/// <summary>
 		/// Legenda da foto
 		/// </summary>
@@ -32,13 +46,32 @@ namespace AltaMontanha.Models.Dominio
 		/// </summary>
 		[Required(ErrorMessage = "Caminho é um campo obrigatório")]
 		[StringLength(255)]
-		public virtual string Caminho { get; set; }
+        public virtual string Caminho
+        {
+            get
+            {
+                return _Caminho;
+            }
+            set
+            {
+                _Caminho = (value == null ? "" : value);
+            }
+        }
 		/// <summary>
 		/// Fonte da foto
 		/// </summary>
-		[Required(ErrorMessage = "Fonte é um campo obrigatório")]
 		[StringLength(75)]
-		public virtual string Fonte { get; set; }
+        public virtual string Fonte
+        {
+            get
+            {
+                return _Fonte;
+            }
+            set
+            {
+                _Fonte = (value == null ? "" : value);
+            }
+        }
 		/// <summary>
 		/// Indica se a foto pertence a galeria
 		/// </summary>
@@ -47,5 +80,10 @@ namespace AltaMontanha.Models.Dominio
 		/// Lista de palavras-chave da foto
 		/// </summary>
 		public virtual IList<PalavraChave> ListaPalavrasChave { get; set; }
-	}
+
+        public void Dispose()
+        {
+            
+        }
+    }
 }

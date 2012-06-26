@@ -127,6 +127,19 @@ namespace AltaMontanha.Models.Persistencia.MySQL
 			throw new NotImplementedException();
 		}
 
+        public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto, int qtde, int pagina)
+        {
+            throw new NotImplementedException();
+        }
+
 		#endregion
-	}
+
+
+
+
+        public IList<Dominio.Coluna> Pesquisar(Dominio.Coluna objeto, int qtde, int pagina, int[] Codigos)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

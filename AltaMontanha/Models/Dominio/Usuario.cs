@@ -10,6 +10,8 @@ namespace AltaMontanha.Models.Dominio
 {
 	public class Usuario
 	{
+        private int _Colunista;
+
 		public virtual int Codigo { get; set; }
 
 		[Required(ErrorMessage = "Nome é um campo obrigatório")]
@@ -22,17 +24,30 @@ namespace AltaMontanha.Models.Dominio
 
 		[Required(ErrorMessage = "Senha é um campo obrigatório")]
 		[StringLength(100)]
-		public virtual string Senha { get; set; }
+        public virtual string Senha { get; set; }
 
-		[Required(ErrorMessage = "Email é um campo obrigatório")]
-		[StringLength(150)]
-		public virtual string Email { get; set; }
+        [Required(ErrorMessage = "Email é um campo obrigatório")]
+        [StringLength(150)]
+        public virtual string Email { get; set; }
+
+        public virtual string Bio { get; set; }
 
 		[Required(ErrorMessage = "Perfil é um campo obrigatório")]
 		public virtual Perfil Perfil { get; set; }
 
 		[Required(ErrorMessage = "Foto é um campo obrigatório")]
 		public virtual Foto Foto { get; set; }
+
+        public virtual bool Colunista {
+            get
+            {
+                return _Colunista == 1;
+            }
+            set
+            {
+                _Colunista = (value ? 1 : 0);
+            }
+        }
 
 		public override string ToString()
 		{

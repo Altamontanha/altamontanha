@@ -1,15 +1,15 @@
-﻿@helper GerarCurtir(AltaMontanha.Models.Dominio.Conteudo conteudo)
+@helper GerarCurtir(AltaMontanha.Models.Dominio.Conteudo conteudo)
 {
 	<p>
-		<iframe src="http://www.facebook.com/plugins/like.php?href=http://www.altamontanha.com/@conteudo.GetType().Name.ToLower()/@conteudo.Codigo/@conteudo.Slug" style="border: medium none; overflow: hidden; width: 200px; height: 27px;" allowtransparency="true" frameborder="0" scrolling="no"></iframe>
+		<iframe src="http://www.facebook.com/plugins/like.php?href=http://altamontanha.com/colunas.asp?NewsID=@conteudo.Codigo" style="border: medium none; overflow: hidden; width: 200px; height: 27px;" allowtransparency="true" frameborder="0" scrolling="no"></iframe>
 	</p>
 }
 
 @helper GerarComentario(AltaMontanha.Models.Dominio.Conteudo conteudo)
 {
 	<div id="comentario">
-		<div id="fb-root"></div>
-		<fb:comments href="http://altamontanha.com/@conteudo.GetType().Name.ToLower()/@conteudo.Codigo/@conteudo.Slug" num_posts="3" width="695px"></fb:comments>
+		<div id="fb-root"></div>		
+		<fb:comments href="http://altamontanha.com/colunas.asp?NewsID=@conteudo.Codigo" num_posts="10" width="600"></fb:comments>
 	</div>
 }
 
@@ -29,5 +29,5 @@
 		}
 		(document, 'script', 'facebook-jssdk'));
 	</script>
-	<div style="background-color:#FFF;" class="fb-activity" data-site="altamontanha.com" data-width="300" data-height="195" data-header="false" data-recommendations="false"></div>
+	<div style="background-color:#FFF;" class="fb-like-box" data-href="http://www.facebook.com/altamontanha" data-width="300" data-height="194" data-show-faces="true" data-stream="false" data-header="true"></div>
 }

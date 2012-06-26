@@ -16,7 +16,7 @@
 @helper VisualizarNoticiasDestaque(IList<AltaMontanha.Models.Dominio.Noticia> listaNoticias)
 {
 	<script src="../Scripts/jquery-1.4.4.js" type="text/javascript"></script>
-	<script src="/Scripts/easySlider1.7.js" type="text/javascript"></script>
+	<script src="../Scripts/easySlider1.7.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		var j = jQuery.noConflict();
 
@@ -27,7 +27,7 @@
 				auto: true,
 				continuous: true,
 				numeric: true,
-				speed: 1000,
+				speed: 400,
 				pause: 4000
 			});
 		});
@@ -42,9 +42,9 @@
 				<li class="photo-destaque">
 					<div>
 						<a href="/Noticia/@noticia.Codigo/@noticia.Slug">
-							<img alt="@noticia.Titulo" src="/AppData/Foto/340x240/@noticia.FotoCapa.Caminho" width="340" height="240" />
+							<img alt="@noticia.Titulo" src="/ManterFoto/Foto/@noticia.FotoCapa.Caminho?Tamanho=340" width="340" height="240" />
 							<div class="news-destaque">
-								<p>@noticia.Titulo</p> 
+								<p>@noticia.Titulo - <i style="font-size: small; color: #DDD;">@noticia.AnteTitulo</i></p> 
 							</div>
 						</a>
 					</div>

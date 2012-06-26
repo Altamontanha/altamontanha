@@ -10,12 +10,13 @@
 <script src="@Url.Content("~/Scripts/jquery.ui.datepicker.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/AM/Util.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")" type="text/javascript"></script>  
+<script src="@Url.Content("~/Scripts/valida.js")" type="text/javascript"></script>
 <script type="text/javascript">
-	j(document).ready(function () {
-		ConfigurarHoverCalendario();
-		ConfigurarCalendario("#Data");
-		CKEDITOR.replace("Texto");
-	});
+    j(document).ready(function () {
+        ConfigurarHoverCalendario();
+        //ConfigurarCalendario("#Data");
+        CKEDITOR.replace("Texto");
+    });
 </script>
 
 <h2>@ViewBag.Title</h2>
@@ -27,7 +28,7 @@
 	<fieldset>
 		<legend>Artigo</legend>
 		<p>
-			@Html.LabelFor(model => model.ObjCategoria)
+			@Html.Label("Categoria", "Categoria")
 			@Html.DropDownListFor(model => model.ObjCategoria.Codigo, (IEnumerable<SelectListItem>)ViewData["Categorias"])
 			@Html.ValidationMessageFor(model => model.ObjCategoria.Codigo)
 		</p>
@@ -53,7 +54,7 @@
 		</p>
 		<p>
 			@Html.LabelFor(model => model.Data)
-			@Html.TextBoxFor(model => model.Data, new { @class = "text-medium" })
+			@Html.EditorFor(model => model.Data, new { @class = "text-medium" })
 			@Html.ValidationMessageFor(model => model.Data)
 		</p>
 	</fieldset>

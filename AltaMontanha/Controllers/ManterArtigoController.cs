@@ -11,13 +11,13 @@ namespace AltaMontanha.Controllers
 	[HandleError]
     public class ManterArtigoController : Utilitario.BaseController
     {
-		ConteudoFacade facade = new ConteudoFacade();
 
         //
         // GET: /ManterArtigo/
 		[Authorize]
 		public ActionResult Index()
         {
+            ConteudoFacade facade = new ConteudoFacade();
 			IList<Artigo> artigos = facade.PesquisarArtigo(null);
             return View(artigos);
         }
@@ -26,8 +26,15 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult CadastrarArtigo()
         {
+            ConteudoFacade facade = new ConteudoFacade();
 			ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null), "Codigo", "Titulo");
-            return View();
+
+            Artigo artigo = new Artigo()
+            {
+                Data = DateTime.Now
+            };
+            
+            return View(artigo);
         } 
         //
 		// POST: /ManterArtigo/CadastrarArtigo
@@ -36,6 +43,7 @@ namespace AltaMontanha.Controllers
 		[ValidateInput(false)]
 		public ActionResult CadastrarArtigo(Artigo artigo)
         {
+            ConteudoFacade facade = new ConteudoFacade();
             try
             {
 				facade.SalvarArtigo(artigo);
@@ -52,6 +60,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult AlterarArtigo(int Codigo)
         {
+            ConteudoFacade facade = new ConteudoFacade();
 			ViewData["Categorias"] = new SelectList(facade.PesquisarCategoria(null), "Codigo", "Titulo");
 			Artigo artigo = facade.PesquisarArtigo(Codigo);
 			return View(artigo);
@@ -61,8 +70,9 @@ namespace AltaMontanha.Controllers
         [HttpPost]
 		[Authorize]
 		[ValidateInput(false)]
-		public ActionResult AlterarArtigo(Artigo artigo)
+		public ActionResult AlterarArtigo(Artigo artigo, FormCollection collection)
         {
+            ConteudoFacade facade = new ConteudoFacade();
             try
             {
 				facade.SalvarArtigo(artigo);
@@ -79,6 +89,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
         public ActionResult ExcluirArtigo(int Codigo)
         {
+            ConteudoFacade facade = new ConteudoFacade();
 			facade.ExcluirArtigo(Codigo);
             return RedirectToAction("Index");
         }

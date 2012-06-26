@@ -1,0 +1,54 @@
+﻿@helper FiltroColunista(IList<AltaMontanha.Models.Dominio.Usuario> usuarios, string Controler, int TotalRegistros = 0, int CodigoColunista = 0, System.Web.Mvc.HtmlHelper<IEnumerable<AltaMontanha.Models.Dominio.Coluna>> Html = null)
+    {
+    <form action="@Controler" method="post" id="FiltroCategoria" name="FiltroCategoria">
+    <ul class="filtroCategoria">
+        @foreach (var usuario in usuarios)
+        {
+            <li@(usuario.Codigo == CodigoColunista ? " class=selected" : " ")><a href="javascript:Colunista(@usuario.Codigo)" title="@usuario.Bio">
+                <img src="/ManterFoto/Foto/Usuario/@usuario.Foto.Caminho" width="50" height="50" class="left" />
+                <div class="left">@usuario.Nome</div>
+            </a></li>
+        }
+        <input type="hidden" name="CodigoColunista" id="CodigoColunista" value="@CodigoColunista" />
+        <div class="clear">
+        </div>
+        <hr />
+        @if (TotalRegistros > 0)
+        {
+            <div class="data right">
+                Total: @TotalRegistros.ToString()</div>
+        }
+        <center>
+            <input type="button" onclick="Colunista(0)" value="Mostrar todos" /></center>
+    </ul>
+    </form>
+        foreach (var usuario in usuarios)
+        {
+            if (usuario.Codigo == CodigoColunista)
+            {
+    <div class="clear">
+    </div>
+    <div id="bioColunista">
+        <h3 style="font-size: 18px; text-align: center;">
+            @usuario.Nome<hr />
+        </h3>
+        <h4>
+            <center>
+                @Html.Raw(usuario.Bio)
+            </center>
+        </h4>
+    </div>
+    
+            }
+        }
+        
+    <script type="text/javascript">
+
+        function Colunista(codigo) {
+            document.getElementById("CodigoColunista").setAttribute("value", codigo.toString());
+            document.FiltroCategoria.action = document.FiltroCategoria.action + "#bioColunista";
+            document.FiltroCategoria.submit();
+        }
+
+    </script>
+}

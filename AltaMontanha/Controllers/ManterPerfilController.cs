@@ -11,13 +11,13 @@ namespace AltaMontanha.Controllers
 	[HandleError]
 	public class ManterPerfilController : Utilitario.BaseController
     {
-		UsuarioFacade facade = new UsuarioFacade();
 
         //
         // GET: /ManterPerfil/
 		[Authorize]
         public ActionResult Index()
         {
+            UsuarioFacade facade = new UsuarioFacade();
             return View(facade.PesquisarPerfil(null));
         }
         //
@@ -25,6 +25,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult VisualizarPerfil(int Codigo)
         {
+            UsuarioFacade facade = new UsuarioFacade();
 			Perfil perfil = facade.PesquisarPerfil(Codigo);
 
             return View(perfil);
@@ -34,6 +35,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult CadastrarPerfil()
         {
+            UsuarioFacade facade = new UsuarioFacade();
 			ViewData["Telas"] = facade.PesquisarTela(null);
 			return View();
         } 
@@ -43,6 +45,7 @@ namespace AltaMontanha.Controllers
         [HttpPost]
 		public ActionResult CadastrarPerfil(Perfil perfil)
         {
+            UsuarioFacade facade = new UsuarioFacade();
             try
             {
 				IList<Permissao> permissoes = new List<Permissao>();
@@ -66,6 +69,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult AlterarPerfil(int Codigo)
         {
+            UsuarioFacade facade = new UsuarioFacade();
 			Perfil perfil = facade.PesquisarPerfil(Codigo);
 			ViewData["Telas"] = facade.PesquisarTela(null);
 
@@ -77,6 +81,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult AlterarPerfil(Perfil perfil)
         {
+            UsuarioFacade facade = new UsuarioFacade();
 			try
 			{
 				IList<Permissao> permissoes = new List<Permissao>();
@@ -100,6 +105,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult ExcluirPerfil(int Codigo)
         {
+            UsuarioFacade facade = new UsuarioFacade();
 			// TODO: validar a existência de usuários
 			facade.ExcluirPerfil(Codigo);
 			return RedirectToAction("Index");

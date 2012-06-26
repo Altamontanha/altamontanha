@@ -11,21 +11,33 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 	{
 		public void Alterar(Dominio.Categoria objeto)
 		{
-			NHibernate.HttpModule.RecuperarSessao.Update(objeto);
+            NHibernate.HttpModule.RecuperarSessao.Update(objeto);
+
+            NHibernate.HttpModule.RecuperarSessao.Flush();
 		}
 
 		public Dominio.Categoria Cadastrar(Dominio.Categoria objeto)
-		{
-			objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+        {
+            try
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Begin();
+                objeto.Codigo = (int)NHibernate.HttpModule.RecuperarSessao.Save(objeto);
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                NHibernate.HttpModule.RecuperarSessao.Transaction.Rollback();
+            }
 			return objeto;
 		}
 
 		public IList<Dominio.Categoria> Pesquisar(Dominio.Categoria objeto, int pagina = 0)
 		{
 			ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Categoria));
+            criteria.AddOrder(Order.Asc("Titulo"));
 
 			if (objeto == null)
-				return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Categoria>().List<Dominio.Categoria>();
+                return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Categoria>().AddOrder(Order.Asc("Titulo")).List<Dominio.Categoria>();
 
 			if (objeto.Codigo > 0)
 				criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
@@ -36,6 +48,24 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			return categorias;
 		}
+
+        public IList<Dominio.Categoria> Pesquisar(Dominio.Categoria objeto, int qtde, int pagina)
+        {
+            ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Categoria));
+            criteria.AddOrder(Order.Asc("Titulo"));
+
+            if (objeto == null)
+                return NHibernate.HttpModule.RecuperarSessao.CreateCriteria<Dominio.Categoria>().AddOrder(Order.Asc("Titulo")).List<Dominio.Categoria>();
+
+            if (objeto.Codigo > 0)
+                criteria = criteria.Add(Expression.Eq("Codigo", objeto.Codigo));
+            if (!string.IsNullOrEmpty(objeto.Titulo))
+                criteria = criteria.Add(Expression.Eq("Titulo", objeto.Titulo));
+
+            IList<Dominio.Categoria> categorias = criteria.List<Dominio.Categoria>();
+
+            return categorias;
+        }
 
 		public Dominio.Categoria Pesquisar(int codigo)
 		{
@@ -63,5 +93,5 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
 
 			return true;
 		}
-	}
+    }
 }

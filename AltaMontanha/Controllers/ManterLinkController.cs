@@ -11,13 +11,13 @@ namespace AltaMontanha.Controllers
 	[HandleError]
 	public class ManterLinkController : Utilitario.BaseController
     {
-		private InformativoFacade facade = new InformativoFacade();
 
         //
         // GET: /ManterLink/
 		[Authorize]
         public ActionResult Index()
         {
+            InformativoFacade facade = new InformativoFacade();
 			IList<Link> links = facade.PesquisarLink(null);
             return View(links.ToList());
         }
@@ -34,6 +34,7 @@ namespace AltaMontanha.Controllers
         [HttpPost]
 		public ActionResult CadastrarLink(Link link)
         {
+            InformativoFacade facade = new InformativoFacade();
             try
             {
 				facade.SalvarLink(link);
@@ -50,6 +51,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
         public ActionResult AlterarLink(int Codigo)
         {
+            InformativoFacade facade = new InformativoFacade();
 			return View(facade.PesquisarLink(Codigo));
         }
 		//
@@ -58,6 +60,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult AlterarLink(Link link)
         {
+            InformativoFacade facade = new InformativoFacade();
             try
             {
 				facade.SalvarLink(link);
@@ -74,6 +77,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
         public ActionResult ExcluirLink(int Codigo)
         {
+            InformativoFacade facade = new InformativoFacade();
 			facade.ExcluirLink(Codigo);
 			return RedirectToAction("Index");
 		}

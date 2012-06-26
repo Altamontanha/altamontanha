@@ -1,0 +1,22 @@
+﻿@helper FiltroCategoriaEmpresa(IList<AltaMontanha.Models.Dominio.CategoriaEmpresa> Categorias, string Controler, Dictionary<int, bool> selecionados = null, int TotalRegistros = 0)
+    {
+    <form action="@Controler" method="post" id="FiltroCategoria" name="FiltroCategoria">
+    <ul class="filtroCategoria">
+        @foreach (var categoria in Categorias)
+        {
+            <li>
+                <input @(selecionados[categoria.CodCategoria] ? "checked='checked' " : "")type="checkbox" value='@categoria.CodCategoria' name="@categoria.Categoria" id="@categoria.Categoria" />
+                <label for="@categoria.Categoria" >@categoria.Categoria</label></li>
+        }
+        <div class="clear"></div>
+        <hr />
+        @if (TotalRegistros > 0)
+        {
+            <div class="data right">
+                Total: @TotalRegistros.ToString()</div>
+        }
+        <center>
+            <input type="submit" value="Filtrar" /></center>
+    </ul>
+    </form>
+}

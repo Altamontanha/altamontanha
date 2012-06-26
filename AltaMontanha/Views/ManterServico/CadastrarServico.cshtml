@@ -1,0 +1,92 @@
+﻿@model AltaMontanha.Models.Dominio.Servico
+@{
+    ViewBag.Title = "Cadastro de Serviço";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.maskedinput.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.ui.datepicker.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/AM/Util.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/valida.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    j(document).ready(function () {
+        ConfigurarHoverCalendario();
+        //ConfigurarCalendario("#Data");
+        CKEDITOR.replace("Texto");
+    });
+
+</script>
+<h2>@ViewBag.Title</h2>
+<div class="clear">
+</div>
+@using (Html.BeginForm("CadastrarServico", "ManterServico", FormMethod.Post, new { @encType = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Serviço - Cadastro</legend>
+        <p>
+            @Html.LabelFor(model => model.Nome)
+            @Html.TextBoxFor(model => model.Nome, new { @class = "text-medium" })
+            @Html.ValidationMessageFor(model => model.Nome)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Cidade)
+            @Html.TextBoxFor(model => model.Cidade, new { @class = "text-medium" })
+            @Html.ValidationMessageFor(model => model.Cidade)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.ResumoCapa)
+            @Html.TextAreaFor(model => model.ResumoCapa, new { @class = "text-long" })
+            @Html.ValidationMessageFor(model => model.ResumoCapa)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Telefone)
+            @Html.TextBoxFor(model => model.Telefone, new { @class = "text-medium" })
+            @Html.ValidationMessageFor(model => model.Telefone)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Logomarca)
+            <input type="file" name="file" />
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Endereco)
+            @Html.TextBoxFor(model => model.Endereco, new { @class = "text-long" })
+            @Html.ValidationMessageFor(model => model.Endereco)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Site)
+            @Html.TextBoxFor(model => model.Site, new { @class = "text-long" })
+            @Html.ValidationMessageFor(model => model.Site)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Email)
+            @Html.TextBoxFor(model => model.Email, new { @class = "text-long" })
+            @Html.ValidationMessageFor(model => model.Email)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Descricao)
+            @Html.TextAreaFor(model => model.Descricao)
+            @Html.ValidationMessageFor(model => model.Descricao)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Categoria)
+            @Html.DropDownListFor(model => model.Categoria.CodCategoria, (IEnumerable<SelectListItem>)ViewBag.Categorias)
+            @Html.ValidationMessageFor(model => model.Categoria.CodCategoria)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Ativo)
+            @Html.CheckBoxFor(model => model.Ativo.Value, new { @Id = "Ativo", @Name = "Ativo" })
+            @Html.ValidationMessageFor(model => model.Ativo)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.IsPagante, "Pagante")
+            @Html.CheckBoxFor(model => model.IsPagante)
+            @Html.ValidationMessageFor(model => model.IsPagante)
+        </p>
+    </fieldset>
+    <br />
+    <p>
+        <input type="submit" value="Cadastrar" /></p>
+    <br />
+}

@@ -11,13 +11,13 @@ namespace AltaMontanha.Controllers
 	[HandleError]
     public class ManterCategoriaController : Utilitario.BaseController
     {
-		ConteudoFacade facade = new ConteudoFacade();
 
         //
         // GET: /ManterCategoria/
 		[Authorize]
         public ActionResult Index()
         {
+            ConteudoFacade facade = new ConteudoFacade();
             return View(facade.PesquisarCategoria(null));
         }
         //
@@ -32,6 +32,7 @@ namespace AltaMontanha.Controllers
         [HttpPost]
 		public ActionResult CadastrarCategoria(Categoria categoria)
         {
+            ConteudoFacade facade = new ConteudoFacade();
             try
             {
 				facade.SalvarCategoria(categoria);
@@ -48,6 +49,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult AlterarCategoria(int Codigo)
         {
+            ConteudoFacade facade = new ConteudoFacade();
 			return View(facade.PesquisarCategoria(Codigo));
         }
 
@@ -57,8 +59,15 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult AlterarCategoria(Categoria categoria)
         {
+            ConteudoFacade facade = new ConteudoFacade();
             try
             {
+                if (categoria.Descricao == null)
+                    categoria.Descricao = "";
+
+                if (categoria.Titulo == null)
+                    categoria.Titulo = "";
+
 				facade.SalvarCategoria(categoria);
 				return RedirectToAction("Index");
 			}
@@ -73,6 +82,7 @@ namespace AltaMontanha.Controllers
 		[Authorize]
 		public ActionResult ExcluirCategoria(int Codigo)
         {
+            ConteudoFacade facade = new ConteudoFacade();
 			// TODO: validar a existência de conteúdo ligado
 			facade.ExcluirCategoria(Codigo);
             return RedirectToAction("Index");

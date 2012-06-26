@@ -1,33 +1,39 @@
 ﻿@model IEnumerable<AltaMontanha.Models.Dominio.Aventura>
-
 @{
-	ViewBag.Title = "Aventuras - AltaMontanha.com";
-    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+    ViewBag.Title = "AltaMontanha.com - Aventuras";
+    Layout = "~/Views/Shared/_LayoutNovo.cshtml";
 }
-
 <div id="main-box">
-	<div id="conteudo">
-		<h2>Aventuras</h2>
-
-		<div>
-			<ul id="listagem">
-			@foreach (var aventura in Model)
-			{
-			<li>
-				<a href="/Aventura/@aventura.Codigo/@aventura.Slug">
-					<img src="/AppData/Foto/50x50/@aventura.FotoCapa.Caminho" align="left" alt="@aventura.FotoCapa.Legenda" width="50" height="50" />
-					<br />
-					@aventura.Titulo<br />
-					Data: @String.Format("{0:dd/MM/yyyy}", aventura.Data)
-				</a>
-			</li>
-			}
-			</ul>
-		</div>
-	</div>
-	<div class="col-fotos">
-		<div id="quadrado-home">
-			@HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner) ViewData["BannerInterna"])
-		</div>
-	</div>
+    <div id="conteudoPrincipal">
+        <h2>
+            Aventuras</h2>
+        <div>
+            <ul id="listagem">
+                @foreach (var aventura in Model)
+                {
+                    <li><a href="/Aventura/@aventura.Codigo/@aventura.Slug">
+                        <center>
+                            <img src="/ManterFoto/Foto/@aventura.FotoCapa.Caminho?Tamanho=340" alt="@aventura.FotoCapa.Legenda" width="280" height="198" />
+                        </center>
+                        <div class="clear">
+                        </div>
+                        <p class="texto">
+                            @aventura.Titulo
+                            @if (aventura.Autor != null)
+                            {
+                                <p class="data center">
+                                    Autor: @aventura.Autor.Nome
+                                </p>
+                            }
+                            <p class="data center">
+                                Data: @String.Format("{0:dd/MM/yyyy}", aventura.Data)</p>
+                        </p>
+                    </a></li>
+                }
+            </ul>
+        </div>
+        <center>
+            @HelperGrid.GerarPaginacao(int.Parse(ViewBag.TotalMaterias.ToString()), int.Parse(ViewBag.Pagina.ToString()), "Aventuras", AltaMontanha.Utilitario.Constante.TamanhoMaterias)
+        </center>
+    </div>
 </div>
