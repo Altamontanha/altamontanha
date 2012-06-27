@@ -6,122 +6,130 @@ using System.Web;
 using NHibernate;
 using NHibernate.Cfg;
 using System.Security;
+using System.Runtime.CompilerServices;
 
 [assembly: AllowPartiallyTrustedCallers]
 namespace AltaMontanha.NHibernate
 {
-	public class HttpModule : IHttpModule
-	{
-		#region Atributos / Propriedades
+    public class HttpModule : IHttpModule
+    {
+        #region Atributos / Propriedades
 
-		public static readonly string CHAVE = "NHibernateSession";
+        public static readonly string CHAVE = "NHibernateSession";
 
-		private static ISession sessao;
-		public static ISession RecuperarSessao
-		{
-			get
-			{
-				if (HttpContext.Current == null)
-				{
-					if (HttpModule.sessao == null)
-						HttpModule.sessao = AbrirSessao();
+        private static ISession sessao;
+        public static ISession RecuperarSessao
+        {
+            get
+            {
+                if (HttpContext.Current == null)
+                {
+                    if (HttpModule.sessao == null)
+                        HttpModule.sessao = AbrirSessao();
 
-					return HttpModule.sessao;
-				}
-				else
-				{
-					HttpContext currentContext = HttpContext.Current;
-					ISession sessao = currentContext.Items[CHAVE] as ISession;
+                    return HttpModule.sessao;
+                }
+                else
+                {
+                    HttpContext currentContext = HttpContext.Current;
+                    ISession sessao = currentContext.Items[CHAVE] as ISession;
 
-					if (sessao == null)
-					{
-						sessao = AbrirSessao();
-						currentContext.Items[CHAVE] = sessao;
-					}
+                    if (sessao == null)
+                    {
+                        sessao = AbrirSessao();
+                        currentContext.Items[CHAVE] = sessao;
+                    }
 
-					return sessao;
-				}
-			}
-		}
+                    return sessao;
+                }
+            }
+        }
 
-		private static ISessionFactory fabrica = null;
+        private static ISessionFactory fabrica = null;
 
-		#endregion
-		
-		#region Eventos
+        #endregion
 
-		private void ContextBeginRequest(object sender, EventArgs e)
-		{
-			HttpApplication application = (HttpApplication)sender;
-			HttpContext context			= application.Context;
-			context.Items[CHAVE]		= AbrirSessao();
-		}
+        #region Eventos
 
-		private void ContextEndRequest(object sender, EventArgs e)
-		{
-			HttpApplication application = (HttpApplication)sender;
-			HttpContext context			= application.Context;
+        private void ContextBeginRequest(object sender, EventArgs e)
+        {
+            HttpApplication application = (HttpApplication)sender;
+            HttpContext context = application.Context;
+            context.Items[CHAVE] = AbrirSessao();
+        }
 
-			ISession session = (ISession) context.Items[CHAVE];
+        private void ContextEndRequest(object sender, EventArgs e)
+        {
+            HttpApplication application = (HttpApplication)sender;
+            HttpContext context = application.Context;
 
-			if (session != null)
-			{
-				if (session.IsConnected)
-				{
-					session.Flush();
-					session.Close();
-				}
-			}
+            ISession session = (ISession)context.Items[CHAVE];
 
-			context.Items[CHAVE] = null;
-		}
+            if (session != null)
+            {
+                if (session.IsConnected)
+                {
+                    session.Flush();
+                    session.Close();
+                }
+            }
 
-		#endregion
+            context.Items[CHAVE] = null;
+        }
 
-		#region Métodos
-		
-		public void Init(HttpApplication context)
-		{
-			context.BeginRequest += new EventHandler(ContextBeginRequest);
-			context.EndRequest += new EventHandler(ContextEndRequest);
-		}
+        #endregion
 
-		private static ISession AbrirSessao()
-		{
-			ISession session;
-			session = GetFactory().OpenSession();
+        #region Métodos
 
-			if (session == null)
-				throw new InvalidOperationException("OpenSession() is null.");
+        public void Init(HttpApplication context)
+        {
+            context.BeginRequest += new EventHandler(ContextBeginRequest);
+            context.EndRequest += new EventHandler(ContextEndRequest);
+        }
 
-			return session;
-		}
+        private static ISession AbrirSessao()
+        {
+            ISession session;
+            session = GetFactory().OpenSession();
 
-		private static ISessionFactory GetFactory()
-		{
-			if (fabrica == null)
-			{
-				Configuration config = new Configuration();
+            if (session == null)
+                throw new InvalidOperationException("OpenSession() is null.");
 
-				if (config == null)
-					throw new InvalidOperationException("NHibernate configuration é nulo.");
+            return session;
+        }
 
-				config.Configure();
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        private static ISessionFactory GetFactory()
+        {
+            if (fabrica == null)
+            {
+                Configuration config = new Configuration();
 
-				fabrica = config.BuildSessionFactory();
+                if (config == null)
+                    throw new InvalidOperationException("NHibernate configuration é nulo.");
 
-				if (fabrica == null)
-					throw new InvalidOperationException("BuildSessionFactory é nulo.");
-			}
+                config.Configure();
 
-			return fabrica;
+                try
+                {
+                    fabrica = config.BuildSessionFactory();
+                }
+                catch (Exception e)
+                {
+                    string erro = e.InnerException.Message;
+                }
 
-		}
+                if (fabrica == null)
+                    throw new InvalidOperationException("BuildSessionFactory é nulo.");
+            }
 
-		public void Dispose()
-		{
-		}
+            return fabrica;
+        }
 
-		#endregion
-	}
+        public void Dispose()
+        {
+        }
+
+        #endregion
+    }
 }
