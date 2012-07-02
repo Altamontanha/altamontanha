@@ -166,9 +166,15 @@ namespace AltaMontanha.Models.Fachada
                     double proporcao = 0;
 
                     if (imagem.Size.Width > imagem.Size.Height)
+                    {
+                        // imagem horizontal
                         proporcao = (double)imagem.Size.Height / (double)imagem.Size.Width;
+                    }
                     else
+                    {
+                        // imagem vertical
                         proporcao = (double)imagem.Size.Width / (double)imagem.Size.Height;
+                    }
 
 
                     foreach (dynamic tamanho in tamanhos)
@@ -178,37 +184,61 @@ namespace AltaMontanha.Models.Fachada
                         // Se a imagem for mais larga que 1024px, reduz para esse tamanho e salva
                         if (imagem.Size.Width > 1024 && tamanho.largura == 1024)
                         {
-                            this.SalvarImagem
-                            (
-                                this.RedimensionarImagem(file.InputStream, tamanho.largura, (int)(((double)tamanho.largura) * proporcao)),
-                                caminho
-                            );
+
+                            if (imagem.Size.Width > imagem.Size.Height)
+                            {
+                                this.SalvarImagem
+                                (
+                                    this.RedimensionarImagem(file.InputStream, (int)(((double)tamanho.largura) * proporcao), tamanho.largura),
+                                    caminho
+                                );
+                            }
+                            else
+                            {
+                                this.SalvarImagem
+                                (
+                                    this.RedimensionarImagem(file.InputStream, tamanho.largura, (int)(((double)tamanho.largura) * proporcao)),
+                                    caminho
+                                );
+                            }
                         }
                         // Se a imagem tiver 1024px ou menos e estiver na hora de salvar a full, mantem o tamanho dela
                         else if (tamanho.largura == 1024)
                         {
                             this.SalvarImagem
                             (
-                                this.RedimensionarImagem(file.InputStream, imagem.Size.Width, imagem.Size.Height),
+                                this.RedimensionarImagem(file.InputStream, imagem.Size.Height, imagem.Size.Width),
                                 caminho
                             );
                         }
-                        else if (tamanho.largura == 300)
+                        else// if (tamanho.largura == 300)
                         {
-                            this.SalvarImagem
-                            (
-                                this.RedimensionarImagem(file.InputStream, tamanho.largura, (int)(((double)tamanho.largura) * proporcao)),
-                                caminho
-                            );
+
+                            if (imagem.Size.Width > imagem.Size.Height)
+                            {
+                                this.SalvarImagem
+                                (
+                                    this.RedimensionarImagem(file.InputStream, (int)(((double)tamanho.largura) * proporcao), tamanho.largura),
+                                    caminho
+                                );
+                            }
+                            else
+                            {
+                                this.SalvarImagem
+                                (
+                                    this.RedimensionarImagem(file.InputStream, tamanho.largura, (int)(((double)tamanho.largura) * proporcao)),
+                                    caminho
+                                );
+                            }
                         }
-                        else
+                        /*else
                         {
                             this.SalvarImagem
                             (
                                 this.RedimensionarImagem(file.InputStream, tamanho.largura, tamanho.altura),
                                 caminho
                             );
-                        }
+                        }*/
                     }
                 }
 
@@ -318,7 +348,7 @@ namespace AltaMontanha.Models.Fachada
             // Carrega imagem original
             Bitmap original = (Bitmap)Image.FromStream(stream);
             // Bitmap para nova imagem com o novo tamanho
-            Bitmap modificada = new Bitmap(altura, largura);
+            Bitmap modificada = new Bitmap(largura, altura);
             // Redimensiona imagem
             Graphics g = Graphics.FromImage(modificada);
             g.DrawImage(original, new Rectangle(0, 0, modificada.Width, modificada.Height), 0, 0, original.Width, original.Height, GraphicsUnit.Pixel);
@@ -488,6 +518,15 @@ namespace AltaMontanha.Models.Fachada
         /// <param name="arquivo">Arquivo de imagem ou multimídia</param>
         public Dominio.Banner SalvarBanner(Dominio.Banner banner, HttpPostedFileBase arquivo)
         {
+            return SalvarBanner(banner, arquivo, "");
+        }
+        /// <summary>
+        /// Salva o banner e o arquivo
+        /// </summary>
+        /// <param name="banner">Banner</param>
+        /// <param name="arquivo">Arquivo de imagem ou multimídia</param>
+        public Dominio.Banner SalvarBanner(Dominio.Banner banner, HttpPostedFileBase arquivo, string AntigoBanner)
+        {
             try
             {
                 if (banner == null)
@@ -496,10 +535,17 @@ namespace AltaMontanha.Models.Fachada
                 IFactoryDAO fabrica = FactoryFactoryDAO.GetFabrica();
                 IBannerDAO bannerDAO = fabrica.GetBannerDAO();
 
-                banner.Caminho = new Regex(@"[^0-9]").Replace(DateTime.Now.ToString(), "") + arquivo.FileName;
-                string path = "~/AppData/Banner/" + banner.Caminho;
+                if (arquivo != null)
+                {
+                    banner.Caminho = new Regex(@"[^0-9]").Replace(DateTime.Now.ToString(), "") + arquivo.FileName;
+                    string path = "~/AppData/Banner/" + banner.Caminho;
 
-                this.SalvarArquivo(path, arquivo);
+                    this.SalvarArquivo(path, arquivo);
+                }
+                else
+                {
+                    banner.Caminho = AntigoBanner;
+                }
 
                 if (banner.Codigo == 0)
                     return bannerDAO.Cadastrar(banner);

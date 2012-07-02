@@ -19,6 +19,7 @@ namespace AltaMontanha.Controllers
         {
             ConteudoFacade facade = new ConteudoFacade();
 			IList<Artigo> artigos = facade.PesquisarArtigo(null);
+
             return View(artigos);
         }
         //

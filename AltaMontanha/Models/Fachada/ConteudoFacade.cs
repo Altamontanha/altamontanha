@@ -1013,7 +1013,7 @@ namespace AltaMontanha.Models.Fachada
                 if (qtde > 0)
                     return servicoDAO.Pesquisar(servico, qtde, pagina, CodigosCategorias);
 
-                return servicoDAO.Pesquisar(servico, CodigosCategorias);
+                return servicoDAO.Pesquisar(servico, 0, 0, true, CodigosCategorias);
             }
             catch (Exception e)
             {

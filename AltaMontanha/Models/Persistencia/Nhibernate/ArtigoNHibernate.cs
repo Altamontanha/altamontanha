@@ -72,6 +72,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
             criteria.SetMaxResults(qtde);
             criteria.AddOrder(Order.Desc("Data"));
 
+            //criteria.Add(Expression.Between("Data", DateTime.MinValue, DateTime.Now));
+
             if (artigo == null)
                 return criteria.List<Dominio.Artigo>();
 
@@ -93,6 +95,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
         {
             ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Artigo));
             criteria.AddOrder(Order.Desc("Data"));
+
+            //criteria.Add(Expression.Between("Data", DateTime.MinValue, DateTime.Now));
 
             if (qtde > 0)
             {
@@ -135,6 +139,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
                 criteria.SetMaxResults(qtde);
             }
 
+            //criteria.Add(Expression.Between("Data", DateTime.MinValue, DateTime.Now));
+
             if (objeto == null)
                 return criteria.List<Dominio.Artigo>();
 
@@ -162,6 +168,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
                 criteria.SetFirstResult((pagina - 1) * qtde);
                 criteria.SetMaxResults(qtde);
             }
+
+            //criteria.Add(Expression.Between("Data", DateTime.MinValue, DateTime.Now));
 
             if (objeto == null)
                 return criteria.List<Dominio.Artigo>();
@@ -191,6 +199,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
         public IList<Artigo> PesquisarAleatorio(int qtde, int[] InCategoria, int[] NotInConteudo, int[] NotInCategoria)
         {
             ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Artigo));
+
+            //criteria.Add(Expression.Between("Data", DateTime.MinValue, DateTime.Now));
 
             if (InCategoria != null)
             {

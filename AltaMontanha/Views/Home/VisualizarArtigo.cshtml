@@ -15,14 +15,10 @@
 </script>
 <div id="main-box">
     <div id="conteudo">
-        <h2>@Model.Titulo</h2>
+        <h2>@Model.AnteTitulo.Trim(): @Model.Titulo</h2>
         <br />
         Categoria: @Model.ObjCategoria.Titulo
         <p class="data">@String.Format("{0:dd/MM/yyyy - HH:mm}", Model.Data)</p>
-        @if (Model.AnteTitulo != "" && Model.AnteTitulo != null)
-        {
-            <p class="data">@Model.AnteTitulo</p>
-        }
         <dl style="margin-top: 5px">
             <dd style="float: left; margin-right: 20px;">@HelperFaceBook.GerarCurtir(Model)</dd>
             <dt style="margin-right: 20px;">@HelperTwitter.GerarTweet()</dt>

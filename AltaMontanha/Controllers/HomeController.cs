@@ -27,6 +27,10 @@ namespace AltaMontanha.Controllers
 
             IList<Noticia> noticias = conteudoFacade.PesquisarNoticia(null, pagina.Value, Utilitario.Constante.TamanhoMaterias);
 
+            noticias = (from a in noticias
+                        where a.Data <= DateTime.Now
+                        select a).ToList<Noticia>();
+
             ViewBag.TotalMaterias = conteudoFacade.PesquisarNoticia(null).Count;
             ViewBag.Pagina = pagina;
 
@@ -71,6 +75,10 @@ namespace AltaMontanha.Controllers
                 pagina = 1;
 
             IList<Aventura> aventuras = conteudoFacade.PesquisarAventura(null, Utilitario.Constante.TamanhoMaterias, pagina.Value);
+
+            aventuras = (from a in aventuras
+                         where a.Data <= DateTime.Now
+                         select a).ToList<Aventura>();
 
             foreach (Aventura aventura in aventuras)
             {
@@ -134,6 +142,10 @@ namespace AltaMontanha.Controllers
 
             IList<Coluna> colunas = conteudoFacade.PesquisarColuna(null, Utilitario.Constante.TamanhoMaterias, pagina.Value, false);
 
+            colunas = (from a in colunas
+                         where a.Data <= DateTime.Now
+                       select a).ToList<Coluna>();
+
             ViewBag.TotalMaterias = conteudoFacade.PesquisarColuna(null).Count;
             ViewBag.Pagina = pagina;
 
@@ -177,6 +189,10 @@ namespace AltaMontanha.Controllers
             }
 
             IList<Coluna> colunas = conteudoFacade.PesquisarColuna(null, Utilitario.Constante.TamanhoMaterias, pagina.Value, false, Codigos);
+
+            colunas = (from a in colunas
+                       where a.Data <= DateTime.Now
+                       select a).ToList<Coluna>();
 
             ViewBag.TotalMaterias = conteudoFacade.PesquisarColuna(null, 0, 0, false, Codigos).Count;
             ViewBag.Pagina = pagina;
@@ -281,6 +297,10 @@ namespace AltaMontanha.Controllers
 
             IList<Artigo> artigos = conteudoFacade.PesquisarArtigo(null, Utilitario.Constante.TamanhoMaterias, pagina.Value, new int[0]);
 
+            artigos = (from a in artigos
+                       where a.Data <= DateTime.Now
+                       select a).ToList<Artigo>();
+
             ViewBag.TotalMaterias = conteudoFacade.PesquisarArtigo(null).Count;
             ViewBag.Pagina = pagina;
 
@@ -326,6 +346,10 @@ namespace AltaMontanha.Controllers
 
             IList<Artigo> artigos = conteudoFacade.PesquisarArtigo(null, Utilitario.Constante.TamanhoMaterias, pagina.Value, Codigos);
 
+            artigos = (from a in artigos
+                       where a.Data <= DateTime.Now
+                       select a).ToList<Artigo>();
+
             IList<Artigo> temp = conteudoFacade.PesquisarArtigo(null, 1, 0, Codigos);
 
             ViewBag.TotalMaterias = temp.Count;
@@ -346,7 +370,7 @@ namespace AltaMontanha.Controllers
 
             IList<CategoriaEmpresa> categorias = categoriaEmpresas.Pesquisar(null);
             ViewBag.Categorias = categorias;
-            
+
             ConteudoFacade conteudoFacade = new ConteudoFacade();
             MultimidiaFacade multimidiaFacade = new MultimidiaFacade();
             UsuarioFacade usuarioFacade = new UsuarioFacade();

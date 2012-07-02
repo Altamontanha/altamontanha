@@ -1,0 +1,32 @@
+﻿@model IEnumerable<AltaMontanha.Models.Dominio.Servico>
+@{
+    ViewBag.Title = "Altamontanha.com - Serviços Especializados";
+    Layout = "~/Views/Shared/_LayoutNovo.cshtml";
+}
+<div id="main-box">
+    <div id="conteudoPrincipal">
+        <h2>
+            Serviços Especializados</h2>
+            @HelperFiltro.FiltroCategoriaEmpresa(ViewBag.Categorias, @HttpContext.Current.Request.Path, ViewBag.Selecionados, int.Parse(ViewBag.TotalServicos.ToString()))
+        <div>
+            <ul id="listagem">
+                @foreach (var servico in Model)
+                {
+                    <li><a href="/Servicos/Servico/@servico.Codigo">
+                        <center>
+                            <img src="/ManterFoto/Foto/Servicos/@servico.Logomarca?Tamanho=280" alt="@servico.Nome" width="280" height="198" />
+                        </center>
+                        <div class="clear">
+                        </div>
+                        <p class="texto">
+                            @servico.Nome
+                        </p>
+                    </a></li>
+                }
+            </ul>
+        </div>
+        <center><br />
+            @HelperGrid.GerarPaginacao(int.Parse(ViewBag.TotalServicos.ToString()), int.Parse(ViewBag.Pagina.ToString()), "Servicos", AltaMontanha.Utilitario.Constante.TamanhoMaterias, true)
+        </center>
+    </div>
+</div>

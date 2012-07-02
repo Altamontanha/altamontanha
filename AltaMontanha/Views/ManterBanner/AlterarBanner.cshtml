@@ -25,9 +25,21 @@
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Banner</legend>
-
+        
 		<p>
+            Selecione um novo banner: <br />
 			<input type="file" name="file" value="Foto" />
+		</p>
+		<p>
+            Ou selecione um já existente: <br />
+
+            <select name="AntigoBanner">
+            @foreach (SelectListItem item in (SelectList)ViewBag.Arquivos)
+            {
+                <option title="@item.Text" value="@item.Text" @if (Model.Caminho == item.Text) { @(" selected");
+                                                              }>@item.Text</option>
+            }
+            </select>
 		</p>
          <p>
             @Html.LabelFor(model => model.Local)

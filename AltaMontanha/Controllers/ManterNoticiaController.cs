@@ -76,11 +76,12 @@ namespace AltaMontanha.Controllers
             try
             {
                 facade.SalvarNoticia(noticia);
-                return RedirectToAction("Index");
+
+                return Redirect("~/ManterNoticia");
             }
             catch
             {
-                return View("Index");
+                return View(noticia);
             }
         }
 

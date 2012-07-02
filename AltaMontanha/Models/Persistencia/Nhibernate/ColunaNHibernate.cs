@@ -58,6 +58,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
             if (qtde > 0)
                 criteria.SetMaxResults(qtde);
 
+            //criteria.Add(Expression.Between("Data", DateTime.MinValue, DateTime.Now));
+
             criteria.AddOrder(Order.Desc("Data"));
 
             if (objeto == null)
@@ -83,6 +85,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
         {
             ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Coluna));
             criteria.AddOrder(Order.Desc("Data"));
+
+            //criteria.Add(Expression.Between("Data", DateTime.MinValue, DateTime.Now));
 
             if (qtde > 0)
             {
@@ -113,6 +117,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
             ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Coluna));
             criteria.AddOrder(Order.Desc("Data"));
 
+            //criteria.Add(Expression.Between("Data", DateTime.MinValue, DateTime.Now));
+
             if (pagina > 0)
             {
                 criteria.SetFirstResult((pagina - 1) * qtde);
@@ -142,6 +148,8 @@ namespace AltaMontanha.Models.Persistencia.Nhibernate
         {
             ICriteria criteria = NHibernate.HttpModule.RecuperarSessao.CreateCriteria(typeof(Dominio.Coluna));
             criteria.AddOrder(Order.Desc("Data"));
+
+            //criteria.Add(Expression.Between("Data", DateTime.MinValue, DateTime.Now));
 
             if (pagina > 0)
             {

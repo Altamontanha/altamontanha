@@ -58,6 +58,9 @@ namespace AltaMontanha.Models.Persistencia.MySQL
 
             try
             {
+                string deletar = "delete from tb_conteudopalavrachave where CodConteudo = " + conteudo.Codigo;
+                this.conexao.ExecutarNonQuery(deletar);
+
                 sql = "INSERT INTO tb_conteudopalavrachave (CodConteudo, CodPalavraChave)" +
                        "VALUES(@CodConteudo, @CodPalavraChave);" +
                        "SELECT LAST_INSERT_ID();";

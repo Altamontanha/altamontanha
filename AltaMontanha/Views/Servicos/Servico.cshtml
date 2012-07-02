@@ -1,0 +1,80 @@
+﻿@model AltaMontanha.Models.Dominio.Servico
+@{
+    ViewBag.Title = "AltaMontanha.com - " + @Model.Nome;
+    Layout = "~/Views/Shared/_LayoutNovo.cshtml";
+}
+<link rel="stylesheet" type="text/css" media="screen" href="/Content/themes/Cinza/css/nyroModal.css" />
+<script src="/Scripts/jquery-1.4.4.min.js" type="text/javascript"></script>
+<script src="/Scripts/jquery.nyromodal.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var j = jQuery.noConflict();
+
+    j(function () {
+        j('.nyroModal').nyroModal();
+    });
+</script>
+<div id="main-box">
+    <div id="conteudo">
+        <h2>@Model.Nome</h2>
+        <div class="texto">
+            <form action="/Servicos" name="FormServico" id="FormServico" method="post">
+            <input type="hidden" id="CategoriaServico" name="@Model.Categoria.Categoria" value="@Model.Categoria.CodCategoria" />
+            <ul class="ListCategorias">
+                <li><b>Categoria:</b> @Model.Categoria.Categoria
+                    <ul>
+                        @foreach (AltaMontanha.Models.Dominio.CategoriaEmpresa categoria in ViewBag.Categorias)
+                        {
+                            <li><a href='javascript:Servico("@categoria.Categoria", @categoria.CodCategoria)' title="@categoria.Categoria">
+                                @categoria.Categoria</a></li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+            </form>
+            @if (Model.Endereco != null && Model.Endereco != "")
+            {
+                <b>Endereço:</b> @Model.Endereco<br />
+            }
+            @if (Model.Cidade != null && Model.Cidade != "")
+            {
+                <b>Cidade:</b> @Model.Cidade<br />
+            }
+            @if (Model.Email != null && Model.Email != "")
+            {
+                <b>Contato:</b> @(Model.Telefone + " - " + Model.Email)<br />
+            }
+            @if (Model.Site != null && Model.Site != "")
+            {
+                <b>Site:</b> <a href="@Model.Site">@Model.Site</a><br />
+                <br />
+            }
+            @Html.Raw(Model.Descricao)
+        </div>
+    </div>
+    <div class="col-fotos">
+        <div id="quadrado-home">
+            @HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner)ViewData["BannerInternaSuperior"], Html)
+        </div>
+        <div class="fotos">
+            <ul>
+                <li><a href="/ManterFoto/Foto/Servicos/@Model.Logomarca" class="nyroModal" title="@(Model.Nome)" rel="galeria">
+                    <img src="/ManterFoto/Foto/Servicos/@Model.Logomarca" alt="@Model.Nome" />
+                    <div>@Model.Nome
+                    </div>
+                </a></li>
+            </ul>
+        </div>
+        <div id="quadrado-home">
+            @HelperBanner.VisualizarBanner((AltaMontanha.Models.Dominio.Banner)ViewData["BannerInternaInferior"], Html)
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function Servico(name, value) {
+        document.getElementById("CategoriaServico").name = name;
+        document.getElementById("CategoriaServico").value = value;
+        document.FormServico.submit();
+    }
+    
+</script>

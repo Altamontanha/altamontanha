@@ -28,20 +28,20 @@ namespace AltaMontanha.Models.Dominio
         public int Enviar()
         {
             MailMessage oEmail = new MailMessage();
-            MailAddress sDe = new MailAddress(this.Nome + "<" + this.EMail + ">"); /*COLOQUE AQUI UMA CAIXA VALIDA @seudomínio PARA QUE O ENVIO SEJA REALIZADO DE MODO NORMALIZADO*/
+            MailAddress sDe = new MailAddress("Página de Contato <altamontanha@altamontanha.com>"); /*COLOQUE AQUI UMA CAIXA VALIDA @seudomínio PARA QUE O ENVIO SEJA REALIZADO DE MODO NORMALIZADO*/
             MailAddress sRpt = new MailAddress(this.EMail);
 
             oEmail.To.Add("altamontanha@altamontanha.com"); //DIGITE AQUI O E-MAIL PARA O QUAL SERÁ ENCAMINHADO O FORMULARIO
             oEmail.From = sDe;
             oEmail.ReplyTo = sRpt;
             oEmail.Priority = MailPriority.Normal;
-            oEmail.IsBodyHtml = false;
-            oEmail.Subject = this.Comentario;
+            oEmail.IsBodyHtml = true;
+            oEmail.Subject = this.Assunto;
 
-            oEmail.Body = this.Comentario;
+            oEmail.Body = "Nome: " + this.Nome + "<br>" + this.Comentario;
 
             SmtpClient oEnviar = new SmtpClient();
-            oEnviar.Host = "smtp.altamontanha.com"; //DIGITE AQUI O NOME DO SERVIDOR DE SMTP QUE VOCÊ IRA UTILIZAR
+            oEnviar.Host = "mail.altamontanha.com"; //DIGITE AQUI O NOME DO SERVIDOR DE SMTP QUE VOCÊ IRA UTILIZAR
             oEnviar.Credentials = new System.Net.NetworkCredential("altamontanha@altamontanha.com", "gentedem"); // DIGITE UM E-MAIL VÁLIDO E UMA SENHA PARA AUTENTICACAO NO SERVIDOR SMTP
             try
             {

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AltaMontanha.Models.Dominio;
 using AltaMontanha.Models.Fachada;
+using System.IO;
 
 namespace AltaMontanha.Controllers
 {
@@ -53,6 +54,21 @@ namespace AltaMontanha.Controllers
 		// GET: /ManterBanner/AlterarBanner/5
 		public ActionResult AlterarBanner(int Codigo)
         {
+            string[] filePaths = Directory.GetFiles(Server.MapPath("~/AppData/Banner/"));
+
+            for(int i = 0; i < filePaths.Length; i++)
+            {
+                filePaths[i] = Path.GetFileName(filePaths[i]);
+            }
+
+            List<string> listString = filePaths.ToList<string>();
+
+            listString.Insert(0, "");
+
+            SelectList list = new SelectList(listString);
+            
+            ViewBag.Arquivos = list;
+
             MultimidiaFacade facade = new MultimidiaFacade();
 			Banner banner = facade.PesquisarBanner(Codigo);
 			ViewData["Locais"] = new SelectList(facade.PesquisarLocal(null), "Codigo", "Descricao");
@@ -63,16 +79,31 @@ namespace AltaMontanha.Controllers
 		// POST: /ManterBanner/AlterarBanner/5
         [HttpPost]
         [ValidateInput(false)]
-		public ActionResult AlterarBanner(Banner banner, HttpPostedFileBase file)
+		public ActionResult AlterarBanner(Banner banner, HttpPostedFileBase file, string AntigoBanner)
         {
             MultimidiaFacade facade = new MultimidiaFacade();
             try
             {
-				facade.SalvarBanner(banner, file);
+                facade.SalvarBanner(banner, file, AntigoBanner);
                 return RedirectToAction("Index");
             }
             catch
             {
+                string[] filePaths = Directory.GetFiles(Server.MapPath("~/AppData/Banner/"));
+
+                for (int i = 0; i < filePaths.Length; i++)
+                {
+                    filePaths[i] = Path.GetFileName(filePaths[i]);
+                }
+
+                List<string> listString = filePaths.ToList<string>();
+
+                listString.Insert(0, "");
+
+                SelectList list = new SelectList(listString);
+
+                ViewBag.Arquivos = list;
+
 				ViewData["Locais"] = new SelectList(facade.PesquisarLocal(null), "Codigo", "Descricao");
 				return View(banner);
             }
